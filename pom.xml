@@ -10,6 +10,13 @@
     <packaging>pom</packaging>
     <modules>
         <module>overAll</module>
+        <module>babchiiProj</module>
+        <module>daiProj</module>
+        <module>leonovProj</module>
+        <module>maslovskyProj</module>
+        <module>pervushynaProj</module>
+        <module>ostaletskiyProj</module>
+        <module>kushchenkoProj</module>
     </modules>
 
     <properties>
