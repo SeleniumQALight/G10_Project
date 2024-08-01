@@ -1,0 +1,8 @@
+#Login page
+
+loginPage.input.userName=".//input[@id="userName"] // замінити реальним локатором
+loginPage.input.password=""
+
+
+#Home page
+homepage.button=".//...."
