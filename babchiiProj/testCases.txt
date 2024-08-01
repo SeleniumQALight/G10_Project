@@ -1,0 +1,18 @@
+#001 Valid log in
+Precondition:
+1. Register new uniq user with name 'testVasyl'
+
+STR:
+1. Open login page https://aqa-complexapp.onrender.com/
+2. Enter 'testVasyl' login in the input login on the Login page
+3. Enter '123456qwerty' password in the input password on the Login page
+4. Click on the button Sign In on Login page
+
+Expected Result:
+Check button Sign out is visible
+
+Postconditions:
+ - Delete user 'testTaras'
+
+
+ #002 ...
