@@ -7,4 +7,6 @@ loginPage.input.password = ".//input[@id='password']
 case #002 Username is displayed on Home page correctly after Valid Sign up
 locator - homePage.userName=".//div[@class='text-center']//strong"
 
-
+case #003 Open Chat Window
+locator - homePage.button.openChat=".//span[@data-original-title='Chat']"
+locator should be visible - homePage.chatWindowIsOpened=".//div[@id='chat-wrapper' and contains(@class, 'visible')]"

@@ -31,3 +31,14 @@ Postcondition:
 
 ------------------------------------------------------------------
 
+#003 Open Chat Window
+Precondition:
+1. login as registered User 'testAlex', passw 'Alex__123456'
+
+STR:
+1. open Home page
+2. press "open Chat window" button
+
+Expected result:
+check - Chat Window opens
+locator should be visible
