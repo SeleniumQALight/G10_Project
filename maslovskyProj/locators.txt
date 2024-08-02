@@ -14,3 +14,7 @@ locator should be visible - homePage.chatWindowIsOpened=".//div[@id='chat-wrappe
 case #004 Close Chat Window
 locator - homePage.button.closeChat=".//span[@class='chat-title-bar-close']"
 locator should not be present - homePage.chatWindowIsOpened=".//div[@id='chat-wrapper' and contains(@class, 'visible')]"
+
+#005 Send message to Chat
+locator - homePage.input.chat=".//input[@class='chat-field']"
+locator - homePage.chatEnteredMessage=".//div[@class='chat-message-inner']"

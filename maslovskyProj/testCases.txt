@@ -56,3 +56,16 @@ STR:
 Expected result:
 check - Chat Window closes
 locator is not present
+
+------------------------------------------------------------------
+
+#005 Send message to Chat
+Precondition:
+1. login as registered User 'testAlex', passw 'Alex__123456'
+2. open Chat window
+
+STR:
+1. enter message 'My message' in 'Type a message' field, press Enter
+
+Expected result:
+check - appeared message matches entered message
