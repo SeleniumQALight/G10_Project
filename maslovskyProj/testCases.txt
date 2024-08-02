@@ -42,3 +42,17 @@ STR:
 Expected result:
 check - Chat Window opens
 locator should be visible
+
+------------------------------------------------------------------
+
+#004 Close Chat Window
+Precondition:
+1. login as registered User 'testAlex', passw 'Alex__123456'
+2. open Chat window
+
+STR:
+1. close Chat window
+
+Expected result:
+check - Chat Window closes
+locator is not present

@@ -10,3 +10,7 @@ locator - homePage.userName=".//div[@class='text-center']//strong"
 case #003 Open Chat Window
 locator - homePage.button.openChat=".//span[@data-original-title='Chat']"
 locator should be visible - homePage.chatWindowIsOpened=".//div[@id='chat-wrapper' and contains(@class, 'visible')]"
+
+case #004 Close Chat Window
+locator - homePage.button.closeChat=".//span[@class='chat-title-bar-close']"
+locator should not be present - homePage.chatWindowIsOpened=".//div[@id='chat-wrapper' and contains(@class, 'visible')]"
