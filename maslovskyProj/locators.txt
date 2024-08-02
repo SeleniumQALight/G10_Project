@@ -18,3 +18,8 @@ locator should not be present - homePage.chatWindowIsOpened=".//div[@id='chat-wr
 #005 Send message to Chat
 locator - homePage.input.chat=".//input[@class='chat-field']"
 locator - homePage.chatEnteredMessage=".//div[@class='chat-message-inner']"
+
+#006 Search wrong result
+locator - homePage.button.openSearchWindow=".//a[@*[contains(name(), 'title')]='Search']"
+locator - homePage.input.search=".//input[@id='live-search-field']"
+locator should be present - homePage.message.searchNoResult=".//div[contains(@class, 'search-result')]//p"

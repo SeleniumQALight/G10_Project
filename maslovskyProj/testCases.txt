@@ -69,3 +69,16 @@ STR:
 
 Expected result:
 check - appeared message matches entered message
+
+------------------------------------------------------------------
+
+#006 Search wrong result
+Precondition:
+1. login as registered User 'testAlex', passw 'Alex__123456'
+2. open Search window
+
+STR:
+1. enter text '*' in Search field
+
+Expected result:
+check - "Sorry…" message is displayed
