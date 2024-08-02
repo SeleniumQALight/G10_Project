@@ -13,3 +13,21 @@ check button 'Sigh out' is visible on Home page
 
 Postcondition:
 - Delete User 'someName'
+
+------------------------------------------------------------------
+
+#002 Username is displayed on Home page correctly after Valid Sign up
+Precondition:
+1. register new unique User with name 'testAlex' / passw 'Alex__123456'
+
+//STR:
+//1. open Home page
+
+Expected result:
+check - text of Username 'testAlex' on Home page matches the one entered during Sign Up
+
+Postcondition:
+- Delete User 'testAlex'
+
+------------------------------------------------------------------
+

@@ -4,4 +4,7 @@ loginPage.input.userName = ".//input[@id='userName']
 loginPage.input.password = ".//input[@id='password']
 
 #Home page
-homePage.button=".//..."
+case #002 Username is displayed on Home page correctly after Valid Sign up
+locator - homePage.userName=".//div[@class='text-center']//strong"
+
+
