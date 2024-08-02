@@ -1,0 +1,16 @@
+#001 Valid log in
+Precondition:
+1. Register new unique user with name "quauto"
+STR:
+1. Open login page
+2. Enter 'quauto' login in input login on Login page
+3. Enter '123456qwerty' password in input password on Login page
+4. Click on button Sign In on Login page
+
+Expected result:
+-Check button Sign out is visible on Home page
+
+Postcondition:
+- Delete user
+
+#002

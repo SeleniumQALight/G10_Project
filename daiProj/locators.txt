@@ -1,0 +1,7 @@
+#Login page
+
+loginPage.input.userName=".//input'''''
+loginPage.input,password=""
+
+#Home page
+homepage.button="'
