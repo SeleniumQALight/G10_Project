@@ -1,0 +1,15 @@
+#001 Valid login
+Precondition:
+1. register new unique User with name 'someName'
+
+STR:
+1. open login page
+2. enter 'qaauto' login in input login on login page
+3. enter '123456qwerty' pass into input password on login page
+4. click on button Sigh In on login page
+
+Expected result:
+check button 'Sigh out' is visible on Home page
+
+Postcondition:
+- Delete User 'someName'
