@@ -8,8 +8,21 @@ STR:
 3. enter '123456qwerty' pass into input password on login page
 4. click on button Sigh In on login page
 
+
 Expected result:
 check button 'Sigh out' is visible on Home page
 
 Postcondition:
 - Delete User 'someName'
+
+
+#002 Invalid login
+
+STR:
+1.Зайти на login page
+2.Залишити пустим поле login
+3.Залишити пустим поле password
+4.Натиснути кнопку Sigh In
+
+Expected result:
+Зявиться повідомлення "Invalid username/password."

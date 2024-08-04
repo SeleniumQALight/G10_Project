@@ -2,6 +2,8 @@
 
 loginPage.input.userName = ".//input[@id='userName']
 loginPage.input.password = ".//input[@id='password']
+loginPage.signIn.button = ".//button[@class='btn btn-primary btn-sm']
+loginPage.error.message = ".//div[@class='alert alert-danger text-center']
 
 #Home page
 homePage.button=".//..."
