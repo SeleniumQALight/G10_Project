@@ -24,6 +24,7 @@ registerPage.error.message.Email = //div[contains(@class, 'liveValidateMessage--
 registerPage.error.message.Password = //div[contains(@class, 'liveValidateMessage--visible') and contains(text(), 'Password must be at least 12 characters.')]
 
 #Post create page
+
 postCreate.postTitle = .//input[@id='post-title']
 postCreate.postBody = .//textarea[@id='post-body']
 postCreate.checkBoxUniquePost = .//input[@name='uniquePost']
@@ -31,6 +32,7 @@ postCreate.SelectValue = .//select[@id='select1']
 postCreate.SaveNewPostButton = .//button[@class='btn btn-primary']
 
 #Created post page
+
 createdPost.AlertSuccess = .//div[@class="alert alert-success text-center"]
 createdPost.EditPost = .//a[@data-original-title="Edit"]
 createdPost.DeletePost = .//button[@data-original-title="Delete"]
@@ -38,6 +40,8 @@ createdPost.H2Text = .//h2[text()='Тест1']
 createdPost.PText = .//p[text()='Тест2']
 
 #Chat page
+
 chatPage.chatFieldType = .//input[@id='chatField']
-chatPage.
+chatPage.CloseChat = //span[@class="chat-title-bar-close"]
+chatPage.SelfMessages = //div[@class="chat-self"]
 
