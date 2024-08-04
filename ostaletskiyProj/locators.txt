@@ -6,14 +6,30 @@ loginPage.signIn.button = ".//button[@class='btn btn-primary btn-sm']
 loginPage.error.message = ".//div[@class='alert alert-danger text-center']
 
 #Home page
-homePage.button=".//..."
+
+homePage.button=".//h4[@class='my-0 mr-md-auto font-weight-normal']
+homePage.SignOutButton = ".//button[@class='btn btn-sm btn-secondary']
+homePage.CreatePost = ".//a[@class='btn btn-sm btn-success mr-2']
 
 #Register page
 
 registerPage.userName = ".//input[@id='username-register']
 registerPage.emailRegister = ".//input[@id='email-register']
 registerPage.passwordRegister = ".//input[@id='password-register']
-registerPage.signUp = ".//button[@class='py-3 mt-4 btn btn-lg btn-success btn-block']
+registerPage.signUpButton = ".//button[@class='py-3 mt-4 btn btn-lg btn-success btn-block']
 registerPage.error.message.userName = //div[contains(@class, 'liveValidateMessage--visible') and contains(text(), 'Username must be at least 3 characters.')]
 registerPage.error.message.Email = //div[contains(@class, 'liveValidateMessage--visible') and contains(text(), 'You must provide a valid email address.')]
 registerPage.error.message.Password = //div[contains(@class, 'liveValidateMessage--visible') and contains(text(), 'Password must be at least 12 characters.')]
+
+#Post create
+postCreate.postTitle = .//input[@id='post-title']
+postCreate.postBody = .//textarea[@id='post-body']
+postCreate.checkBoxUniquePost = .//input[@name='uniquePost']
+postCreate.SelectValue = .//select[@id='select1']
+postCreate.SaveNewPostButton = .//button[@class='btn btn-primary']
+postCreate.AlertSuccess = .//div[@class="alert alert-success text-center"]
+postCreate.EditPost = .//a[@data-original-title="Edit"]
+postCreate.DeletePost = .//button[@data-original-title="Delete"]
+
+
+

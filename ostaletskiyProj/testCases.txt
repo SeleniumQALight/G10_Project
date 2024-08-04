@@ -1,4 +1,5 @@
 #001 Valid login
+
 Precondition:
 1. register new unique User with name 'someName'
 
@@ -53,3 +54,26 @@ Expected result:
 1. Зявилось повідомлення про імя - Username must be at least 3 characters.
 2. Зявилось повідомлення про Email - You must provide a valid email address.
 3. Зявилось повідомлення про Password - Password must be at least 12 characters.
+
+#005 Create a Post
+
+Precondition: Треба бути залогіненим для стоворення поста
+
+STR:
+1. Натиснути "Create Post"
+2. Ввести в полі "Title" заголовок Тест1
+3. Ввести в полі "Body content" текст Тест2
+4. Зробити активним чек бокс Is this post unique
+5. Зі списку Select value вибрати Загальнодоступне
+6. Натиснути кнопку "Save New Post"
+
+Expected result:
+1.Повнинно звявитись повідомлення про успішне створення поста
+2.Відображатись іконки видалення та редагування біля створенного поста
+
+Postcondition
+Видалити створенний пост
+
+
+
+
