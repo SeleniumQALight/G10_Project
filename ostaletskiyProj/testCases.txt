@@ -26,3 +26,30 @@ STR:
 
 Expected result:
 Зявиться повідомлення "Invalid username/password."
+
+
+#003 Valid Register Account
+
+STR:
+1. В поле UserName ввести імя 'Ozh'
+2. В поле Email ввести email.domain@gmail.com
+3. В поле Password ввести пароль qwe234567890
+4. Натиснути кнопку Sigh Up
+
+Expected result:
+Зявиться кнопка 'Sigh out' на домашній сторінці
+
+
+#004 InValid Register Account
+
+STR:
+1. В поле UserName ввести імя меньше 3 символів
+2. В поле Password ввести пароль меньше 12 символів
+3. В поле Email ввести не валідного формату електронну пошту
+4. Натиснути кнопку Sigh Up
+
+
+Expected result:
+1. Зявилось повідомлення про імя - Username must be at least 3 characters.
+2. Зявилось повідомлення про Email - You must provide a valid email address.
+3. Зявилось повідомлення про Password - Password must be at least 12 characters.

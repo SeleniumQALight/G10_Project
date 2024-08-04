@@ -7,3 +7,13 @@ loginPage.error.message = ".//div[@class='alert alert-danger text-center']
 
 #Home page
 homePage.button=".//..."
+
+#Register page
+
+registerPage.userName = ".//input[@id='username-register']
+registerPage.emailRegister = ".//input[@id='email-register']
+registerPage.passwordRegister = ".//input[@id='password-register']
+registerPage.signUp = ".//button[@class='py-3 mt-4 btn btn-lg btn-success btn-block']
+registerPage.error.message.userName = //div[contains(@class, 'liveValidateMessage--visible') and contains(text(), 'Username must be at least 3 characters.')]
+registerPage.error.message.Email = //div[contains(@class, 'liveValidateMessage--visible') and contains(text(), 'You must provide a valid email address.')]
+registerPage.error.message.Password = //div[contains(@class, 'liveValidateMessage--visible') and contains(text(), 'Password must be at least 12 characters.')]
