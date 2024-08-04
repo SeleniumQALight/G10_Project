@@ -10,6 +10,8 @@ loginPage.error.message = ".//div[@class='alert alert-danger text-center']
 homePage.button=".//h4[@class='my-0 mr-md-auto font-weight-normal']
 homePage.SignOutButton = ".//button[@class='btn btn-sm btn-secondary']
 homePage.CreatePost = ".//a[@class='btn btn-sm btn-success mr-2']
+homePage.ChatButton = .//span[@data-original-title="Chat"]
+
 
 #Register page
 
@@ -34,4 +36,8 @@ createdPost.EditPost = .//a[@data-original-title="Edit"]
 createdPost.DeletePost = .//button[@data-original-title="Delete"]
 createdPost.H2Text = .//h2[text()='Тест1']
 createdPost.PText = .//p[text()='Тест2']
+
+#Chat page
+chatPage.chatFieldType = .//input[@id='chatField']
+chatPage.
 
