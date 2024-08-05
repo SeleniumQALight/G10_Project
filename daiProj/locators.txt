@@ -1,7 +1,24 @@
 #Login page
 
-loginPage.input.userName=".//input'''''
-loginPage.input,password=""
+loginPage.input.userName= //input[@placeholder='Username']
+loginPage.input.password= //input[@placeholder='Password']
+loginPage.signIn.button= //button[text()='Sign In']
+
 
 #Home page
-homepage.button="'
+homePage.createPost.button= //*[@href='/create-post']
+myProfile.button= //a[img[@alt='My profile']]
+
+#Create/Edit/Delete post page
+createPostPage.input.title= //input[@id='post-title']
+createPostPage.input.bodyContent= //textarea[@id='post-body']
+createPostPage.saveNewPost.button= //button[text()='Save New Post']
+editPostPage.edit.button= //a[contains(@class, 'text-primary') and contains(@class, 'mr-2')]
+editPostPage.saveUpdate= //button[text()='Save Updates']
+deletePostPage.delete.button= //form[contains(@class, 'delete-post-form') and contains(@class, 'd-inline')]
+
+
+
+#My profile page
+lastPost.button= (//a[contains(@class, 'list-group-item') and contains(@class, 'list-group-item-action')])[1]
+chatIcon.button= //span[contains(@class, 'header-chat-icon')]
