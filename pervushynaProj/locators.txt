@@ -28,8 +28,8 @@ createPostPage.button.saveNewPost = .//button[@class='btn btn-primary']
 #Post page
 
 post.text.notification = .//*[@class='alert alert-success text-center']
-post.h.title = .//h2
-post.text.bodyContent =
+post.h.title = .//div[@class='d-flex justify-content-between'][.//h2]
+post.text.bodyContent = .//*[@class='body-content'][2]
 post.href.edit = .//a[@class="text-primary mr-2"]
 post.button.delete = .//button[@class="delete-post-button text-danger"]
 
