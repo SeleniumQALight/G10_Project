@@ -9,7 +9,7 @@ STR:
 Expected result:
 -Check button Sign out is visible on Home page
 Postcondition:
-- Delete user
+1. Delete user
 
 #002 Create a new post
 Preconditions:
@@ -23,8 +23,8 @@ STR:
 Expected result:
 - The post with the title "Text" appears on the page. A notification "New post successfully created" appears
 Postconditions:
-- Delete user
-- Delete post
+1. Delete user
+2. Delete post
 
 #003 Edit a post
 Precondition:
