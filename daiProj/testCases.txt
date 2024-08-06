@@ -17,13 +17,14 @@ Preconditions:
 2. Log in
 STR:
 1. Click on "Create Post"
-2. Enter any text into "Title" field
+2. Enter text "Text" into "Title" field
 3. Enter any text into "Body Content"
 4. Click on "Save New Post"
 Expected result:
-- The post appears on the page. A notification "New post successfully created" appears
+- The post with the title "Text" appears on the page. A notification "New post successfully created" appears
 Postconditions:
 - Delete user
+- Delete post
 
 #003 Edit a post
 Precondition:
@@ -34,12 +35,13 @@ STR:
 1. Click on "My Profile"
 2. Click on the last created post
 3. Click on "Edit" button
-4. Update "Body content" field
+4. Update "Body content" field by adding text "New"
 5. Click on "Save updates"
  Expected result:
- - User remains on the same page. A notification "Post successfully updated" appears
+ - User remains on the same page and text "New" is visible in "Body Content" field. A notification "Post successfully updated" appears
  Postconditions:
  1. Delete user
+ 2. Delete post
 
 #004 Delete a post
 Precondition:
@@ -51,7 +53,7 @@ STR:
 2. Click on the last created post
 3. Click on "Delete" button
  Expected result:
- - User is redirected to "My profile" page. A notification "Post successfully deleted" appears
+ - User is redirected to "My profile" page. A notification "Post successfully deleted" appears and the post is not shown on the page
  Postconditions:
  1. Delete user
 
