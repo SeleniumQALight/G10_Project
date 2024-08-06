@@ -1,16 +1,69 @@
 #001 Valid log in
 Precondition:
-1. Register new unique user with name "quauto"
+1. Register new unique user with name "mdai"
 STR:
 1. Open login page
-2. Enter 'quauto' login in input login on Login page
+2. Enter 'mdai' login in input login on Login page
 3. Enter '123456qwerty' password in input password on Login page
 4. Click on button Sign In on Login page
-
 Expected result:
 -Check button Sign out is visible on Home page
-
 Postcondition:
-- Delete user
+1. Delete user
 
-#002
+#002 Create a new post
+Preconditions:
+1. Register new unique user with name "mdai"
+2. Log in
+STR:
+1. Click on "Create Post"
+2. Enter text "Text" into "Title" field
+3. Enter any text into "Body Content"
+4. Click on "Save New Post"
+Expected result:
+- The post with the title "Text" appears on the page. A notification "New post successfully created" appears
+Postconditions:
+1. Delete user
+2. Delete post
+
+#003 Edit a post
+Precondition:
+1. Register new unique user with name "mdai"
+2. Log in
+3. Create a new post
+STR:
+1. Click on "My Profile"
+2. Click on the last created post
+3. Click on "Edit" button
+4. Update "Body content" field by adding text "New"
+5. Click on "Save updates"
+ Expected result:
+ - User remains on the same page and text "New" is visible in "Body Content" field. A notification "Post successfully updated" appears
+ Postconditions:
+ 1. Delete user
+ 2. Delete post
+
+#004 Delete a post
+Precondition:
+1. Register new unique user with name "mdai"
+2. Log in
+3. Create a new post
+STR:
+1. Click on "My Profile"
+2. Click on the last created post
+3. Click on "Delete" button
+ Expected result:
+ - User is redirected to "My profile" page. A notification "Post successfully deleted" appears and the post is not shown on the page
+ Postconditions:
+ 1. Delete user
+
+ #005 Open chat window
+ 1. Register new unique user with name "mdai"
+ 2. Log in
+ STR:
+ 1. Click on "Chat" button
+ Expected result:
+ - Chat window appears in the right bottom corner
+ Postconditions:
+ 1. Delete user
+
