@@ -1,6 +1,7 @@
 package loginTests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,11 +13,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 public class loginTestAllinOneFile {
     private WebDriver webDriver;
-    private Logger logger = Logger.getLogger(getClass().getName());
+    private Logger logger = Logger.getLogger(getClass());
 
     @Before
     public void setup(){
