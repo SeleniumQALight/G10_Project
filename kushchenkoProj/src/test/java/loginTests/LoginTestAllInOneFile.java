@@ -62,7 +62,55 @@ public class LoginTestAllInOneFile {
             logger.info(state + " is element displayed");
             return state;
         } catch (Exception e) {
+            logger.info("Sign Out button is not present on page");
+            return false;
+        }
+    }
+
+
+
+    @Test
+    public void invalidLogin(){
+        webDriver.get("https://aqa-complexapp.onrender.com/");
+        logger.info("The Login page is opened");
+
+        WebElement inputUserNameInLoginForm =
+                webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
+        inputUserNameInLoginForm.clear();
+        inputUserNameInLoginForm.sendKeys("1qaauto");
+        logger.info("Incorrect username is entered");
+
+        WebElement inputPasswordInLoginForm =
+                webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
+        inputPasswordInLoginForm.clear();
+        inputPasswordInLoginForm.sendKeys("123456qwerty");
+        logger.info("Password is entered");
+
+        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
+        logger.info("Login button is clicked");
+
+        Assert.assertTrue("Sign In button is not visible", isButtonSignInVisible());
+        Assert.assertFalse("Sign Out button is visible", isButtonSignOutVisible());
+        Assert.assertTrue("Alert message is not displayed", isAlertMessageIsVisible());
+    }
+
+    private boolean isButtonSignInVisible() {
+        try {
+            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign In']")).isDisplayed();
+            logger.info(state + " Sign In button is displayed");
+            return state;
+        } catch (Exception e) {
             logger.info("Element is not present on page");
+            return false;
+        }
+    }
+    private boolean isAlertMessageIsVisible() {
+        try {
+            boolean state = webDriver.findElement(By.xpath("//div[text()='Invalid username/password.']")).isDisplayed();
+            logger.info(state + " alert message is dispalayed");
+            return  state;
+        } catch (Exception e) {
+            logger.info("Alert message is not present on page");
             return false;
         }
     }
