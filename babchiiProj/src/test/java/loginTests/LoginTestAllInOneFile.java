@@ -87,17 +87,6 @@ public class LoginTestAllInOneFile {
         logger.info("Button Sign In was clicked");
     }
 
-    private boolean isButtonSignOutNotVisible(){
-        try {
-            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
-            logger.info(state + " is element displayed");
-            return state;
-        } catch (Exception e) {
-            logger.info("Button Sign Out is not visible");
-            return false;
-        }
-    }
-
     private boolean isButtonSignInIsVisible() {
         try {
             boolean state = webDriver.findElement(By.xpath("//button[text()='Sign In']")).isDisplayed();
@@ -126,7 +115,7 @@ public class LoginTestAllInOneFile {
         enterUserNameForLogin("qaaauto");
         enterPasswordForLogin("123456qwerty");
         clickSignInButton();
-        Assert.assertFalse("Button 'Sign Out' is visible", isButtonSignOutNotVisible());
+        Assert.assertFalse("Button 'Sign Out' is visible", isButtonSignOutVisible());
         Assert.assertTrue("Button 'Sign In' is not visible", isButtonSignInIsVisible());
         Assert.assertTrue("The alert message is not visible", isAlertMessageVisible());
     }
