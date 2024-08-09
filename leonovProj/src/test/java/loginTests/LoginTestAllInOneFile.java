@@ -54,22 +54,60 @@ public class LoginTestAllInOneFile {
         webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
         logger.info("button Sign In clicked");
 
-        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
+        Assert.assertTrue("Button Sign Out is not visible",
+                isElementVisible("//button[text()='Sign Out]"));
     }
 
-    private boolean isButtonSignOutVisible() {
-        try {
-            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
-            logger.info(state + " is element displayed");
-            return state;
-        } catch (Exception e) {
-            logger.info("Element is not present on the page");
-            return false;
-        }
-    }
 
+    // HW2
     // hw написати тест кейс на невалідний логін в цьому ж класі, просто створити окремий тест на невалідний логін
     // впевнитись що кнопки сайн аут нема
     // впевнитись що кнопка сайн ін присутня
     // впевнитись що банер про невалідний логін присутній
+
+
+    private boolean isElementVisible(String locator) {
+        try {
+            boolean state = webDriver.findElement(By.xpath(locator)).isDisplayed();
+            return state;
+        } catch (Exception e) {
+            logger.info("Element not found");
+            return false;
+        }
+    }
+
+    @Test
+    public void invalidLogin() {
+        webDriver.get("https://aqa-complexapp.onrender.com");
+        logger.info("site opened");
+
+        WebElement userNameLoginInput = webDriver.findElement(By.
+                xpath("//input[@placeholder='Username']"));
+
+        WebElement passwordLoginInput = webDriver.findElement(By.
+                xpath("//input[@placeholder='Password']"));
+
+        WebElement loginButton = webDriver.findElement(By.xpath("//button[text()='Sign In']"));
+
+        String signInButton = "//button[text()='Sign In']";
+        String incorrectCredentialsBanner = "//div[text()='Invalid username/password.']";
+        String signOutButton = "//button[text()='Sign Out]";
+
+        userNameLoginInput.clear();
+        userNameLoginInput.sendKeys("qqaauto");
+        logger.info("invalid login entered");
+
+        passwordLoginInput.clear();
+        passwordLoginInput.sendKeys("123456qwerty");
+        logger.info("password entered");
+
+        loginButton.click();
+        logger.info("login button clicked");
+
+        Assert.assertFalse("signOut button displayed", isElementVisible(signOutButton));
+        Assert.assertTrue("SignIn button isn't present", isElementVisible(signInButton));
+        Assert.assertTrue("Incorrect credentials banner isn't displayed",
+                isElementVisible(incorrectCredentialsBanner));
+
+    }
 }
