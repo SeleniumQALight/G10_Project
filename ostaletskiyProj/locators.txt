@@ -1,0 +1,7 @@
+#Login page
+
+loginPage.input.userName = ".//input[@name='username']
+loginPage.input.password = ".//input[@name='password']
+
+#Home page
+homePage.button=".//..."
