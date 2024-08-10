@@ -3,8 +3,8 @@
 loginPageInputLoginUserName = "//input[@placeholder='Username']"
 loginPageInputLoginPassword = "//input[@placeholder='Password']"
 loginPageInputSignupUserName = "//input[@placeholder='Pick a username']"
-loginPageInputSignupPassword = "//input[@placeholder='you@example.com']"
-loginPageInputSignupEmail = "//input[@placeholder='Create a password']"
+loginPageInputSignupEmail = "//input[@placeholder='you@example.com']"
+loginPageInputSignupPassword = "//input[@placeholder='Create a password']"
 
 #Home page
 case #002 Username is displayed on Home page correctly after Valid Sign up
