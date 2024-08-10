@@ -89,7 +89,7 @@ public class loginTestAllinOneFile {
         webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
         logger.info("Sign in was clicked");
 
-        Assert.assertFalse("Button Sign Out is visible", isButtonSignOutIsNotVisible());
+        Assert.assertFalse("Button Sign Out is visible", isButtonSignOutVisible());
         Assert.assertTrue("Notification is not visible", isNotificationVisible());
         Assert.assertTrue("Button Sign In is visible", isButtonSignInIsVisible());
 
@@ -112,16 +112,6 @@ public class loginTestAllinOneFile {
             return state;
         } catch (Exception e) {
             logger.info("Button is not visible");
-            return false;
-        }
-    }
-    private boolean isButtonSignOutIsNotVisible () {
-        try {
-            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
-            logger.info("button is not displayed");
-            return state;
-        } catch (Exception e) {
-            logger.info("Button is visible");
             return false;
         }
     }
