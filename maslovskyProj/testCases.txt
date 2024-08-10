@@ -1,6 +1,6 @@
 #001 Valid login
 Precondition:
-1. register new unique User with name 'someName'
+1. register new unique User with name 'qaauto', Email 'radulenko@gmail.com', passw '123456qwerty'
 
 STR:
 1. open login page
@@ -12,16 +12,17 @@ Expected result:
 check button 'Sigh out' is visible on Home page
 
 Postcondition:
-- Delete User 'someName'
+- Delete User 'qaauto'
 
 ------------------------------------------------------------------
 
 #002 Username is displayed on Home page correctly after Valid Sign up
-Precondition:
-1. register new unique User with name 'testAlex' / passw 'Alex__123456'
-
-//STR:
-//1. open Home page
+STR:
+1. open login page
+2. enter 'testAlex' Username in input 'register Username' on login page
+2. enter 'a.maslovsky@gmail.com' Email in input 'register Email' on login page
+3. enter 'Alex__123456' Password in input 'register password' on login page
+4. click on button 'Sign up for OurApp' on login page
 
 Expected result:
 check - text of Username 'testAlex' on Home page matches the one entered during Sign Up
@@ -33,52 +34,91 @@ Postcondition:
 
 #003 Open Chat Window
 Precondition:
-1. login as registered User 'testAlex', passw 'Alex__123456'
+1. register new unique User with name 'testAlex', Email 'a.maslovsky@gmail.com', passw 'Alex__123456'
 
 STR:
-1. open Home page
-2. press "open Chat window" button
+1. open login page
+2. enter 'testAlex' login in input login on login page
+3. enter 'Alex__123456' password in input password on login page
+4. click on button Sigh In on login page
+5. press "open Chat window" button
 
 Expected result:
 check - Chat Window opens
 locator should be visible
 
+Postcondition:
+- Delete User 'testAlex'
+
 ------------------------------------------------------------------
 
 #004 Close Chat Window
 Precondition:
-1. login as registered User 'testAlex', passw 'Alex__123456'
-2. open Chat window
+1. register new unique User with name 'testAlex', Email 'a.maslovsky@gmail.com', passw 'Alex__123456'
 
 STR:
-1. close Chat window
+1. open login page
+2. enter 'testAlex' login in input login on login page
+3. enter 'Alex__123456' password in input password on login page
+4. click on button Sigh In on login page
+5. press "open Chat window" button
+6. press "close Chat window" button
 
 Expected result:
 check - Chat Window closes
-locator is not present
+locator of invisible chat-window is present
+
+Postcondition:
+- Delete User 'testAlex'
 
 ------------------------------------------------------------------
+
+//
+// my assumption is that 'chat messages are present in Chat all time' (not only when User is in app)
+//
 
 #005 Send message to Chat
 Precondition:
-1. login as registered User 'testAlex', passw 'Alex__123456'
-2. open Chat window
+1. register new unique User with name 'testAlex', Email 'a.maslovsky@gmail.com', passw 'Alex__123456'
+2. register second new unique User with name 'qaauto', Email 'radulenko@gmail.com', passw '123456qwerty'
 
 STR:
-1. enter message 'My message' in 'Type a message' field, press Enter
+1. open login page
+2. enter 'testAlex' login in input login on login page
+3. enter 'Alex__123456' password in input password on login page
+4. click on button Sigh In on login page
+5. press "open Chat window" button
+6. enter message 'My message' in 'Type a message' field, press Enter
+7. Logout 'testAlex'
+8. enter 'qaauto' login in input login on login page
+9. enter '123456qwerty' password in input password on login page
+10. click on button Sigh In on login page
+11. press "open Chat window" button
 
 Expected result:
-check - appeared message matches entered message
+after step #6 - message 'My message' should appear in Chat window
+after step #11 - message 'My message' should be visible in Chat window
+
+Postcondition:
+- Delete User 'testAlex'
+- Delete User 'qaauto'
 
 ------------------------------------------------------------------
 
-#006 Search wrong result
+#006 Check message "Sorry, we could not find any results for that search."
 Precondition:
-1. login as registered User 'testAlex', passw 'Alex__123456'
-2. open Search window
+1. register new unique User with name 'testAlex', Email 'a.maslovsky@gmail.com', passw 'Alex__123456'
 
 STR:
-1. enter text '*' in Search field
+1. open login page
+2. enter 'testAlex' login in input login on login page
+3. enter 'Alex__123456' password in input password on login page
+4. click on button Sigh In on login page
+5. press Search button
+6. enter text '*' in Search field
 
 Expected result:
-check - "Sorry…" message is displayed
+check - "Sorry, we could not find any results for that search." message is displayed
+
+Postcondition:
+- Delete User 'testAlex'

@@ -1,25 +1,28 @@
 #Login page
 
-loginPage.input.userName = ".//input[@id='userName']
-loginPage.input.password = ".//input[@id='password']
+loginPageInputLoginUserName = "//input[@placeholder='Username']"
+loginPageInputLoginPassword = "//input[@placeholder='Password']"
+loginPageInputSignupUserName = "//input[@placeholder='Pick a username']"
+loginPageInputSignupPassword = "//input[@placeholder='you@example.com']"
+loginPageInputSignupEmail = "//input[@placeholder='Create a password']"
 
 #Home page
 case #002 Username is displayed on Home page correctly after Valid Sign up
-locator - homePage.userName=".//div[@class='text-center']//strong"
+locator - homePage.userName="//div[@class='text-center']//strong"
 
 case #003 Open Chat Window
-locator - homePage.button.openChat=".//span[@data-original-title='Chat']"
-locator should be visible - homePage.chatWindowIsOpened=".//div[@id='chat-wrapper' and contains(@class, 'visible')]"
+locator - homePageButtonOpenChat="//span[@data-original-title='Chat']"
+locator should be visible - homePageChatWindowIsOpened="//div[@id='chat-wrapper' and contains(@class, 'visible')]"
 
 case #004 Close Chat Window
-locator - homePage.button.closeChat=".//span[@class='chat-title-bar-close']"
-locator should not be present - homePage.chatWindowIsOpened=".//div[@id='chat-wrapper' and contains(@class, 'visible')]"
+locator - homePageButtonCloseChat="//span[@class='chat-title-bar-close']"
+locator should be present - homePageChatWindowIsOpened="//div[@id='chat-wrapper' and not(contains(@class, 'visible'))]"
 
 #005 Send message to Chat
-locator - homePage.input.chat=".//input[@class='chat-field']"
-locator - homePage.chatEnteredMessage=".//div[@class='chat-message-inner']"
+locator - homePageInputChatField="//input[@class='chat-field']"
+locator - homePageChatEnteredMessage="//div[contains(text(), 'My message')]"
 
 #006 Search wrong result
-locator - homePage.button.openSearchWindow=".//a[@*[contains(name(), 'title')]='Search']"
-locator - homePage.input.search=".//input[@id='live-search-field']"
-locator should be present - homePage.message.searchNoResult=".//div[contains(@class, 'search-result')]//p"
+locator - homePageButtonOpenSearchWindow="//a[@*[contains(name(), 'title')]='Search']"
+locator - homePageInputSearchField="//input[@id='live-search-field']"
+text should be present - homePageMessageSearchNoResultText="//p[text()='Sorry, we could not find any results for that search.']"
