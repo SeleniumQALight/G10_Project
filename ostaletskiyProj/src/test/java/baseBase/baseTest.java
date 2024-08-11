@@ -1,5 +1,6 @@
 package baseBase;
 
+import Pages.PageProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -13,6 +14,7 @@ import java.time.Duration;
 public class baseTest {
     private WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
+    protected PageProvider pageProvider;
 
     @Before
     public void setup(){
@@ -22,6 +24,7 @@ public class baseTest {
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         logger.info("Browser started");
+        pageProvider = new PageProvider(webDriver);
     }
 
     @After

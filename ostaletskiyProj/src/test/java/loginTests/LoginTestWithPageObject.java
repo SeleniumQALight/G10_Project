@@ -6,7 +6,9 @@ public class LoginTestWithPageObject extends baseBase.baseTest {
 
     @Test
     public void TR001_validLogin() {
-
-
+        pageProvider.getLoginPage().openPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto");
+        pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty");
+        pageProvider.getLoginPage().clickOnButtonSignIn();
 }
 }
