@@ -69,4 +69,57 @@ public class LoginTestsAllInOneFile {
         }
 
     }
+
+    @Test
+    public void invalidLogin(){
+        webDriver.get("https://aqa-complexapp.onrender.com/");
+        logger.info("Site was opened");
+
+        WebElement inputUsernameInLoginForm =
+                webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
+
+        inputUsernameInLoginForm.clear();
+        inputUsernameInLoginForm.sendKeys("123456");
+        logger.info("123456 was inputted into input Login");
+
+        WebElement inputPasswordInLoggInForm =
+                webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
+
+        inputPasswordInLoggInForm.clear();
+        inputPasswordInLoggInForm.sendKeys("123456qwerty");
+        logger.info("Password was inputted into input Password");
+
+        webDriver.findElement(By.xpath("//button[@class='btn btn-primary btn-sm']")).click();
+        logger.info("Button Sign in was clicked");
+
+        Assert.assertFalse("Button Sign Out is visible", isButtonSignOutVisible());
+
+        Assert.assertTrue("Button Sign In is not visible", isButtonSignInVisible());
+
+        Assert.assertTrue("Text is not display", textIsNotDisplay());
+
+    }
+
+    private boolean isButtonSignInVisible() {
+        try {
+            boolean state = webDriver.findElement(By.xpath("//button[@class='btn btn-primary btn-sm']")).isDisplayed();
+            logger.info(state + " is element displayed");
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not present on page");
+            return false;
+        }
+    }
+
+    private boolean textIsNotDisplay() {
+        try {
+            boolean state = webDriver.findElement(By.xpath("//div[@class='alert alert-danger text-center']")).isDisplayed();
+            logger.info(state + " is text displayed");
+            return state;
+        } catch (Exception e) {
+            logger.info("Text is not present on page");
+            return false;
+        }
+    }
+
 }
