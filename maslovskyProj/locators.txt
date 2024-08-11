@@ -1,7 +1,28 @@
 #Login page
 
-loginPage.input.userName = ".//input[@id='userName']
-loginPage.input.password = ".//input[@id='password']
+loginPageInputLoginUserName = "//input[@placeholder='Username']"
+loginPageInputLoginPassword = "//input[@placeholder='Password']"
+loginPageInputSignupUserName = "//input[@placeholder='Pick a username']"
+loginPageInputSignupEmail = "//input[@placeholder='you@example.com']"
+loginPageInputSignupPassword = "//input[@placeholder='Create a password']"
 
 #Home page
-homePage.button=".//..."
+case #002 Username is displayed on Home page correctly after Valid Sign up
+locator - homePage.userName="//div[@class='text-center']//strong"
+
+case #003 Open Chat Window
+locator - homePageButtonOpenChat="//span[@data-original-title='Chat']"
+locator should be visible - homePageChatWindowIsOpened="//div[@id='chat-wrapper' and contains(@class, 'visible')]"
+
+case #004 Close Chat Window
+locator - homePageButtonCloseChat="//span[@class='chat-title-bar-close']"
+locator should be present - homePageChatWindowIsOpened="//div[@id='chat-wrapper' and not(contains(@class, 'visible'))]"
+
+#005 Send message to Chat
+locator - homePageInputChatField="//input[@class='chat-field']"
+locator - homePageChatEnteredMessage="//div[contains(text(), 'My message')]"
+
+#006 Search wrong result
+locator - homePageButtonOpenSearchWindow="//a[@*[contains(name(), 'title')]='Search']"
+locator - homePageInputSearchField="//input[@id='live-search-field']"
+text should be present - homePageMessageSearchNoResultText="//p[text()='Sorry, we could not find any results for that search.']"
