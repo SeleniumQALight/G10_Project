@@ -16,4 +16,5 @@ public class LoginTestWithPageObject extends baseBase.baseTest {
                 pageProvider.getHomePage().isButtonSignOutVisible());
 
 }
+
 }
