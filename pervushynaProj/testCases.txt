@@ -1,0 +1,96 @@
+#001 Valid log in
+
+STR:
+1. Open login page https://aqa-complexapp.onrender.com/
+2. Enter "qaauto" login in input login on Login page
+3. Enter "123456qwerty" password in input password on Login page
+4. Click on "Sign In" button on Login page
+
+Expected Result:
+- Check if the "Sign Out" button is visible on Home page
+- Check if the "Create Post" button is visible on Home page
+- Check if the "Search" button is visible on Home page
+- Check if the "Chat" button is visible on Home page
+- Check if the "My Profile" button is visible on Home page
+- Check if the posts are visible on Home page
+
+
+#002 Check if can go to the "My profile" page
+
+Precondition:
+1. Login with valid credentials
+
+STR:
+1. Click on the "My Profile" button in the "Home page" header
+
+Expected Result:
+- The https://aqa-complexapp.onrender.com/profile/qaauto page is opened
+- "Posts", "Followers" and "Following" buttons are displayed
+
+
+#003 Check if can create a new post
+
+Precondition:
+1. Login with valid credentials
+
+STR:
+1. Click on the "Create Post" button in the "Home page" header
+Expected result: https://aqa-complexapp.onrender.com/create-post is opened
+2. Fill in the field "Title" - ex. "TEST"
+3. Fill in the field "Body Content" - ex. "TEST Body"
+4. Click on the "Save New Post" button
+Expected Result:
+- https://aqa-complexapp.onrender.com/post/*** page is opened
+- "New post successfully created" notification is displayed
+- Post with the title "TEST" and the body "TEST Body" is displayed
+- "Edit" button is displayed
+- "Delete" button is displayed
+5. Go to My profile page (https://aqa-complexapp.onrender.com/profile/qaauto) and make sure your post is added to the "Post" tab
+Expected result:
+- your post with the title "TEST" and the body "TEST Body" is added to the "Post" tab
+- "Post" counter is changed - there is one more post
+
+Post condition:
+- delete your post with the title "TEST" and the body "TEST Body"
+
+
+#004 Check if can edit the post
+
+Precondition:
+1. Login with valid credentials
+2. Click on the "Create Post" button in the "Home page" header and create new post with the title "TEST" and the body "TEST Body".
+
+STR:
+1. Click on the "Edit" button
+Expected result: https://aqa-complexapp.onrender.com/post/***/edit page is opened
+2. Make changes to the field "Title" - ex. "TEST2"
+3. Make changes to the field "Body Content" - ex. "TEST Body2"
+3. Click on the "Save Updates" button
+Expected Result:
+"Post successfully updated" notification is displayed
+4. Click on the "Back to post permalink" link
+
+Expected Result:
+- https://aqa-complexapp.onrender.com/post/*** page is opened
+- New information is displayed in the title and body of the post - "Title"-"TEST2" and "Body Content"-"TEST Body2"
+
+Post condition:
+- delete your post with the title "TEST2" and the body "TEST Body2"
+
+#005 Check if can delete the post
+
+Precondition:
+1. Login with valid credentials
+2. Click on the "Create Post" button in the "Home page" header and create new post with the title "TEST" and the body "TEST Body".
+
+STR:
+1. Click on the "Delete" button
+
+Expected result:
+- My profile page is opened
+- your post with the title "TEST" and the body "TEST Body" isn't on the "Post" tab
+- "Post" counter is changed - there is one less post
+Expected result:
+- My profile page is opened
+- your post isn't on the "Post" tab
+- "Post" counter is changed - there is one less post

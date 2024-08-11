@@ -1,0 +1,49 @@
+#Logine page
+
+loginPage.input.userName = //input[@placeholder='Username']
+LoginPage.input.password = .//input[@placeholder="Password"]
+loginPage.button.signIn = .//button[@class="btn btn-primary btn-sm"]
+
+#Home page
+
+homePage.button.signOut = .//button[@class="btn btn-sm btn-secondary"]
+homePage.href.createPost =.//a[@class="btn btn-sm btn-success mr-2"]
+homePage.href.myProfile =.//a[@class="mr-2"]
+homePage.href.chat = .//*[@class="text-white mr-2 header-chat-icon"]
+homePage.href.search = .//a[@href="#"]
+homePage.text.posts = .//*[@class='text-center mb-4']
+
+#My Profile page
+
+myProfilePage.href.posts = .//a[@href='/profile/qaauto' and @class='profile-nav-link nav-item nav-link active']
+myProfilePage.href.followers = .//a[@href='/profile/qaauto/followers']
+myProfilePage.href.following = .//a[@href='/profile/qaauto/following']
+
+#Create Post page
+
+createPostPage.input.title = .//input[@id='post-title']
+createPostPage.textarea.bodyContent = .//textarea[@id='post-body']
+createPostPage.button.saveNewPost = .//button[@class='btn btn-primary']
+
+#Post page
+
+post.text.notification = .//*[@class='alert alert-success text-center']
+post.h.title = .//div[@class='d-flex justify-content-between'][.//h2]
+post.text.bodyContent = .//*[@class='body-content'][2]
+post.href.edit = .//a[@class="text-primary mr-2"]
+post.button.delete = .//button[@class="delete-post-button text-danger"]
+
+#Edit Post page (//aqa-complexapp.onrender.com/post/***)
+
+editPostPage.input.title = .//input[@id='post-title']
+editPostPage.textarea.bodyContent = .//textarea[@id='post-body']
+editPostPage.button.saveNewPost = .//button[@class='btn btn-primary']
+
+#postEdit Post page (//aqa-complexapp.onrender.com/post/***/edit)
+
+postEditPostPage.text.notification = .//*[@class='alert alert-success text-center']
+postEditPostPage.input.title = .//input[@id='post-title']
+postEditPostPage.textarea.bodyContent = .//textarea[@id='post-body']
+postEditPostPage.href.edit = .//a[@class="text-primary mr-2"]
+
+
