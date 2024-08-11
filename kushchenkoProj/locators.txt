@@ -1,0 +1,23 @@
+#Login page
+
+loginPage.input.userName="//input[@placeholder='Username']"
+loginPage.input.password="//input[@placeholder='Password']"
+loginPage.button.signIn="//button[text()='Sign In']"
+loginPage.input.username-register=".//input[@id='username-register']"
+loginPage.button.submit="//button[@type='submit']"
+loginPage.alertMessage.username=".//div[text()='Username must be at least 3 characters.']"
+
+
+#Home page
+homepage.button.createPost=".//a[text()='Create Post']"
+homePage.button.myProfile=".//a[@href='/profile/qaauto']"
+
+#MyProfilePage
+meProfilePage.link.followers="//a[contains(@href,"followers")]"
+
+#NewPost page
+newPostPage.input.title="//input[@id='post-title']"
+newPostPage.input.textArea="//textarea[@id='post-body']"
+newPostPage.input.checkbox="//input[@type='checkbox']"
+newPostPage.button.saveNewPost="//button[text()='Save New Post']"
+
