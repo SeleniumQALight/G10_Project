@@ -5,8 +5,21 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends ParentPage {
+
+    @FindBy(xpath = "//input[@placeholder='Username']")
+    private WebElement inputUserNameInLoginForm;
+
+    @FindBy(xpath = "//input[@placeholder='Password']")
+    private WebElement inputPasswordInLoginForm;
+
+    @FindBy(xpath = "//button[text()='Sign In']")
+    private WebElement buttonSignIn;
+
+
+
    private Logger logger = Logger.getLogger(getClass());
 
     public LoginPage(WebDriver webDriver) {
@@ -20,8 +33,6 @@ public class LoginPage extends ParentPage {
 
     public void enterTextIntoInputLogin(String login) {
         try {
-            WebElement inputUserNameInLoginForm =
-                    webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
             inputUserNameInLoginForm.clear();
             inputUserNameInLoginForm.sendKeys(login);
             logger.info(login + " was entered into input Login");
@@ -33,8 +44,6 @@ public class LoginPage extends ParentPage {
 
     public void enterTextIntoInputPassword(String password) {
         try {
-            WebElement inputPasswordInLoginForm =
-                    webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
             inputPasswordInLoginForm.clear();
             inputPasswordInLoginForm.sendKeys(password);
             logger.info(password + " was entered into input Password");
@@ -46,7 +55,7 @@ public class LoginPage extends ParentPage {
 
     public void clickOnButtonSignIn() {
         try {
-            webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
+            buttonSignIn.click();
             logger.info("Button Sign In was clicked");
         } catch (Exception e) {
             logger.error("Cannot work with element " + e);
