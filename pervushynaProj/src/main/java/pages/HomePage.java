@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class HomePage extends ParentPage {
+public class HomePage extends ParentPage{
 
-    @FindBy(xpath = "//button[text()='Sign Out']")
+    @FindBy(xpath = "//button[@class='btn btn-sm btn-secondary']")
     private WebElement buttonSignOut;
 
     public HomePage(WebDriver webDriver) {
@@ -14,6 +14,7 @@ public class HomePage extends ParentPage {
     }
 
     public boolean isButtonSignOutVisible() {
-        return isElementVisible(buttonSignOut);
+      return  isElementVisible(buttonSignOut);
+
     }
 }
