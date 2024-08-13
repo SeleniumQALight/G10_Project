@@ -1,5 +1,6 @@
 package pages;
 
+import data.TestData;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -69,5 +70,13 @@ public class LoginPage extends ParentPage {
 
     public boolean isAlertMessageVisible() {
         return isElementVisible(alertMessage);
+    }
+
+    public HomePage openLoginPageAndLoginWithValidCreds() {
+        openLoginPage();
+        enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
+        enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
+        clickOnButtonSignIn();
+        return new HomePage(webDriver);
     }
 }
