@@ -16,6 +16,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement invalidLoginErrorMessage;
+
     Logger logger = Logger.getLogger(getClass());
 
     public LoginPage(WebDriver webDriver) {
@@ -47,4 +50,8 @@ public class LoginPage extends ParentPage {
     public void clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
     }
+
+    public boolean isInvalidLoginMessageVisible() {return isElementVisible(invalidLoginErrorMessage);}
+
+    public boolean isButtonSignInVisible() {return isElementVisible(buttonSignIn);}
 }
