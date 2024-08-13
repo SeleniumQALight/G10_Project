@@ -53,20 +53,5 @@ public class CommonActionsWithElements {
             return false;
         }
     }
-
-    protected boolean isNotificationAlertVisible(WebElement webElement) {
-        try {
-            boolean state = webElement.isDisplayed();
-            if (state) {
-                logger.info("Notification is visible");
-            } else {
-                logger.info("Notification is not visible");
-            }
-            return state;
-        } catch (Exception e) {
-            logger.info("Notification is not visible");
-            return false;
-        }
-    }
 }
 

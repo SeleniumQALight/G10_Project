@@ -45,8 +45,7 @@ public class LoginPage extends ParentPage {
     }
 
     public boolean isNotificationVisible() {
-        isNotificationAlertVisible(notificationAlert);
-        return true;
+      return isElementDisplayed(notificationAlert);
     }
 
     public boolean isButtonSignInVisible() {
