@@ -15,7 +15,7 @@ public class BaseTest {
     private Logger logger = Logger.getLogger(getClass());
     protected PageProvider pageProvider;
 
-
+    //цей блок
     @Before
     public void setup() {
         WebDriverManager.chromedriver().setup();
@@ -33,4 +33,5 @@ public class BaseTest {
         logger.info("browser closed");
 
     }
+
 }
