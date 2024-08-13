@@ -1,8 +1,6 @@
 package pages;
 
 import org.apache.log4j.Logger;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +15,9 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
+
+    @FindBy(xpath = "//div[text()='Invalid username/password.']")
+    private WebElement alertMessage;
 
     private Logger logger = Logger.getLogger(getClass());
 
@@ -60,5 +61,13 @@ public class LoginPage extends ParentPage {
 
     public void clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
+    }
+
+    public boolean isButtonSignInVisible() {
+        return isElementVisible(buttonSignIn);
+    }
+
+    public boolean isAlertMessageVisible() {
+        return isElementVisible(alertMessage);
     }
 }
