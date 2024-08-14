@@ -57,9 +57,48 @@ public class LoginTestAllInOneFile {
 
     }
 
+    @Test
+    public void invalidLogin() {
+        webDriver.get("https://aqa-complexapp.onrender.com");
+        logger.info("Site was opened");
+        logger.info("nothing was inputted into input Login");
+        logger.info("nothing was inputted into input Password");
+
+        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
+        logger.info("Button Sign In was clicked");
+
+        Assert.assertFalse("Button Sign Out is visible", isButtonSignOutVisible());
+        Assert.assertTrue("Button Sign In is not visible", isButtonSignInVisible());
+        Assert.assertTrue("Alert text is not displayed", isInvalidCredentialsTextDisplayed());
+
+    }
+
     private boolean isButtonSignOutVisible() {
         try {
             boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
+            logger.info(state + " is element displayed");
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not present on page");
+            return false;
+        }
+    }
+
+    private boolean isButtonSignInVisible() {
+        try {
+            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign In']")).isDisplayed();
+            logger.info(state + " is element displayed");
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not present on page");
+            return false;
+        }
+    }
+
+    private boolean isInvalidCredentialsTextDisplayed() {
+        try {
+            boolean state = webDriver.findElement
+                    (By.xpath("//*[contains (text(), 'Invalid username/password.')]")).isDisplayed();
             logger.info(state + " is element displayed");
             return state;
         } catch (Exception e) {
