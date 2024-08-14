@@ -1,8 +1,7 @@
 package Pages;
 
+import data.TestData;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,6 +40,14 @@ public class LoginPage extends ParentPage {
 
     public void clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
+    }
+
+    public HomePage openLoginPageAndFillLoginFormWithValidCredentials() {
+        openPage();
+        enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
+        enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
+        clickOnButtonSignIn();
+        return new HomePage(webDriver);
     }
 }
 
