@@ -12,10 +12,6 @@ import pages.elements.HeaderElement;
 public class HomePage extends ParentPage {
     Logger logger = Logger.getLogger(getClass());
 
-
-    @FindBy(xpath = "//button[text()='Sign Out']")
-    private WebElement buttonSignOut;
-
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
@@ -34,10 +30,6 @@ public class HomePage extends ParentPage {
         return new HeaderElement(webDriver);
     }
 
-    public boolean isButtonSignOutVisible() {
-        return isElementVisible(buttonSignOut);
-    }
-
     public boolean isButtonSignInVisible() {
         return isElementVisible(buttonSignIn);
     }
@@ -47,7 +39,7 @@ public class HomePage extends ParentPage {
     }
 
     public HomePage checkIsRedirectOnHomePage() {
-        Assert.assertTrue("It is not Home page", isButtonSignOutVisible());
+        Assert.assertTrue("It is not Home page", getHeaderElement().isButtonSignOutVisible());
         // TODO check URL
         return this;
     }
@@ -60,7 +52,7 @@ public class HomePage extends ParentPage {
     public HomePage openHomePageAndLoginIfNeeded() {
         LoginPage loginPage = new LoginPage(webDriver);
         loginPage.openLoginPage();
-        if (isButtonSignOutVisible()) {
+        if (getHeaderElement().isButtonSignOutVisible()) {
             logger.info("User is already logged in");
         } else {
             loginPage.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
