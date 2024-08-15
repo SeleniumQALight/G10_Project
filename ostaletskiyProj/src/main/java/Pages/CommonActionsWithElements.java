@@ -16,13 +16,13 @@ public class CommonActionsWithElements {
     }
 
     protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
-       try {
-              webElement.clear();
-              webElement.sendKeys(text);
-                logger.info(text + " was entered into input");
-         } catch (Exception e) {
-              printErrorAndStopTest(e);
-       }
+        try {
+            webElement.clear();
+            webElement.sendKeys(text);
+            logger.info(text + " was entered into input");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
     }
 
     protected void clickOnElement(WebElement webElement) {
@@ -32,6 +32,11 @@ public class CommonActionsWithElements {
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
+    }
+
+    private void printErrorAndStopTest(Exception e) {
+        logger.error("Can not work with element " + e);
+        Assert.fail("Can not work with element " + e);
     }
 
     protected boolean isElementDisplayed(WebElement webElement) {
@@ -48,11 +53,5 @@ public class CommonActionsWithElements {
             return false;
         }
     }
-
-
-
-    private void printErrorAndStopTest(Exception e) {
-        logger.error("Cannot work with element " + e);
-        Assert.fail("Cannot work with element " + e);
-    }
 }
+
