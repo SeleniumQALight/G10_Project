@@ -5,7 +5,7 @@ loginPage.InputLoginPassword = "//input[@placeholder='Password']"
 loginPage.signIn.button = ".//button[@class='btn btn-primary btn-sm']
 loginPage.error.message = ".//div[@class='alert alert-danger text-center']
 
-#Home pagef
+#Home page
 
 homePage.button=".//h4[@class='my-0 mr-md-auto font-weight-normal']
 homePage.SignOutButton = ".//button[@class='btn btn-sm btn-secondary']
@@ -38,6 +38,7 @@ createdPost.EditPost = .//a[@data-original-title="Edit"]
 createdPost.DeletePost = .//button[@data-original-title="Delete"]
 createdPost.H2Text = .//h2[text()='Тест1']
 createdPost.PText = .//p[text()='Тест2']
+
 
 #Chat page
 
