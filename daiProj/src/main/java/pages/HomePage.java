@@ -28,22 +28,13 @@ public class HomePage extends ParentPage {
     //  return false;
     // }
 
-    @FindBy(xpath = "//button[text()='Sign In']")
-    private WebElement buttonSignIn;
 
-    @FindBy(xpath = "//div[contains(@class, 'alert-danger') and contains(@class, 'text-center')]")
-    private WebElement alertMessage;
+
 
     public boolean isButtonSignOutVisible() {
         return isElementVisible(buttonSignOut);
     }
 
-    public boolean isButtonSignInVisible() {
-        return isElementVisible(buttonSignIn);
     }
 
-    public boolean isAlertMessageVisible() {
-        return isElementVisible(alertMessage);
-    }
 
-}

@@ -17,6 +17,10 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+    @FindBy(xpath = "//div[contains(@class, 'alert-danger') and contains(@class, 'text-center')]")
+    private WebElement alertMessage;
+
+
     private Logger logger = Logger.getLogger(getClass());
 
     public LoginPage(WebDriver webDriver) {
@@ -73,6 +77,14 @@ public class LoginPage extends ParentPage {
 
     public void clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
+    }
+
+    public boolean isButtonSignInVisible() {
+        return isElementVisible(buttonSignIn);
+    }
+
+    public boolean isAlertMessageVisible() {
+        return isElementVisible(alertMessage);
     }
 }
 
