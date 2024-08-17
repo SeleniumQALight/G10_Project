@@ -12,9 +12,6 @@ import pages.elements.HeaderElement;
 public class HomePage extends ParentPage {
     Logger logger = Logger.getLogger(getClass());
 
-    @FindBy(xpath = "//button[text()='Sign Out']")
-    private WebElement buttonSignOut;
-
     @FindBy(xpath = "//*[contains (text(), 'Invalid username/password.')]")
 //  as a variant  @FindBy(xpath = "//*[contains (@class, 'alert-danger') and not (contains(@class, 'liveValidateMessage'))]")
     private WebElement invalidCredentialsText;
