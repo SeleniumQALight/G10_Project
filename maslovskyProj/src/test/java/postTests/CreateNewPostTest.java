@@ -19,11 +19,15 @@ public class CreateNewPostTest extends BaseTest {
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoTextAreaBody("Body of the post from me")
                 // .setCheckBox to ON (ask what is your state, if ON, do nothing if OFF, click) - add these methods to CommonActionsWithElements
+                .setCheckBoxStatus("check")
+                ////////////////////////////////
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
                 // isThisPost unique& : yes
+                .checkIsUniqueTextInPost("Is this post unique? : yes")
+                ////////////////////////////////
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
                 .checkPostWithTitleIsPresent(POST_TITLE, 1);
