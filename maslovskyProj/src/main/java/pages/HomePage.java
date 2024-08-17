@@ -12,15 +12,9 @@ import pages.elements.HeaderElement;
 public class HomePage extends ParentPage {
     Logger logger = Logger.getLogger(getClass());
 
-    @FindBy(xpath = "//button[text()='Sign In']")
-    private WebElement buttonSignIn;
-
     @FindBy(xpath = "//*[contains (text(), 'Invalid username/password.')]")
 //  as a variant  @FindBy(xpath = "//*[contains (@class, 'alert-danger') and not (contains(@class, 'liveValidateMessage'))]")
     private WebElement invalidCredentialsText;
-
-    @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
-    private WebElement buttonCreatePost;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -30,9 +24,6 @@ public class HomePage extends ParentPage {
         return new HeaderElement(webDriver);
     }
 
-    public boolean isButtonSignInVisible() {
-        return isElementVisible(buttonSignIn);
-    }
 
     public boolean isInvalidCredentialsTextDisplayed() {
         return isElementVisible(invalidCredentialsText);
@@ -42,11 +33,6 @@ public class HomePage extends ParentPage {
         Assert.assertTrue("It is not Home page", getHeaderElement().isButtonSignOutVisible());
         // TODO check URL
         return this;
-    }
-
-    public CreateNewPostPage clickOnButtonCreatePost() {
-        clickOnElement(buttonCreatePost);
-        return new CreateNewPostPage(webDriver);
     }
 
     public HomePage openHomePageAndLoginIfNeeded() {

@@ -18,6 +18,7 @@ public class LoginPage extends ParentPage {
     private WebElement buttonSighIn;
 
     private Logger logger = Logger.getLogger(getClass());
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -55,5 +56,17 @@ public class LoginPage extends ParentPage {
         enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
         clickOnButtonSighIn();
         return new HomePage(webDriver);
+    }
+
+    public boolean isButtonSignInVisible() {
+        return isElementVisible(buttonSighIn);
+    }
+
+    public boolean isUsernameInputFieldVisible() {
+        return isElementVisible(inputUserNameInLoginForm);
+    }
+
+    public boolean isPasswordInputFieldVisible() {
+        return isElementVisible(inputPasswordInLoginForm);
     }
 }
