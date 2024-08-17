@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.CommonActionsWithElements;
 import pages.CreateNewPostPage;
-import pages.LoginPage;
 import pages.MyProfilePage;
 
 import static data.TestData.VALID_LOGIN_UI;

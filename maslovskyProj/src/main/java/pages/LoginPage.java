@@ -17,6 +17,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSighIn;
 
+    @FindBy(xpath = "//*[contains (text(), 'Invalid username/password.')]")
+    private WebElement invalidCredentialsText;
+
     private Logger logger = Logger.getLogger(getClass());
 
     public LoginPage(WebDriver webDriver) {
@@ -48,6 +51,10 @@ public class LoginPage extends ParentPage {
 
     public void clickOnButtonSighIn() {
         clickOnElement(buttonSighIn);
+    }
+
+    public boolean isInvalidCredentialsTextDisplayed() {
+        return isElementVisible(invalidCredentialsText);
     }
 
     public HomePage openLoginPageAndFillLoginFormWithValidCred() {

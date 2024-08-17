@@ -88,17 +88,6 @@ public class CreateNewPostPage extends ParentPage {
             default: logger.info("The status '" + status + "' is not valid, checkbox status is not changed");
             break;
         }
-//        if (!status.equals("check") && !status.equals("uncheck")) {
-//            logger.info("The status should be either 'check' or 'uncheck'");
-//        } else if (!getCheckBoxStatus() && status.equals("check")) {
-//            clickOnElement(checkBox);
-//            logger.info("checkbox set to 'check' status");
-//        } else if (getCheckBoxStatus() && status.equals("uncheck")) {
-//                clickOnElement(checkBox);
-//            logger.info("checkbox set to 'uncheck' status");
-//        } else {
-//            logger.info("The checkbox is already in the desired state");
-//        }
         return this;
     }
 }
