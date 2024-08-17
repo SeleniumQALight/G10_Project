@@ -38,6 +38,9 @@ createdPost.EditPost = .//a[@data-original-title="Edit"]
 createdPost.DeletePost = .//button[@data-original-title="Delete"]
 createdPost.H2Text = .//h2[text()='Тест1']
 createdPost.PText = .//p[text()='Тест2']
+createdPost.MyProfile = //img[@alt='My profile']
+createdPost.IsPostVisible = //a[@class='list-group-item list-group-item-action' and contains(., 'Тест1')]
+
 
 
 #Chat page
