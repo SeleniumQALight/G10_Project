@@ -37,6 +37,9 @@ STR:
 Expected result:
 Зявиться кнопка 'Sigh out' на домашній сторінці
 
+Postcondition:
+Видалити створеного користувача 'Ozh'
+
 
 #004 InValid Register Account
 
