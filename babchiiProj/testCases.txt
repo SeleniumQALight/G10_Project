@@ -1,5 +1,5 @@
 #001 Valid log in
-Precondition:
+Preconditions:
 1. Register new uniq user with name 'testVasyl'
 
 STR:
@@ -12,7 +12,130 @@ Expected Result:
 Check button Sign out is visible
 
 Postconditions:
- - Delete user 'testTaras'
+- Delete user 'testTaras'
 
 
- #002 ...
+#002 Valid registration
+STR:
+1. Open the page https://aqa-complexapp.onrender.com/
+2. Enter 'testUserVasyl123' username in the input 'Username' on the login page for Sign up
+3. Enter 'testBabchii@gmail.com' email in the input 'Email' on the login page for Sign up
+4. Enter 'Test123456Hrsw' password in the input password on the Login page for Sign up
+5. Click on the button 'Sign up for OurApp'
+
+Expected result:
+- The message "Hello testUserVasyl, your feed is empty." is visible
+- 'Search' and 'Chat' icons are visible
+- User avatar and username is visible
+- 'Create Post' and 'Sign Out' buttons are visible
+- 'Sign In' and 'Sign up for OurApp' buttons are not visible
+
+Postconditions:
+- Sign Out
+- Delete user 'testUserVasyl123'
+
+
+#003 Valid create publicly available unique post
+Preconditions:
+1. Login user with 'Username' - 'qaauto' and 'Password' - '123456qwerty'
+
+STR:
+1. Click on the button 'Create Post'
+2. Click on the field 'Title'
+3. Enter text "Test Title" in the field 'Title'
+4. Click on the area 'Body Content'
+5. Enter text "Test Content" in the area 'Body Content'
+6. Click on the 'Is this post unique?' checkbox
+7. Open the dropdown 'Select value'
+8. Choose option "All Users"
+9. Click on the 'Save New Post' button
+
+Expected result:
+- Successful message "New post successfully created." is visible
+- The post title is visible and the same as was created
+- 'Edit' and 'Delete' icons are visible text to the title name
+- The 'Note' with message "This post was written for All Users" is visible
+- Next ot the text "Is this post unique?" the "yes" values is displayed
+
+Postconditions:
+- Delete the post
+- Sign Out
+
+
+#004 Valid post search
+Preconditions:
+1. Login user with 'Username' - 'qaauto' and 'Password' - '123456qwerty'
+2. Create post with title name 'Test for search'
+3. Refresh the page
+
+STR:
+1. Click on the 'Search' icon
+2. Enter the title name 'Test for search' in the search field
+3. Click on the title name 'Test for search'
+
+Expected result:
+- The post title is visible and the same as was searched
+- 'Edit' and 'Delete' icons are visible text to the title name
+
+Postconditions:
+- Delete the post
+- Sign Out
+
+
+#005 Valid post edit
+Preconditions:
+1. Login user with 'Username' - 'qaauto' and 'Password' - '123456qwerty'
+2. Create post with values:
+    - Title Name - "Test for edit"
+    - Body Content - "Test"
+    - Is this post unique? - "no"
+    - Select value of availability for other users - Private Message
+3. Refresh the page
+
+STR:
+1. Click on the 'Search' icon
+2. Enter the title name 'Test for edit' in the search field
+3. Click on the title name 'Test for edit'
+4. Click on the 'Edit' icon
+5. Click on the field 'Title' and add text " EDITED"
+6. Click on the area 'Body Content' and add text " EDITED"
+7. Click on the 'Is this post unique?' checkbox
+8. Open the dropdown 'Select value' and choose option "All Users"
+9. Click on the 'Save Updates' button
+10. Click on the 'Back to post permalink' link
+
+Expected result:
+- 'Test for edit EDITED' is title name
+- 'Test for edit EDITED' is content
+- The 'Note' with message "This post was written for All Users" is visible
+- Next ot the text "Is this post unique?" the "yes" values is displayed
+
+Postconditions:
+- Delete the post
+- Sign Out
+
+
+#006 Valid post delete
+1. Login user with 'Username' - 'qaauto' and 'Password' - '123456qwerty'
+2. Create post with values:
+    - Title Name - "Test for delete"
+    - Body Content - "Test"
+    - Is this post unique? - "no"
+    - Select value of availability for other users - Private Message
+3. Click on the user avatar
+4. Remember post count
+5. Refresh the page
+
+STR:
+1. Click on the 'Search' icon
+2. Enter the title name 'Test for delete' in the search field
+3. Click on the title name 'Test for delete'
+4. Click on the 'Delete' icon
+
+Expected result:
+- Successful message "Post successfully deleted." is visible
+- Posts count is less than was remembered (-1)
+- List of posts is visible
+
+Postconditions:
+- Sign Out
