@@ -11,6 +11,7 @@ STR:
 Expected Result:
 Перевірити що залогінилися:
  - Check button 'Sign out' is visible on Home page
+ - Check the user name "testTaras" is displayed in the header of Home page
 
  Postcondition:
  - Delete user 'testTaras'
@@ -83,6 +84,7 @@ Postcondition:
   - Check that h2 tag "test new post" is displayed on the page // локатор //h2[text()="test new post"] //
 
 Postcondition:
+ - Delete recently created post with title "test new post"
  - Delete user 'testUser123'
 
 

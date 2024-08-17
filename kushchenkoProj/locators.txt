@@ -11,6 +11,7 @@ loginPage.alertMessage.username=".//div[text()='Username must be at least 3 char
 #Home page
 homepage.button.createPost=".//a[text()='Create Post']"
 homePage.button.myProfile=".//a[@href='/profile/qaauto']"
+homePage.text.userName="//*[text()='qaauto']"
 
 #MyProfilePage
 meProfilePage.link.followers="//a[contains(@href,"followers")]"
