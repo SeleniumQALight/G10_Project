@@ -1,11 +1,11 @@
 #Login page
 
-loginPage.input.userName = ".//input[@id='userName']
-loginPage.input.password = ".//input[@id='password']
+loginPage.InputLoginUserName = "//input[@placeholder='Username']"
+loginPage.InputLoginPassword = "//input[@placeholder='Password']"
 loginPage.signIn.button = ".//button[@class='btn btn-primary btn-sm']
 loginPage.error.message = ".//div[@class='alert alert-danger text-center']
 
-#Home page
+#Home pagef
 
 homePage.button=".//h4[@class='my-0 mr-md-auto font-weight-normal']
 homePage.SignOutButton = ".//button[@class='btn btn-sm btn-secondary']
