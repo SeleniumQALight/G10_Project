@@ -10,9 +10,11 @@ import static data.TestData.VALID_PASSWORD_UI;
 public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void TR001_validLogin() {
+        String userName = "qaauto";
+        String userPassword = "123456qwerty";
         pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().enterTextIntoInputLogin(VALID_LOGIN_UI);
-        pageProvider.getLoginPage().enterTextIntoInputPassword(VALID_PASSWORD_UI);
+        pageProvider.getLoginPage().enterTextIntoInputLogin(userName);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(userPassword);
         pageProvider.getLoginPage().clickOnButtonSighIn();
 
         Assert.assertTrue("Button Sign Out is not visible",
@@ -25,7 +27,7 @@ public class LoginTestWithPageObject extends BaseTest {
                 pageProvider.getHomePage().getHeaderElement().isButtonMyProfileVisible());
 
         Assert.assertTrue("UserName is not visible",
-                pageProvider.getHomePage().getHeaderElement().isUsernameVisible());
+                pageProvider.getHomePage().getHeaderElement().isUsernameVisible(userName));
 
         Assert.assertFalse("input UserName is visible",
                 pageProvider.getLoginPage().isUsernameInputFieldVisible());

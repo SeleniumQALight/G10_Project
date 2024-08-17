@@ -1,5 +1,6 @@
 package pages.elements;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,9 +20,9 @@ public class HeaderElement extends CommonActionsWithElements {
 
     @FindBy(xpath = "//img[@alt='My profile']")
     private WebElement buttonMyProfile;
-
-    @FindBy(xpath = "//span[contains(text(), '" + VALID_LOGIN_UI + "')]")
-    private WebElement userName;
+//
+//    @FindBy(xpath = "//span[contains(text(), '" + VALID_LOGIN_UI + "')]")
+//    private WebElement userName;
 
     public HeaderElement(WebDriver webDriver) {
         super(webDriver);
@@ -49,7 +50,8 @@ public class HeaderElement extends CommonActionsWithElements {
         return isElementVisible(buttonMyProfile);
     }
 
-    public boolean isUsernameVisible() {
+    public boolean isUsernameVisible(String nameOfUser) {
+        WebElement userName = webDriver.findElement(By.xpath("//span[contains(text(), '" + nameOfUser + "')]"));
         return isElementVisible(userName);
     }
 

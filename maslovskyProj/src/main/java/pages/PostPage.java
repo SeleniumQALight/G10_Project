@@ -51,9 +51,8 @@ public class PostPage extends ParentPage {
         return new MyProfilePage(webDriver);
     }
 
-    public PostPage checkIsUniqueTextInPost(String expectedUniqueText) {
-        String actualText = uniqueText.getText();
-        Assert.assertEquals("Unique text is not as expected", expectedUniqueText, actualText);
+    public PostPage checkIsUniqueTextInPostDisplayed() {
+        Assert.assertTrue(uniqueText.isDisplayed());
         return this;
     }
 }

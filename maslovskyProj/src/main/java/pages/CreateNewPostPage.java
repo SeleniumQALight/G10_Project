@@ -3,6 +3,8 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.junit.Assert;
+
 
 public class CreateNewPostPage extends ParentPage {
 
@@ -71,22 +73,16 @@ public class CreateNewPostPage extends ParentPage {
 
     public CreateNewPostPage setCheckBoxStatus(String status) {
         switch (status) {
-            case "check": if (!isCheckBoxSelected()) {
-                clickOnElement(checkBox);
-                logger.info("checkbox set to '" + status + "' status");
-            } else {
-                logger.info("The checkbox is already in '" + status + "' status");
-            }
+            case "check":
+                setCheckBoxOn();
             break;
-            case "uncheck": if (isCheckBoxSelected()) {
-                clickOnElement(checkBox);
-                logger.info("checkbox set to '" + status + "' status");
-            } else {
-                logger.info("The checkbox is already in '" + status + "' status");
-            }
+            case "uncheck":
+                setCheckBoxOff();
             break;
-            default: logger.info("The status '" + status + "' is not valid, checkbox status is not changed");
-            break;
+            default:
+                logger.info("The status '" + status + "' is not valid, test is interrupted");
+                Assert.assertTrue("The status '" + status + "' is not valid", false);
+                break;
         }
         return this;
     }
