@@ -78,40 +78,41 @@ public class LoginTestAllInOneFile {
         WebElement inputUserNameInLoginForm =
                 webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
         inputUserNameInLoginForm.clear();
-        inputUserNameInLoginForm.sendKeys("invalid");
+        inputUserNameInLoginForm.sendKeys("qaauto");
         logger.info("invalid username was inputted into input Login");
 
         WebElement inputPasswordInLoginForm =
                 webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
         inputPasswordInLoginForm.clear();
-        inputPasswordInLoginForm.sendKeys("123456");
+        inputPasswordInLoginForm.sendKeys("123456qwerty");
         logger.info("invalid password was inputted into input Password");
 
         webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
         logger.info("Button Sign in was clicked");
 
         Assert.assertTrue("Button Sign In is not visible", buttonSignInVisible());
+        Assert.assertFalse("Button Sign Out is visible", isButtonSignOutVisible());
+        Assert.assertTrue("Alert message is not visible", alertMessageIsVisible());
 
 
-     if(alertMessageIsVisible()){
-         WebElement alertMessage =
-                 webDriver.findElement(By.xpath("//div[contains(@class, 'alert-danger') and contains(@class, 'text-center')]"));
-         Assert.assertEquals("Invalid username/password.", alertMessage.getText());
-         logger.info("Alert message is visible");
-     } else {
+        if (alertMessageIsVisible()) {
+            WebElement alertMessage =
+                    webDriver.findElement(By.xpath("//div[contains(@class, 'alert-danger') and contains(@class, 'text-center')]"));
+            Assert.assertEquals("Invalid username/password.", alertMessage.getText());
+            logger.info("Alert message is visible");
+        } else {
             Assert.fail("Alert message is not visible");
-     }
+        }
 
-   }
+    }
 
-private boolean alertMessageIsVisible(){
+    private boolean alertMessageIsVisible() {
         try {
             return webDriver.findElement(By.xpath("//div[contains(@class, 'alert-danger') and contains(@class, 'text-center')]")).isDisplayed();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
-}
+    }
 
     private boolean buttonSignInVisible() {
         try {
