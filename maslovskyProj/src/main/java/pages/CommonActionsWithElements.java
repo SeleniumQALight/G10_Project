@@ -50,13 +50,30 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected boolean isElementVisible(String xPath) {
+        try {
+            boolean state = webDriver.findElement(By.xpath(xPath)).isDisplayed();
+            if (state) {
+                logger.info("Element is displayed");
+            } else {
+                logger.info("Element is not displayed");
+            }
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not displayed");
+            return false;
+        }
+    }
+
+
     protected String returnTextFromElementByLocator(WebElement webElement) {
         try {
             String userName = webElement.getText().trim().toLowerCase();
             logger.info("Element is displayed");
             return userName;
         } catch (Exception e) {
-            logger.info("Element is not displayed");
+            logger.error("Element is not displayed");
+            Assert.fail("Element is not displayed " + e);
             return "";
         }
     }

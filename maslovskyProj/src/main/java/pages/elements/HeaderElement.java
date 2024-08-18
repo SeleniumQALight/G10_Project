@@ -27,6 +27,8 @@ public class HeaderElement extends CommonActionsWithElements {
 //    @FindBy(xpath = "//span[contains(text(), '" + VALID_LOGIN_UI + "')]")
 //    private WebElement userName;
 
+    String userNameLocator = "//header//*[contains (text(), '%s')]";
+
     public HeaderElement(WebDriver webDriver) {
         super(webDriver);
     }
@@ -55,6 +57,10 @@ public class HeaderElement extends CommonActionsWithElements {
 
     public String getUserName() {
         return returnTextFromElementByLocator(userName);
+    }
+
+    public boolean isUserNameVisible(String userName) {
+        return isElementVisible(String.format(userNameLocator, userName));
     }
 
 }

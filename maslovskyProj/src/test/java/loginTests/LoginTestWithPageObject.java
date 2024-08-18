@@ -31,9 +31,13 @@ public class LoginTestWithPageObject extends BaseTest {
         Assert.assertTrue("Button MyProfile is not visible",
                 pageProvider.getHomePage().getHeaderElement().isButtonMyProfileVisible());
 
-        Assert.assertEquals("User name is not equals to Login userName", userName,
+//        Assert.assertEquals("User name is not equal to Login userName", userName,
+//                pageProvider.getHomePage().getHeaderElement()
+//                        .getUserName());
+
+        Assert.assertTrue("Element UserName is not visible",
                 pageProvider.getHomePage().getHeaderElement()
-                        .getUserName());
+                        .isUserNameVisible(userName));
 
         Assert.assertFalse("input UserName is visible",
                 pageProvider.getLoginPage().isUsernameInputFieldVisible());
