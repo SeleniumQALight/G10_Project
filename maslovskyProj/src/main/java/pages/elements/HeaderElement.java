@@ -21,7 +21,7 @@ public class HeaderElement extends CommonActionsWithElements {
     @FindBy(xpath = "//img[@alt='My profile']")
     private WebElement buttonMyProfile;
 //
-    @FindBy(xpath = "//span[@class='text-white mr-2'")
+    @FindBy(xpath = "//span[@class='text-white mr-2']")
     private WebElement userName;
 
 //    @FindBy(xpath = "//span[contains(text(), '" + VALID_LOGIN_UI + "')]")
