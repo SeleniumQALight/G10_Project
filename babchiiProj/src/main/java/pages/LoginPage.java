@@ -1,5 +1,6 @@
 package pages;
 
+import data.TestData;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,9 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
+
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement invalidLoginErrorMessage;
 
     Logger logger = Logger.getLogger(getClass());
 
@@ -46,5 +50,17 @@ public class LoginPage extends ParentPage {
 
     public void clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
+    }
+
+    public boolean isInvalidLoginMessageVisible() {return isElementVisible(invalidLoginErrorMessage);}
+
+    public boolean isButtonSignInVisible() {return isElementVisible(buttonSignIn);}
+
+    public HomePage openLoginPageAndFillLoginFormWithValidCred() {
+        openLoginPage();
+        enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
+        enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
+        clickOnButtonSignIn();
+        return new HomePage(webDriver);
     }
 }

@@ -68,9 +68,8 @@ public class LoginTestAllInOneFile {
     }
 
 
-
     @Test
-    public void invalidLogin(){
+    public void invalidLogin() {
         webDriver.get("https://aqa-complexapp.onrender.com/");
         logger.info("The Login page is opened");
 
@@ -104,11 +103,12 @@ public class LoginTestAllInOneFile {
             return false;
         }
     }
+
     private boolean isAlertMessageIsVisible() {
         try {
             boolean state = webDriver.findElement(By.xpath("//div[text()='Invalid username/password.']")).isDisplayed();
             logger.info(state + " alert message is dispalayed");
-            return  state;
+            return state;
         } catch (Exception e) {
             logger.info("Alert message is not present on page");
             return false;

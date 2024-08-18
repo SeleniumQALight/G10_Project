@@ -15,6 +15,9 @@ public class BaseTest {
     private Logger logger = Logger.getLogger(getClass());
     protected PageProvider pageProvider;
 
+
+    // цей блок виконується перед кожним тестом (аналог BeforeEach в JUnit 5)
+
     @Before
     public void setup() {
         WebDriverManager.chromedriver().setup();
