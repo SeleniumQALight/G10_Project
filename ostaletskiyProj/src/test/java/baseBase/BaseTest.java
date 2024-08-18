@@ -11,11 +11,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.time.Duration;
 
 
-public class baseTest {
+public class BaseTest {
     private WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
     protected PageProvider pageProvider;
 
+    // цей блок викликається перед кожним тестом
     @Before
     public void setup(){
 
