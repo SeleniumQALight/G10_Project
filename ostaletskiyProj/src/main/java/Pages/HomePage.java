@@ -11,8 +11,7 @@ import org.openqa.selenium.support.FindBy;
 public class HomePage extends ParentPage {
     Logger logger = Logger.getLogger(getClass());
 
-    @FindBy(xpath = "//button[text()='Sign Out']")
-    private WebElement buttonSignOut;
+
 
     @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
     private WebElement buttonCreatePost;
@@ -25,12 +24,8 @@ public class HomePage extends ParentPage {
         super(webDriver);
     }
 
-    public boolean isButtonSignOutVisible() {
-        return isElementDisplayed(buttonSignOut);
-    }
-
     public HomePage checkIsRedirectToHomePage() {
-        Assert.assertTrue("It is not Home page", isButtonSignOutVisible());
+        Assert.assertTrue("It is not Home page", getHeaderElement().isButtonSignOutVisible());
         //TODO checkUrl
         return this;
     }
@@ -44,7 +39,7 @@ public class HomePage extends ParentPage {
     public HomePage openHomePageAndLoginIfNeeded() {
         LoginPage loginPage = new LoginPage(webDriver);
         loginPage.openLoginPage();
-        if (isButtonSignOutVisible()) {
+        if (getHeaderElement().isButtonSignOutVisible()) {
             logger.info("User is already logged in");
         } else {
             loginPage.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);

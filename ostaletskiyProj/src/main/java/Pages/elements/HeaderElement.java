@@ -12,6 +12,9 @@ public class HeaderElement extends CommonActionsWithElements {
     @FindBy(xpath = "//img[@alt='My profile']")
     private WebElement buttonMyProfile;
 
+    @FindBy(xpath = "//button[text()='Sign Out']")
+    private WebElement buttonSignOut;
+
     public HeaderElement(WebDriver webDriver) {
         super(webDriver);
     }
@@ -19,6 +22,10 @@ public class HeaderElement extends CommonActionsWithElements {
     public MyProfilePage clickOnButtonMyProfile() {
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
+    }
+
+    public boolean isButtonSignOutVisible() {
+        return isElementDisplayed(buttonSignOut);
     }
 
 
