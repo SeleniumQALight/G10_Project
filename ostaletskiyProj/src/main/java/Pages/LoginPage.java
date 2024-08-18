@@ -28,7 +28,7 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
-    public void openPage() {
+    public void openLoginPage() {
         webDriver.get("https://aqa-complexapp.onrender.com");
         logger.info("Login page was opened");
     }
@@ -55,7 +55,7 @@ public class LoginPage extends ParentPage {
 
 
     public HomePage openLoginPageAndFillLoginFormWithValidCredentials() {
-        openPage();
+        openLoginPage();
         enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
         enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
         clickOnButtonSignIn();

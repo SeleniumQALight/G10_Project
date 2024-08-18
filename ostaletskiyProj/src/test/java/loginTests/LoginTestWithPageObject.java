@@ -8,7 +8,7 @@ public class LoginTestWithPageObject extends BaseTest {
 
     @Test
     public void TR001_validLogin() {
-        pageProvider.getLoginPage().openPage();
+        pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto");
         pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty");
         pageProvider.getLoginPage().clickOnButtonSignIn();
@@ -17,10 +17,9 @@ public class LoginTestWithPageObject extends BaseTest {
                 pageProvider.getHomePage().isButtonSignOutVisible());
 }
 
-}
     @Test
     public void TR002_invalidLogin() {
-        pageProvider.getLoginPage().openPage();
+        pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto");
         pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty123");
         pageProvider.getLoginPage().clickOnButtonSignIn();
