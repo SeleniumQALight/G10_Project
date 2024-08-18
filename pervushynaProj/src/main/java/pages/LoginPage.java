@@ -17,6 +17,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[@class='btn btn-primary btn-sm']")
     private WebElement buttonSignIn;
 
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement textInvalidUsernamePasswordIsDisplay;
+
     private Logger logger = Logger.getLogger(getClass());
 
     public LoginPage(WebDriver webDriver) {
@@ -56,5 +59,13 @@ public class LoginPage extends ParentPage {
         enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
         clickOnButtonSignIn();
         return new HomePage(webDriver);
+    }
+
+    public boolean isButtonSignInVisible() {
+        return isElementVisible(buttonSignIn);
+    }
+
+    public boolean textIsDisplay() {
+        return isElementVisible(textInvalidUsernamePasswordIsDisplay);
     }
 }

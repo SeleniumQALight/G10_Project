@@ -1,6 +1,4 @@
 #001 Valid login
-Precondition:
-1. register new unique User with name 'someName'
 
 STR:
 1. open login page
@@ -8,8 +6,98 @@ STR:
 3. enter '123456qwerty' pass into input password on login page
 4. click on button Sigh In on login page
 
+
 Expected result:
 check button 'Sigh out' is visible on Home page
 
 Postcondition:
 - Delete User 'someName'
+
+
+#002 Invalid login
+
+STR:
+1.Зайти на login page
+2.Залишити пустим поле login
+3.Залишити пустим поле password
+4.Натиснути кнопку Sigh In
+
+Expected result:
+Зявиться повідомлення "Invalid username/password."
+
+
+#003 Valid Register Account
+
+STR:
+1. В поле UserName ввести імя 'Ozh'
+2. В поле Email ввести email.domain@gmail.com
+3. В поле Password ввести пароль qwe234567890
+4. Натиснути кнопку Sigh Up
+
+Expected result:
+Зявиться кнопка 'Sigh out' на домашній сторінці
+
+Postcondition:
+Видалити створеного користувача 'Ozh'
+
+
+#004 InValid Register Account
+
+STR:
+1. В поле UserName ввести імя меньше 3 символів
+2. В поле Password ввести пароль меньше 12 символів
+3. В поле Email ввести не валідного формату електронну пошту
+4. Натиснути кнопку Sigh Up
+
+
+Expected result:
+1. Зявилось повідомлення про імя - Username must be at least 3 characters.
+2. Зявилось повідомлення про Email - You must provide a valid email address.
+3. Зявилось повідомлення про Password - Password must be at least 12 characters.
+
+#005 Create a Post
+
+Precondition: Треба бути залогіненим для стоворення поста
+
+STR:
+1. Натиснути "Create Post"
+2. Ввести в полі "Title" заголовок Тест1
+3. Ввести в полі "Body content" текст Тест2
+4. Зробити активним чек бокс Is this post unique
+5. Зі списку Select value вибрати Загальнодоступне
+6. Натиснути кнопку "Save New Post"
+
+Expected result:
+1.Повнинно звявитись повідомлення про успішне створення поста
+2.Відображатись іконки видалення та редагування біля створенного поста
+3.Відображається вірний текст заголовока
+4.Відображається вірний текст тіла опису
+5.Відображається створений пост в списку постів
+
+Postcondition
+Видалити створенний пост
+
+
+#006 Send message to the chat
+Precondition: Треба бути залогіненим для відображення іконки чата чата
+
+STR:
+1. Відкрити чат
+2. В поле вводу ввести повідомлення "Привіт"
+3. Натиснути "Enter"
+
+
+Expected result:
+1. Після відправки повідомлення в чаті видно власне повідомлення.
+
+
+
+
+
+
+
+
+
+
+
+

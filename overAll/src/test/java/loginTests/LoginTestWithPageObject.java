@@ -13,7 +13,7 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().clickOnButtonSignIn();
 
         Assert.assertTrue("Button Sign Out is not Visible",
-                pageProvider.getHomePage().isButtonSignOutVisible() );
+                pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible() );
     }
 
 

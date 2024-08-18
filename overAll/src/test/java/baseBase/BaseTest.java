@@ -16,6 +16,7 @@ public class BaseTest {
     private Logger logger = Logger.getLogger(getClass());
     protected PageProvider pageProvider;
 
+    // цей блок виконується перед кожним тестом
     @Before
     public void setup(){
         WebDriverManager.chromedriver().setup();
