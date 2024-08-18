@@ -3,15 +3,20 @@ package loginTests;
 import baseTest.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import static data.TestData.VALID_LOGIN_UI;
 import static data.TestData.VALID_PASSWORD_UI;
 
 public class LoginTestWithPageObject extends BaseTest {
+
     @Test
     public void TR001_validLogin() {
         String userName = "qaauto";
         String userPassword = "123456qwerty";
+
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin(userName);
         pageProvider.getLoginPage().enterTextIntoInputPassword(userPassword);
@@ -26,8 +31,9 @@ public class LoginTestWithPageObject extends BaseTest {
         Assert.assertTrue("Button MyProfile is not visible",
                 pageProvider.getHomePage().getHeaderElement().isButtonMyProfileVisible());
 
-        Assert.assertTrue("UserName is not visible",
-                pageProvider.getHomePage().getHeaderElement().isUsernameVisible(userName));
+        Assert.assertEquals("User name is not equals to Login userName", userName,
+                pageProvider.getHomePage().getHeaderElement()
+                        .getUserName());
 
         Assert.assertFalse("input UserName is visible",
                 pageProvider.getLoginPage().isUsernameInputFieldVisible());
