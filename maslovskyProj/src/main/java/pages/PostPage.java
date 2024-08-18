@@ -52,7 +52,7 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkIsUniqueTextInPostDisplayed() {
-        Assert.assertTrue(uniqueText.isDisplayed());
+        Assert.assertTrue(isElementVisible(uniqueText));
         return this;
     }
 }

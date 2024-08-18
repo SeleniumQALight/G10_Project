@@ -51,8 +51,7 @@ public class HeaderElement extends CommonActionsWithElements {
     }
 
     public boolean isUsernameVisible(String nameOfUser) {
-        WebElement userName = webDriver.findElement(By.xpath("//span[contains(text(), '" + nameOfUser + "')]"));
-        return isElementVisible(userName);
+        return isElementVisible(nameOfUser);
     }
 
 }
