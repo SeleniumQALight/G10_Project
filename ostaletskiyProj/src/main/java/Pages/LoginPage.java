@@ -17,6 +17,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+    @FindBy(xpath = "//div[contains(text(), 'Invalid username/password.')]")
+    private WebElement notificationAlert;
+
 
 
    private Logger logger = Logger.getLogger(getClass());
@@ -41,6 +44,15 @@ public class LoginPage extends ParentPage {
     public void clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
     }
+
+    public boolean isNotificationVisible() {
+      return isElementDisplayed(notificationAlert);
+    }
+
+    public boolean isButtonSignInVisible() {
+        return isElementDisplayed(buttonSignIn);
+    }
+
 
     public HomePage openLoginPageAndFillLoginFormWithValidCredentials() {
         openPage();
