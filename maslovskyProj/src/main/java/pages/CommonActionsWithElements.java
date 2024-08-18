@@ -2,6 +2,7 @@ package pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -46,6 +47,34 @@ public class CommonActionsWithElements {
         } catch (Exception e) {
             logger.info("Element is not displayed");
             return false;
+        }
+    }
+
+    protected boolean isElementVisible(String xPath) {
+        try {
+            boolean state = webDriver.findElement(By.xpath(xPath)).isDisplayed();
+            if (state) {
+                logger.info("Element is displayed");
+            } else {
+                logger.info("Element is not displayed");
+            }
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not displayed");
+            return false;
+        }
+    }
+
+
+    protected String returnTextFromElementByLocator(WebElement webElement) {
+        try {
+            String userName = webElement.getText().trim().toLowerCase();
+            logger.info("Element is displayed");
+            return userName;
+        } catch (Exception e) {
+            logger.error("Element is not displayed");
+            Assert.fail("Element is not displayed " + e);
+            return "";
         }
     }
 
