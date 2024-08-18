@@ -1,20 +1,19 @@
-package pages;
+package Pages;
 
+import Pages.elements.HeaderElement;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.elements.HeaderElement;
 
-public class PostPage extends ParentPage {
-    @FindBy(xpath = ".//div[@class='alert alert-success text-center']")
+public class PostPage extends ParentPage{
+
+    @FindBy(xpath = "//div[@class=\"alert alert-success text-center\"]")
     private WebElement successMessage;
 
     @FindBy(xpath = ".//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
-    @FindBy(xpath = ".//*[text()='Is this post unique? : yes']")
-    private WebElement uniqueText;
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -24,35 +23,34 @@ public class PostPage extends ParentPage {
         return new HeaderElement(webDriver);
     }
 
+
     public PostPage checkIsRedirectToPostPage() {
-        //TODO: check URL
-        //TODO: check some element
+        // TODO checkUrl
+        // TODO check some element
         return this;
     }
 
     /**
-     * Method checks if success message is displayed
+     * Method to check if success message is displayed
      * doesn't check the text of the message
-     * @return PostPage
+     * @return
      */
+
     public PostPage checkIsSuccessMessageDisplayed() {
-        Assert.assertTrue("Success message is not displayed", isElementVisible(successMessage));
+        Assert.assertTrue("Success message is not displayed",
+                isElementDisplayed(successMessage));
         return this;
     }
 
-    public PostPage checkTextInSuccessMessage(String expectedMessageText) {
+    public PostPage checkTextInSuccesMessage(String expectedMessageText) {
         String actualText = successMessage.getText();
-        Assert.assertEquals("Message text is not as expected", expectedMessageText, actualText);
+        Assert.assertEquals("Text in message",
+                expectedMessageText, actualText);
         return this;
     }
 
     public MyProfilePage clickOnDeleteButton() {
         clickOnElement(buttonDeletePost);
         return new MyProfilePage(webDriver);
-    }
-
-    public PostPage checkIsUniqueTextInPostDisplayed() {
-        Assert.assertTrue("'Unique' text is not displayed", isElementVisible(uniqueText));
-        return this;
     }
 }

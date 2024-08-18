@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.elements.HeaderElement;;
 
-public class HomePage extends ParentPage{
+public class HomePage extends ParentPage {
 
     Logger logger = Logger.getLogger(getClass());
 
@@ -64,3 +64,5 @@ public class HomePage extends ParentPage{
         return this;
     }
 }
+
+
