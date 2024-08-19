@@ -35,6 +35,27 @@ public class CommonActionsWithElements {
         }
     }
 
+    //method check checkbox
+    protected void setCheckBoxToNeededState(WebElement webElement, String neededState){
+        boolean isStateCheck = neededState.equals("check");
+        boolean isStateUnCheck = neededState.equals("uncheck");
+        boolean isCheckBoxSelected = webElement.isSelected();
+
+        if (isStateCheck || isStateUnCheck){
+            if (isStateCheck && !isCheckBoxSelected || isStateUnCheck && isCheckBoxSelected){
+                webElement.click();
+                logger.info("CheckBox is checked");
+            }else {
+                logger.info("CheckBox is already checked");
+            }
+        }else {
+            logger.error("State should be only 'check' or 'uncheck'");
+            Assert.fail("State should be only 'check' or 'uncheck'");
+        }
+    }
+
+
+
     protected boolean isElementVisible(WebElement webElement){
         try{
             boolean state = webElement.isDisplayed();
