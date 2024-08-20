@@ -13,6 +13,11 @@ public class MyProfilePage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/profile/[a-zA-Z0-9]*";
+    }
+
     @FindBy(xpath = "//*[text()='Post successfully deleted.']")
     private WebElement successDeleteMessage;
 
@@ -23,7 +28,7 @@ public class MyProfilePage extends ParentPage {
     }
 
     public MyProfilePage checkIsRedirectOnProfilePage() {
-        //TODO checkUrl
+        checkCurrentUrlWithPattern();
         //TODO check some element
 
         return this;

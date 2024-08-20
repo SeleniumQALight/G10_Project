@@ -13,6 +13,11 @@ public class CreateNewPostPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/create-post";
+    }
+
     @FindBy(xpath = "//textarea[@id='post-body']")
     WebElement textAreaBody;
 
@@ -34,7 +39,7 @@ public class CreateNewPostPage extends ParentPage {
 
 
     public CreateNewPostPage checkIsRedirectOnCreateNewPostPage() {
-        //TODO checkUrl
+        checkUrl();
         //TODO check some element
         return this;
     }
