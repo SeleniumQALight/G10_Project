@@ -18,12 +18,12 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTitleInToInputTitle(POST_TITLE)
                 .enterTextInToTextAreaBody("Text of the post from Vasyl")
-                //set checkbox to true
+                .setStateToIsPostUniqueCheckbox("no")
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
-                //Is post unique is yes
+                .checkIsPostUniqueValueAsExpected("no")
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
                 .checkIsPostWithTitlePresent(POST_TITLE, 1)

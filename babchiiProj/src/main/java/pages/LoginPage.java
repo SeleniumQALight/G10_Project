@@ -5,15 +5,9 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.elements.HeaderElement;
 
 public class LoginPage extends ParentPage {
-
-    @FindBy(xpath = "//input[@placeholder='Username']")
-    private WebElement inputUserNameInLoginForm;
-
-    @FindBy(xpath = "//input[@placeholder='Password']")
-    private WebElement inputPasswordInLoginForm;
-
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
@@ -24,6 +18,9 @@ public class LoginPage extends ParentPage {
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
+    }
+    public HeaderElement getHeaderElement() {
+        return new HeaderElement(webDriver);
     }
 
     public void openLoginPage() {
@@ -41,11 +38,11 @@ public class LoginPage extends ParentPage {
 //            logger.error("Can not work with element " + e);
 //            Assert.fail("Can not work with element " + e);
 //        }
-        clearAndEnterTextIntoElement(inputUserNameInLoginForm, login);
+        clearAndEnterTextIntoElement(getHeaderElement().getInputUserNameInLoginForm(), login);
     }
 
     public void enterTextIntoInputPassword(String password) {
-        clearAndEnterTextIntoElement(inputPasswordInLoginForm, password);
+        clearAndEnterTextIntoElement(getHeaderElement().getInputPasswordInLoginForm(), password);
     }
 
     public void clickOnButtonSignIn() {
