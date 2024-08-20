@@ -23,8 +23,13 @@ public class CreateNewPostPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/create-post";
+    }
+
     public CreateNewPostPage checkIsRedirectToCreatePostPage() {
-        // TODO checkUrl
+        checkUrl();
         // TODO check some element
         return this;
     }
