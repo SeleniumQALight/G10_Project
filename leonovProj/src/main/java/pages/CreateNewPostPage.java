@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class CreateNewPostPage extends ParentPage {
 
+    @FindBy(xpath = "//select")
+    private WebElement dropDownAccess;
 
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
@@ -40,6 +42,19 @@ public class CreateNewPostPage extends ParentPage {
     public PostPage clickOnButtonSaveNewPost() {
         clickOnElement(buttonSaveNewPost);
         return new PostPage(webDriver);
+    }
+
+
+    public CreateNewPostPage selectTextInDropDownAccessByVisibleText(String textForSelect) {
+
+        selectTextInDropDownByVisibleText(dropDownAccess, textForSelect);
+        return this;
+    }
+
+
+    public CreateNewPostPage selectInDropDownAccessByValue(String valueForSelect) {
+        selectValueInDropDown(dropDownAccess, valueForSelect);
+        return this;
     }
 
 
