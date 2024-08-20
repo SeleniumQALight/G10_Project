@@ -15,11 +15,14 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("Body of the post from Masha ")
+                //.selectTextInDropdownAccessByVisibleText("Приватне повідомлення")
+                .selectValueInDropdownAccess("One Person")
                 // setcheckbox to true
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
+                .checkTextThisPostWasWrittenIsVisible("One Person")
                 //is this post unique? : yes
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
