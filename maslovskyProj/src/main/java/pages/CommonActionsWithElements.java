@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -52,19 +53,12 @@ public class CommonActionsWithElements {
 
     protected boolean isElementVisible(String xPath) {
         try {
-            boolean state = webDriver.findElement(By.xpath(xPath)).isDisplayed();
-            if (state) {
-                logger.info("Element is displayed");
-            } else {
-                logger.info("Element is not displayed");
-            }
-            return state;
+            return isElementVisible(webDriver.findElement(By.xpath(xPath)));
         } catch (Exception e) {
             logger.info("Element is not displayed");
             return false;
         }
     }
-
 
     protected String returnTextFromElementByLocator(WebElement webElement) {
         try {
@@ -81,6 +75,26 @@ public class CommonActionsWithElements {
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
+    }
+
+    protected void selectTextInDropDownByVisibleText(WebElement dropdown, String textForSelect) {
+        try {
+            Select optionsFromDropdown = new Select(dropdown);
+            optionsFromDropdown.selectByVisibleText(textForSelect);
+            logger.info(textForSelect + " was selected in DropDown");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void selectValueInDropdown(WebElement dropdown, String valueForSelect) {
+        try {
+            Select select = new Select(dropdown);
+            select.selectByValue(valueForSelect);
+            logger.info(valueForSelect + " was selected in DropDown");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+            }
     }
 
 }
