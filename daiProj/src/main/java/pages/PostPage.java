@@ -14,14 +14,18 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = ".//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
+    @FindBy(xpath = "// p[text()='Is this post unique? : yes']")
+    private WebElement uniqueText;
+
     public PostPage(WebDriver webDriver) {
         super(webDriver);
     }
 
 
-    public HeaderElement getHeaderElement(){
+    public HeaderElement getHeaderElement() {
         return new HeaderElement(webDriver);
     }
+
     public PostPage checkIsRedirectToPostPage() {
         //TODO checkUrl
         //TODO check same element
@@ -32,6 +36,7 @@ public class PostPage extends ParentPage {
     /**
      * Method checks if success message is displayed
      * doesn't check text of message
+     *
      * @return PostPage
      */
     public PostPage checkIsSuccessMessageDisplayed() {
@@ -49,4 +54,16 @@ public class PostPage extends ParentPage {
         clickOnElement(buttonDeletePost);
         return new MyProfilePage(webDriver);
     }
+
+    public PostPage checkIsPostUniqueDisplayed() {
+        Assert.assertTrue("Post is not unique", isElementVisible(uniqueText));
+        return this;
+    }
+
+    public PostPage checkIsPostUniqueText(String expectedText) {
+        String actualText = uniqueText.getText();
+        Assert.assertEquals("Text", expectedText, actualText);
+        return this;
+    }
 }
+
