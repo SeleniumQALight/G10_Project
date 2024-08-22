@@ -2,9 +2,8 @@ package pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -128,6 +127,49 @@ public class CommonActionsWithElements {
         } catch (Exception e) {
             printErrorAndStopTest(e);
             return elementName;
+        }
+    }
+
+    //accept alert
+    protected void acceptAlert() {
+        try {
+            webDriverWait10.until(ExpectedConditions.alertIsPresent());
+            webDriver.switchTo().alert().accept();
+            logger.info("Alert was accepted");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //scroll to element
+    protected void scrollToElement(WebElement webElement) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.moveToElement(webElement)
+                    .perform();
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //press Enter using Actions class
+    protected void pressEnterUsingActions(WebElement webElement) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.sendKeys(webElement, Keys.ENTER)
+                    .perform();
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //execute JS script - open a new tab
+    protected void openNewTab() {
+        try {
+            ((JavascriptExecutor) webDriver).executeScript("window.open()");
+            logger.info("New tab was opened");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
         }
     }
 }
