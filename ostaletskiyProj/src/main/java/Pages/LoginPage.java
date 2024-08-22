@@ -21,8 +21,7 @@ public class LoginPage extends ParentPage {
     private WebElement notificationAlert;
 
 
-
-   private Logger logger = Logger.getLogger(getClass());
+    private Logger logger = Logger.getLogger(getClass());
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -46,7 +45,7 @@ public class LoginPage extends ParentPage {
     }
 
     public boolean isNotificationVisible() {
-      return isElementDisplayed(notificationAlert);
+        return isElementDisplayed(notificationAlert);
     }
 
     public boolean isButtonSignInVisible() {

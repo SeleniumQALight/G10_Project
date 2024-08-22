@@ -2,9 +2,11 @@ package Pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -51,6 +53,42 @@ public class CommonActionsWithElements {
         } catch (Exception e) {
             logger.info("Element is not displayed");
             return false;
+        }
+    }
+
+    // isElementDisplayed (String locator)
+    protected boolean isElementDisplayed(String locator) {
+        try {
+            boolean state = webDriver.findElement(By.xpath(locator)).isDisplayed();
+            if (state) {
+                logger.info("Element is displayed");
+            } else {
+                logger.info("Element is not displayed");
+            }
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not displayed");
+            return false;
+        }
+    }
+
+    protected void selectTextInDropDownByVisibleText(WebElement dropdown, String textForSelect) {
+        try {
+            Select optionsFromDropdown = new Select(dropdown);
+            optionsFromDropdown.selectByVisibleText(textForSelect);
+            logger.info(textForSelect + " was selected in DropDown");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void selectValueInDropDown(WebElement dropdown, String value) {
+        try {
+            Select optionsFromDropdown = new Select(dropdown);
+            optionsFromDropdown.selectByValue(value);
+            logger.info(value + " was selected in DropDown");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
         }
     }
 }

@@ -12,7 +12,6 @@ public class HomePage extends ParentPage {
     Logger logger = Logger.getLogger(getClass());
 
 
-
     @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
     private WebElement buttonCreatePost;
 
