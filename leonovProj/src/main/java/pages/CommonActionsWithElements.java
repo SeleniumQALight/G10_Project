@@ -30,7 +30,7 @@ public class CommonActionsWithElements {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(text + " was inputted into element");
+            logger.info(text + " was inputted into element " + getElementName(webElement));
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -44,8 +44,9 @@ public class CommonActionsWithElements {
     protected void clickOnElement(WebElement webElement) {
         try {
             webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
+            String elementName = getElementName(webElement);
             webElement.click();
-            logger.info("Element was clicked");
+            logger.info(elementName + " Element was clicked");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -55,9 +56,24 @@ public class CommonActionsWithElements {
         try {
             boolean state = webElement.isDisplayed();
             if (state) {
-                logger.info("Element is displayed");
+                logger.info(getElementName(webElement) + " Element is displayed");
             } else {
-                logger.info("Element is not visible");
+                logger.info(getElementName(webElement) + " Element is not visible");
+            }
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not present on the page");
+            return false;
+        }
+    }
+
+    protected boolean isElementVisible(WebElement webElement, String elementName) {
+        try {
+            boolean state = webElement.isDisplayed();
+            if (state) {
+                logger.info(elementName + " Element is displayed");
+            } else {
+                logger.info(elementName + " Element is not visible");
             }
             return state;
         } catch (Exception e) {
@@ -86,7 +102,7 @@ public class CommonActionsWithElements {
         try {
             Select optionsFromDropDown = new Select(dropDown);
             optionsFromDropDown.selectByVisibleText(textForSelect);
-            logger.info(textForSelect + " was selected in dropDown");
+            logger.info(textForSelect + " was selected in dropDown " + getElementName(dropDown));
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -97,10 +113,21 @@ public class CommonActionsWithElements {
         try {
             Select optionsFromDropDown = new Select(dropDown);
             optionsFromDropDown.selectByValue(valueForSelect);
-            logger.info(valueForSelect + " was selected in dropDown");
+            logger.info(valueForSelect + " was selected in dropDown " + getElementName(dropDown));
         } catch (Exception e) {
             printErrorAndStopTest(e);
 
+        }
+    }
+
+    private String getElementName(WebElement webElement) {
+        String elementName = "";
+
+        try {
+            return webElement.getAccessibleName();
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+            return elementName;
         }
     }
 }
