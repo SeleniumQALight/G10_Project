@@ -2,9 +2,8 @@ package pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -109,6 +108,50 @@ protected WebDriverWait webDriverWait10, webDriverWait15;
             printErrorAndStopTest(e);
         }
     }
+
+    public void acceptAlert () {
+            try {
+                webDriver.switchTo().alert().accept();
+                logger.info("Alert was accepted");
+            } catch (Exception e) {
+                printErrorAndStopTest(e);
+            }
+    }
+
+//scroll to element
+    public void scrollToElement(WebElement webElement) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.moveToElement(webElement)
+            .build().perform();
+            logger.info("Scroll to element " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //press Enter key using Actions class
+    public void pressEnterKeyUsingActions(){
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.sendKeys(Keys.ENTER)
+                    .build().perform();
+            logger.info("Enter key was pressed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //execute JavaScript code - open new tab
+    public void openNewTab(){
+        try {
+            ((JavascriptExecutor) webDriver).executeScript("window.open()");
+            logger.info("New tab was opened");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
 
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
