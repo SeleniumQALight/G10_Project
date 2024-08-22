@@ -2,9 +2,8 @@ package pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -84,8 +83,6 @@ public class CommonActionsWithElements {
         }
     }
 
-
-
     protected String returnTextFromElementByLocator(WebElement webElement) {
         try {
             String userName = webElement.getText().trim().toLowerCase();
@@ -129,6 +126,51 @@ public class CommonActionsWithElements {
             return webElement.getAccessibleName();
         } catch (Exception e) {
             return elementName;
+        }
+    }
+
+    //accept alert
+    protected void acceptAlert() {
+        try {
+            webDriverWait10.until(ExpectedConditions.alertIsPresent());
+            webDriver.switchTo().alert().accept();
+            logger.info("Alert was accepted");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //scroll to element
+    protected void scrollToElement(WebElement webElement) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.moveToElement(webElement)
+                    .build().perform();
+            logger.info("Scrolled to element " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //press Enter key using Actions class
+    protected void pressEnterKeyUsingActions() {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.sendKeys(Keys.ENTER)
+                    .build().perform();
+            logger.info("Enter key was pressed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //execute JS script - open new tab
+    protected void openNewTab() {
+        try {
+            ((JavascriptExecutor) webDriver).executeScript("window.open()");
+            logger.info("New tab was opened");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
         }
     }
 
