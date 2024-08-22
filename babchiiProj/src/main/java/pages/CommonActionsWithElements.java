@@ -28,7 +28,7 @@ public class CommonActionsWithElements {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(text + " was inputted into element ");
+            logger.info(text + " was inputted into element " + getElementName(webElement));
         } catch (Exception e) {
             printErrorAndStopTest(e);
 
@@ -38,8 +38,9 @@ public class CommonActionsWithElements {
     protected void clickOnElement(WebElement webElement) {
         try {
             webDriverWait_10.until(ExpectedConditions.elementToBeClickable(webElement));
+            String elementName = getElementName(webElement);
             webElement.click();
-            logger.info("Element was clicked");
+            logger.info(elementName + " Element was clicked");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -49,13 +50,28 @@ public class CommonActionsWithElements {
         try {
             boolean state = webElement.isDisplayed();
             if (state) {
-                logger.info("Element is displayed");
+                logger.info(getElementName(webElement) + " Element is displayed");
             } else {
-                logger.info("Element is not displayed");
+                logger.info(getElementName(webElement) + " Element is not displayed");
             }
             return state;
         } catch (Exception e) {
             logger.info("Element is not displayed");
+            return false;
+        }
+    }
+
+    protected boolean isElementVisible(WebElement webElement, String elementName) {
+        try {
+            boolean state = webElement.isDisplayed();
+            if (state) {
+                logger.info(elementName + " Element is displayed");
+            } else {
+                logger.info(elementName + " Element is not displayed");
+            }
+            return state;
+        } catch (Exception e) {
+            logger.info(elementName + " Element is not displayed");
             return false;
         }
     }
@@ -80,7 +96,7 @@ public class CommonActionsWithElements {
         try {
             Select optionsFromDropdown = new Select(dropdown);
             optionsFromDropdown.selectByVisibleText(textForSelect);
-            logger.info(textForSelect + " was selected in DropDown");
+            logger.info(textForSelect + " was selected in DropDown " + getElementName(dropdown));
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -90,7 +106,7 @@ public class CommonActionsWithElements {
         try {
             Select select = new Select(dropdown);
             select.selectByValue(valueFromSelect);
-            logger.info(valueFromSelect + " was selected in DropDown");
+            logger.info(valueFromSelect + " was selected in DropDown " + getElementName(dropdown));
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -99,6 +115,15 @@ public class CommonActionsWithElements {
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
+    }
+
+    private String getElementName(WebElement webElement) {
+        String elementName = "";
+        try{
+            return webElement.getAccessibleName();
+        }catch (Exception e){
+            return elementName;
+        }
     }
 
 }
