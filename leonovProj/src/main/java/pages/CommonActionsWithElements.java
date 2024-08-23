@@ -2,27 +2,34 @@ package pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
+    protected WebDriverWait webDriverWait10, webDriverWait15;
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this); // ініціалізує елемент описані FindBy анотаціями
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }
 
     protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(text + " was inputted into element");
+            logger.info(text + " was inputted into element " + getElementName(webElement));
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -35,8 +42,10 @@ public class CommonActionsWithElements {
 
     protected void clickOnElement(WebElement webElement) {
         try {
+            webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
+            String elementName = getElementName(webElement);
             webElement.click();
-            logger.info("Element was clicked");
+            logger.info(elementName + " Element was clicked");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -46,9 +55,24 @@ public class CommonActionsWithElements {
         try {
             boolean state = webElement.isDisplayed();
             if (state) {
-                logger.info("Element is displayed");
+                logger.info(getElementName(webElement) + " Element is displayed");
             } else {
-                logger.info("Element is not visible");
+                logger.info(getElementName(webElement) + " Element is not visible");
+            }
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not present on the page");
+            return false;
+        }
+    }
+
+    protected boolean isElementVisible(WebElement webElement, String elementName) {
+        try {
+            boolean state = webElement.isDisplayed();
+            if (state) {
+                logger.info(elementName + " Element is displayed");
+            } else {
+                logger.info(elementName + " Element is not visible");
             }
             return state;
         } catch (Exception e) {
@@ -77,7 +101,7 @@ public class CommonActionsWithElements {
         try {
             Select optionsFromDropDown = new Select(dropDown);
             optionsFromDropDown.selectByVisibleText(textForSelect);
-            logger.info(textForSelect + " was selected in dropDown");
+            logger.info(textForSelect + " was selected in dropDown " + getElementName(dropDown));
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -88,10 +112,64 @@ public class CommonActionsWithElements {
         try {
             Select optionsFromDropDown = new Select(dropDown);
             optionsFromDropDown.selectByValue(valueForSelect);
-            logger.info(valueForSelect + " was selected in dropDown");
+            logger.info(valueForSelect + " was selected in dropDown " + getElementName(dropDown));
         } catch (Exception e) {
             printErrorAndStopTest(e);
 
+        }
+    }
+
+    private String getElementName(WebElement webElement) {
+        String elementName = "";
+
+        try {
+            return webElement.getAccessibleName();
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+            return elementName;
+        }
+    }
+
+    //accept alert
+    protected void acceptAlert() {
+        try {
+            webDriverWait10.until(ExpectedConditions.alertIsPresent());
+            webDriver.switchTo().alert().accept();
+            logger.info("Alert was accepted");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //scroll to element
+    protected void scrollToElement(WebElement webElement) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.moveToElement(webElement)
+                    .perform();
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //press Enter using Actions class
+    protected void pressEnterUsingActions(WebElement webElement) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.sendKeys(webElement, Keys.ENTER)
+                    .perform();
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //execute JS script - open a new tab
+    protected void openNewTab() {
+        try {
+            ((JavascriptExecutor) webDriver).executeScript("window.open()");
+            logger.info("New tab was opened");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
         }
     }
 }
