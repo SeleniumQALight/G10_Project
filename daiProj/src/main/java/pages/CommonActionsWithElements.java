@@ -14,7 +14,7 @@ import java.time.Duration;
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
-protected WebDriverWait webDriverWait10, webDriverWait15;
+    protected WebDriverWait webDriverWait10, webDriverWait15;
 
 
     public CommonActionsWithElements(WebDriver webDriver) {
@@ -166,7 +166,7 @@ protected WebDriverWait webDriverWait10, webDriverWait15;
             return elementName;
         }
     }
-}
+
 
 
     public boolean checkCheckBox(WebElement checkBox) {

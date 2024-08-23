@@ -14,6 +14,7 @@ abstract public class ParentPage extends CommonActionsWithElements {
         super(webDriver);
     }
 
+
     abstract protected String getRelativeUrl();
 
     protected void checkUrl() {
@@ -36,3 +37,4 @@ abstract public class ParentPage extends CommonActionsWithElements {
                 webDriver.getCurrentUrl().matches(baseUrl + getRelativeUrl()));
     }
 }
+

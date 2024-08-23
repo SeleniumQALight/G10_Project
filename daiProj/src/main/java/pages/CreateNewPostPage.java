@@ -54,7 +54,7 @@ public class CreateNewPostPage extends ParentPage {
     }
 
     public CreateNewPostPage selectTextInDropdownAccessByVisibleText(String textForSelect) {
-      selectTextInDropdownByVisibleText(dropdownAccess, textForSelect);
+        selectTextInDropdownByVisibleText(dropdownAccess, textForSelect);
         return this;
     }
 
@@ -63,7 +63,6 @@ public class CreateNewPostPage extends ParentPage {
         selectValueInDropdown(dropdownAccess, valueForSelect);
         return this;
     }
-
 
 
     public CreateNewPostPage setCheckBoxState(String state) {
@@ -76,6 +75,6 @@ public class CreateNewPostPage extends ParentPage {
 
     }
 
-
 }
+
 

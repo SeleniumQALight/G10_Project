@@ -99,6 +99,7 @@ public class LoginPage extends ParentPage {
         enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
         clickOnButtonSignIn();
         return new HomePage(webDriver);
+
     }
 
     public boolean isInputLoginVisible() { return isElementVisible(inputUserNameInLoginForm);
