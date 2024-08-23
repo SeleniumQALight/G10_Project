@@ -1,13 +1,17 @@
 #01 Check registration with valid data
 
 STR:
-1. Open the login page https://aqa-complexapp.onrender.com/
+1. Open the login page https://aqa-complexapp.onrender.com/;
 2. Enter "Denys" to the username field inside "Sign Up" section [signUpUsername];
 3. Enter "Qwertyasdfgh123!" to the password field inside "Sign Up" section [signUpPass];
 4. Enter "test24hpass@gmail.com" to the email field inside the "Sign Up" section [signUpEmail];
 5. Click on the "Sign Up for OurApp" button [signUpBtn];
 
-ER: "Create post" and "Sign Out" buttons displayed in the header [createPostBtn], [signOutBtn].
+ER: Text with entered username displayed in the header [userName].
+    "Create Post" button displayed in the header [createPostBtn].
+
+Post-condition:
+1. Remove all the data was created during the test.
 
 
 
@@ -21,7 +25,7 @@ STR:
 
 ER: "Create post" and "Sign Out" buttons displayed in the header [createPostBtn], [signOutBtn];
 
-#03 Create post
+#03 Check the banner about successful post creation
 
 Precondition:
 1. A user should be logged-in;
@@ -42,11 +46,13 @@ Precondition:
 
 STR:
 1. Click on the "My Profile" icon in the header [myProfileIcon];
-2. Click on a random post from the posts list, remember the number of posts;
+2. Click on a random post from the posts list, remember the number of posts and the post title;
 3. Click on the "Delete" icon [deleteIcon];
+
 
 ER: The banner "Post successfully deleted." displayed on the page [postRemovedBanner].
         The number of posts decreased by 1;
+        The post with the title that was deleted is not displayed in the posts list;
 
 #05 Check sign out
 1. A user should be logged-in;
