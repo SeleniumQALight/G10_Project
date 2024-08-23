@@ -20,6 +20,7 @@ public class CreateNewPostTest extends BaseTest {
                 .enterTextIntoInputBody("Body of the post")
                 // setCheckbox to true (create methods in CommonActionsWithElements)
 //                .selectTextInDropDownAccessByVisibleText("Приватне повідомлення")
+                .checkboxStateOnPostPage("uncheck")
                 .selectInDropDownAccessByValue("One Person")
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectOnPostPage()

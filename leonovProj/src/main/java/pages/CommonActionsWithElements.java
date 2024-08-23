@@ -94,4 +94,34 @@ public class CommonActionsWithElements {
 
         }
     }
+
+    protected void checkCheckbox(WebElement checkbox) {
+        if (checkbox.isSelected()) {
+            logger.info("Checkbox is already checked");
+        } else {
+            clickOnElement(checkbox);
+            logger.info("Checkbox was unchecked, but now is checked");
+        }
+    }
+
+    protected void uncheckCheckbox(WebElement checkbox) {
+        if (checkbox.isSelected()) {
+            clickOnElement(checkbox);
+            logger.info("Checkbox was checked, but now is unchecked");
+        } else {
+            logger.info("Checkbox is already unchecked");
+        }
+    }
+
+    protected void checkboxState(WebElement checkbox, String state) {
+        if (state.equals("check")) {
+            checkCheckbox(checkbox);
+        } else if (state.equals("uncheck")) {
+            uncheckCheckbox(checkbox);
+        } else {
+            logger.error("State for checkbox should be 'check' or 'uncheck'");
+            Assert.fail("State for checkbox should be 'check' or 'uncheck'");
+        }
+    }
+
 }
