@@ -16,5 +16,16 @@ public class LoginTestWithPageObject extends BaseTest {
                 pageProvider.getHomePage().getHeader().isButtonSignOutVisible());
     }
 
+    @Test
+    public void TR002_invalidLogin() {
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin("invalidLogin");
+        pageProvider.getLoginPage().enterTextIntoInputPassword("invalidPassword");
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+
+        Assert.assertTrue("Alert about invalid login should be displayed",
+                pageProvider.getLoginPage().isAlertInvalidLoginDisplayed());
+    }
+
 
 }
