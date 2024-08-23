@@ -1,0 +1,90 @@
+#001 Valid log in
+Precondition:
+1. Register new unique user with name 'testTaras'
+
+STR:
+1. Open login page https://aqa-complexapp.onrender.com/
+2. Enter 'testTaras' login in input login on Login page
+3. Enter '123456qwerty' password in input password on Login page
+4. Click on button Sign In on Login page
+
+Expected Result:
+Перевірити що залогінилися:
+ - Check button 'Sign out' is visible on Home page
+ - Check the user name "testTaras" is displayed in the header of Home page
+
+ Postcondition:
+ - Delete user 'testTaras'
+
+
+
+
+ #002 Invalid log in
+
+ STR:
+ 1. Open login page https://aqa-complexapp.onrender.com/
+ 2. Enter '234testuser' login in input login on Login page
+ 3. Enter 'qwerty' password in input password on Login page
+ 4. Click on button Sign In on Login page
+
+ Expected Result:
+ - Check that button 'Sign in' is visible on Home page
+
+
+
+#003 Validation of Username field
+
+STR:
+1. Open login page https://aqa-complexapp.onrender.com/
+2. Enter invalid value '23' into Username field on the registration form
+3. Click on Submit button
+
+ Expected Result:
+ - Check that alert message "Username must be at least 3 characters." is displayed
+
+
+
+ #004 Checking User Profile page
+
+Precondition:
+ 1. Register a new user with name 'testUser123' and password '123456qwerty'
+ 2. Login with an existing user with name 'testUser123' and password '123456qwerty'
+
+ STR:
+
+ 1. Open Homepage https://aqa-complexapp.onrender.com/
+ 2. Click on My Profile button
+
+ Expected Result:
+ - Check that URL contains "/profile/testuser123"
+ - Check that "Followers" link is displayed on page
+
+Postcondition:
+ - Delete user 'testUser123'
+
+
+
+ #005 Check successful creation of new post
+
+ Precondition:
+ 1. Register a new user with name 'testUser123' and password '123456qwerty'
+ 2. Login with an existing user with name 'testUser123' and password '123456qwerty'
+
+  STR:
+
+  1. Open Homepage https://aqa-complexapp.onrender.com/
+  2. Click on Create Post button
+  3. Check that URL contains "/create-post"
+  4. Input "test new post" in the "Title" field
+  5. Input "test content" in the "Body Content" field
+  6. Click on the "Save New Post" button
+
+  Expected Result:
+  - Check that message "New post successfully created." is displayed on the page
+  - Check that h2 tag "test new post" is displayed on the page // локатор //h2[text()="test new post"] //
+
+Postcondition:
+ - Delete recently created post with title "test new post"
+ - Delete user 'testUser123'
+
+
