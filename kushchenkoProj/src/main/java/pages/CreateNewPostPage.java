@@ -41,36 +41,13 @@ public class CreateNewPostPage extends ParentPage {
     public PostPage clickOnButtonSavePost() {
         clickOnElement(buttonSavePost);
         return new PostPage(webDriver);
-
-    }
-
-//    public void setCheckBox(WebElement checkBox) {
-//        clickOnElement(checkBox);
-//    }
-
-    public void setCheckbox(WebElement checkBox) {
-        if (!checkBox.isSelected()) {
-            clickOnElement(checkBox);
-            logger.info("Checkbox is set to true");
-        } else{
-            logger.info("Checkbox is already checked");
-        }
-    }
-
-    public void unsetCheckbox(WebElement checkBox) {
-        if (checkBox.isSelected()) {
-            clickOnElement(checkBox);
-            logger.info("Checkbox is set to false");
-        } else {
-            logger.info("Checkbox is already unchecked");
-        }
     }
 
     public CreateNewPostPage changeCheckBoxState(String state) {
         if (state.equalsIgnoreCase("check")) {
-            setCheckbox(checkBox);
+            this.setCheckbox(checkBox);
         } else if (state.equalsIgnoreCase("uncheck")) {
-            unsetCheckbox(checkBox);
+            this.unsetCheckbox(checkBox);
         } else {
             logger.error("State should be 'check' or 'uncheck'");
         }

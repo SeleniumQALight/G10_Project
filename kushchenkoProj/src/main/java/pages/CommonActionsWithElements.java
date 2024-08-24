@@ -48,6 +48,24 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void setCheckbox(WebElement webElement) {
+        if (!webElement.isSelected()) {
+            clickOnElement(webElement);
+            logger.info("Checkbox is set to true");
+        } else{
+            logger.info("Checkbox is already checked");
+        }
+    }
+
+    protected void unsetCheckbox(WebElement webElement) {
+        if (webElement.isSelected()) {
+            clickOnElement(webElement);
+            logger.info("Checkbox is set to false");
+        } else {
+            logger.info("Checkbox is already unchecked");
+        }
+    }
+
     private void printErrorAndStopTest(Exception e) {
         logger.error("Cannot work with element " + e);
         Assert.fail("Cannot work with element " + e);
