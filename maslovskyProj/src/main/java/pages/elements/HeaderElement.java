@@ -1,12 +1,9 @@
 package pages.elements;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.CommonActionsWithElements;
-import pages.CreateNewPostPage;
-import pages.MyProfilePage;
+import pages.*;
 
 import static data.TestData.VALID_LOGIN_UI;
 
@@ -20,7 +17,7 @@ public class HeaderElement extends CommonActionsWithElements {
 
     @FindBy(xpath = "//img[@alt='My profile']")
     private WebElement buttonMyProfile;
-//
+
     @FindBy(xpath = "//span[@class='text-white mr-2']")
     private WebElement userName;
 
@@ -61,6 +58,11 @@ public class HeaderElement extends CommonActionsWithElements {
 
     public boolean isUserNameVisible(String userName) {
         return isElementVisible(String.format(userNameLocator, userName));
+    }
+
+    public HomePage clickOnSignOutButton() {
+        clickOnElement(buttonSignOut);
+        return new HomePage(webDriver);
     }
 
 }
