@@ -14,6 +14,21 @@ public class SignOutTest extends BaseTest {
 //        commonLoginActions(userName, userPassword);
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred();
+
+        Assert.assertTrue("Search button is not visible",
+                pageProvider.getHomePage().getHeaderElement().isSearchButtonVisible());
+
+        Assert.assertTrue("Chat button is not visible",
+                pageProvider.getHomePage().getHeaderElement().isChatButtonVisible());
+
+        Assert.assertTrue("Button MyProfile is not visible",
+                pageProvider.getHomePage().getHeaderElement().isButtonMyProfileVisible());
+
+        Assert.assertTrue("Button Create Post is not visible",
+                pageProvider.getHomePage().getHeaderElement().isButtonCreatePostVisible());
+
+        Assert.assertTrue("Button Sign Out is not visible",
+                pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
     }
 
     @Test
@@ -22,14 +37,20 @@ public class SignOutTest extends BaseTest {
                 .getHeaderElement()
                 .clickOnSignOutButton();
 
-        Assert.assertTrue("Button Sign In is not visible",
-                pageProvider.getLoginPage().isButtonSignInVisible());
+        Assert.assertFalse("Search button is visible",
+                pageProvider.getHomePage().getHeaderElement().isSearchButtonVisible());
 
-        Assert.assertTrue("Username login input field is not visible",
-                pageProvider.getLoginPage().isUsernameInputFieldVisible());
+        Assert.assertFalse("Chat button is visible",
+                pageProvider.getHomePage().getHeaderElement().isChatButtonVisible());
 
-        Assert.assertTrue("Password login input field is not visible",
-                pageProvider.getLoginPage().isPasswordInputFieldVisible());
+        Assert.assertFalse("Button MyProfile is visible",
+                pageProvider.getHomePage().getHeaderElement().isButtonMyProfileVisible());
+
+        Assert.assertFalse("Button Create Post is visible",
+                pageProvider.getHomePage().getHeaderElement().isButtonCreatePostVisible());
+
+        Assert.assertFalse("Button Sign Out is visible",
+                pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
     }
 
 }

@@ -88,7 +88,7 @@ public class CommonActionsWithElements {
             }
             return state;
         } catch (Exception e) {
-            logger.info("Element is not displayed");
+            logger.info(elementName + "Element is not displayed");
             return false;
         }
     }
