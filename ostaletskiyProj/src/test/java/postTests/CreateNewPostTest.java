@@ -20,15 +20,19 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreatePostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("Body of the post")
+       //         .selectTextInDropDownAccessByVisibleText("Приватне повідомлення")
+                .selectValueInDropDownAccess("One Person")
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
-                .checkTextInSuccesMessage("New post successfully created.")
+                .checkTextInSuccessMessage("New post successfully created.")
+                .checkTextThisPostWasWrittenIsVisible("One Person")
                 .getHeaderElement().clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
                 .checkPostWithTitleIsPresent(POST_TITLE, 1)
         ;
     }
+
     @After
     public void deletePost() {
         pageProvider.getHomePage()
@@ -36,7 +40,6 @@ public class CreateNewPostTest extends BaseTest {
                 .getHeaderElement().clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
                 .deletePostsTillPresent(POST_TITLE)
-
 
 
         ;
