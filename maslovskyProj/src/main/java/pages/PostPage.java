@@ -28,7 +28,6 @@ public class PostPage extends ParentPage {
 
     private String postTitleLocator = "//*[text()='%s']";  // locator with parameter
 
-
     private String locatorForTextThisPostWasWrittenIsVisible = "//*[contains(text(), '%s')]";
 
     public PostPage(WebDriver webDriver) {
