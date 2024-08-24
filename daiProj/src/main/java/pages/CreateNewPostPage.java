@@ -19,6 +19,9 @@ public class CreateNewPostPage extends ParentPage {
     @FindBy(xpath = "//select")
     private WebElement dropdownAccess;
 
+    @FindBy(xpath = "//input [@type ='checkbox']")
+    private WebElement checkBox;
+
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -51,7 +54,7 @@ public class CreateNewPostPage extends ParentPage {
     }
 
     public CreateNewPostPage selectTextInDropdownAccessByVisibleText(String textForSelect) {
-      selectTextInDropdownByVisibleText(dropdownAccess, textForSelect);
+        selectTextInDropdownByVisibleText(dropdownAccess, textForSelect);
         return this;
     }
 
@@ -62,5 +65,16 @@ public class CreateNewPostPage extends ParentPage {
     }
 
 
+    public CreateNewPostPage setCheckBoxState(String state) {
+        if ("check".equalsIgnoreCase(state)) {
+            checkCheckBox(checkBox);
+        } else if ("uncheck".equalsIgnoreCase(state)) {
+            uncheckCheckBox(checkBox);
+        }
+        return this;
+
+    }
+
 }
+
 
