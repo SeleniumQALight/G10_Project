@@ -18,7 +18,7 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTitleInToInputTitle(POST_TITLE)
                 .enterTextInToInputBody("Body of new Post")
-                .changeCheckBoxState("check")
+                .setCheckBoxPostUniqueTrue("check")
                 .clickOnButtonSavePost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()

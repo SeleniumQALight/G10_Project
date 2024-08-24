@@ -43,14 +43,8 @@ public class CreateNewPostPage extends ParentPage {
         return new PostPage(webDriver);
     }
 
-    public CreateNewPostPage changeCheckBoxState(String state) {
-        if (state.equalsIgnoreCase("check")) {
-            this.setCheckbox(checkBox);
-        } else if (state.equalsIgnoreCase("uncheck")) {
-            this.unsetCheckbox(checkBox);
-        } else {
-            logger.error("State should be 'check' or 'uncheck'");
-        }
+    public CreateNewPostPage setCheckBoxPostUniqueTrue(String state) {
+        this.changeCheckBoxState(state, checkBox);
         return this;
     }
 }
