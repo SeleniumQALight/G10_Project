@@ -1,16 +1,19 @@
 package signOutTest;
 
+import baseTest.BaseTest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import loginTests.LoginTestWithPageObject;
 
 
-public class SignOutTest extends LoginTestWithPageObject {
+public class SignOutTest extends BaseTest {
 
     @Before
     public void ValidLogin() {
-        commonLoginActions(userName, userPassword);
+//        commonLoginActions(userName, userPassword);
+        pageProvider.getLoginPage()
+                .openLoginPageAndFillLoginFormWithValidCred();
     }
 
     @Test

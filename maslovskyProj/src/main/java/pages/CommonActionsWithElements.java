@@ -44,6 +44,16 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void clickOnElement(WebElement webElement, String elementName) {
+        try {
+            webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
+            webElement.click();
+            logger.info(elementName + " Element was clicked");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
     protected boolean isElementVisible(WebElement webElement) {
         try {
             boolean state = webElement.isDisplayed();
