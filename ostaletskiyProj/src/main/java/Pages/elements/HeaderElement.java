@@ -15,6 +15,9 @@ public class HeaderElement extends CommonActionsWithElements {
     @FindBy(xpath = "//button[text()='Sign Out']")
     private WebElement buttonSignOut;
 
+    @FindBy(xpath = "//*[@href='/create-post']")
+    private WebElement buttonCreatePost;
+
     public HeaderElement(WebDriver webDriver) {
         super(webDriver);
     }
@@ -26,6 +29,14 @@ public class HeaderElement extends CommonActionsWithElements {
 
     public boolean isButtonSignOutVisible() {
         return isElementDisplayed(buttonSignOut);
+    }
+
+    public boolean isButtonMyProfileVisible() {
+        return isElementDisplayed(buttonMyProfile);
+    }
+
+    public boolean isButtonCreatePostVisible() {
+        return isElementDisplayed(buttonCreatePost);
     }
 
 

@@ -53,6 +53,13 @@ public class LoginPage extends ParentPage {
         return isElementDisplayed(buttonSignIn);
     }
 
+    public boolean isInputLoginVisible() {
+        return isElementDisplayed(inputUserNameInLoginForm);
+    }
+
+    public boolean isInputPasswordVisible() {
+        return isElementDisplayed(inputPasswordInLoginForm);
+    }
 
     public HomePage openLoginPageAndFillLoginFormWithValidCredentials() {
         openLoginPage();
