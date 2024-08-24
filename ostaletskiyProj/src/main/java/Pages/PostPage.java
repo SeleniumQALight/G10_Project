@@ -16,6 +16,9 @@ public class PostPage extends ParentPage {
 
     private String locatorForTextThisPostWasWritten = "//*[contains(text(), '%s')]";
 
+    @FindBy(xpath = "// p[text()='Is this post unique? : yes']")
+    private WebElement uniqueText;
+
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -46,7 +49,7 @@ public class PostPage extends ParentPage {
 
     public PostPage checkIsSuccessMessageDisplayed() {
         Assert.assertTrue("Success message is not displayed",
-                isElementDisplayed(successMessage, "Success message"));
+                isElementDisplayed(successMessage));
         return this;
     }
 
@@ -60,6 +63,17 @@ public class PostPage extends ParentPage {
     public MyProfilePage clickOnDeleteButton() {
         clickOnElement(buttonDeletePost);
         return new MyProfilePage(webDriver);
+    }
+
+    public PostPage checkIsPostUniqueDisplayed() {
+        Assert.assertTrue("Post is not unique", isElementDisplayed(uniqueText));
+        return this;
+    }
+
+    public PostPage checkIsPostUniqueText(String expectedText) {
+        String actualText = uniqueText.getText();
+        Assert.assertEquals("Text", expectedText, actualText);
+        return this;
     }
 
     public PostPage checkTextThisPostWasWrittenIsVisible(String expectedText) {

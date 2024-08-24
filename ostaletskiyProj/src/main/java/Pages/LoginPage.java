@@ -34,7 +34,7 @@ public class LoginPage extends ParentPage {
 
     public void openLoginPage() {
         webDriver.get(baseUrl);
-        logger.info(" Login page was opened" + baseUrl);
+        logger.info( "  Login page was opened" + baseUrl);
     }
 
     public void enterTextIntoInputLogin(String login) {
@@ -57,6 +57,13 @@ public class LoginPage extends ParentPage {
         return isElementDisplayed(buttonSignIn);
     }
 
+    public boolean isInputLoginVisible() {
+        return isElementDisplayed(inputUserNameInLoginForm);
+    }
+
+    public boolean isInputPasswordVisible() {
+        return isElementDisplayed(inputPasswordInLoginForm);
+    }
 
     public HomePage openLoginPageAndFillLoginFormWithValidCredentials() {
         openLoginPage();
