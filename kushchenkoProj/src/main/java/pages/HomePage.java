@@ -11,10 +11,6 @@ import pages.elements.HeaderElement;
 public class HomePage extends ParentPage {
     Logger logger = Logger.getLogger(getClass());
 
-
-    @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
-    private WebElement buttonCreatePost;
-
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -23,7 +19,6 @@ public class HomePage extends ParentPage {
         return new HeaderElement(webDriver);
     }
 
-
     public HomePage checkIsRedirectToHomePage() {
         Assert.assertTrue("It is not Home page", getHeaderElement().isButtonSignOutVisible());
         //TODO checkUrl
@@ -31,7 +26,7 @@ public class HomePage extends ParentPage {
     }
 
     public CreateNewPostPage clickOnButtonCreatePost() {
-        clickOnElement(buttonCreatePost);
+        getHeaderElement().clickOnElement(getHeaderElement().buttonCreatePost);
         return new CreateNewPostPage(webDriver);
     }
 

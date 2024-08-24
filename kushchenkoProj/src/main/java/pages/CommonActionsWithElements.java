@@ -52,5 +52,4 @@ public class CommonActionsWithElements {
         logger.error("Cannot work with element " + e);
         Assert.fail("Cannot work with element " + e);
     }
-
 }
