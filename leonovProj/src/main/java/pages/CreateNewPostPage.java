@@ -6,9 +6,16 @@ import org.openqa.selenium.support.FindBy;
 
 public class CreateNewPostPage extends ParentPage {
 
+    @FindBy(xpath = "//select")
+    private WebElement dropDownAccess;
 
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    @Override
+    protected String getRelativeUrl() {
+        return "/create-post";
     }
 
     @FindBy(xpath = "//textarea[@id='post-body']")
@@ -32,7 +39,7 @@ public class CreateNewPostPage extends ParentPage {
 
 
     public CreateNewPostPage checkIsRedirectOnCreateNewPostPage() {
-        //TODO checkUrl
+        checkUrl();
         //TODO check some element
         return this;
     }
@@ -40,6 +47,19 @@ public class CreateNewPostPage extends ParentPage {
     public PostPage clickOnButtonSaveNewPost() {
         clickOnElement(buttonSaveNewPost);
         return new PostPage(webDriver);
+    }
+
+
+    public CreateNewPostPage selectTextInDropDownAccessByVisibleText(String textForSelect) {
+
+        selectTextInDropDownByVisibleText(dropDownAccess, textForSelect);
+        return this;
+    }
+
+
+    public CreateNewPostPage selectInDropDownAccessByValue(String valueForSelect) {
+        selectValueInDropDown(dropDownAccess, valueForSelect);
+        return this;
     }
 
 
