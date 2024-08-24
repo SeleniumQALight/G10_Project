@@ -45,7 +45,10 @@ public class EditPostTest extends BaseTest {
                 .checkTextInPostBody(NEW_POST_BODY)
                 .getBackToCurrentPostPage()
                 .checkTextInPostTitleOfPostPage(NEW_POST_TITLE)
-                .checkTextInPostBodyOfPostPage(NEW_POST_BODY);
+                .checkTextInPostBodyOfPostPage(NEW_POST_BODY)
+                .getHeaderElement()
+                .clickOnMyProfileButton()
+                .checkPostWithTitleIsPresent(NEW_POST_TITLE, 1);
     }
 
     @After
@@ -54,7 +57,8 @@ public class EditPostTest extends BaseTest {
                 .openHomePageAndLoginIfNeeded()
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
-                .deletePostsTillPresent(NEW_POST_TITLE);
+                .deletePostsTillPresent(NEW_POST_TITLE)
+                .deletePostsTillPresent(POST_TITLE);
     }
 
 }
