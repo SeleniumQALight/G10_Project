@@ -1,5 +1,6 @@
 package pages;
 
+import data.TestData;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -17,15 +18,24 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+    @FindBy(xpath = "//div[contains(@class, 'alert-danger') and contains(@class, 'text-center')]")
+    private WebElement alertMessage;
+
+
     private Logger logger = Logger.getLogger(getClass());
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/";
+    }
+
     public void openLoginPage() {
-        webDriver.get("https://aqa-complexapp.onrender.com");
-        logger.info("Login page was opened");
+        webDriver.get(baseUrl);
+        logger.info("Login page was opened " + baseUrl);
     }
 
     public void enterTextIntoInputLogin(String login) {
@@ -73,6 +83,22 @@ public class LoginPage extends ParentPage {
 
     public void clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
+    }
+
+    public boolean isButtonSignInVisible() {
+        return isElementVisible(buttonSignIn);
+    }
+
+    public boolean isAlertMessageVisible() {
+        return isElementVisible(alertMessage);
+    }
+
+    public HomePage openLoginPageAndFillLoginFormWithValidCred() {
+        openLoginPage();
+        enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
+        enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
+        clickOnButtonSignIn();
+        return new HomePage(webDriver);
     }
 }
 

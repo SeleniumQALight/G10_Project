@@ -3,6 +3,8 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.junit.Assert;
+
 
 public class CreateNewPostPage extends ParentPage {
 
@@ -16,12 +18,23 @@ public class CreateNewPostPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Save New Post']")
     private WebElement buttonSaveNewPost;
 
+    @FindBy(xpath = "//input[@type='checkbox']")
+    private WebElement checkBox;
+
+    @FindBy(xpath = "//select")
+    private WebElement dropdownAccess;
+
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/create-post";
+    }
+
     public CreateNewPostPage checkIsRedirectOnCreateNewPostPage() {
-        //TODO: check URL
+        checkUrl();
         //TODO: check some element
         return this;
     }
@@ -41,5 +54,55 @@ public class CreateNewPostPage extends ParentPage {
         return new PostPage(webDriver);
     }
 
+
+    public boolean isCheckBoxSelected() {
+        return checkBox.isSelected();
+    }
+
+    public CreateNewPostPage setCheckBoxOn() {
+        if (!isCheckBoxSelected()) {
+            clickOnElement(checkBox);
+            logger.info("checkbox set to 'check' status");
+        } else {
+            logger.info("The checkbox is already in 'check' status");
+        }
+        return this;
+    }
+
+    public CreateNewPostPage setCheckBoxOff() {
+        if (isCheckBoxSelected()) {
+            clickOnElement(checkBox);
+            logger.info("checkbox set to 'uncheck' status");
+        } else {
+            logger.info("The checkbox is already in 'uncheck' status");
+        }
+        return this;
+    }
+
+    public CreateNewPostPage setCheckBoxStatus(String status) {
+        switch (status) {
+            case "check":
+                setCheckBoxOn();
+            break;
+            case "uncheck":
+                setCheckBoxOff();
+            break;
+            default:
+                logger.info("The status '" + status + "' is not valid, test is interrupted");
+                Assert.assertTrue("The status '" + status + "' is not valid", false);
+                break;
+        }
+        return this;
+    }
+
+    public CreateNewPostPage selectTextInDropDownAccessByVisibleText(String textForSelect) {
+        selectTextInDropDownByVisibleText(dropdownAccess, textForSelect);
+        return this;
+    }
+
+    public CreateNewPostPage selectValueInDropdownAccess(String valueForSelect) {
+        selectValueInDropdown(dropdownAccess, valueForSelect);
+        return this;
+    }
 
 }

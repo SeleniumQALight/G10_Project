@@ -18,17 +18,22 @@ public class LoginPage extends ParentPage {
     private WebElement buttonSighIn;
 
     @FindBy(xpath = "//*[contains (text(), 'Invalid username/password.')]")
-//  as a variant  @FindBy(xpath = "//*[contains (@class, 'alert-danger') and not (contains(@class, 'liveValidateMessage'))]")
     private WebElement invalidCredentialsText;
 
     private Logger logger = Logger.getLogger(getClass());
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
+    @Override
+    String getRelativeUrl() {
+        return "/";
+    }
+
     public void openLoginPage() {
-        webDriver.get("https://aqa-complexapp.onrender.com");
-        logger.info("Login page was opened");
+        webDriver.get(baseUrl);
+        logger.info("Login page was opened " + baseUrl);
     }
 
     public void enterTextIntoInputLogin(String login) {
@@ -49,10 +54,6 @@ public class LoginPage extends ParentPage {
         clearAndEnterTextIntoElement(inputPasswordInLoginForm, password);
     }
 
-    public boolean isButtonSignInVisible() {
-        return isElementVisible(buttonSighIn);
-    }
-
     public void clickOnButtonSighIn() {
         clickOnElement(buttonSighIn);
     }
@@ -67,5 +68,17 @@ public class LoginPage extends ParentPage {
         enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
         clickOnButtonSighIn();
         return new HomePage(webDriver);
+    }
+
+    public boolean isButtonSignInVisible() {
+        return isElementVisible(buttonSighIn);
+    }
+
+    public boolean isUsernameInputFieldVisible() {
+        return isElementVisible(inputUserNameInLoginForm);
+    }
+
+    public boolean isPasswordInputFieldVisible() {
+        return isElementVisible(inputPasswordInLoginForm);
     }
 }

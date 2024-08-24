@@ -1,5 +1,6 @@
 package Pages;
 
+import data.TestData;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,7 +28,7 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
-    public void openPage() {
+    public void openLoginPage() {
         webDriver.get("https://aqa-complexapp.onrender.com");
         logger.info("Login page was opened");
     }
@@ -52,5 +53,13 @@ public class LoginPage extends ParentPage {
         return isElementDisplayed(buttonSignIn);
     }
 
+
+    public HomePage openLoginPageAndFillLoginFormWithValidCredentials() {
+        openLoginPage();
+        enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
+        enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
+        clickOnButtonSignIn();
+        return new HomePage(webDriver);
+    }
 }
 

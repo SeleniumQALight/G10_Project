@@ -14,16 +14,22 @@ public class CreateNewPostTest extends BaseTest {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectOnHomePage()
-                .clickOnButtonCreatePost()
+                .getHeaderElement().clickOnButtonCreatePost()
                 .checkIsRedirectOnCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoTextAreaBody("Body of the post from me")
-                // .setCheckBox to ON (ask what is your state, if ON, do nothing if OFF, click) - add these methods to CommonActionsWithElements
+//                .selectTextInDropDownAccessByVisibleText("Приватне повідомлення")
+                .selectValueInDropdownAccess("One Person")
+                .setCheckBoxStatus("check")
+                ////////////////////////////////
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
                 // isThisPost unique& : yes
+                .checkIsUniqueTextInPostDisplayed()
+                ////////////////////////////////
+                .checkTextThisPostWasWrittenIsVisible("One Person")
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
                 .checkPostWithTitleIsPresent(POST_TITLE, 1);

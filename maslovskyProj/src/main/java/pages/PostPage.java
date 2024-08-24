@@ -13,8 +13,18 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = ".//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
+    @FindBy(xpath = ".//*[text()='Is this post unique? : yes']")
+    private WebElement uniqueText;
+
+    private String locatorForTextThisPostWasWrittenIsVisible = "//*[contains(text(), '%s')]";
+
     public PostPage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    @Override
+    String getRelativeUrl() {
+        return "/post/[a-zA-Z0-9]*";
     }
 
     public HeaderElement getHeaderElement() {
@@ -22,7 +32,7 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkIsRedirectToPostPage() {
-        //TODO: check URL
+        checkUrlWithPattern();
         //TODO: check some element
         return this;
     }
@@ -33,7 +43,7 @@ public class PostPage extends ParentPage {
      * @return PostPage
      */
     public PostPage checkIsSuccessMessageDisplayed() {
-        Assert.assertTrue("Success message is not displayed", isElementVisible(successMessage));
+        Assert.assertTrue("Success message is not displayed", isElementVisible(successMessage, "Success message"));
         return this;
     }
 
@@ -46,5 +56,16 @@ public class PostPage extends ParentPage {
     public MyProfilePage clickOnDeleteButton() {
         clickOnElement(buttonDeletePost);
         return new MyProfilePage(webDriver);
+    }
+
+    public PostPage checkIsUniqueTextInPostDisplayed() {
+        Assert.assertTrue("'Unique' text is not displayed", isElementVisible(uniqueText));
+        return this;
+    }
+
+    public PostPage checkTextThisPostWasWrittenIsVisible(String expectedText) {
+        Assert.assertTrue(expectedText + " Text is not visible",
+                isElementVisible(String.format(locatorForTextThisPostWasWrittenIsVisible, expectedText)));
+        return this;
     }
 }
