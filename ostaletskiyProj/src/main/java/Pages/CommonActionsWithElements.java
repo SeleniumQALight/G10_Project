@@ -53,5 +53,30 @@ public class CommonActionsWithElements {
             return false;
         }
     }
+
+    public boolean checkCheckBox(WebElement checkBox) {
+        if (!checkBox.isSelected()) {
+            checkBox.click();
+            logger.info("CheckBox is checked");
+            return true;
+        } else {
+            logger.info("CheckBox is already checked");
+            return false;
+        }
+    }
+
+    public boolean uncheckCheckBox(WebElement checkBox) {
+        if (checkBox.isSelected()) {
+            checkBox.click();
+            logger.info("CheckBox is unchecked");
+            return true;
+        } else {
+            logger.info("CheckBox is already unchecked");
+            return false;
+        }
+    }
+
+
 }
+
 
