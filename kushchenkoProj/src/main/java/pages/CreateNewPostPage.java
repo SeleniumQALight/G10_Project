@@ -15,6 +15,9 @@ public class CreateNewPostPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Save New Post']")
     private WebElement buttonSavePost;
 
+    @FindBy(xpath = "//input[@type='checkbox']")
+    private WebElement checkBox;
+
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -41,4 +44,28 @@ public class CreateNewPostPage extends ParentPage {
 
     }
 
+    public void setCheckBox(WebElement checkBox) {
+        clickOnElement(checkBox);
+    }
+
+    public CreateNewPostPage changeCheckBoxState(String state) {
+        if (state.equals("check")) {
+            if (!checkBox.isSelected()) {
+                setCheckBox(checkBox);
+                logger.info("Checkbox is set to true");
+            } else{
+                logger.info("Checkbox is already checked");
+            }
+        } else if (state.equals("uncheck")) {
+            if (checkBox.isSelected()) {
+                setCheckBox(checkBox);
+                logger.info("Checkbox is set to false");
+            } else {
+                logger.info("Checkbox is already unchecked");
+            }
+        } else {
+            logger.error("State should be 'check' or 'uncheck'");
+        }
+        return this;
+    }
 }
