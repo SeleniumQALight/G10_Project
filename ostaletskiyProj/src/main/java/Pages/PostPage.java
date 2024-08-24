@@ -53,7 +53,7 @@ public class PostPage extends ParentPage {
         return this;
     }
 
-    public PostPage checkTextInSuccesMessage(String expectedMessageText) {
+    public PostPage checkTextInSuccessMessage(String expectedMessageText) {
         String actualText = successMessage.getText();
         Assert.assertEquals("Text in message",
                 expectedMessageText, actualText);

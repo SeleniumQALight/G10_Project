@@ -62,9 +62,6 @@ public class CreateNewPostPage extends ParentPage {
         return this;
     }
 
-     }
-
-
     public CreateNewPostPage setCheckBoxState(String state) {
         if ("check".equalsIgnoreCase(state)) {
             checkCheckBox(checkBox);
@@ -74,5 +71,8 @@ public class CreateNewPostPage extends ParentPage {
         return this;
 
     }
+
 }
+
+
 
