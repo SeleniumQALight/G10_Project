@@ -21,16 +21,20 @@ public class LoginPage extends ParentPage {
     private WebElement notificationAlert;
 
 
-
-   private Logger logger = Logger.getLogger(getClass());
+    private Logger logger = Logger.getLogger(getClass());
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/";
+    }
+
     public void openLoginPage() {
-        webDriver.get("https://aqa-complexapp.onrender.com");
-        logger.info("Login page was opened");
+        webDriver.get(baseUrl);
+        logger.info(" Login page was opened" + baseUrl);
     }
 
     public void enterTextIntoInputLogin(String login) {
@@ -46,7 +50,7 @@ public class LoginPage extends ParentPage {
     }
 
     public boolean isNotificationVisible() {
-      return isElementDisplayed(notificationAlert);
+        return isElementDisplayed(notificationAlert);
     }
 
     public boolean isButtonSignInVisible() {

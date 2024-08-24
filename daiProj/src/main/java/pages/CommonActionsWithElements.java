@@ -14,7 +14,7 @@ import java.time.Duration;
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
-protected WebDriverWait webDriverWait10, webDriverWait15;
+    protected WebDriverWait webDriverWait10, webDriverWait15;
 
 
     public CommonActionsWithElements(WebDriver webDriver) {
@@ -166,5 +166,32 @@ protected WebDriverWait webDriverWait10, webDriverWait15;
             return elementName;
         }
     }
+
+
+
+    public boolean checkCheckBox(WebElement checkBox) {
+        if (!checkBox.isSelected()) {
+            checkBox.click();
+            logger.info("CheckBox is checked");
+            return true;
+        } else {
+            logger.info("CheckBox is already checked");
+            return false;
+        }
+    }
+
+    public boolean uncheckCheckBox(WebElement checkBox) {
+        if (checkBox.isSelected()) {
+            checkBox.click();
+            logger.info("CheckBox is unchecked");
+            return true;
+        } else {
+            logger.info("CheckBox is already unchecked");
+            return false;
+        }
+    }
+
 }
+
+
 
