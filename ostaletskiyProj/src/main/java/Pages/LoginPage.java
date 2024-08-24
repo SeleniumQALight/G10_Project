@@ -34,7 +34,7 @@ public class LoginPage extends ParentPage {
 
     public void openLoginPage() {
         webDriver.get(baseUrl);
-        logger.info("Login page was opened" + baseUrl);
+        logger.info(" Login page was opened" + baseUrl);
     }
 
     public void enterTextIntoInputLogin(String login) {

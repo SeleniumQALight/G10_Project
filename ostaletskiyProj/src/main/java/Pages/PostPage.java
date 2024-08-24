@@ -46,11 +46,11 @@ public class PostPage extends ParentPage {
 
     public PostPage checkIsSuccessMessageDisplayed() {
         Assert.assertTrue("Success message is not displayed",
-                isElementDisplayed(successMessage));
+                isElementDisplayed(successMessage, "Success message"));
         return this;
     }
 
-    public PostPage checkTextInSuccesMessage(String expectedMessageText) {
+    public PostPage checkTextInSuccessMessage(String expectedMessageText) {
         String actualText = successMessage.getText();
         Assert.assertEquals("Text in message",
                 expectedMessageText, actualText);
@@ -62,7 +62,7 @@ public class PostPage extends ParentPage {
         return new MyProfilePage(webDriver);
     }
 
-    public PostPage checkTextThisPostWasWrittenIsVissible(String expectedText) {
+    public PostPage checkTextThisPostWasWrittenIsVisible(String expectedText) {
         Assert.assertTrue("Text is not visible",
                 isElementDisplayed(String.format(locatorForTextThisPostWasWritten, expectedText)));
         return this;
