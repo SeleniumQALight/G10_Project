@@ -17,8 +17,15 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//p[text()='Is this post unique? : yes']")
     private WebElement answerYes;
 
+    private String locatorForTextThisPostWasWritten = "//*[contains(text(), '%s')]";
+
     public PostPage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    @Override
+    protected String getRelativeUrl() {
+        return "/post/[a-zA-Z0-9]*";
     }
 
     public HeaderElement getHeaderElement() {
@@ -26,7 +33,7 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkIsRedirectToPostPage() {
-        // TODO checkUrl
+        checkUrlWithPattern();
         // TODO check some element
         return this;
     }
@@ -37,7 +44,7 @@ public class PostPage extends ParentPage {
      * @return PostPage
      */
     public PostPage checkIsSuccessMessageDisplayed() {
-        Assert.assertTrue("Success message is not displayed", isElementVisible(successMessage));
+        Assert.assertTrue("Success message is not displayed", isElementVisible(successMessage, "Success message"));
         return this;
     }
 
@@ -55,6 +62,11 @@ public class PostPage extends ParentPage {
     public PostPage checkAnswerYesIsDisplayed(String expectedText) {
         String actualText = answerYes.getText();
         Assert.assertEquals("Text in message", expectedText, actualText);
+        return this;
+    }
+
+    public PostPage checkTextThisPostWasWrittenIsVisible(String expectedText) {
+        Assert.assertTrue(expectedText + "Text is not visible", isElementVisible(String.format(locatorForTextThisPostWasWritten, expectedText)));
         return this;
     }
 }

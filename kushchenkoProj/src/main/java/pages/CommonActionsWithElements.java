@@ -48,9 +48,36 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void setCheckbox(WebElement webElement) {
+        if (!webElement.isSelected()) {
+            clickOnElement(webElement);
+            logger.info("Checkbox is set to true");
+        } else{
+            logger.info("Checkbox is already checked");
+        }
+    }
+
+    protected void unsetCheckbox(WebElement webElement) {
+        if (webElement.isSelected()) {
+            clickOnElement(webElement);
+            logger.info("Checkbox is set to false");
+        } else {
+            logger.info("Checkbox is already unchecked");
+        }
+    }
+
+    protected void changeCheckBoxState(String state, WebElement webElement) {
+        if (state.equalsIgnoreCase("check")) {
+            this.setCheckbox(webElement);
+        } else if (state.equalsIgnoreCase("uncheck")) {
+            this.unsetCheckbox(webElement);
+        } else {
+            logger.error("State should be 'check' or 'uncheck'");
+        }
+    }
+
     private void printErrorAndStopTest(Exception e) {
         logger.error("Cannot work with element " + e);
         Assert.fail("Cannot work with element " + e);
     }
-
 }
