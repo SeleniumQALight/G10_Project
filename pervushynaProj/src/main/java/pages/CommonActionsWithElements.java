@@ -50,7 +50,7 @@ public class CommonActionsWithElements {
         }
     }
 
-    //method check checkbox
+
     protected void setCheckBoxToNeededState(WebElement webElement, String neededState){
         boolean isStateCheck = neededState.equals("check");
         boolean isStateUnCheck = neededState.equals("uncheck");
