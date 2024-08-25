@@ -2,8 +2,11 @@ package pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -104,6 +107,46 @@ public class CommonActionsWithElements {
     private void printErrorAndStopTest(Exception e) {
         logger.error("Cannot work with element " + e);
         Assert.fail("Cannot work with element " + e);
+    }
+
+    public void acceptAlert() {
+        try {
+            webDriver.switchTo().alert().accept();
+            logger.info("Alert is accepted");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    public void scrollToElement(WebElement webElement) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.moveToElement(webElement)
+                    .build().perform();
+            logger.info("Scrolled to element " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    public void pressEnterKey() {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.sendKeys(Keys.ENTER)
+                    .build().perform();
+            logger.info("Enter key is pressed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    public void openNewTab() {
+        try {
+            ((JavascriptExecutor) webDriver).executeScript("window.open()");
+            logger.info("New tab is opened");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
     }
 
     private String getElementName(WebElement webElement) {
