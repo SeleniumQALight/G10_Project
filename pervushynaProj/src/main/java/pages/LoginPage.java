@@ -1,7 +1,10 @@
 package pages;
 
+import com.beust.ah.A;
 import data.TestData;
+import org.apache.hc.core5.http.HeaderElement;
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,6 +24,7 @@ public class LoginPage extends ParentPage {
     private WebElement textInvalidUsernamePasswordIsDisplay;
 
     private Logger logger = Logger.getLogger(getClass());
+    private HeaderElement headerElement;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -73,4 +77,13 @@ public class LoginPage extends ParentPage {
     public boolean textIsDisplay() {
         return isElementVisible(textInvalidUsernamePasswordIsDisplay);
     }
+
+    public LoginPage checkIsRedirectToLoginPage() {
+        Assert.assertTrue("It is not Login page", isButtonSignInVisible());
+        Assert.assertTrue("Input Username is not visible", isElementVisible(inputUsernameInLoginForm));
+        Assert.assertTrue("Input Password is not visible", isElementVisible(inputPasswordInLoggInForm));
+        return this;
+    }
+
+
 }

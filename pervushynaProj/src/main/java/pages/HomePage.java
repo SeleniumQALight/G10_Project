@@ -30,6 +30,9 @@ public class HomePage extends ParentPage{
 
     public HomePage checkIsRedirectToHomePage() {
         Assert.assertTrue("It is not Home page", getHeaderElement().isButtonSignOutVisible());
+        Assert.assertTrue("Button Chat is not visible", getHeaderElement().isChatButtonVisible());
+        Assert.assertTrue("Img Avatar is not visible", getHeaderElement().isImgAvatarVisible());
+        Assert.assertTrue("Button Create Post is not visible", isElementVisible(buttonCreatePost));
         checkUrlWithPattern();
         return this;
     }
@@ -53,4 +56,21 @@ public class HomePage extends ParentPage{
         }
         return this;
     }
+
+//    public HomePage checkIsButtonCreatePostVisible() {
+//        Assert.assertTrue("Button Create Post is not visible", isElementVisible(buttonCreatePost));
+//        return this;
+//    }
+//
+//    public HomePage checkIsImgAvatarVisible() {
+//        HeaderElement headerElement = new HeaderElement(webDriver);
+//        Assert.assertTrue("Img Avatar is not visible", headerElement.isImgAvatarVisible());
+//        return this;
+//    }
+
+//    public HomePage checkIsChatButtonVisible() {
+//        HeaderElement headerElement = new HeaderElement(webDriver);
+//        Assert.assertTrue("Chat button is not visible", headerElement.isChatButtonVisible());
+//        return this;
+//    }
 }
