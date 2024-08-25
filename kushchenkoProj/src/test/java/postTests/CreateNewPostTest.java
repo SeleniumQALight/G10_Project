@@ -19,11 +19,14 @@ public class CreateNewPostTest extends BaseTest {
                 .enterTitleInToInputTitle(POST_TITLE)
                 .enterTextInToInputBody("Body of new Post")
                 .setCheckBoxPostUniqueTrue("check")
+//                .selectTextInDropDownAccessByVisibleText("Приватне повідомлення")
+                .selectVaueInDropDownAccess("One Person")
                 .clickOnButtonSavePost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
                 .checkIsPostUnique()
+                .checkTextThisPostWasWrittenIsVisible("One Person")
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToProfilePage()
                 .checkPostWithTitleIsPresent(POST_TITLE, 1)
@@ -40,6 +43,6 @@ public class CreateNewPostTest extends BaseTest {
 
 
         ;
-
     }
 }
+
