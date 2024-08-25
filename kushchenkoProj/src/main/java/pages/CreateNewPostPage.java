@@ -18,6 +18,9 @@ public class CreateNewPostPage extends ParentPage {
     @FindBy(xpath = "//input[@type='checkbox']")
     private WebElement checkBox;
 
+    @FindBy(xpath = "//select")
+    private WebElement dropDownAccess;
+
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -47,4 +50,17 @@ public class CreateNewPostPage extends ParentPage {
         this.changeCheckBoxState(state, checkBox);
         return this;
     }
+
+    public CreateNewPostPage selectTextInDropDownAccessByVisibleText(String textForSelect) {
+        selectTextInDropdownByVisibleText(dropDownAccess, textForSelect);
+        return this;
+    }
+
+
+    public CreateNewPostPage selectVaueInDropDownAccess(String valueForSelect) {
+        selectValueInDropdown(dropDownAccess, valueForSelect);
+        return this;
+    }
+
+
 }
