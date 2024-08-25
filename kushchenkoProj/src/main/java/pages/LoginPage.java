@@ -72,6 +72,14 @@ public class LoginPage extends ParentPage {
         return isElementVisible(alertMessage);
     }
 
+    public boolean isInputUserNameVisible() {
+        return isElementVisible(inputUserNameInLoginForm);
+    }
+
+    public boolean isInputPasswordVisible() {
+        return isElementVisible(inputPasswordInLoginForm);
+    }
+
     public HomePage openLoginPageAndLoginWithValidCreds() {
         openLoginPage();
         enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
