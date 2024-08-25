@@ -31,7 +31,7 @@ public class EditPostPage extends ParentPage {
 
     @Override
     String getRelativeUrl() {
-        return null;
+        return "/post/[a-zA-Z0-9]*/edit";
     }
 
     public EditPostPage clickOnEditButton() {
@@ -81,5 +81,10 @@ public class EditPostPage extends ParentPage {
     public PostPage getBackToCurrentPostPage() {
         clickOnElement(getBack, "Back to post permalink");
         return new PostPage(webDriver);
+    }
+
+    public EditPostPage checkIsRedirectToEditPostPage() {
+        checkUrlWithPattern();
+        return this;
     }
 }

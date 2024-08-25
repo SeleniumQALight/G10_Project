@@ -14,9 +14,6 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = ".//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
-    @FindBy(id = "post-title")
-    private WebElement inputTitle;
-
     @FindBy(xpath = ".//*[text()='Is this post unique? : yes']")
     private WebElement uniqueText;
 

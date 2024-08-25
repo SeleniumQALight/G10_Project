@@ -4,14 +4,13 @@ import baseTest.BaseTest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import loginTests.LoginTestWithPageObject;
 
 
 public class SignOutTest extends BaseTest {
 
     @Before
-    public void ValidLogin() {
-//        commonLoginActions(userName, userPassword);
+    public void validLogin() {
+
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred();
 

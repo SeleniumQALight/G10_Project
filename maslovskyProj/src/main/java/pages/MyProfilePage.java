@@ -69,9 +69,7 @@ public class MyProfilePage extends ParentPage {
     }
 
     public EditPostPage clickOnPostWithTitle(String postTitle) {
-        WebElement postTitleXpath =
-                webDriver.findElement(By.xpath(String.format(postTitleLocator, postTitle)));
-        clickOnElement(postTitleXpath, "Post with title " + postTitle);
+        clickOnElement(postTitleLocator, postTitle);
         return new EditPostPage(webDriver);
     }
 

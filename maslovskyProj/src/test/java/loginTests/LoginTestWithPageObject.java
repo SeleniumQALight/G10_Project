@@ -14,16 +14,13 @@ public class LoginTestWithPageObject extends BaseTest {
     protected String userName = "qaauto";
     protected String userPassword = "123456qwerty";
 
-    public void commonLoginActions(String userName, String userPassword) {
+    @Test
+    public void TR001_validLogin() {
+
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin(userName);
         pageProvider.getLoginPage().enterTextIntoInputPassword(userPassword);
         pageProvider.getLoginPage().clickOnButtonSighIn();
-    }
-
-    @Test
-    public void TR001_validLogin() {
-        commonLoginActions(userName, userPassword);
 
         Assert.assertTrue("Button Sign Out is not visible",
                 pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
@@ -52,8 +49,10 @@ public class LoginTestWithPageObject extends BaseTest {
     // зробити тест на невалідний логін
     @Test
     public void TR002_invalidLogin() {
-        commonLoginActions("", "");
-
+        pageProvider.getLoginPage().openLoginPage();
+//        pageProvider.getLoginPage().enterTextIntoInputLogin(userName);
+//        pageProvider.getLoginPage().enterTextIntoInputPassword(userPassword);
+        pageProvider.getLoginPage().clickOnButtonSighIn();
         Assert.assertTrue("Button Sign In is not visible",
                 pageProvider.getLoginPage().isButtonSignInVisible());
 

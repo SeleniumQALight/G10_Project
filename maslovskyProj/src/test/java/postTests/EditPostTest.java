@@ -14,7 +14,7 @@ public class EditPostTest extends BaseTest {
 
 
     @Before
-    public void CreateNewPostTest() {
+    public void createNewPostTest() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .getHeaderElement()
@@ -36,6 +36,7 @@ public class EditPostTest extends BaseTest {
                 .clickOnMyProfileButton()
                 .clickOnPostWithTitle(POST_TITLE)
                 .clickOnEditButton()
+                .checkIsRedirectToEditPostPage()
                 .enterTextIntoInputTitle(NEW_POST_TITLE)
                 .enterTextIntoTextAreaBody(NEW_POST_BODY)
                 .clickOnButtonSaveUpdates()
