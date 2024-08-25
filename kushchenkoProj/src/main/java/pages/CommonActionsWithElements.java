@@ -22,12 +22,12 @@ public class CommonActionsWithElements {
         webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }
 
-    protected void clearAndEnterTextIntoElement(WebElement webElement, String text){
-        try{
+    protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
+        try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(text + " was entered into element");
-        }catch(Exception e){
+            logger.info(text + " was entered into element " + getElementName(webElement));
+        } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
@@ -35,24 +35,40 @@ public class CommonActionsWithElements {
     protected void clickOnElement(WebElement webElement) {
         try {
             webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
+            String elementName = getElementName(webElement);
             webElement.click();
-            logger.info("Element is clicked");
-        } catch (Exception e){
+            logger.info(elementName + " element is clicked");
+        } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
 
-    protected boolean isElementVisible(WebElement webElement){
-        try{
+    protected boolean isElementVisible(WebElement webElement) {
+        try {
             boolean state = webElement.isDisplayed();
             if (state) {
-                logger.info("Element is displayed");
+                logger.info(getElementName(webElement) + " element is displayed");
             } else {
-                logger.info("Element is not displayed");
+                logger.info(getElementName(webElement) + " element is not displayed");
             }
             return state;
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.info("Element is not visible");
+            return false;
+        }
+    }
+
+    protected boolean isElementVisible(WebElement webElement, String elementName) {
+        try {
+            boolean state = webElement.isDisplayed();
+            if (state) {
+                logger.info(elementName + " element is displayed");
+            } else {
+                logger.info(elementName + " element is not displayed");
+            }
+            return state;
+        } catch (Exception e) {
+            logger.info(elementName + " element is not visible");
             return false;
         }
     }
@@ -61,7 +77,7 @@ public class CommonActionsWithElements {
         if (!webElement.isSelected()) {
             clickOnElement(webElement);
             logger.info("Checkbox is set to true");
-        } else{
+        } else {
             logger.info("Checkbox is already checked");
         }
     }
@@ -88,5 +104,14 @@ public class CommonActionsWithElements {
     private void printErrorAndStopTest(Exception e) {
         logger.error("Cannot work with element " + e);
         Assert.fail("Cannot work with element " + e);
+    }
+
+    private String getElementName(WebElement webElement) {
+        String elementName = "";
+        try {
+            return webElement.getAccessibleName();
+        } catch (Exception e) {
+            return elementName;
+        }
     }
 }
