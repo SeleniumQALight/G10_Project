@@ -41,7 +41,7 @@ public class PostPage extends ParentPage {
      */
     public PostPage checkIsSuccessMessageDisplayed() {
         Assert.assertTrue("Success message is not displayed"
-                , isElementVisible(successMessage));
+                , isElementVisible(successMessage, "Success Message"));
         return this;
     }
 
