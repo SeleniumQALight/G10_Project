@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import org.openqa.selenium.support.ui.Select;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -61,6 +62,15 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected boolean isElementVisible(String locator){
+        try{
+            return isElementVisible(webDriver.findElement(By.xpath(locator)));
+        } catch (Exception e){
+            logger.info("Element is not visible");
+            return false;
+        }
+    }
+
     protected boolean isElementVisible(WebElement webElement, String elementName) {
         try {
             boolean state = webElement.isDisplayed();
@@ -101,6 +111,26 @@ public class CommonActionsWithElements {
             this.unsetCheckbox(webElement);
         } else {
             logger.error("State should be 'check' or 'uncheck'");
+        }
+    }
+
+    protected void selectTextInDropdownByVisibleText(WebElement dropdown, String textForSelect) {
+        try {
+        Select optionsFromDropdown = new Select(dropdown);
+        optionsFromDropdown.selectByVisibleText(textForSelect);
+        logger.info(textForSelect + " was selected in dropdown");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void selectValueInDropdown(WebElement dropdown, String valueForSelect) {
+        try {
+            Select select = new Select(dropdown);
+            select.selectByValue(valueForSelect);
+            logger.info(valueForSelect + " was selected in dropdown");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
         }
     }
 
