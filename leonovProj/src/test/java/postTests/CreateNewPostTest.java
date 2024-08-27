@@ -30,6 +30,10 @@ public class CreateNewPostTest extends BaseTest {
                 .getHeaderElement().clickOnButtonMyProfile()
                 .checkIsRedirectOnProfilePage()
                 .checkPostWithTitleIsPresent(POST_TITLE, 1)
+        //TODO: HW4 - додати цей метод в наш тест по створенню поста (зі значенням check) і перевірку на наступному скріні (yes або no)
+        //4. додати перевірки в тест на валідний логін:
+        //- що після того як залогінилися, ми бачимо кнопки Create Post, MyProfile, імʼя юзера
+        //- і не бачимо інпутів куди ми вводили логін та пароль
         ;
     }
 
