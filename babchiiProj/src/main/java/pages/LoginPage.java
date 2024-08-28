@@ -23,9 +23,14 @@ public class LoginPage extends ParentPage {
         return new HeaderElement(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/";
+    }
+
     public void openLoginPage() {
-        webDriver.get("https://aqa-complexapp.onrender.com/");
-        logger.info("Login page was opened");
+        webDriver.get(baseUrl);
+        logger.info("Login page was opened" + baseUrl);
     }
 
     public void enterTextIntoInputLogin(String login) {

@@ -22,7 +22,12 @@ public class HomePage extends ParentPage {
         super(webDriver);
     }
 
-    public HeaderElement getHeaderElement(){
+    @Override
+    protected String getRelativeUrl() {
+        return "/";
+    }
+
+    public HeaderElement getHeaderElement() {
         return new HeaderElement(webDriver);
     }
 
@@ -39,7 +44,7 @@ public class HomePage extends ParentPage {
 
     public HomePage checkIsRedirectToHomePage() {
         Assert.assertTrue("It is not Home page", getHeaderElement().isButtonSignOutVisible());
-        //TODO checkUrl
+        checkUrl();
         return this;
     }
 
@@ -58,8 +63,7 @@ public class HomePage extends ParentPage {
             loginPage.enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
             loginPage.clickOnButtonSignIn();
             checkIsRedirectToHomePage();
-            logger.info("User was logged in")
-;
+            logger.info("User was logged in");
         }
         return this;
     }

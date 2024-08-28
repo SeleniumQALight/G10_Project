@@ -26,9 +26,14 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/";
+    }
+
     public void openLoginPage() {
-        webDriver.get("https://aqa-complexapp.onrender.com/");
-        logger.info("Login page is opened");
+        webDriver.get(baseUrl);
+        logger.info("Login page is opened " + baseUrl);
     }
 
     public void enterTextIntoInputLogin(String login) {
@@ -70,6 +75,14 @@ public class LoginPage extends ParentPage {
 
     public boolean isAlertMessageVisible() {
         return isElementVisible(alertMessage);
+    }
+
+    public boolean isInputUserNameVisible() {
+        return isElementVisible(inputUserNameInLoginForm);
+    }
+
+    public boolean isInputPasswordVisible() {
+        return isElementVisible(inputPasswordInLoginForm);
     }
 
     public HomePage openLoginPageAndLoginWithValidCreds() {

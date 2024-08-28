@@ -1,5 +1,6 @@
 package pages.elements;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +15,15 @@ public class HeaderElement extends CommonActionsWithElements {
     @FindBy(xpath = "//button[text()='Sign Out']")
     private WebElement buttonSignOut;
 
+    @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
+    public WebElement buttonCreatePost;
+
+    public String userNameLocator = "//span[text()=' %s']";
+
+    private WebElement getUserNameElement(String login) {
+        return webDriver.findElement(By.xpath(String.format(userNameLocator, login)));
+    }
+
     public HeaderElement(WebDriver webDriver) {
         super(webDriver);
     }
@@ -25,5 +35,17 @@ public class HeaderElement extends CommonActionsWithElements {
 
     public boolean isButtonSignOutVisible() {
         return isElementVisible(buttonSignOut);
+    }
+
+    public boolean isButtonCreatePostVisible() {
+        return isElementVisible(buttonCreatePost);
+    }
+
+    public boolean isButtonMyProfileVisible() {
+        return isElementVisible(buttonMyProfile);
+    }
+
+    public boolean isUserNameVisible(String login) {
+        return isElementVisible(getUserNameElement(login));
     }
 }

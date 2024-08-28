@@ -28,9 +28,14 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/";
+    }
+
     public void openLoginPage() {
-        webDriver.get("https://aqa-complexapp.onrender.com");
-        logger.info("Login page was opened");
+        webDriver.get(baseUrl);
+        logger.info("Login page was opened " + baseUrl);
     }
 
     public void enterTextIntoInputLogin(String login) {
@@ -94,6 +99,13 @@ public class LoginPage extends ParentPage {
         enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
         clickOnButtonSignIn();
         return new HomePage(webDriver);
+
+    }
+
+    public boolean isInputLoginVisible() { return isElementVisible(inputUserNameInLoginForm);
+    }
+
+    public boolean isInputPasswordVisible() { return isElementVisible(inputPasswordInLoginForm);
     }
 }
 
