@@ -14,6 +14,9 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
+    @FindBy(xpath = "//a[@class='text-primary mr-2']")
+    private WebElement editPostButton;
+
     private String locatorForTextThisPostWasWritten = "//*[contains(text(), '%s')]";
 
     public PostPage(WebDriver webDriver) {
@@ -58,6 +61,16 @@ public class PostPage extends ParentPage {
 
     public PostPage checkTextThisPostWasWrittenIsVisible(String expectedText) {
         Assert.assertTrue(expectedText + "Text is not visible", isElementVisible(String.format(locatorForTextThisPostWasWritten, expectedText)));
+        return this;
+    }
+
+    public EditPostPage clickOnButtonEditPost() {
+        clickOnElement(editPostButton);
+        return new EditPostPage(webDriver);
+    }
+
+    public PostPage checkNewPostTitleIsPresent(String newPostTitle) {
+        Assert.assertTrue("New post title is not present", isElementVisible(String.format(locatorForTextThisPostWasWritten, newPostTitle)));
         return this;
     }
 }

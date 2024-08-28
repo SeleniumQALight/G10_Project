@@ -39,6 +39,8 @@ post.button.delete = .//button[@class="delete-post-button text-danger"]
 editPostPage.input.title = .//input[@id='post-title']
 editPostPage.textarea.bodyContent = .//textarea[@id='post-body']
 editPostPage.button.saveNewPost = .//button[@class='btn btn-primary']
+editPostPage.text.successNotification = //div[@class='alert alert-success text-center']
+editPostPage.href.backToPost = //a[@class='small font-weight-bold']
 
 #postEdit Post page (//aqa-complexapp.onrender.com/post/***/edit)
 
