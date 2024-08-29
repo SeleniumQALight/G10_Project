@@ -8,13 +8,16 @@ import pages.elements.HeaderElement;
 
 public class PostPage extends ParentPage{
     @FindBy(xpath = "//div[@class='alert alert-success text-center']")
-    private WebElement successMessage;
+    public WebElement successMessage;
 
     @FindBy(xpath = ".//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
     @FindBy(xpath = "//p[text()='Is this post unique? : yes']")
     private WebElement isPostUnique;
+
+    @FindBy(xpath = "//a[@data-original-title='Edit']")
+    private WebElement buttonEditPost;
 
     private String locatorForTextThisPostWasWritten = "//*[contains(text(), '%s')]";
 
@@ -63,5 +66,10 @@ public class PostPage extends ParentPage{
         Assert.assertTrue(expectedText + "Text is not visible",
                 isElementVisible(String.format(locatorForTextThisPostWasWritten, expectedText)));
         return this;
+    }
+
+    public EditPostPage clickOnEditButton() {
+        clickOnElement(buttonEditPost);
+        return new EditPostPage(webDriver);
     }
 }
