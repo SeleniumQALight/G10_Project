@@ -43,6 +43,7 @@ public class CreateAndUpdatePostTest extends BaseTest {
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToProfilePage()
                 .deletePostsTillPresent(UPDATED_POST_TITLE)
+                .deletePostsTillPresent(POST_TITLE)
         ;
     }
 }
