@@ -22,6 +22,15 @@ public class LoginPage extends ParentPage {
 
     private Logger logger = Logger.getLogger(getClass());
 
+    @FindBy(id = "username-register")
+    private WebElement inputUserNameInRegistrationForm;
+
+    @FindBy(id = "email-register")
+    private WebElement inputEmailInRegistrationForm;
+
+    @FindBy(id = "password-register")
+    private WebElement inputPasswordInRegistrationForm;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -73,4 +82,29 @@ public class LoginPage extends ParentPage {
     public boolean textIsDisplay() {
         return isElementVisible(textInvalidUsernamePasswordIsDisplay);
     }
+
+    public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
+        cleatAndEnterTextIntoElement(inputUserNameInRegistrationForm, userName);
+        return this;
+    }
+
+    public LoginPage enterTextIntoRegistrationEmailField(String email) {
+        cleatAndEnterTextIntoElement(inputEmailInRegistrationForm, email);
+        return this;
+    }
+
+    public LoginPage enterTextIntoRegistrationPasswordField(String password) {
+        cleatAndEnterTextIntoElement(inputPasswordInRegistrationForm, password);
+        return this;
+    }
+
+    public LoginPage checkErrorsMessage(String expectedMessages) {
+        //error1;error2;error3 -> [error1, error2, error3]
+        String[] messagesArray = expectedMessages.split(";");
+        return this;
+    }
+
+
+
+
 }
