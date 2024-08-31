@@ -2,9 +2,17 @@ package pages;
 
 import data.TestData;
 import org.apache.log4j.Logger;
+import org.assertj.core.api.SoftAssertions;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginPage extends ParentPage {
 
@@ -30,6 +38,11 @@ public class LoginPage extends ParentPage {
 
     @FindBy(id = "password-register")
     private WebElement inputPasswordInRegistrationForm;
+
+    final static String listOfMessagesLocator
+            = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
+    @FindBy(xpath = listOfMessagesLocator)
+    private List<WebElement> listOfMessages;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -101,6 +114,26 @@ public class LoginPage extends ParentPage {
     public LoginPage checkErrorsMessage(String expectedMessages) {
         //error1;error2;error3 -> [error1, error2, error3]
         String[] messagesArray = expectedMessages.split(";");
+
+        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfMessagesLocator), messagesArray.length));
+
+        Utils.waitABit(1);
+
+        Assert.assertEquals("Number of messages", messagesArray.length, listOfMessages.size());
+
+        ArrayList<String> textFromMessagesActual = new ArrayList<>();
+        for (WebElement element : listOfMessages) {
+            textFromMessagesActual.add(element.getText());
+        }
+        SoftAssertions softAssertions = new SoftAssertions();
+        for (int i = 0; i < messagesArray.length; i++) {
+            softAssertions
+                    .assertThat(textFromMessagesActual.get(i))
+                    .as("Message number " + i)
+                    .isIn(messagesArray);
+        }
+
+        softAssertions.assertAll();
         return this;
     }
 

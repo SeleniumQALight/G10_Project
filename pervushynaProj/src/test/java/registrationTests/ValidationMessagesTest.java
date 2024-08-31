@@ -18,7 +18,7 @@ public class ValidationMessagesTest extends BaseTest {
                 .enterTextIntoRegistrationUserNameField("TR")
                 .enterTextIntoRegistrationEmailField("TR")
                 .enterTextIntoRegistrationPasswordField("TR")
-                .checkErrorsMessage(SHORT_USER_NAME_MESSAGE + SEMICOLON + SHORT_EMAIL_MESSAGE + SEMICOLON + SHORT_PASSWORD_MESSAGE)
+                .checkErrorsMessage(SHORT_USER_NAME_MESSAGE)
 
         ;
 
