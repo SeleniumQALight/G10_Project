@@ -107,5 +107,7 @@ public class LoginPage extends ParentPage {
 
     public boolean isInputPasswordVisible() { return isElementVisible(inputPasswordInLoginForm);
     }
+
+
 }
 
