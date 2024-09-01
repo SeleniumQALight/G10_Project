@@ -35,7 +35,7 @@ public class HomePage extends ParentPage {
     }
 
     public CreateNewPostPage clickOnButtonCreatePost() {
-        clickOnElement(buttonCreatePost, "Back to post permalink");
+        clickOnElement(buttonCreatePost, "Button Create Post");
         return new CreateNewPostPage(webDriver);
     }
 
