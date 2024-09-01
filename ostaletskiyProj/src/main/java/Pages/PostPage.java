@@ -19,6 +19,12 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "// p[text()='Is this post unique? : yes']")
     private WebElement uniqueText;
 
+    @FindBy(xpath = "//h2")
+    private WebElement titleText;
+
+    @FindBy(xpath = "(//div[@class='body-content'])[2]")
+    private WebElement bodyText;
+
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -61,7 +67,7 @@ public class PostPage extends ParentPage {
     }
 
     public MyProfilePage clickOnDeleteButton() {
-        clickOnElement(buttonDeletePost);
+        clickOnElement(buttonDeletePost, "Delete post button");
         return new MyProfilePage(webDriver);
     }
 
@@ -82,4 +88,13 @@ public class PostPage extends ParentPage {
         return this;
     }
 
+    public PostPage checkTextInPostTitleOfPostPage(String newPostTitle) {
+        Assert.assertEquals("Title text is not as expected", titleText.getText(), newPostTitle);
+        return this;
+    }
+
+    public PostPage checkTextInPostBodyOfPostPage(String newPostBody) {
+        Assert.assertEquals("Body text is not as expected", bodyText.getText(), newPostBody);
+        return this;
+    }
 }

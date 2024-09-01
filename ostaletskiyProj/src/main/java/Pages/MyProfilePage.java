@@ -48,7 +48,7 @@ public class MyProfilePage extends ParentPage {
         final int MAX_POST_COUNT = 100; // postList.size()
         int counter = 0;
         while (!postsLists.isEmpty() && (counter < MAX_POST_COUNT)) {
-            clickOnElement(postsLists.get(0));
+            clickOnElement(postsLists.get(0), "Back to post permalink" + postTitle);
             new PostPage(webDriver)
                     .checkIsRedirectToPostPage()
                     .clickOnDeleteButton()
@@ -67,7 +67,12 @@ public class MyProfilePage extends ParentPage {
     private MyProfilePage checkIsSuccessMessageDisplayed() {
         // check message is displayed
         Assert.assertTrue("Success message is not displayed"
-                , isElementDisplayed(successMessageDelete));
+                , isElementDisplayed(successMessageDelete, "Success message about delete"));
         return this;
+    }
+
+    public EditPostPage clickOnPostWithTitle(String postTitle) {
+        clickOnElement(PostsListWithTitle(postTitle).get(0), "Back to post permalink");
+        return new EditPostPage(webDriver);
     }
 }

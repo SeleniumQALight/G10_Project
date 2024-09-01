@@ -31,7 +31,7 @@ public class HeaderElement extends CommonActionsWithElements {
     }
 
     public MyProfilePage clickOnButtonMyProfile() {
-        clickOnElement(buttonMyProfile);
+        clickOnElement(buttonMyProfile, "Back to post permalink");
         return new MyProfilePage(webDriver);
     }
 
@@ -53,11 +53,12 @@ public class HeaderElement extends CommonActionsWithElements {
 
 
     public HomePage clickOnButtonSignOut() {
-        clickOnElement(buttonSignOut);
+        clickOnElement(buttonSignOut, "Back to post permalink");
         return new HomePage(webDriver);
     }
 
     public boolean isChatButtonVisible() {
         return isElementDisplayed(chatButton);
     }
+
 }

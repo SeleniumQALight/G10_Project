@@ -21,6 +21,9 @@ public class CreateNewPostPage extends ParentPage {
     @FindBy(xpath = "//select")
     private WebElement dropdownAccess;
 
+    @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
+    private WebElement buttonCreatePost;
+
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -47,7 +50,7 @@ public class CreateNewPostPage extends ParentPage {
     }
 
     public PostPage clickOnButtonSaveNewPost() {
-        clickOnElement(buttonSaveNewPost);
+        clickOnElement(buttonSaveNewPost, "Back to post permalink");
         return new PostPage(webDriver);
 
     }
@@ -70,6 +73,10 @@ public class CreateNewPostPage extends ParentPage {
         }
         return this;
 
+    }
+    public CreateNewPostPage clickOnButtonCreatePost() {
+        clickOnElement(buttonCreatePost, "Back to post permalink");
+        return new CreateNewPostPage(webDriver);
     }
 
 }
