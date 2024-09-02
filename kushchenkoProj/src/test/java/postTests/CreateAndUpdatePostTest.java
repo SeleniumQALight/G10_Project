@@ -5,12 +5,12 @@ import org.junit.After;
 import org.junit.Test;
 import utils.Utils;
 
-public class CreateNewPostTest extends BaseTest {
-    // GUID = 3b3b3b3b-3b3b-3b3b-3b3b-3b3b3b3b3b3b
+public class CreateAndUpdatePostTest extends BaseTest {
     private final String POST_TITLE = "TR003_Kushchenko " + Utils.getDateAndTimeFormatted();
+    private final String UPDATED_POST_TITLE = POST_TITLE + " updated";
 
     @Test
-    public void TR003_createNewPost() {
+    public void TR005_createAndUpdatePost() {
         pageProvider.getLoginPage()
                 .openLoginPageAndLoginWithValidCreds()
                 .checkIsRedirectToHomePage()
@@ -19,18 +19,21 @@ public class CreateNewPostTest extends BaseTest {
                 .enterTitleInToInputTitle(POST_TITLE)
                 .enterTextInToInputBody("Body of new Post")
                 .setCheckBoxPostUniqueTrue("check")
-//                .selectTextInDropDownAccessByVisibleText("Приватне повідомлення")
-                .selectVaueInDropDownAccess("One Person")
                 .clickOnButtonSavePost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
                 .checkIsPostUnique()
-                .checkTextThisPostWasWrittenIsVisible("One Person")
+                .clickOnEditButton()
+                .checkIsRedirectToEditPostPage()
+                .enterNewTitleInToInputTitle(UPDATED_POST_TITLE)
+                .clickOnButtonSaveUpdates()
+                .checkIsRedirectToEditPostPage()
+                .checkIsSuccessUpdateMessageDisplayed()
+                .checkTextInSuccessUpdateMessage("Post successfully updated.")
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToProfilePage()
-                .checkPostWithTitleIsPresent(POST_TITLE, 1)
-        ;
+                .checkPostWithTitleIsPresent(UPDATED_POST_TITLE, 1);
     }
 
     @After
@@ -39,8 +42,8 @@ public class CreateNewPostTest extends BaseTest {
                 .openHomePageAndLoginIfNeeded()
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToProfilePage()
+                .deletePostsTillPresent(UPDATED_POST_TITLE)
                 .deletePostsTillPresent(POST_TITLE)
         ;
     }
 }
-
