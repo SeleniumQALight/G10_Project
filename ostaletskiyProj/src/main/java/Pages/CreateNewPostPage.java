@@ -74,11 +74,6 @@ public class CreateNewPostPage extends ParentPage {
         return this;
 
     }
-    public CreateNewPostPage clickOnButtonCreatePost() {
-        clickOnElement(buttonCreatePost);
-        return new CreateNewPostPage(webDriver);
-    }
-
 }
 
 

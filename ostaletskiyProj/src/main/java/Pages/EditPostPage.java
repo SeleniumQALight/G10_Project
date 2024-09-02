@@ -73,10 +73,6 @@ public class EditPostPage extends ParentPage {
         return this;
     }
 
-    public PostPage getBackToCurrentPostPage() {
-        clickOnElement(getBack);
-        return new PostPage(webDriver);
-    }
 
     public EditPostPage checkIsRedirectToEditPostPage() {
         checkUrlWithPattern();

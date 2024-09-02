@@ -1,6 +1,7 @@
 package Pages.elements;
 
 import Pages.CommonActionsWithElements;
+import Pages.CreateNewPostPage;
 import Pages.HomePage;
 import Pages.MyProfilePage;
 import org.openqa.selenium.WebDriver;
@@ -36,15 +37,15 @@ public class HeaderElement extends CommonActionsWithElements {
     }
 
     public boolean isButtonSignOutVisible() {
-        return isElementDisplayed(buttonSignOut);
+        return isElementDisplayed(buttonSignOut, "Sign Out button");
     }
 
     public boolean isButtonMyProfileVisible() {
-        return isElementDisplayed(buttonMyProfile);
+        return isElementDisplayed(buttonMyProfile , "My Profile button");
     }
 
     public boolean isButtonCreatePostVisible() {
-        return isElementDisplayed (buttonCreatePost);
+        return isElementDisplayed (buttonCreatePost , "Create Post button");
     }
 
     public boolean isSearchIconVisible() {
@@ -61,5 +62,9 @@ public class HeaderElement extends CommonActionsWithElements {
         return isElementDisplayed(chatButton);
     }
 
+    public CreateNewPostPage clickOnButtonCreatePost() {
+        clickOnElement(buttonCreatePost);
+        return new CreateNewPostPage(webDriver);
+    }
 
 }
