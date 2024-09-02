@@ -46,7 +46,7 @@ public class LoginPage extends ParentPage {
     }
 
     public void clickOnButtonSignIn() {
-        clickOnElement(buttonSignIn, "Back to post permalink");
+        clickOnElement(buttonSignIn);
     }
 
     public boolean isNotificationVisible() {

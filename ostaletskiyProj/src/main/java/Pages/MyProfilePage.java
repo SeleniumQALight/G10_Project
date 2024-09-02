@@ -48,7 +48,7 @@ public class MyProfilePage extends ParentPage {
         final int MAX_POST_COUNT = 100; // postList.size()
         int counter = 0;
         while (!postsLists.isEmpty() && (counter < MAX_POST_COUNT)) {
-            clickOnElement(postsLists.get(0), "Back to post permalink" + postTitle);
+            clickOnElement(postsLists.get(0));
             new PostPage(webDriver)
                     .checkIsRedirectToPostPage()
                     .clickOnDeleteButton()
@@ -72,7 +72,7 @@ public class MyProfilePage extends ParentPage {
     }
 
     public EditPostPage clickOnPostWithTitle(String postTitle) {
-        clickOnElement(PostsListWithTitle(postTitle).get(0), "Back to post permalink");
+        clickOnElement(PostsListWithTitle(postTitle).get(0));
         return new EditPostPage(webDriver);
     }
 }

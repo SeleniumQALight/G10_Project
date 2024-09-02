@@ -25,6 +25,9 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "(//div[@class='body-content'])[2]")
     private WebElement bodyText;
 
+    @FindBy(xpath = "//a[@data-original-title='Edit']")
+    private WebElement buttonEditPost;
+
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -67,7 +70,7 @@ public class PostPage extends ParentPage {
     }
 
     public MyProfilePage clickOnDeleteButton() {
-        clickOnElement(buttonDeletePost, "Delete post button");
+        clickOnElement(buttonDeletePost);
         return new MyProfilePage(webDriver);
     }
 
@@ -97,4 +100,9 @@ public class PostPage extends ParentPage {
         Assert.assertEquals("Body text is not as expected", bodyText.getText(), newPostBody);
         return this;
     }
+    public EditPostPage clickOnEditButton() {
+        clickOnElement(buttonEditPost);
+        return new EditPostPage(webDriver);
+    }
+
 }

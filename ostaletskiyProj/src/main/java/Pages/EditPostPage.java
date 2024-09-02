@@ -33,10 +33,6 @@ public class EditPostPage extends ParentPage {
         return "/post/[a-zA-Z0-9]*/edit";
     }
 
-    public EditPostPage clickOnEditButton() {
-        clickOnElement(buttonEditPost, "Edit button");
-        return new EditPostPage(webDriver);
-    }
 
     public EditPostPage enterTextIntoInputTitle(String postTitle) {
         clearAndEnterTextIntoElement(inputTitle, postTitle);
@@ -49,7 +45,7 @@ public class EditPostPage extends ParentPage {
     }
 
     public EditPostPage clickOnButtonSaveUpdates() {
-        clickOnElement(buttonSaveSaveUpdates, "Back to post permalink");
+        clickOnElement(buttonSaveSaveUpdates);
         return new EditPostPage(webDriver);
     }
 
@@ -78,7 +74,7 @@ public class EditPostPage extends ParentPage {
     }
 
     public PostPage getBackToCurrentPostPage() {
-        clickOnElement(getBack, "Back to post permalink");
+        clickOnElement(getBack);
         return new PostPage(webDriver);
     }
 

@@ -50,7 +50,7 @@ public class CreateNewPostPage extends ParentPage {
     }
 
     public PostPage clickOnButtonSaveNewPost() {
-        clickOnElement(buttonSaveNewPost, "Back to post permalink");
+        clickOnElement(buttonSaveNewPost);
         return new PostPage(webDriver);
 
     }
@@ -75,7 +75,7 @@ public class CreateNewPostPage extends ParentPage {
 
     }
     public CreateNewPostPage clickOnButtonCreatePost() {
-        clickOnElement(buttonCreatePost, "Back to post permalink");
+        clickOnElement(buttonCreatePost);
         return new CreateNewPostPage(webDriver);
     }
 

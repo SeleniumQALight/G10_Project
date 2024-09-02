@@ -32,7 +32,7 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected void clickOnElement(WebElement webElement, String backToPostPermalink) {
+    protected void clickOnElement(WebElement webElement) {
         try {
             webDriverWait_10.until(ExpectedConditions.elementToBeClickable(webElement));
             String elementName = getElementName(webElement);
