@@ -1,5 +1,6 @@
 package Pages;
 
+import Pages.elements.HeaderElement;
 import junit.framework.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,7 +33,6 @@ public class EditPostPage extends ParentPage {
     protected String getRelativeUrl() {
         return "/post/[a-zA-Z0-9]*/edit";
     }
-
 
     public EditPostPage enterTextIntoInputTitle(String postTitle) {
         clearAndEnterTextIntoElement(inputTitle, postTitle);
@@ -81,6 +81,10 @@ public class EditPostPage extends ParentPage {
     public EditPostPage checkIsRedirectToEditPostPage() {
         checkUrlWithPattern();
         return this;
+    }
+
+    public HeaderElement getHeaderElement() {
+        return new HeaderElement(webDriver);
     }
 }
 

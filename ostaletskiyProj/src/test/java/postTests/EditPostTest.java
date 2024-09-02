@@ -28,12 +28,11 @@ public class EditPostTest extends BaseTest {
                 .clickOnButtonSaveUpdates()
                 .checkIsRedirectToEditPostPage()
                 .checkIsSuccessMessageDisplayed()
-                .clickOnButtonMyProfile()
+                .getHeaderElement().clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
                 .checkPostWithTitleIsPresent(NEW_POST_TITLE, 1);
 
     }
-
         @After
         public void deletePost() {
             pageProvider.getHomePage()
