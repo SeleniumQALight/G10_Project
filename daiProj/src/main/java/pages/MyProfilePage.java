@@ -26,7 +26,7 @@ public class MyProfilePage extends ParentPage {
     }
 
 
-    private List<WebElement> postsListWithTitle(String postTitle) {
+    public List<WebElement> postsListWithTitle(String postTitle) {
         return webDriver.findElements(By.xpath(String.format(postTitleLocator, postTitle)));
     }
 
@@ -67,6 +67,12 @@ public class MyProfilePage extends ParentPage {
         // check message is present
         Assert.assertTrue("Message is not displayed"
                 , isElementVisible(successMessageDelete));
+        return this;
+    }
+
+    public MyProfilePage checkPostWithEditedTitleIsPresent(String postTitleEdited) {
+        Assert.assertTrue("Post with edited title is not displayed"
+                , isElementVisible(String.format(postTitleLocator, postTitleEdited)));
         return this;
     }
 }
