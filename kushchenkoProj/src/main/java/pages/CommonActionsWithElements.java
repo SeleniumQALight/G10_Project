@@ -44,6 +44,16 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void clickOnElement(WebElement webElement, String elementName) {
+        try {
+            webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
+            webElement.click();
+            logger.info(elementName + " element is clicked");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
     protected boolean isElementVisible(WebElement webElement) {
         try {
             boolean state = webElement.isDisplayed();
@@ -115,7 +125,7 @@ public class CommonActionsWithElements {
         try {
         Select optionsFromDropdown = new Select(dropdown);
         optionsFromDropdown.selectByVisibleText(textForSelect);
-        logger.info(textForSelect + " was selected in dropdown");
+        logger.info(textForSelect + " was selected in dropdown " + getElementName(dropdown));
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -125,7 +135,7 @@ public class CommonActionsWithElements {
         try {
             Select select = new Select(dropdown);
             select.selectByValue(valueForSelect);
-            logger.info(valueForSelect + " was selected in dropdown");
+            logger.info(valueForSelect + " was selected in dropdown " + getElementName(dropdown));
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
