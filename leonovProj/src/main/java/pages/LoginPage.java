@@ -100,9 +100,10 @@ public class LoginPage extends ParentPage {
 
     public boolean isPasswordFieldVisible() {
         return isElementVisible(inputPasswordInLoginForm);
+    }
 
-    public LoginPage enterTextIntoRegistrationNameField(String userName) {
-        clearAndEnterTextIntoElement(inputUserNameInRegistrationForm, userName);
+    public LoginPage enterTextIntoRegistrationNameField(String username) {
+        clearAndEnterTextIntoElement(inputUserNameInRegistrationForm, username);
 
         return this;
     }
