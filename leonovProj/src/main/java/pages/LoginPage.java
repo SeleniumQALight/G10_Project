@@ -71,4 +71,8 @@ public class LoginPage extends ParentPage {
     public boolean isAlertInvalidLoginDisplayed() {
         return isElementVisible(alertInvalidLogin);
     }
+
+    public boolean isButtonSignInVisible() {
+        return isElementVisible(buttonSignIn);
+    }
 }
