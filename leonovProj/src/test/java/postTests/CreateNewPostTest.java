@@ -20,21 +20,17 @@ public class CreateNewPostTest extends BaseTest {
                 .enterTextIntoInputBody("Body of the post")
                 // setCheckbox to true (create methods in CommonActionsWithElements)
 //                .selectTextInDropDownAccessByVisibleText("Приватне повідомлення")
-                .checkboxStateOnPostPage("uncheck")
+                .checkboxStateOnPostPage("check")
                 .selectInDropDownAccessByValue("One Person")
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectOnPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
+                .checkIsCreatedPostUnique("yes")
                 .checkTextThisPostWasWrittenIsVisible("One Person")
                 .getHeaderElement().clickOnButtonMyProfile()
                 .checkIsRedirectOnProfilePage()
-                .checkPostWithTitleIsPresent(POST_TITLE, 1)
-        //TODO: HW4 - додати цей метод в наш тест по створенню поста (зі значенням check) і перевірку на наступному скріні (yes або no)
-        //4. додати перевірки в тест на валідний логін:
-        //- що після того як залогінилися, ми бачимо кнопки Create Post, MyProfile, імʼя юзера
-        //- і не бачимо інпутів куди ми вводили логін та пароль
-        ;
+                .checkPostWithTitleIsPresent(POST_TITLE, 1);
     }
 
     @After

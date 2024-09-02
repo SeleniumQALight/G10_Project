@@ -64,4 +64,13 @@ public class LoginPage extends ParentPage {
         clickOnButtonSignIn();
         return new HomePage(webDriver);
     }
+
+    public boolean isLoginFieldVisible() {
+        return isElementVisible(inputUserNameInLoginForm);
+    }
+
+
+    public boolean isPasswordFieldVisible() {
+        return isElementVisible(inputPasswordInLoginForm);
+    }
 }
