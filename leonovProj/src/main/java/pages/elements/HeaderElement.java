@@ -11,8 +11,14 @@ public class HeaderElement extends CommonActionsWithElements {
     @FindBy(xpath = "//img[@alt='My profile']")
     private WebElement buttonMyProfile;
 
+    @FindBy(xpath = "//a[@href='/create-post']")
+    private WebElement buttonCreatePost;
+
     @FindBy(xpath = "//button[text()='Sign Out']")
     private WebElement buttonSignOut;
+
+    private String username = "//span[text()=' %s']";
+
 
     public HeaderElement(WebDriver webDriver) {
         super(webDriver);
@@ -25,5 +31,17 @@ public class HeaderElement extends CommonActionsWithElements {
 
     public boolean isButtonSignOutVisible() {
         return isElementVisible(buttonSignOut);
+    }
+
+    public boolean isButtonCreatePostVisible() {
+        return isElementVisible(buttonCreatePost);
+    }
+
+    public boolean isMyProfileVisible() {
+        return isElementVisible(buttonMyProfile);
+    }
+
+    public boolean isUsernameVisible(String validLoginUi) {
+        return isElementVisible(String.format(username, validLoginUi));
     }
 }
