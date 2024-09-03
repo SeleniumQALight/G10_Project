@@ -11,8 +11,13 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto");
         pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty");
         pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getHomePage().checkIsButtonCreatePostVisible();
+        pageProvider.getHomePage().checkIsButtonMyProfileVisible();
+        pageProvider.getHomePage().checkIsUserNameVisible();
 
         Assert.assertTrue("Button Sign Out is not visible", pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
+        Assert.assertFalse("Input Login is displayed", pageProvider.getLoginPage().getHeaderElement().isInputUserNameInLoginFormVisible());
+        Assert.assertFalse("Input Password is displayed", pageProvider.getLoginPage().getHeaderElement().isInputPasswordInLoginFormVisible());
     }
 
     @Test

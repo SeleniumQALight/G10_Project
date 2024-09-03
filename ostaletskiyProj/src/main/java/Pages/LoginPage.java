@@ -34,7 +34,7 @@ public class LoginPage extends ParentPage {
 
     public void openLoginPage() {
         webDriver.get(baseUrl);
-        logger.info( "  Login page was opened" + baseUrl);
+        logger.info( "Login page was opened_" + baseUrl);
     }
 
     public void enterTextIntoInputLogin(String login) {
@@ -50,19 +50,19 @@ public class LoginPage extends ParentPage {
     }
 
     public boolean isNotificationVisible() {
-        return isElementDisplayed(notificationAlert);
+        return isElementDisplayed(notificationAlert, "Notification alert");
     }
 
     public boolean isButtonSignInVisible() {
-        return isElementDisplayed(buttonSignIn);
+        return isElementDisplayed(buttonSignIn, "Sign In button");
     }
 
     public boolean isInputLoginVisible() {
-        return isElementDisplayed(inputUserNameInLoginForm);
+        return isElementDisplayed(inputUserNameInLoginForm, "Login input");
     }
 
     public boolean isInputPasswordVisible() {
-        return isElementDisplayed(inputPasswordInLoginForm);
+        return isElementDisplayed(inputPasswordInLoginForm, "Password input");
     }
 
     public HomePage openLoginPageAndFillLoginFormWithValidCredentials() {

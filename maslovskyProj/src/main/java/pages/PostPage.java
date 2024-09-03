@@ -1,6 +1,7 @@
 package pages;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,6 +16,14 @@ public class PostPage extends ParentPage {
 
     @FindBy(xpath = ".//*[text()='Is this post unique? : yes']")
     private WebElement uniqueText;
+
+    @FindBy(xpath = "//h2")
+    private WebElement titleText;
+
+    @FindBy(xpath = "(//div[@class='body-content'])[2]")
+    private WebElement bodyText;
+
+    private String postTitleLocator = "//*[text()='%s']";  // locator with parameter
 
     private String locatorForTextThisPostWasWrittenIsVisible = "//*[contains(text(), '%s')]";
 
@@ -54,7 +63,7 @@ public class PostPage extends ParentPage {
     }
 
     public MyProfilePage clickOnDeleteButton() {
-        clickOnElement(buttonDeletePost);
+        clickOnElement(buttonDeletePost, "Delete post button");
         return new MyProfilePage(webDriver);
     }
 
@@ -66,6 +75,16 @@ public class PostPage extends ParentPage {
     public PostPage checkTextThisPostWasWrittenIsVisible(String expectedText) {
         Assert.assertTrue(expectedText + " Text is not visible",
                 isElementVisible(String.format(locatorForTextThisPostWasWrittenIsVisible, expectedText)));
+        return this;
+    }
+
+    public PostPage checkTextInPostTitleOfPostPage(String newPostTitle) {
+        Assert.assertEquals("Title text is not as expected", titleText.getText(), newPostTitle);
+        return this;
+    }
+
+    public PostPage checkTextInPostBodyOfPostPage(String newPostBody) {
+        Assert.assertEquals("Body text is not as expected", bodyText.getText(), newPostBody);
         return this;
     }
 }

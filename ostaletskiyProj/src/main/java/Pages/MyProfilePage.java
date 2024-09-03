@@ -67,7 +67,12 @@ public class MyProfilePage extends ParentPage {
     private MyProfilePage checkIsSuccessMessageDisplayed() {
         // check message is displayed
         Assert.assertTrue("Success message is not displayed"
-                , isElementDisplayed(successMessageDelete));
+                , isElementDisplayed(successMessageDelete, "Success message about delete"));
         return this;
+    }
+
+    public EditPostPage clickOnPostWithTitle(String postTitle) {
+        clickOnElement(PostsListWithTitle(postTitle).get(0));
+        return new EditPostPage(webDriver);
     }
 }

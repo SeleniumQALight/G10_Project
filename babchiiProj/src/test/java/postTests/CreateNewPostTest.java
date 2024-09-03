@@ -18,15 +18,15 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTitleInToInputTitle(POST_TITLE)
                 .enterTextInToTextAreaBody("Text of the post from Vasyl")
-//                .selectTextInDropDownAccessByVisibleText("Приватне повідомлення")
+                .setStateToIsPostUniqueCheckbox("no")
+//              .selectTextInDropDownAccessByVisibleText("Приватне повідомлення")
                 .selectValueInDropDownAccess("One Person")
-                //set checkbox to true
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
+                .checkIsPostUniqueValueAsExpected("no")
                 .checkTextThisPostWasWrittenIsVisible("One Person")
-                //Is post unique is yes
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
                 .checkIsPostWithTitlePresent(POST_TITLE, 1)
