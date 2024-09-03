@@ -73,6 +73,14 @@ public class LoginPage extends ParentPage {
         cleatAndEnterTextIntoElement(inputUsernameInLoginForm, login);
     }
 
+    public boolean isInputLoginDisplayed() {
+        return isElementVisible(inputUsernameInLoginForm);
+    }
+
+    public boolean isInputPasswordDisplayed() {
+        return isElementVisible(inputPasswordInLoggInForm);
+    }
+
     public void enterTextIntoInputPassword(String password) {
         cleatAndEnterTextIntoElement(inputPasswordInLoggInForm, password);
     }

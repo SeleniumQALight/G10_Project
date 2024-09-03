@@ -50,25 +50,34 @@ public class CommonActionsWithElements {
         }
     }
 
-
     protected void setCheckBoxToNeededState(WebElement webElement, String neededState){
-        boolean isStateCheck = neededState.equals("check");
-        boolean isStateUnCheck = neededState.equals("uncheck");
-        boolean isCheckBoxSelected = webElement.isSelected();
-
-        if (isStateCheck || isStateUnCheck){
-            if (isStateCheck && !isCheckBoxSelected || isStateUnCheck && isCheckBoxSelected){
-                webElement.click();
-                logger.info("CheckBox is checked");
-            }else {
-                logger.info("CheckBox is already checked");
-            }
+        if (neededState.equals("check")){
+            setCheckBoxToChecked(webElement);
+        }else if (neededState.equals("uncheck")){
+            setCheckBoxToUnChecked(webElement);
         }else {
             logger.error("State should be only 'check' or 'uncheck'");
             Assert.fail("State should be only 'check' or 'uncheck'");
         }
     }
 
+    protected void setCheckBoxToChecked(WebElement webElement){
+        if (!webElement.isSelected()){
+            webElement.click();
+            logger.info("CheckBox is checked");
+        }else {
+            logger.info("CheckBox is already checked");
+        }
+    }
+
+    protected void setCheckBoxToUnChecked(WebElement webElement){
+        if (webElement.isSelected()){
+            webElement.click();
+            logger.info("CheckBox is unchecked");
+        }else {
+            logger.info("CheckBox is already unchecked");
+        }
+    }
 
 
     protected boolean isElementVisible(WebElement webElement){

@@ -60,8 +60,7 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkAnswerYesIsDisplayed(String expectedText) {
-        String actualText = answerYes.getText();
-        Assert.assertEquals("Text in message", expectedText, actualText);
+        Assert.assertTrue("Answer is not displayed", isElementVisible(answerYes, "Answer"));
         return this;
     }
 

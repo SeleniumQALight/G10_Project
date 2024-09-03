@@ -57,6 +57,7 @@ public class CreateNewPostPage extends ParentPage{
         setCheckBoxToNeededState(checkBoxUniquePost, "check");
         return this;
     }
+
     public CreateNewPostPage selectTextInDropdownAccessByVisibleText(String textForSelect) {
         selectTextInDropdownByVisibleText(dropdownAccess, textForSelect);
         return this;
