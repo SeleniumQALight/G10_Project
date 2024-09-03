@@ -75,6 +75,15 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void checkElementIsVisible(WebElement webElement) {
+        webDriverWait_10.until(ExpectedConditions.elementToBeClickable(webElement));
+        Assert.assertTrue("Element is not visible", isElementVisible(webElement));
+    }
+
+    protected void checkElementIsNotVisible(WebElement webElement) {
+        Assert.assertFalse("Element is visible", isElementVisible(webElement));
+    }
+
     protected boolean isElementVisible(String locator) {
         try {
 //            boolean state = webDriver.findElement(By.xpath(locator)).isDisplayed();

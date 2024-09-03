@@ -13,7 +13,7 @@ public class PostPage extends ParentPage {
     private WebElement buttonDeletePost;
     private String locatorForTextThisPostWasWritten = "//*[contains(text(), '%s')]";
     @FindBy(xpath = ".//p[contains(text(),'Is this post unique?')]")
-    private WebElement IsPostUniqueInfoText;
+    private WebElement isPostUniqueInfoText;
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -51,7 +51,7 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkIsPostUniqueValueAsExpected(String expectedState) {
-        String infoText = IsPostUniqueInfoText.getText();
+        String infoText = isPostUniqueInfoText.getText();
         String actualUniqueValue = infoText.substring(infoText.indexOf(":") + 2);
         Assert.assertEquals("IsPostUnique value is not as expected", expectedState, actualUniqueValue);
         return this;

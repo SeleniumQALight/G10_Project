@@ -31,4 +31,14 @@ public class LoginTestWithPageObject extends BaseTest {
         Assert.assertTrue("Button 'Sign In' is not visible", pageProvider.getLoginPage().isButtonSignInVisible());
         Assert.assertTrue("The alert message is not visible", pageProvider.getLoginPage().isInvalidLoginMessageVisible());
     }
+
+    @Test
+    public void TR003_checkSignOutButton(){
+        pageProvider.getLoginPage()
+                .openLoginPageAndFillLoginFormWithValidCred()
+                .getHeaderElement()
+                .checkIsHeaderElementsAreVisible("yes")
+                .getHeaderElement().clickOnButtonSignOut()
+                .getHeaderElement().checkIsHeaderElementsAreVisible("no");
+    }
 }
