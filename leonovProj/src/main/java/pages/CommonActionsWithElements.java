@@ -202,4 +202,14 @@ public class CommonActionsWithElements {
         }
     }
 
+    public void checkIsElementVisible(WebElement element) {
+        Assert.assertTrue("Element should be visible", isElementVisible(element));
+    }
+
+    public void checkIsElementVisible(WebElement webElement, String elementName) {
+        Assert.assertTrue(elementName + "Element should be visible"
+                , isElementVisible(webElement, elementName));
+    }
+
+
 }
