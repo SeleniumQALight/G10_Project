@@ -20,18 +20,24 @@ public class MyProfilePage extends ParentPage {
 
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/profile/[a-zA-Z0-9]*";
+    }
+
     private List<WebElement> postListWithTitle(String postTitle) {
         return webDriver.findElements(By.xpath(String.format(postTitleLocator, postTitle)));
     }
 
     public MyProfilePage checkIsRedirectToProfilePage() {
-        //TODO checkUrl
+        checkUrlWithPattern();
         //TODO check some element
         return this;
     }
 
     public MyProfilePage checkPostWithTitleIsPresent(String postTitle, int expectedNumberOfPosts) {
-        Assert.assertEquals("Number of posts with title " + postTitle, expectedNumberOfPosts, postListWithTitle(postTitle).size());
+        Assert.assertEquals("Number of posts with title " + postTitle, expectedNumberOfPosts,
+                postListWithTitle(postTitle).size());
         return this;
     }
 
