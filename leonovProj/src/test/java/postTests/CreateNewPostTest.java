@@ -20,16 +20,17 @@ public class CreateNewPostTest extends BaseTest {
                 .enterTextIntoInputBody("Body of the post")
                 // setCheckbox to true (create methods in CommonActionsWithElements)
 //                .selectTextInDropDownAccessByVisibleText("Приватне повідомлення")
+                .checkboxStateOnPostPage("check")
                 .selectInDropDownAccessByValue("One Person")
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectOnPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
+                .checkIsCreatedPostUnique("yes")
                 .checkTextThisPostWasWrittenIsVisible("One Person")
                 .getHeaderElement().clickOnButtonMyProfile()
                 .checkIsRedirectOnProfilePage()
-                .checkPostWithTitleIsPresent(POST_TITLE, 1)
-        ;
+                .checkPostWithTitleIsPresent(POST_TITLE, 1);
     }
 
     @After

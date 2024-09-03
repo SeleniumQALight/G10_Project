@@ -18,12 +18,15 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTitleInToInputTitle(POST_TITLE)
                 .enterTextInToInputBody("Body of new Post")
-                // set check-box to true
+                .setCheckBoxPostUniqueTrue("check")
+//                .selectTextInDropDownAccessByVisibleText("Приватне повідомлення")
+                .selectVaueInDropDownAccess("One Person")
                 .clickOnButtonSavePost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
-                // isPostUnique? - yes
+                .checkIsPostUnique()
+                .checkTextThisPostWasWrittenIsVisible("One Person")
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToProfilePage()
                 .checkPostWithTitleIsPresent(POST_TITLE, 1)
@@ -37,9 +40,7 @@ public class CreateNewPostTest extends BaseTest {
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToProfilePage()
                 .deletePostsTillPresent(POST_TITLE)
-
-
         ;
-
     }
 }
+

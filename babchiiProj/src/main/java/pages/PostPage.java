@@ -12,6 +12,8 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = ".//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
     private String locatorForTextThisPostWasWritten = "//*[contains(text(), '%s')]";
+    @FindBy(xpath = ".//p[contains(text(),'Is this post unique?')]")
+    private WebElement IsPostUniqueInfoText;
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -38,13 +40,20 @@ public class PostPage extends ParentPage {
      * @return PostPage
      */
     public PostPage checkIsSuccessMessageDisplayed() {
-        Assert.assertTrue("Success message is not displayed", isElementVisible(successMessage));
+        Assert.assertTrue("Success message is not displayed", isElementVisible(successMessage, "Success message"));
         return this;
     }
 
     public PostPage checkTextInSuccessMessage(String expectedMessageText) {
         String actualText = successMessage.getText();
         Assert.assertEquals("Message text is not as expected", expectedMessageText, actualText);
+        return this;
+    }
+
+    public PostPage checkIsPostUniqueValueAsExpected(String expectedState) {
+        String infoText = IsPostUniqueInfoText.getText();
+        String actualUniqueValue = infoText.substring(infoText.indexOf(":") + 2);
+        Assert.assertEquals("IsPostUnique value is not as expected", expectedState, actualUniqueValue);
         return this;
     }
 

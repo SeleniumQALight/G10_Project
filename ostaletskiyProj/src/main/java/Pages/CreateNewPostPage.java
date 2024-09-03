@@ -15,12 +15,26 @@ public class CreateNewPostPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Save New Post']")
     private WebElement buttonSaveNewPost;
 
+    @FindBy(xpath = "//input [@type ='checkbox']")
+    private WebElement checkBox;
+
+    @FindBy(xpath = "//select")
+    private WebElement dropdownAccess;
+
+    @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
+    private WebElement buttonCreatePost;
+
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/create-post";
+    }
+
     public CreateNewPostPage checkIsRedirectToCreatePostPage() {
-        // TODO checkUrl
+        checkUrl();
         // TODO check some element
         return this;
     }
@@ -35,9 +49,32 @@ public class CreateNewPostPage extends ParentPage {
         return this;
     }
 
-     public PostPage clickOnButtonSaveNewPost() {
-         clickOnElement(buttonSaveNewPost);
-         return new PostPage(webDriver);
+    public PostPage clickOnButtonSaveNewPost() {
+        clickOnElement(buttonSaveNewPost);
+        return new PostPage(webDriver);
 
-     }
+    }
+
+    public CreateNewPostPage selectTextInDropDownAccessByVisibleText(String textForSelect) {
+        selectTextInDropDownByVisibleText(dropdownAccess, textForSelect);
+        return this;
+    }
+
+    public CreateNewPostPage selectValueInDropDownAccess(String value) {
+        selectValueInDropDown(dropdownAccess, value);
+        return this;
+    }
+
+    public CreateNewPostPage setCheckBoxState(String state) {
+        if ("check".equalsIgnoreCase(state)) {
+            checkCheckBox(checkBox);
+        } else if ("uncheck".equalsIgnoreCase(state)) {
+            uncheckCheckBox(checkBox);
+        }
+        return this;
+
+    }
 }
+
+
+
