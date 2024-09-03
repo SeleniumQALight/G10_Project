@@ -14,6 +14,8 @@ public class PostPage extends ParentPage {
     private String locatorForTextThisPostWasWritten = "//*[contains(text(), '%s')]";
     @FindBy(xpath = ".//p[contains(text(),'Is this post unique?')]")
     private WebElement isPostUniqueInfoText;
+    @FindBy(xpath = "//a[@data-original-title='Edit']")
+    private WebElement buttonEditPost;
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -65,5 +67,9 @@ public class PostPage extends ParentPage {
     public PostPage checkTextThisPostWasWrittenIsVisible(String expectedText) {
         Assert.assertTrue(expectedText + " Text is not visible", isElementVisible(String.format(locatorForTextThisPostWasWritten, expectedText)));
         return this;
+    }
+    public EditPostPage clickOnEditButton() {
+        clickOnElement(buttonEditPost);
+        return new EditPostPage(webDriver);
     }
 }
