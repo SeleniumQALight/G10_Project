@@ -26,7 +26,8 @@ abstract class ParentPage extends CommonActionsWithElements {
         Assert.assertTrue("URL is not expected \n" +
                 "Expected URL " + baseUrl + getRelativeUrl() +
                         "\n Actual URL " + webDriver.getCurrentUrl(),
-                webDriver.getCurrentUrl().matches(baseUrl + getRelativeUrl())   );
+                webDriver.getCurrentUrl().matches(baseUrl + getRelativeUrl()));
+        logger.info("Current URL equals to expected URL");
     }
 
 }

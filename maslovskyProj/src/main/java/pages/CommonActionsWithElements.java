@@ -44,6 +44,24 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void clickOnElement(WebElement webElement, String elementName) {
+        try {
+            webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
+            webElement.click();
+            logger.info(elementName + " Element was clicked");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void clickOnElement(String xPath, String elementName) {
+        try {
+            clickOnElement(webDriver.findElement(By.xpath(String.format(xPath, elementName))), elementName);
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
     protected boolean isElementVisible(WebElement webElement) {
         try {
             boolean state = webElement.isDisplayed();
@@ -78,7 +96,7 @@ public class CommonActionsWithElements {
             }
             return state;
         } catch (Exception e) {
-            logger.info("Element is not displayed");
+            logger.info(elementName + "Element is not displayed");
             return false;
         }
     }

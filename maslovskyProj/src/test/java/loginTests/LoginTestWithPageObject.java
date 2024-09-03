@@ -11,11 +11,11 @@ import static data.TestData.VALID_LOGIN_UI;
 import static data.TestData.VALID_PASSWORD_UI;
 
 public class LoginTestWithPageObject extends BaseTest {
+    protected String userName = "qaauto";
+    protected String userPassword = "123456qwerty";
 
     @Test
     public void TR001_validLogin() {
-        String userName = "qaauto";
-        String userPassword = "123456qwerty";
 
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin(userName);
@@ -50,10 +50,9 @@ public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void TR002_invalidLogin() {
         pageProvider.getLoginPage().openLoginPage();
-//        pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto");
-//        pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty");
+//        pageProvider.getLoginPage().enterTextIntoInputLogin(userName);
+//        pageProvider.getLoginPage().enterTextIntoInputPassword(userPassword);
         pageProvider.getLoginPage().clickOnButtonSighIn();
-
         Assert.assertTrue("Button Sign In is not visible",
                 pageProvider.getLoginPage().isButtonSignInVisible());
 
