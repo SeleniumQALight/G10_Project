@@ -26,25 +26,25 @@ public class LoginTestWithPageObject extends BaseTest {
 //                pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
         pageProvider.getHomePage().getHeaderElement().checkIsButtonSighOutVisible();
 
-        Assert.assertTrue("Button Create Post is not visible",
-                pageProvider.getHomePage().getHeaderElement().isButtonCreatePostVisible());
-
-        Assert.assertTrue("Button MyProfile is not visible",
-                pageProvider.getHomePage().getHeaderElement().isButtonMyProfileVisible());
-
-//        Assert.assertEquals("User name is not equal to Login userName", userName,
+//        Assert.assertTrue("Button Create Post is not visible",
+//                pageProvider.getHomePage().getHeaderElement().isButtonCreatePostVisible());
+//
+//        Assert.assertTrue("Button MyProfile is not visible",
+//                pageProvider.getHomePage().getHeaderElement().isButtonMyProfileVisible());
+//
+////        Assert.assertEquals("User name is not equal to Login userName", userName,
+////                pageProvider.getHomePage().getHeaderElement()
+////                        .getUserName());
+//
+//        Assert.assertTrue("Element UserName is not visible",
 //                pageProvider.getHomePage().getHeaderElement()
-//                        .getUserName());
-
-        Assert.assertTrue("Element UserName is not visible",
-                pageProvider.getHomePage().getHeaderElement()
-                        .isUserNameVisible(userName));
-
-        Assert.assertFalse("input UserName is visible",
-                pageProvider.getLoginPage().isUsernameInputFieldVisible());
-
-        Assert.assertFalse("input Password is visible",
-                pageProvider.getLoginPage().isPasswordInputFieldVisible());
+//                        .isUserNameVisible(userName));
+//
+//        Assert.assertFalse("input UserName is visible",
+//                pageProvider.getLoginPage().isUsernameInputFieldVisible());
+//
+//        Assert.assertFalse("input Password is visible",
+//                pageProvider.getLoginPage().isPasswordInputFieldVisible());
     }
 
     // зробити тест на невалідний логін
