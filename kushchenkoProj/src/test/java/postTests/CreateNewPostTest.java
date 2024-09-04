@@ -40,8 +40,6 @@ public class CreateNewPostTest extends BaseTest {
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToProfilePage()
                 .deletePostsTillPresent(POST_TITLE)
-
-
         ;
     }
 }

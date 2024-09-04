@@ -61,11 +61,8 @@ public class CreateNewPostPage extends ParentPage {
         return this;
     }
 
-
     public CreateNewPostPage selectVaueInDropDownAccess(String valueForSelect) {
         selectValueInDropdown(dropDownAccess, valueForSelect);
         return this;
     }
-
-
 }

@@ -11,8 +11,6 @@ import pages.elements.HeaderElement;
 public class HomePage extends ParentPage {
     Logger logger = Logger.getLogger(getClass());
 
-    @FindBy(xpath = ".//a[@href='/create-post']")
-    private WebElement buttonCreatePost;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -32,9 +30,21 @@ public class HomePage extends ParentPage {
         checkUrl();
         return this;
     }
+    public HomePage checkIsButtonCreatePostVisible() {
+        Assert.assertTrue("Button Create Post is not displayed", getHeaderElement().isButtonCreatePostVisible());
+        return this;
+    }
+    public HomePage checkIsButtonMyProfileVisible() {
+        Assert.assertTrue("Button My Profile is not displayed", getHeaderElement().isMyProfileButtonVisible());
+        return this;
+    }
+    public HomePage checkIsUserNameVisible() {
+        Assert.assertTrue("User name is not displayed", getHeaderElement().getUserNameText().equals(TestData.VALID_LOGIN_UI));
+        return this;
+    }
 
     public CreateNewPostPage clickOnButtonCreatePost() {
-        clickOnElement(buttonCreatePost);
+        clickOnElement(getHeaderElement().buttonCreatePost());
         return new CreateNewPostPage(webDriver);
     }
 
