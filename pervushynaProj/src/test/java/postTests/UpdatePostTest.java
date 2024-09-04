@@ -41,11 +41,10 @@ public class UpdatePostTest extends BaseTest {
                 .checkTextInUpdateSuccessMessage("Post successfully updated.")
                 .clickOnButtonBackToPost()
                 .checkIsRedirectToPostPage()
-                //.checkNewPostTitleIsPresent(NEW_POST_TITLE)
+                .checkNewPostTitleIsPresent(NEW_POST_TITLE)
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
                 .checkPostWithTitleIsPresent(NEW_POST_TITLE, 1)
-
 
         ;
     }
@@ -57,6 +56,7 @@ public class UpdatePostTest extends BaseTest {
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
                 .deletePostsTillPresent(NEW_POST_TITLE)
+                .deletePostsTillPresent(POST_TITLE)
         ;
     }
 }

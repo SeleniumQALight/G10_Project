@@ -16,5 +16,4 @@ public class LogOutTest extends BaseTest {
     }
 
 
-
 }

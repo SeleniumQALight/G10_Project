@@ -17,6 +17,9 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//a[@class='text-primary mr-2']")
     private WebElement editPostButton;
 
+    @FindBy(xpath = "//div[@class='d-flex justify-content-between'][.//h2]")
+    private WebElement postTitle;
+
     private String locatorForTextThisPostWasWritten = "//*[contains(text(), '%s')]";
 
     public PostPage(WebDriver webDriver) {
@@ -69,8 +72,10 @@ public class PostPage extends ParentPage {
         return new EditPostPage(webDriver);
     }
 
+
     public PostPage checkNewPostTitleIsPresent(String newPostTitle) {
-        Assert.assertTrue("New post title is not present", isElementVisible(String.format(locatorForTextThisPostWasWritten, newPostTitle)));
+        Assert.assertTrue("New post title is not visible", isElementVisible(postTitle, newPostTitle));
         return this;
     }
+
 }
