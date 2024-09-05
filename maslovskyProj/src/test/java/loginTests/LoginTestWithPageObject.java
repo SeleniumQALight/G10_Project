@@ -1,6 +1,7 @@
 package loginTests;
 
 import baseTest.BaseTest;
+import data.TestData;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -21,16 +22,13 @@ public class LoginTestWithPageObject extends BaseTest {
 
     @Test
     public void TR001_validLogin() {
-
         pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().enterTextIntoInputLogin(userName);
+        pageProvider.getLoginPage().enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
         pageProvider.getLoginPage().enterTextIntoInputPassword(userPassword);
         pageProvider.getLoginPage().clickOnButtonSighIn();
-
 //        Assert.assertTrue("Button Sign Out is not visible",
 //                pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
         pageProvider.getHomePage().getHeaderElement().checkIsButtonSighOutVisible();
-
 //        Assert.assertTrue("Button Create Post is not visible",
 //                pageProvider.getHomePage().getHeaderElement().isButtonCreatePostVisible());
 //
