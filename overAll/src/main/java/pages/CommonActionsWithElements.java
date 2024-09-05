@@ -146,6 +146,14 @@ public class CommonActionsWithElements {
         }
     }
 
+    public void checkIsElementVisible(WebElement webElement) {
+        Assert.assertTrue("Element is not visible", isElementVisible(webElement));
+    }
+
+    public void checkIsElementVisible(WebElement webElement, String elementName) {
+        Assert.assertTrue(elementName + " is not visible", isElementVisible(webElement, elementName));
+    }
+
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
