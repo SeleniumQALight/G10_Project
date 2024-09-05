@@ -42,7 +42,7 @@ public class HeaderElement extends CommonActionsWithElements {
         clickOnElement(buttonCreatePost);
         return new CreateNewPostPage(webDriver);
     }
-    public HomePage checkIsHeaderElementsAreVisible(String shouldBeVisible){
+    public HomePage checkIsHeaderElementsAreVisible(String shouldBeVisible){  //possible values for shouldBeVisible is "yes" (should be display) or any other string (should not be displayed)
         if (shouldBeVisible.equals("yes")) {
             checkElementIsVisible(searchButton);
             checkElementIsVisible(chatButton);
