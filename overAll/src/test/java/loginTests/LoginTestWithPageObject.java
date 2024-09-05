@@ -2,6 +2,7 @@ package loginTests;
 
 import baseBase.BaseTest;
 
+import data.TestData;
 import org.junit.Test;
 import utils.ConfigProvider;
 import utils.ExcelDriver;
@@ -13,7 +14,7 @@ public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void TR001_validLogin(){
         pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto");
+        pageProvider.getLoginPage().enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
         pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty");
         pageProvider.getLoginPage().clickOnButtonSignIn();
 
