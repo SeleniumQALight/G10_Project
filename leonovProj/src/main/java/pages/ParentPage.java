@@ -4,9 +4,11 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
-abstract public class ParentPage extends CommonActionsWithElements {
+import java.util.Locale;
 
-    String baseUrl = "https://aqa-complexapp.onrender.com";
+abstract public class ParentPage extends CommonActionsWithElements {
+    String environment = System.getProperty("env", "aqa").toLowerCase();
+    String baseUrl = "https://" + environment + "-complexapp.onrender.com";
 
     protected Logger logger = Logger.getLogger(getClass());
 
