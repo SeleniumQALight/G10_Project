@@ -6,6 +6,11 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utils.ConfigProvider;
+import utils.ExcelDriver;
+
+import java.io.IOException;
+import java.util.Map;
 
 import static data.TestData.VALID_LOGIN_UI;
 import static data.TestData.VALID_PASSWORD_UI;
@@ -46,6 +51,21 @@ public class LoginTestWithPageObject extends BaseTest {
 //        Assert.assertFalse("input Password is visible",
 //                pageProvider.getLoginPage().isPasswordInputFieldVisible());
     }
+
+    @Test
+    public void TR001_validLoginWithExcel() throws IOException {
+        Map<String, String> dataForValidLogin =
+                ExcelDriver.getData(ConfigProvider.configProperties.DATA_FILE(),"validLogOn");
+
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin(dataForValidLogin.get("login"));
+        pageProvider.getLoginPage().enterTextIntoInputPassword(dataForValidLogin.get("pass"));
+        pageProvider.getLoginPage().clickOnButtonSighIn();
+
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSighOutVisible();
+    }
+
+
 
     // зробити тест на невалідний логін
     @Test
