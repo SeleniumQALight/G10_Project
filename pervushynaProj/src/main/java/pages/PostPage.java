@@ -14,6 +14,9 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
+    @FindBy(xpath = "//p[text()='Is this post unique? : yes']")
+    private WebElement answerYes;
+
     private String locatorForTextThisPostWasWritten = "//*[contains(text(), '%s')]";
 
     public PostPage(WebDriver webDriver) {
@@ -54,6 +57,11 @@ public class PostPage extends ParentPage {
     public MyProfilePage clickOnDeleteButton() {
         clickOnElement(buttonDeletePost);
         return new MyProfilePage(webDriver);
+    }
+
+    public PostPage checkAnswerYesIsDisplayed(String expectedText) {
+        Assert.assertTrue("Answer is not displayed", isElementVisible(answerYes, "Answer"));
+        return this;
     }
 
     public PostPage checkTextThisPostWasWrittenIsVisible(String expectedText) {

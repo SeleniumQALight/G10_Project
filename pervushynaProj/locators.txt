@@ -23,6 +23,7 @@ myProfilePage.href.following = .//a[@href='/profile/qaauto/following']
 
 createPostPage.input.title = .//input[@id='post-title']
 createPostPage.textarea.bodyContent = .//textarea[@id='post-body']
+createPostPage.input.checkbox = //input[@name='uniquePost']
 createPostPage.button.saveNewPost = .//button[@class='btn btn-primary']
 
 #Post page
@@ -30,6 +31,7 @@ createPostPage.button.saveNewPost = .//button[@class='btn btn-primary']
 post.text.notification = .//*[@class='alert alert-success text-center']
 post.h.title = .//div[@class='d-flex justify-content-between'][.//h2]
 post.text.bodyContent = .//*[@class='body-content'][2]
+post.text.uniquePostYes = //p[text()='Is this post unique? : yes']
 post.href.edit = .//a[@class="text-primary mr-2"]
 post.button.delete = .//button[@class="delete-post-button text-danger"]
 

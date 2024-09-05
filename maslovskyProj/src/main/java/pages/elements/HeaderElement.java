@@ -79,4 +79,9 @@ public class HeaderElement extends CommonActionsWithElements {
         return isElementVisible(chatButton, "Chat button");
     }
 
+    public HeaderElement checkIsButtonSighOutVisible() {
+        checkIsElementVisible(buttonSignOut);
+        return this;
+    }
+
 }
