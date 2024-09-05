@@ -6,7 +6,8 @@ import org.apache.log4j.Logger;
 
 abstract class ParentPage extends CommonActionsWithElements {
     protected Logger logger = Logger.getLogger(getClass());
-    String baseUrl = "https://aqa-complexapp.onrender.com";
+    String environment = System.getProperty("env", "aqa");
+    String baseUrl = "https://" + environment.toLowerCase() + "-complexapp.onrender.com";
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
     }

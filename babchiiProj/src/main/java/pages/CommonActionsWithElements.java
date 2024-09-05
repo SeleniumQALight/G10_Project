@@ -212,6 +212,13 @@ public class CommonActionsWithElements {
             Assert.fail("State should be only 'Checked' or 'Unchecked'");
         }
     }
+    public void checkIsElementVisible(WebElement webElement) {
+        Assert.assertTrue("Element is not visible", isElementVisible(webElement));
+    }
+
+    public void checkIsElementVisible(WebElement webElement, String elementName) {
+        Assert.assertTrue(elementName + " Element is not visible", isElementVisible(webElement, elementName));
+    }
 
 
 }

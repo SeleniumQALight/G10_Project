@@ -16,19 +16,23 @@ public class ValidationMessagesTest extends BaseTest {
 
     @Test
     @Parameters(method = "parametersForValidationMessagesTest")
-    public void TC023_ValidationMessages(String userName, String email, String password, String expectedMessages) {
+    public void TC023_validationMessagesTest(
+            String userName, String email, String password, String expectedMessages) {
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage()
                 .enterTextIntoRegistrationUserNameField(userName)
                 .enterTextIntoRegistrationEmailField(email)
                 .enterTextIntoRegistrationPasswordField(password)
-                .checkErrorsMessages(expectedMessages);
+//                .checkErrorsMessages(SHORT_USER_NAME_MESSAGE + SEMICOLON + SHORT_EMAIL_MESSAGE + SEMICOLON + SHORT_PASSWORD_MESSAGE)
+                .checkErrorsMessages(expectedMessages)
+        ;
     }
 
     public Object[][] parametersForValidationMessagesTest() {
-        return new Object[][]{
+        return new Object[][] {
                 {twoChars, twoChars, twoChars, SHORT_USER_NAME_MESSAGE + SEMICOLON + SHORT_EMAIL_MESSAGE + SEMICOLON + SHORT_PASSWORD_MESSAGE},
-                {"taras123", twoChars, twoChars, SHORT_EMAIL_MESSAGE + SEMICOLON + SHORT_PASSWORD_MESSAGE}
+                {"twoChars", twoChars, twoChars, SHORT_EMAIL_MESSAGE + SEMICOLON + SHORT_PASSWORD_MESSAGE}
         };
     }
+
 }
