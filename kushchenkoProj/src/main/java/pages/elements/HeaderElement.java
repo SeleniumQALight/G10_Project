@@ -68,4 +68,9 @@ public class HeaderElement extends CommonActionsWithElements {
     public boolean isChatIconVisible() {
         return isElementVisible(chatIcon, "Chat icon");
     }
+
+    public  HeaderElement checkIsButtonSignOutIsVisible() {
+        checkIsElementVisible(buttonSignOut);
+        return this;
+    }
 }

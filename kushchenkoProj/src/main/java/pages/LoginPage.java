@@ -8,8 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,6 +135,8 @@ public class LoginPage extends ParentPage {
         String[] messagesArray = expectedMessages.split(";");
         webDriverWait10.until(ExpectedConditions
                 .numberOfElementsToBe(By.xpath(listErrorMessagesLocator), messagesArray.length));
+
+        Utils.waitABit(1);
 
         Assert.assertEquals("Number of messages", messagesArray.length, listOfMessages.size());
 

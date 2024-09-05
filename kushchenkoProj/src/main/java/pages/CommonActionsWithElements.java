@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+
 import org.openqa.selenium.support.ui.Select;
 
 public class CommonActionsWithElements {
@@ -69,10 +70,10 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected boolean isElementVisible(String locator){
-        try{
+    protected boolean isElementVisible(String locator) {
+        try {
             return isElementVisible(webDriver.findElement(By.xpath(locator)));
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.info("Element is not visible");
             return false;
         }
@@ -123,9 +124,9 @@ public class CommonActionsWithElements {
 
     protected void selectTextInDropdownByVisibleText(WebElement dropdown, String textForSelect) {
         try {
-        Select optionsFromDropdown = new Select(dropdown);
-        optionsFromDropdown.selectByVisibleText(textForSelect);
-        logger.info(textForSelect + " was selected in dropdown " + getElementName(dropdown));
+            Select optionsFromDropdown = new Select(dropdown);
+            optionsFromDropdown.selectByVisibleText(textForSelect);
+            logger.info(textForSelect + " was selected in dropdown " + getElementName(dropdown));
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -184,6 +185,14 @@ public class CommonActionsWithElements {
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
+    }
+
+    public void checkIsElementVisible(WebElement webElement) {
+        Assert.assertTrue("Element is not visible", isElementVisible(webElement));
+    }
+
+    public void checkIsElementVisible(WebElement webElement, String elementName) {
+        Assert.assertTrue(elementName + " is not visible", isElementVisible(webElement, elementName));
     }
 
     private String getElementName(WebElement webElement) {
