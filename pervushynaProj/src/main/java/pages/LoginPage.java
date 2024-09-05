@@ -48,6 +48,7 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
+
     @Override
     protected String getRelativeUrl() {
         return "/";
@@ -70,6 +71,14 @@ public class LoginPage extends ParentPage {
 //            Assert.fail("Can not work with element " + e);
 //        }
         cleatAndEnterTextIntoElement(inputUsernameInLoginForm, login);
+    }
+
+    public boolean isInputLoginDisplayed() {
+        return isElementVisible(inputUsernameInLoginForm);
+    }
+
+    public boolean isInputPasswordDisplayed() {
+        return isElementVisible(inputPasswordInLoggInForm);
     }
 
     public void enterTextIntoInputPassword(String password) {
