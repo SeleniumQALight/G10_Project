@@ -160,4 +160,9 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    public LoginPage checkIsErrorMessageDisplayed() {
+        Assert.assertTrue(isElementVisible(invalidCredentialsText, "Invalid username/password message"));
+        return this;
+    }
+
 }

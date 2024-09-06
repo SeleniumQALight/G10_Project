@@ -93,4 +93,8 @@ public class HeaderElement extends CommonActionsWithElements {
         return new HomePage(webDriver);
     }
 
+    public LoginPage getLoginPage() {
+        return new LoginPage(webDriver);
+    }
+
 }
