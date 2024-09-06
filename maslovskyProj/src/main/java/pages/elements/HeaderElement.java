@@ -84,4 +84,8 @@ public class HeaderElement extends CommonActionsWithElements {
         return this;
     }
 
+    public HomePage getHomePage() {
+        return new HomePage(webDriver);
+    }
+
 }

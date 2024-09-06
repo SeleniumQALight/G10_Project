@@ -2,13 +2,8 @@ package loginTests;
 
 import baseTest.BaseTest;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
-import static data.TestData.VALID_LOGIN_UI;
-import static data.TestData.VALID_PASSWORD_UI;
 
 public class LoginTestWithPageObject extends BaseTest {
     protected String userName = "qaauto";
@@ -63,4 +58,39 @@ public class LoginTestWithPageObject extends BaseTest {
         Assert.assertFalse("Button Sign Out is visible",
                 pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
     }
+
+
+    boolean beforeMustBeLaunched = false;
+
+    @Before
+    public void validLoginPrecondition() {
+        if (!beforeMustBeLaunched) {
+            pageProvider.getLoginPage()
+                    .openLoginPageAndFillLoginFormWithValidCred()
+                    .getHeaderElement().checkIsButtonSighOutVisible();
+        }
+    }
+
+    @Test
+    public void HW6_validLoginVisibleInNewTab() {
+        beforeMustBeLaunched = true;
+        pageProvider.getHomePage()
+                .openNewBrowserTab()
+                .switchToNewBrowserTab()
+                .openLoginPage()
+                .getHeaderElement().checkIsButtonSighOutVisible()
+                .getHomePage()
+                .returnToFirstBrowserTab()
+                .getHeaderElement().checkIsButtonSighOutVisible()
+                .getHomePage()
+                .closeNewBrowserTab()
+                .returnToFirstBrowserTab()
+                .getHeaderElement().checkIsButtonSighOutVisible()
+        ;
+
+    }
+
+
+
+
 }

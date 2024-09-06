@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import pages.elements.HeaderElement;
+import utils.Utils;
 
 public class HomePage extends ParentPage {
     Logger logger = Logger.getLogger(getClass());
@@ -17,6 +18,8 @@ public class HomePage extends ParentPage {
     String getRelativeUrl() {
         return "/";
     }
+
+    Utils utils = new Utils(webDriver, logger);
 
     public HeaderElement getHeaderElement() {
         return new HeaderElement(webDriver);
@@ -41,4 +44,31 @@ public class HomePage extends ParentPage {
         }
         return this;
     }
+
+    public HomePage openNewBrowserTab() {
+        utils.openNewBrowserTab();
+        return this;
+    }
+
+    public HomePage switchToNewBrowserTab() {
+        utils.switchToNewBrowserTab();
+        return this;
+    }
+
+    public HomePage openLoginPage() {
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
+        return this;
+    }
+
+    public HomePage returnToFirstBrowserTab() {
+        utils.returnToFirstBrowserTab();
+        return this;
+    }
+
+    public HomePage closeNewBrowserTab() {
+        utils.closeNewBrowserTab();
+        return this;
+    }
+
 }
