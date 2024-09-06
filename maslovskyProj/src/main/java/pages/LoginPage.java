@@ -220,5 +220,9 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    public LoginPage switchToNewBrowserTab() {
+        utils.switchToNewBrowserTab();
+        return this;
+    }
 
 }
