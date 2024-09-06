@@ -12,7 +12,8 @@ import pages.elements.HeaderElement;
 public class HomePage extends ParentPage{
     Logger logger = Logger.getLogger(getClass());
 
-
+    @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
+    private WebElement buttonCreatePost;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -38,6 +39,10 @@ public class HomePage extends ParentPage{
         return this;
     }
 
+    public CreateNewPostPage clickOnButtonCreatePost() {
+        clickOnElement(buttonCreatePost);
+        return new CreateNewPostPage(webDriver);
+    }
 
     public HomePage openHomePageAndLoginIfNeeded() {
         LoginPage loginPage = new LoginPage(webDriver);
@@ -64,5 +69,9 @@ public class HomePage extends ParentPage{
         CreateNewPostPage createNewPostPage = new CreateNewPostPage(webDriver);
         createNewPostPage.checkIsRedirectToCreateNewPostPage();
         return createNewPostPage;
+    }
+
+    public boolean isButtonCreatePostVisible() {
+        return isElementVisible(buttonCreatePost);
     }
 }

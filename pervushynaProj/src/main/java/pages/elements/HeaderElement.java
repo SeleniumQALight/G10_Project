@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import pages.CommonActionsWithElements;
 import pages.CreateNewPostPage;
 import pages.LoginPage;
+import pages.LoginPage;
 import pages.MyProfilePage;
 
 public class HeaderElement extends CommonActionsWithElements {
@@ -19,7 +20,7 @@ public class HeaderElement extends CommonActionsWithElements {
 
     @FindBy(xpath = "//img[@alt='My profile']")
     private WebElement ImgAvatar;
-    
+
     @FindBy(xpath = "//*[@class='text-white mr-2 header-chat-icon']")
     private WebElement chatButton;
 
@@ -28,6 +29,10 @@ public class HeaderElement extends CommonActionsWithElements {
 
     @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
     private WebElement buttonCreatePost;
+
+
+    @FindBy(xpath = "//span[@class='text-white mr-2']")
+    private WebElement userName;
 
 
     public HeaderElement(WebDriver webDriver) {
@@ -48,6 +53,14 @@ public class HeaderElement extends CommonActionsWithElements {
     public boolean isButtonSignOutVisible() {
         return  isElementVisible(buttonSignOut);
 
+    }
+
+    public boolean isButtonMyProfileVisible() {
+        return isElementVisible(myProfileButton);
+    }
+
+    public boolean isUserNameDisplayed() {
+        return isElementVisible(userName);
     }
 
     public boolean isImgAvatarVisible() {

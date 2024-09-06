@@ -58,4 +58,8 @@ public class HeaderElement extends CommonActionsWithElements {
     public boolean isInputPasswordInLoginFormVisible() {
         return isElementVisible(inputPasswordInLoginForm);
     }
+    public HeaderElement checkIsButtonSignOutVisible() {
+        checkIsElementVisible(buttonSignOut);
+        return this;
+    }
 }
