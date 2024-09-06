@@ -121,5 +121,17 @@ public class LoginTestWithPageObject extends BaseTest {
         });
     }
 
+    @Test
+    public void HW6_validLoginUsingKeyboardKeys() {
+        pageProvider.getLoginPage().openLoginPage()
+                .navigateToUsernameField()
+                .enterText(userName)
+                .navigateToPasswordField()
+                .enterText(userPassword)
+                .navigateToSignInButton()
+                .clickOnButton()
+                .getHeaderElement().checkIsButtonSighOutVisible()
+        ;
+    }
 
 }

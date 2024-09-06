@@ -5,8 +5,10 @@ import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.elements.HeaderElement;
@@ -55,6 +57,8 @@ public class LoginPage extends ParentPage {
     }
 
     Utils utils = new Utils(webDriver, logger);
+
+    Actions actions = new Actions(webDriver);
 
     public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
@@ -165,4 +169,34 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    public LoginPage navigateToUsernameField() {
+        tabPressing(2);
+        return this;
+    }
+
+    public LoginPage enterText(String text) {
+        actions.sendKeys(text).perform();
+        return this;
+    }
+
+    public LoginPage navigateToPasswordField() {
+        tabPressing(1);
+        return this;
+    }
+
+    private void tabPressing(int count) {
+        for (int i = 0; i < count; i++) {
+            actions.sendKeys(Keys.TAB).perform();
+        }
+    }
+
+    public LoginPage navigateToSignInButton() {
+        tabPressing(1);
+        return this;
+    }
+
+    public HomePage clickOnButton() {
+        actions.sendKeys(Keys.ENTER).perform();
+        return new HomePage(webDriver);
+    }
 }
