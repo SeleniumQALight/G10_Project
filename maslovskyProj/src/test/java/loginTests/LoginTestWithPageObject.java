@@ -60,20 +60,15 @@ public class LoginTestWithPageObject extends BaseTest {
     }
 
 
-    boolean beforeMustBeLaunched = false;
-
-    @Before
     public void validLoginPrecondition() {
-        if (!beforeMustBeLaunched) {
-            pageProvider.getLoginPage()
-                    .openLoginPageAndFillLoginFormWithValidCred()
-                    .getHeaderElement().checkIsButtonSighOutVisible();
-        }
+        pageProvider.getLoginPage()
+                .openLoginPageAndFillLoginFormWithValidCred()
+                .getHeaderElement().checkIsButtonSighOutVisible();
     }
 
     @Test
     public void HW6_validLoginVisibleInNewTab() {
-        beforeMustBeLaunched = true;
+        validLoginPrecondition();
         pageProvider.getHomePage()
                 .openNewBrowserTab()
                 .switchToNewBrowserTab()
@@ -86,6 +81,18 @@ public class LoginTestWithPageObject extends BaseTest {
                 .closeNewBrowserTab()
                 .returnToFirstBrowserTab()
                 .getHeaderElement().checkIsButtonSighOutVisible()
+        ;
+
+    }
+
+    @Test
+    public void HW6_dataFromLoginAndPasswordFieldsDisappearsAfterPageRefreshed() {
+        pageProvider.getLoginPage().openLoginPage()
+                .enterTextIntoInputLoginAndContinue(userName)
+                .enterTextIntoInputPasswordAndContinue(userPassword)
+                .refreshPage()
+                .clickOnButtonSighIn()
+                .checkIsButtonSighOutNotVisible()
         ;
 
     }

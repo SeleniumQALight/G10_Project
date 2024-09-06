@@ -84,6 +84,11 @@ public class HeaderElement extends CommonActionsWithElements {
         return this;
     }
 
+    public HeaderElement checkIsButtonSighOutNotVisible() {
+        checkIsElementNotVisible(buttonSignOut, "Sign Out");
+        return this;
+    }
+
     public HomePage getHomePage() {
         return new HomePage(webDriver);
     }

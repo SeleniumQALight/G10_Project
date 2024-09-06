@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.elements.HeaderElement;
 import utils.Utils;
 
 import java.util.ArrayList;
@@ -53,31 +54,39 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
-    public void openLoginPage() {
+    Utils utils = new Utils(webDriver, logger);
+
+    public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened " + baseUrl);
+        return this;
+    }
+
+    public HeaderElement getHeaderElement() {
+        return new HeaderElement(webDriver);
     }
 
     public void enterTextIntoInputLogin(String login) {
-//        try{
-//            WebElement inputUserNameInLoginForm =
-//                    webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
-//            inputUserNameInLoginForm.clear();
-//            inputUserNameInLoginForm.sendKeys(login);
-//            logger.info(login + " was inputted into input Login");
-//        } catch (Exception e) {
-//            logger.error("Can not work with element " + e);
-//            Assert.fail("Can not work with element " + e);
-//        }
         clearAndEnterTextIntoElement(inputUserNameInLoginForm, login);
+    }
+
+    public LoginPage enterTextIntoInputLoginAndContinue(String login) {
+        clearAndEnterTextIntoElement(inputUserNameInLoginForm, login);
+        return this;
     }
 
     public void enterTextIntoInputPassword(String password) {
         clearAndEnterTextIntoElement(inputPasswordInLoginForm, password);
     }
 
-    public void clickOnButtonSighIn() {
+    public LoginPage enterTextIntoInputPasswordAndContinue(String password) {
+        clearAndEnterTextIntoElement(inputPasswordInLoginForm, password);
+        return this;
+    }
+
+    public HeaderElement clickOnButtonSighIn() {
         clickOnElement(buttonSighIn);
+        return new HeaderElement(webDriver);
     }
 
     public boolean isInvalidCredentialsTextDisplayed() {
@@ -143,6 +152,11 @@ public class LoginPage extends ParentPage {
                     .isIn(messagesArray);
         }
         softAssertions.assertAll(); // check all soft assertions
+        return this;
+    }
+
+    public LoginPage refreshPage() {
+        utils.refreshPage();
         return this;
     }
 

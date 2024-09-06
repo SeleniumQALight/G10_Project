@@ -96,4 +96,9 @@ public class Utils {
         Assert.assertEquals("Switching to TAB failed", tabs.get(tabNumber), webDriver.getWindowHandle());
     }
 
+    public void refreshPage() {
+        webDriver.navigate().refresh();
+        logger.info("Page is refreshed");
+    }
+
 }

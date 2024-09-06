@@ -66,9 +66,9 @@ public class CommonActionsWithElements {
         try {
             boolean state = webElement.isDisplayed();
             if (state) {
-                logger.info(getElementName(webElement) + " Element is displayed");
+                logger.info(getElementName(webElement) + " Element is visible");
             } else {
-                logger.info(getElementName(webElement) + " Element is not displayed");
+                logger.info(getElementName(webElement) + " Element is not visible");
             }
             return state;
         } catch (Exception e) {
@@ -96,7 +96,7 @@ public class CommonActionsWithElements {
             }
             return state;
         } catch (Exception e) {
-            logger.info(elementName + "Element is not displayed");
+            logger.info(elementName + " Element is not displayed");
             return false;
         }
     }
@@ -194,6 +194,10 @@ public class CommonActionsWithElements {
 
     public void checkIsElementVisible(WebElement webElement) {
         Assert.assertTrue("Element is not visible", isElementVisible(webElement));
+    }
+
+    public void checkIsElementNotVisible(WebElement webElement, String elementName) {
+        Assert.assertFalse("Element is visible", isElementVisible(webElement, elementName));
     }
 
     public void checkIsElementVisible(WebElement webElement, String elementName) {
