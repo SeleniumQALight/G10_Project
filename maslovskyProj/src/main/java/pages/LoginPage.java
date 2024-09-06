@@ -199,4 +199,26 @@ public class LoginPage extends ParentPage {
         actions.sendKeys(Keys.ENTER).perform();
         return new HomePage(webDriver);
     }
+
+    public LoginPage navigateToRegistrationUsernameField() {
+        tabPressing(5);
+        return this;
+    }
+
+    public LoginPage navigateToRegistrationEmailField() {
+        tabPressing(1);
+        return this;
+    }
+
+    public LoginPage navigateToRegistrationPasswordField() {
+        tabPressing(1);
+        return this;
+    }
+
+    public LoginPage navigateToSignUpButton() {
+        tabPressing(1);
+        return this;
+    }
+
+
 }

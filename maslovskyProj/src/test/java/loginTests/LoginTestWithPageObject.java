@@ -130,8 +130,7 @@ public class LoginTestWithPageObject extends BaseTest {
                 .enterText(userPassword)
                 .navigateToSignInButton()
                 .clickOnButton()
-                .getHeaderElement().checkIsButtonSighOutVisible()
-        ;
+                .getHeaderElement().checkIsButtonSighOutVisible();
     }
 
 }
