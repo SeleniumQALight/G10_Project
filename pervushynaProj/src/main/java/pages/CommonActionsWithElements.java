@@ -95,6 +95,20 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected boolean isElementInvisible(WebElement webElement){
+        try{
+            boolean state = webElement.isDisplayed();
+            if (!state) {
+                logger.info(getElementsName(webElement) + " Element is not displayed");
+            }else {
+                logger.info(getElementsName(webElement) + " Element is displayed");
+            }
+            return !state;
+        }catch (Exception e){
+            logger.info("Element is displayed");
+            return false;
+        }
+    }
 
     protected boolean isElementVisible(WebElement webElement, String elementName){
         try{
