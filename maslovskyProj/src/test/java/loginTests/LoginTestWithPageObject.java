@@ -5,9 +5,6 @@ import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import utils.ConfigProvider;
 import utils.ExcelDriver;
 
@@ -100,7 +97,7 @@ public class LoginTestWithPageObject extends BaseTest {
         validLoginPrecondition();
         pageProvider.getHomePage()
                 .createNewBrowserTab()
-                .gotoToNewBrowserTab()
+                .goToNewBrowserTab()
                 .openLoginPage()
                 .getHeaderElement().checkIsButtonSighOutVisible()
                 .getHomePage()

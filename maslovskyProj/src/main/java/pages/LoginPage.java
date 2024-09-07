@@ -220,7 +220,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public LoginPage gotoToNewBrowserTab() {
+    public LoginPage goToNewBrowserTab() {
         switchToNewBrowserTab();
         return this;
     }

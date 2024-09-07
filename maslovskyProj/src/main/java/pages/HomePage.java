@@ -55,7 +55,7 @@ public class HomePage extends ParentPage {
         return this;
     }
 
-    public HomePage gotoToNewBrowserTab() {
+    public HomePage goToNewBrowserTab() {
         switchToNewBrowserTab();
         return this;
     }
