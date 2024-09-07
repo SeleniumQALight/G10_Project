@@ -159,11 +159,6 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public LoginPage refreshPage() {
-        utils.refreshPage();
-        return this;
-    }
-
     public LoginPage checkIsErrorMessageDisplayed() {
         Assert.assertTrue(isElementVisible(invalidCredentialsText, "Invalid username/password message"));
         return this;
@@ -195,7 +190,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public HomePage clickOnButton() {
+    public HomePage pressEnterButton() {
         actions.sendKeys(Keys.ENTER).perform();
         return new HomePage(webDriver);
     }
@@ -220,8 +215,13 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public LoginPage switchToNewBrowserTab() {
-        utils.switchToNewBrowserTab();
+    public LoginPage reloadPageContent() {
+        refreshPage();
+        return this;
+    }
+
+    public LoginPage gotoToNewBrowserTab() {
+        switchToNewBrowserTab();
         return this;
     }
 

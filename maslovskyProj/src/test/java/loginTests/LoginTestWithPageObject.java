@@ -76,16 +76,16 @@ public class LoginTestWithPageObject extends BaseTest {
     public void HW6_validLoginVisibleInNewTab() {
         validLoginPrecondition();
         pageProvider.getHomePage()
-                .openNewBrowserTab()
-                .switchToNewBrowserTab()
+                .createNewBrowserTab()
+                .gotoToNewBrowserTab()
                 .openLoginPage()
                 .getHeaderElement().checkIsButtonSighOutVisible()
                 .getHomePage()
-                .returnToFirstBrowserTab()
+                .getBackToFirstBrowserTab()
                 .getHeaderElement().checkIsButtonSighOutVisible()
                 .getHomePage()
                 .closeNewBrowserTab()
-                .returnToFirstBrowserTab()
+                .getBackToFirstBrowserTab()
                 .getHeaderElement().checkIsButtonSighOutVisible();
     }
 
@@ -94,7 +94,7 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().openLoginPage()
                 .enterTextIntoInputLoginAndContinue(userName)
                 .enterTextIntoInputPasswordAndContinue(userPassword)
-                .refreshPage()
+                .reloadPageContent()
                 .clickOnButtonSighIn()
                 .checkIsButtonSighOutNotVisible();
     }
@@ -128,8 +128,8 @@ public class LoginTestWithPageObject extends BaseTest {
                 .enterText(userName)
                 .navigateToPasswordField()
                 .enterText(userPassword)
-                .navigateToSignInButton()
-                .clickOnButton()
+//                .navigateToSignInButton()
+                .pressEnterButton()
                 .getHeaderElement().checkIsButtonSighOutVisible();
     }
 
