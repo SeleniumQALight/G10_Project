@@ -40,6 +40,11 @@ public class HeaderElement extends CommonActionsWithElements {
         return isElementDisplayed(buttonSignOut, "Sign Out button");
     }
 
+    public HeaderElement checkIsButtonSignOutVisible() {
+        checkIsElementVisible(buttonSignOut);
+        return this;
+    }
+
     public boolean isButtonMyProfileVisible() {
         return isElementDisplayed(buttonMyProfile , "My Profile button");
     }

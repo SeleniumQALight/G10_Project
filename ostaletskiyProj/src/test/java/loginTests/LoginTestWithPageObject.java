@@ -13,8 +13,9 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty");
         pageProvider.getLoginPage().clickOnButtonSignIn();
 
-        Assert.assertTrue("Button Sign Out is not displayed",
-                pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
+      //  Assert.assertTrue("Button Sign Out is not displayed",
+      //          pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutVisible();
         Assert.assertTrue("Button My Profile is not displayed",
                 pageProvider.getHomePage().getHeaderElement().isButtonMyProfileVisible());
         Assert.assertTrue("Button Create Post is not displayed",

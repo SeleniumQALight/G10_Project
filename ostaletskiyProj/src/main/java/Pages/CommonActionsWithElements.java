@@ -180,6 +180,15 @@ public class CommonActionsWithElements {
         }
     }
 
+    // check element is visible on page
+    public void checkIsElementVisible(WebElement webElement) {
+            Assert.assertTrue("Element is not visible", webElement.isDisplayed());
+    }
+
+    public void checkIsElementVisible (WebElement webElement, String elementName) {
+        Assert.assertTrue(elementName + " is not visible",  isElementDisplayed(webElement, elementName));
+    }
+
 
     private String getElementName(WebElement webElement) {
         String elementName = "";
