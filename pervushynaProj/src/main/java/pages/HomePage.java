@@ -39,10 +39,6 @@ public class HomePage extends ParentPage{
         return this;
     }
 
-    public CreateNewPostPage clickOnButtonCreatePost() {
-        clickOnElement(buttonCreatePost);
-        return new CreateNewPostPage(webDriver);
-    }
 
     public HomePage openHomePageAndLoginIfNeeded() {
         LoginPage loginPage = new LoginPage(webDriver);
@@ -63,7 +59,6 @@ public class HomePage extends ParentPage{
         getHeaderElement().clickOnButtonCreatePost();
         return this;
     }
-
 
     public CreateNewPostPage checkIsRedirectToCreateNewPostPage() {
         CreateNewPostPage createNewPostPage = new CreateNewPostPage(webDriver);
