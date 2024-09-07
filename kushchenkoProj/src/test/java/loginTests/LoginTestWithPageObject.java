@@ -1,8 +1,15 @@
 package loginTests;
 
 import baseTest.BaseTest;
+import data.TestData;
 import org.junit.Assert;
 import org.junit.Test;
+import utils.ConfigProvider;
+import utils.ExcelDriver;
+
+import java.io.IOException;
+import java.util.Map;
+
 import static data.TestData.*;
 
 
@@ -10,12 +17,11 @@ public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void TR001_validLogin() {
         pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().enterTextIntoInputLogin(VALID_LOGIN_UI);
-        pageProvider.getLoginPage().enterTextIntoInputPassword(VALID_PASSWORD_UI);
+        pageProvider.getLoginPage().enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
         pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutIsVisible();
 
-        Assert.assertTrue("Button Sign Out is not visible",
-                pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
         Assert.assertTrue("Button Create Post is not visible",
                 pageProvider.getHeaderElement().isButtonCreatePostVisible());
         Assert.assertTrue("Button My Profile is not visible",
@@ -59,21 +65,33 @@ public class LoginTestWithPageObject extends BaseTest {
 
         pageProvider.getHomePage().getHeaderElement().clickOnButtonSignOut();
 
-            Assert.assertTrue("Button Sign In is not visible",
-                    pageProvider.getLoginPage().isButtonSignInVisible());
-            Assert.assertTrue("Input Username is not visible",
-                    pageProvider.getLoginPage().isInputUserNameVisible());
-            Assert.assertTrue("Input Password is not visible",
-                    pageProvider.getLoginPage().isInputPasswordVisible());
-            Assert.assertFalse("Button Sign Out is visible",
-                    pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
-            Assert.assertFalse("Button Create Post is visible",
-                    pageProvider.getHeaderElement().isButtonCreatePostVisible());
-            Assert.assertFalse("Button My Profile is visible",
-                    pageProvider.getHeaderElement().isButtonMyProfileVisible());
-            Assert.assertFalse("Search icon is visible",
-                    pageProvider.getHeaderElement().isSearchIconVisible());
-            Assert.assertFalse("Chat icon is visible",
-                    pageProvider.getHeaderElement().isChatIconVisible());
-        }
+        Assert.assertTrue("Button Sign In is not visible",
+                pageProvider.getLoginPage().isButtonSignInVisible());
+        Assert.assertTrue("Input Username is not visible",
+                pageProvider.getLoginPage().isInputUserNameVisible());
+        Assert.assertTrue("Input Password is not visible",
+                pageProvider.getLoginPage().isInputPasswordVisible());
+        Assert.assertFalse("Button Sign Out is visible",
+                pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
+        Assert.assertFalse("Button Create Post is visible",
+                pageProvider.getHeaderElement().isButtonCreatePostVisible());
+        Assert.assertFalse("Button My Profile is visible",
+                pageProvider.getHeaderElement().isButtonMyProfileVisible());
+        Assert.assertFalse("Search icon is visible",
+                pageProvider.getHeaderElement().isSearchIconVisible());
+        Assert.assertFalse("Chat icon is visible",
+                pageProvider.getHeaderElement().isChatIconVisible());
+    }
+
+    @Test
+    public void TR001_validLoginWithExcel() throws IOException {
+        Map<String, String> dataForValidLogin =
+                ExcelDriver.getData(ConfigProvider.configProperties.DATA_FILE(), "validLogOn");
+
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin(dataForValidLogin.get("login"));
+        pageProvider.getLoginPage().enterTextIntoInputPassword(dataForValidLogin.get("pass"));
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutIsVisible();
+    }
 }

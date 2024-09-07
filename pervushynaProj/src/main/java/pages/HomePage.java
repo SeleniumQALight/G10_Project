@@ -53,4 +53,8 @@ public class HomePage extends ParentPage{
         }
         return this;
     }
+
+    public boolean isButtonCreatePostVisible() {
+        return isElementVisible(buttonCreatePost);
+    }
 }
