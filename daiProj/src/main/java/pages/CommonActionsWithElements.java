@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static utils.ConfigProvider.configProperties;
+
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
@@ -21,8 +23,8 @@ public class CommonActionsWithElements {
         this.webDriver = webDriver;
 
         PageFactory.initElements(webDriver, this); //initialized elements described FindBy
-    webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-    webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+    webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_DEFAULT_WAIT()));
+    webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_DEFAULT_WAIT()));
     }
 
     protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
