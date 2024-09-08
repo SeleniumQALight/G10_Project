@@ -15,11 +15,9 @@ import utils.ConfigProvider;
 
 import java.time.Duration;
 
-import static utils.ConfigProvider.configProperties;
-
 
 public class BaseTest {
-    private WebDriver webDriver = new ChromeDriver();
+    private WebDriver webDriver = new  InternetExplorerDriver();
     private Logger logger = Logger.getLogger(getClass());
     protected PageProvider pageProvider;
 
@@ -30,7 +28,7 @@ public class BaseTest {
         // webDriver = new ChromeDriver();
         webDriver = initDriver();
         webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT()));
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_IMPLICIT_WAIT()));
         logger.info("Browser started");
         pageProvider = new PageProvider(webDriver);
     }
@@ -51,6 +49,9 @@ public class BaseTest {
         } else if (browserFromProperty.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
             webDriver = new FirefoxDriver();
+        } else if ("ie".equals(browserFromProperty.toLowerCase())){
+            WebDriverManager.iedriver().setup(); //zoom 100%
+            webDriver = new InternetExplorerDriver(); //security level - Medium
         } else if ("safari".equalsIgnoreCase(browserFromProperty)) {
             WebDriverManager.safaridriver().setup();
             webDriver = new SafariDriver();

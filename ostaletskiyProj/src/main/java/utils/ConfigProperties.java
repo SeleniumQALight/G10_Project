@@ -7,7 +7,7 @@ public interface ConfigProperties extends Config {
 	long TIME_FOR_DEFAULT_WAIT();
 	long TIME_FOR_EXPLICIT_WAIT_LOW();
 	long TIME_FOR_EXPLICIT_WAIT_HIGH();
-	long TIME_FOR_EXPLICIT_WAIT ();
+	long TIME_FOR_IMPLICIT_WAIT ();
 
 	String base_url();
 	String DATA_FILE();
