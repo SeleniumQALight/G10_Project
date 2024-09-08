@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Set;
 
 import org.openqa.selenium.support.ui.Select;
 import utils.ConfigProvider;
@@ -202,6 +203,49 @@ public class CommonActionsWithElements {
             return webElement.getAccessibleName();
         } catch (Exception e) {
             return elementName;
+        }
+    }
+
+    public void switchToTab(String tabName) {
+        try {
+            String currentWindow = webDriver.getWindowHandle();
+            Set<String> allWindows = webDriver.getWindowHandles();
+            for (String window : allWindows) {
+                if (!window.equals(currentWindow)) {
+                    webDriver.switchTo().window(window);
+                    break;
+                }
+            }
+            logger.info("Switched to " + tabName);
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    public void closeNewTabAndSwitchToMainTab() {
+        try {
+            String currentWindow = webDriver.getWindowHandle();
+            Set<String> allWindows = webDriver.getWindowHandles();
+            for (String window : allWindows) {
+                if (!window.equals(currentWindow)) {
+                    webDriver.switchTo().window(window);
+                    webDriver.close();
+                    webDriver.switchTo().window(currentWindow);
+                    break;
+                }
+            }
+            logger.info("Closed new tab and switched to main tab");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    public void refreshPage() {
+        try {
+            webDriver.navigate().refresh();
+            logger.info("Page is refreshed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
         }
     }
 }
