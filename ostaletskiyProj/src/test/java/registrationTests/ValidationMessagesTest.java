@@ -24,11 +24,7 @@ public class ValidationMessagesTest extends BaseTest {
                 .enterTextRegistrationNameField(userName)
                 .enterTextRegistrationEmailField(email)
                 .enterTextRegistrationPasswordField(password)
-                .checkErrorMessageForRegistrationForm(expectedMessages)
-
-
-
-        ;
+                .checkErrorMessageForRegistrationForm(expectedMessages);
     }
 
     public Object[][] parametersForValidationMessagesTest(){
