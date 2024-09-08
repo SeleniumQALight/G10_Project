@@ -19,7 +19,7 @@ import static utils.ConfigProvider.configProperties;
 
 
 public class BaseTest {
-    private WebDriver webDriver = new  InternetExplorerDriver();
+    private WebDriver webDriver = new ChromeDriver();
     private Logger logger = Logger.getLogger(getClass());
     protected PageProvider pageProvider;
 
@@ -51,9 +51,6 @@ public class BaseTest {
         } else if (browserFromProperty.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
             webDriver = new FirefoxDriver();
-        } else if ("ie".equals(browserFromProperty.toLowerCase())){
-            WebDriverManager.iedriver().setup(); //zoom 100%
-            webDriver = new InternetExplorerDriver(); //security level - Medium
         } else if ("safari".equalsIgnoreCase(browserFromProperty)) {
             WebDriverManager.safaridriver().setup();
             webDriver = new SafariDriver();
