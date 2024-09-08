@@ -12,6 +12,7 @@ public class LogOutTest extends BaseTest {
                 .checkIsRedirectToHomePage()
                 .getHeaderElement().clickOnButtonSignOut()
                 .checkIsRedirectToLoginPage()
+                .getHeaderElement().checkIsElementInvisible()
         ;
     }
 

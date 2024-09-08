@@ -14,7 +14,7 @@ public class CreateNewPostTest extends BaseTest {
     public void TR003_createNewPost() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillingFormWithValidCred()
-                .checkIsRedirectToHomePage()
+                .checkIsRedirectToHomePage().getHeaderElement()
                 .clickOnButtonCreatePost()
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)

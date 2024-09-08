@@ -1,5 +1,6 @@
 package pages.elements;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -47,17 +48,14 @@ public class HeaderElement extends CommonActionsWithElements {
         return new CreateNewPostPage(webDriver);
     }
 
-
     public boolean isButtonSignOutVisible() {
         return  isElementVisible(buttonSignOut);}
 
     public boolean isButtonMyProfileVisible() {
-
         return isElementVisible(myProfileButton);
     }
 
     public boolean isUserNameDisplayed() {
-
         return isElementVisible(userName);
     }
 
@@ -75,14 +73,12 @@ public class HeaderElement extends CommonActionsWithElements {
         return this;
     }
 
-
     public LoginPage clickOnButtonSignOut() {
         clickOnElement(buttonSignOut);
         return new LoginPage(webDriver);
     }
 
     public boolean isSearchButtonVisible() {
-
         return isElementVisible(searchButton);
     }
 
@@ -90,7 +86,13 @@ public class HeaderElement extends CommonActionsWithElements {
         return isElementVisible(buttonCreatePost);
     }
 
-    public boolean isButtonSignOutInvisible() {
-        return isElementInvisible(buttonSignOut);
+
+    public HeaderElement checkIsElementInvisible() {
+        Assert.assertFalse("Button Sign Out is visible", isButtonSignOutVisible());
+        Assert.assertFalse("Button Search is visible", isSearchButtonVisible());
+        Assert.assertFalse("Button Chat is visible", isChatButtonVisible());
+        Assert.assertFalse("Img Avatar is visible", isImgAvatarVisible());
+        Assert.assertFalse("Button Create Post is visible", isButtonCreatePostVisible());
+        return this;
     }
 }

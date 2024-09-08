@@ -55,17 +55,6 @@ public class HomePage extends ParentPage{
         return this;
     }
 
-    public HomePage clickOnButtonCreatePost() {
-        getHeaderElement().clickOnButtonCreatePost();
-        return this;
-    }
-
-    public CreateNewPostPage checkIsRedirectToCreateNewPostPage() {
-        CreateNewPostPage createNewPostPage = new CreateNewPostPage(webDriver);
-        createNewPostPage.checkIsRedirectToCreateNewPostPage();
-        return createNewPostPage;
-    }
-
     public boolean isButtonCreatePostVisible() {
         return isElementVisible(buttonCreatePost);
     }

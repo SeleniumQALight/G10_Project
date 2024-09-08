@@ -116,11 +116,6 @@ public class LoginPage extends ParentPage {
         Assert.assertTrue("It is not Login page", isButtonSignInVisible());
         Assert.assertTrue("Input Username is not visible", isElementVisible(inputUsernameInLoginForm));
         Assert.assertTrue("Input Password is not visible", isElementVisible(inputPasswordInLoggInForm));
-        Assert.assertFalse("Button Sign Out is visible", getHeaderElement().isButtonSignOutVisible());
-        Assert.assertFalse("Button Search is visible", getHeaderElement().isSearchButtonVisible());
-        Assert.assertFalse("Button Chat is visible", getHeaderElement().isChatButtonVisible());
-        Assert.assertFalse("Img Avatar is visible", getHeaderElement().isImgAvatarVisible());
-        Assert.assertFalse("Button Create Post is visible", getHeaderElement().isButtonCreatePostVisible());
         checkUrlWithPattern();
         return this;
     }

@@ -15,7 +15,7 @@ public class UpdatePostTest extends BaseTest {
     public void createPost() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillingFormWithValidCred()
-                .checkIsRedirectToHomePage()
+                .checkIsRedirectToHomePage().getHeaderElement()
                 .clickOnButtonCreatePost()
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
