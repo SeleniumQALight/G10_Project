@@ -10,7 +10,6 @@ import pages.MyProfilePage;
 
 public class HeaderElement extends CommonActionsWithElements {
 
-    //myProfile button
     @FindBy(xpath = "//a[@class='mr-2']")
     private WebElement myProfileButton;
 
@@ -71,6 +70,11 @@ public class HeaderElement extends CommonActionsWithElements {
 
         return isElementVisible(chatButton);
     }
+    public HeaderElement checkIsButtonSignOutVisible() {
+        checkIsElementVisible(buttonSignOut);
+        return this;
+    }
+
 
     public LoginPage clickOnButtonSignOut() {
         clickOnElement(buttonSignOut);

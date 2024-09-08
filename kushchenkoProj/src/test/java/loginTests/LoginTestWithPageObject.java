@@ -1,8 +1,14 @@
 package loginTests;
 
 import baseTest.BaseTest;
+import data.TestData;
 import org.junit.Assert;
 import org.junit.Test;
+import utils.ConfigProvider;
+import utils.ExcelDriver;
+
+import java.io.IOException;
+import java.util.Map;
 
 import static data.TestData.*;
 
@@ -11,8 +17,8 @@ public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void TR001_validLogin() {
         pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().enterTextIntoInputLogin(VALID_LOGIN_UI);
-        pageProvider.getLoginPage().enterTextIntoInputPassword(VALID_PASSWORD_UI);
+        pageProvider.getLoginPage().enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
         pageProvider.getLoginPage().clickOnButtonSignIn();
         pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutIsVisible();
 
@@ -75,5 +81,17 @@ public class LoginTestWithPageObject extends BaseTest {
                 pageProvider.getHeaderElement().isSearchIconVisible());
         Assert.assertFalse("Chat icon is visible",
                 pageProvider.getHeaderElement().isChatIconVisible());
+    }
+
+    @Test
+    public void TR001_validLoginWithExcel() throws IOException {
+        Map<String, String> dataForValidLogin =
+                ExcelDriver.getData(ConfigProvider.configProperties.DATA_FILE(), "validLogOn");
+
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin(dataForValidLogin.get("login"));
+        pageProvider.getLoginPage().enterTextIntoInputPassword(dataForValidLogin.get("pass"));
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutIsVisible();
     }
 }
