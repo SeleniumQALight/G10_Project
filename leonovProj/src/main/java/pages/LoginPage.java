@@ -27,6 +27,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement alertInvalidLogin;
+
     @FindBy(id = "username-register")
     private WebElement inputUserNameInRegistrationForm;
 
@@ -92,8 +95,26 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
-    public LoginPage enterTextIntoRegistrationNameField(String userName) {
-        clearAndEnterTextIntoElement(inputUserNameInRegistrationForm, userName);
+    public boolean isAlertInvalidLoginDisplayed() {
+        return isElementVisible(alertInvalidLogin);
+    }
+
+    public boolean isButtonSignInVisible() {
+        return isElementVisible(buttonSignIn);
+    }
+
+
+    public boolean isLoginFieldVisible() {
+        return isElementVisible(inputUserNameInLoginForm);
+    }
+
+
+    public boolean isPasswordFieldVisible() {
+        return isElementVisible(inputPasswordInLoginForm);
+    }
+
+    public LoginPage enterTextIntoRegistrationNameField(String username) {
+        clearAndEnterTextIntoElement(inputUserNameInRegistrationForm, username);
 
         return this;
     }
@@ -137,5 +158,6 @@ public class LoginPage extends ParentPage {
 
         softAssertions.assertAll();
         return this;
+
     }
 }

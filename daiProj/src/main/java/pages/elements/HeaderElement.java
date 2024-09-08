@@ -43,6 +43,12 @@ public class HeaderElement extends CommonActionsWithElements {
     public boolean isButtonMyProfileVisible() {return isElementVisible(buttonMyProfile);
     }
 
+
+    public HeaderElement checkIsButtonSignOutVisible() {
+       checkIsElementVisible(buttonSignOut);
+        return this;
+    }
+
     public boolean isButtonSearchVisible() {return isElementVisible(buttonSearch);
     }
 

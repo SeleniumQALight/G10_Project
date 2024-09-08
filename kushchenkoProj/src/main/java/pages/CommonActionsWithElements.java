@@ -9,7 +9,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+
 import org.openqa.selenium.support.ui.Select;
+import utils.ConfigProvider;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -19,8 +21,8 @@ public class CommonActionsWithElements {
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this); //ініціалізує елементи описані FinfBy
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT()));
     }
 
     protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
@@ -69,10 +71,10 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected boolean isElementVisible(String locator){
-        try{
+    protected boolean isElementVisible(String locator) {
+        try {
             return isElementVisible(webDriver.findElement(By.xpath(locator)));
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.info("Element is not visible");
             return false;
         }
@@ -123,9 +125,9 @@ public class CommonActionsWithElements {
 
     protected void selectTextInDropdownByVisibleText(WebElement dropdown, String textForSelect) {
         try {
-        Select optionsFromDropdown = new Select(dropdown);
-        optionsFromDropdown.selectByVisibleText(textForSelect);
-        logger.info(textForSelect + " was selected in dropdown " + getElementName(dropdown));
+            Select optionsFromDropdown = new Select(dropdown);
+            optionsFromDropdown.selectByVisibleText(textForSelect);
+            logger.info(textForSelect + " was selected in dropdown " + getElementName(dropdown));
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -184,6 +186,14 @@ public class CommonActionsWithElements {
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
+    }
+
+    public void checkIsElementVisible(WebElement webElement) {
+        Assert.assertTrue("Element is not visible", isElementVisible(webElement));
+    }
+
+    public void checkIsElementVisible(WebElement webElement, String elementName) {
+        Assert.assertTrue(elementName + " is not visible", isElementVisible(webElement, elementName));
     }
 
     private String getElementName(WebElement webElement) {

@@ -5,12 +5,13 @@ import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+
+import static utils.ConfigProvider.configProperties;
 
 
 public class CommonActionsWithElements {
@@ -21,8 +22,8 @@ public class CommonActionsWithElements {
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this); // ініціалізує елемент описані FindBy анотаціями
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_DEFAULT_WAIT()));
     }
 
     protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
@@ -172,4 +173,44 @@ public class CommonActionsWithElements {
             printErrorAndStopTest(e);
         }
     }
+
+    protected void checkCheckbox(WebElement checkbox) {
+        if (checkbox.isSelected()) {
+            logger.info("Checkbox is already checked");
+        } else {
+            clickOnElement(checkbox);
+            logger.info("Checkbox was unchecked, but now is checked");
+        }
+    }
+
+    protected void uncheckCheckbox(WebElement checkbox) {
+        if (checkbox.isSelected()) {
+            clickOnElement(checkbox);
+            logger.info("Checkbox was checked, but now is unchecked");
+        } else {
+            logger.info("Checkbox is already unchecked");
+        }
+    }
+
+    protected void checkboxState(WebElement checkbox, String state) {
+        if (state.equals("check")) {
+            checkCheckbox(checkbox);
+        } else if (state.equals("uncheck")) {
+            uncheckCheckbox(checkbox);
+        } else {
+            logger.error("State for checkbox should be 'check' or 'uncheck'");
+            Assert.fail("State for checkbox should be 'check' or 'uncheck'");
+        }
+    }
+
+    public void checkIsElementVisible(WebElement element) {
+        Assert.assertTrue("Element should be visible", isElementVisible(element));
+    }
+
+    public void checkIsElementVisible(WebElement webElement, String elementName) {
+        Assert.assertTrue(elementName + "Element should be visible"
+                , isElementVisible(webElement, elementName));
+    }
+
+
 }
