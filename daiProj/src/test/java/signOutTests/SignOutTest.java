@@ -3,6 +3,7 @@ package signOutTests;
 import baseBase.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
+import pages.LoginPage;
 
 public class SignOutTest extends BaseTest {
     @Test
@@ -15,8 +16,9 @@ public class SignOutTest extends BaseTest {
         Assert.assertTrue("Create post button is not visible", pageProvider.getHomePage().getHeaderElement().isButtonCreatePostVisible());
         Assert.assertTrue("Sign out button is not visible", pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
 
-        pageProvider.getHomePage().clickOnButtonSignOut()
-                .checkIsRedirectToLoginPage();
+        pageProvider.getHomePage().getHeaderElement().clickOnButtonSignOut();
+                LoginPage loginPage = pageProvider.getLoginPage();
+                loginPage.checkIsRedirectToLoginPage();
         Assert.assertFalse("Search button is visible", pageProvider.getHomePage().getHeaderElement().isButtonSearchVisible());
         Assert.assertFalse("Chat button is visible", pageProvider.getHomePage().getHeaderElement().isButtonChatVisible());
         Assert.assertFalse("Avatar is visible", pageProvider.getHomePage().getHeaderElement().isButtonMyProfileVisible());

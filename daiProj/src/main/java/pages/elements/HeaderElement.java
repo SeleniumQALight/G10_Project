@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.CommonActionsWithElements;
+import pages.HomePage;
 import pages.MyProfilePage;
 
 public class HeaderElement extends CommonActionsWithElements {
@@ -23,8 +24,7 @@ public class HeaderElement extends CommonActionsWithElements {
     @FindBy(xpath = "//span[contains(@class, 'header-chat-icon')]")
     private WebElement buttonChat;
 
-    @FindBy(xpath = "//button[text()='Sign In']")
-    private WebElement buttonSignIn;
+
 
     public HeaderElement(WebDriver webDriver) {
         super(webDriver);
@@ -48,7 +48,9 @@ public class HeaderElement extends CommonActionsWithElements {
 
     public boolean isButtonChatVisible() {return isElementVisible(buttonChat);
     }
-    public boolean isButtonSignInVisible() {return isElementVisible(buttonSignIn);
+
+    public HomePage clickOnButtonSignOut() {clickOnElement(buttonSignOut);
+        return new HomePage(webDriver);
     }
 }
 

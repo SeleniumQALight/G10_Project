@@ -18,8 +18,6 @@ public class HomePage extends ParentPage {
     @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
     private WebElement buttonCreatePost;
 
-    @FindBy(xpath = "//button[text()='Sign Out']")
-    private WebElement buttonSignOut;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -72,18 +70,6 @@ public class HomePage extends ParentPage {
 
     }
 
-    public HomePage clickOnButtonSignOut() {
-        clickOnElement(buttonSignOut);
-    return this;
-    }
-
-
-    public HomePage checkIsRedirectToLoginPage() {
-        Assert.assertTrue("It is not Login page", getHeaderElement().isButtonSignInVisible());
-        checkUrl();
-        return this;
-
-    }
 }
 
 

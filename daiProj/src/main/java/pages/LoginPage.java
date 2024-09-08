@@ -169,8 +169,11 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll(); //check all soft assertions
         return this;
     }
-
-
+    public LoginPage checkIsRedirectToLoginPage() {
+        Assert.assertTrue("It is not Login page", isButtonSignInVisible());
+        checkUrl();
+        return this;
+    }
 }
 
 

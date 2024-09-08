@@ -6,14 +6,19 @@ import org.junit.Before;
 import org.junit.Test;
 import utils.Utils;
 
+
+
+
+
+
 public class EditPostTest extends BaseTest {
 
     private final String POST_TITLE = "dai " + Utils.getDateAndTimeFormatted();
     private final String POST_TITLE_EDITED = POST_TITLE + " edited";
 
 
-    @Test
-    public void TR_005_editPost() {
+    @Before
+    public void createPost() {
         pageProvider.getLoginPage().openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectToHomePage().clickOnButtonCreatePost()
                 .checkIsRedirectToCreateNewPostPage()
@@ -23,17 +28,26 @@ public class EditPostTest extends BaseTest {
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
-                .checkPostWithTitleIsPresent(POST_TITLE, 1)
+                .getHeaderElement().clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage()
+                .checkPostWithTitleIsPresent(POST_TITLE, 1);
+    }
+
+
+    @Test
+    public void TR_005_editPost() {
+        pageProvider.getHomePage()
+                .getHeaderElement().clickOnMyProfileButton()
+                .checkIsRedirectToMyProfilePage()
+                .clickOnPostWithTitle(POST_TITLE)
                 .clickOnEditPostButton()
-                .enterTextIntoInputTitle(POST_TITLE_EDITED)
+                .enterNewTextIntoInputTitle(POST_TITLE_EDITED)
                 .clickOnButtonSaveUpdates()
                 .checkIsRemainOnEditPostPage()
                 .checkIsEditSuccessMessageDisplayed("Post successfully updated.")
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
-                .checkPostWithEditedTitleIsPresent(POST_TITLE_EDITED)
-
-
+                .checkPostWithTitleIsPresent(POST_TITLE_EDITED, 1)
         ;
     }
 

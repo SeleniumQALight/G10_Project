@@ -70,10 +70,9 @@ public class MyProfilePage extends ParentPage {
         return this;
     }
 
-    public MyProfilePage checkPostWithEditedTitleIsPresent(String postTitleEdited) {
-        Assert.assertTrue("Post with edited title is not displayed"
-                , isElementVisible(String.format(postTitleLocator, postTitleEdited)));
-        return this;
+    public PostPage clickOnPostWithTitle(String postTitle) {
+        clickOnElement(postsListWithTitle(postTitle).get(0));
+        return new PostPage(webDriver);
     }
 }
 
