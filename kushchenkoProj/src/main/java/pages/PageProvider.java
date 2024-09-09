@@ -20,4 +20,7 @@ public class PageProvider {
 
     public HeaderElement getHeaderElement() { return new HeaderElement(webDriver);
     }
+
+    public CommonActionsWithElements getCommonActionsWithElements() { return new CommonActionsWithElements(webDriver);
+    }
 }
