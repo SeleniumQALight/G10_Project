@@ -96,7 +96,7 @@ public class LoginPage extends ParentPage {
     }
 
     public boolean isAlertMessageVisible() {
-        return isElementVisible(alertMessage);
+        return isElementVisible(alertMessage, "Alert message");
     }
 
     public boolean isInputUserNameVisible() {
@@ -154,6 +154,16 @@ public class LoginPage extends ParentPage {
             softAssertions.assertAll(); // check all soft assertions
             return this;
         }
+        return this;
+    }
+
+    public LoginPage checkIsButtonSignInVisible() {
+        Assert.assertTrue("Button Sign In is not visible", isButtonSignInVisible());
+        return this;
+    }
+
+    public LoginPage checkIsAlertMessageDisplayed(String alertMessage) {
+        Assert.assertTrue("Alert message is not displayed", isAlertMessageVisible());
         return this;
     }
 }
