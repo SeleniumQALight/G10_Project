@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Set;
 
 import org.openqa.selenium.support.ui.Select;
@@ -206,35 +207,22 @@ public class CommonActionsWithElements {
         }
     }
 
-    public void switchToTab(String tabName) {
+    public void switchToTab(String tabName, int tabIndex) {
         try {
-            String currentWindow = webDriver.getWindowHandle();
             Set<String> allWindows = webDriver.getWindowHandles();
-            for (String window : allWindows) {
-                if (!window.equals(currentWindow)) {
-                    webDriver.switchTo().window(window);
-                    break;
-                }
-            }
+            ArrayList<String> tabList = new ArrayList<>(allWindows);
+            webDriver.switchTo().window(tabList.get(tabIndex));
             logger.info("Switched to " + tabName);
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
 
-    public void closeNewTabAndSwitchToMainTab() {
+    public void closeTab(String tabName, int tabIndex) {
         try {
-            String currentWindow = webDriver.getWindowHandle();
-            Set<String> allWindows = webDriver.getWindowHandles();
-            for (String window : allWindows) {
-                if (!window.equals(currentWindow)) {
-                    webDriver.switchTo().window(window);
-                    webDriver.close();
-                    webDriver.switchTo().window(currentWindow);
-                    break;
-                }
-            }
-            logger.info("Closed new tab and switched to main tab");
+            this.switchToTab(tabName, tabIndex);
+            webDriver.close();
+            logger.info(tabName + " is closed");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }

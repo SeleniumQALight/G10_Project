@@ -106,14 +106,14 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().openLoginPageAndLoginWithValidCreds();
         pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutIsVisible();
         pageProvider.getCommonActionsWithElements().openNewTab();
-        pageProvider.getCommonActionsWithElements().switchToTab("new tab");
+        pageProvider.getCommonActionsWithElements().switchToTab("new tab", 1);
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getHeaderElement().checkIsButtonSignOutIsVisible();
-        pageProvider.getCommonActionsWithElements().switchToTab("main tab");
+        pageProvider.getCommonActionsWithElements().switchToTab("main tab", 0);
         pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutIsVisible();
-        pageProvider.getCommonActionsWithElements().closeNewTabAndSwitchToMainTab();
+        pageProvider.getCommonActionsWithElements().closeTab("new tab",1);
+        pageProvider.getCommonActionsWithElements().switchToTab("main tab", 0);
         pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutIsVisible();
-
     }
 
     @Test
