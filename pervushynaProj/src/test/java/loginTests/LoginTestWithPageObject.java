@@ -3,6 +3,12 @@ package loginTests;
 import baseTest.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
+import utils.ConfigProperties;
+import utils.ConfigProvider;
+import utils.ExcelDriver;
+
+import java.io.IOException;
+import java.util.Map;
 
 public class LoginTestWithPageObject extends BaseTest {
 
@@ -26,6 +32,21 @@ public class LoginTestWithPageObject extends BaseTest {
     }
 
     @Test
+    public void TR001_validLoginWithExcel() throws IOException {
+
+        Map<String, String> dataForValidLogin =
+                ExcelDriver.getData(ConfigProvider.configProperties.DATA_FILE(), "validLogOn");
+
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin(dataForValidLogin.get("login"));
+        pageProvider.getLoginPage().enterTextIntoInputPassword(dataForValidLogin.get("pass"));
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutVisible();
+    }
+
+
+    @Test
     public void TR002_invalidLogin(){
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin("123456");
@@ -36,4 +57,6 @@ public class LoginTestWithPageObject extends BaseTest {
         Assert.assertTrue("Button Sign In is not visible", pageProvider.getLoginPage().isButtonSignInVisible());
         Assert.assertTrue("Text is not display", pageProvider.getLoginPage().textIsDisplay());
     }
+
+
 }
