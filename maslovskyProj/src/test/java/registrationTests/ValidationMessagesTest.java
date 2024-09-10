@@ -35,4 +35,19 @@ public class ValidationMessagesTest extends BaseTest {
         };
     }
 
+    @Test
+    @Parameters(method = "parametersForValidationMessagesTest")
+    public void HW6_invalidRegistrationUsingKeyboardKeys
+            (String userName, String email, String password, String expectedMessages) {
+        pageProvider.getLoginPage().openLoginPage()
+                .tabPressing(5)
+                .enterText(userName)
+                .tabPressing(1)
+                .enterText(email)
+                .tabPressing(1)
+                .enterText(password)
+                .tabPressing(1)
+                .checkErrorsMessages(expectedMessages);
+    }
+
 }
