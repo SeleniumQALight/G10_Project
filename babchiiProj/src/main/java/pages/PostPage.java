@@ -13,7 +13,9 @@ public class PostPage extends ParentPage {
     private WebElement buttonDeletePost;
     private String locatorForTextThisPostWasWritten = "//*[contains(text(), '%s')]";
     @FindBy(xpath = ".//p[contains(text(),'Is this post unique?')]")
-    private WebElement IsPostUniqueInfoText;
+    private WebElement isPostUniqueInfoText;
+    @FindBy(xpath = "//a[@data-original-title='Edit']")
+    private WebElement buttonEditPost;
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -51,7 +53,7 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkIsPostUniqueValueAsExpected(String expectedState) {
-        String infoText = IsPostUniqueInfoText.getText();
+        String infoText = isPostUniqueInfoText.getText();
         String actualUniqueValue = infoText.substring(infoText.indexOf(":") + 2);
         Assert.assertEquals("IsPostUnique value is not as expected", expectedState, actualUniqueValue);
         return this;
@@ -65,5 +67,9 @@ public class PostPage extends ParentPage {
     public PostPage checkTextThisPostWasWrittenIsVisible(String expectedText) {
         Assert.assertTrue(expectedText + " Text is not visible", isElementVisible(String.format(locatorForTextThisPostWasWritten, expectedText)));
         return this;
+    }
+    public EditPostPage clickOnEditButton() {
+        clickOnElement(buttonEditPost);
+        return new EditPostPage(webDriver);
     }
 }

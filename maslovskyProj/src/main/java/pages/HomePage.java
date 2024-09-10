@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import pages.elements.HeaderElement;
 
+import static data.TestData.initialNumberOpenedTabs;
+
 public class HomePage extends ParentPage {
     Logger logger = Logger.getLogger(getClass());
 
@@ -41,4 +43,37 @@ public class HomePage extends ParentPage {
         }
         return this;
     }
+
+    public HomePage openLoginPage() {
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
+        return this;
+    }
+
+    public HomePage createNewBrowserTab() {
+        openNewBrowserTab();
+        return this;
+    }
+
+    public HomePage goToNewBrowserTab() {
+        switchToNewBrowserTab();
+        return this;
+    }
+//
+//    public HomePage openLoginPage() {
+//        LoginPage loginPage = new LoginPage(webDriver);
+//        loginPage.openLoginPage();
+//        return this;
+//    }
+//
+    public HomePage getBackToFirstBrowserTab() {
+        returnToFirstBrowserTab();
+        return this;
+    }
+
+    public HomePage closeNewBrowserTab() {
+        closeBrowserTab(initialNumberOpenedTabs-1);
+        return this;
+    }
+
 }
