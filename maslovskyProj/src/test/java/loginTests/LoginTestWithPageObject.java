@@ -5,6 +5,7 @@ import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.Keys;
 import utils.ConfigProvider;
 import utils.ExcelDriver;
 
@@ -144,11 +145,10 @@ public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void HW6_validLoginUsingKeyboardKeys() {
         pageProvider.getLoginPage().openLoginPage()
-                .navigateToUsernameField()
+                .tabPressing(2)
                 .enterText(userName)
-                .navigateToPasswordField()
+                .tabPressing(1)
                 .enterText(userPassword)
-//                .navigateToSignInButton()
                 .pressEnterButton()
                 .getHeaderElement().checkIsButtonSighOutVisible();
     }

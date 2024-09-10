@@ -40,13 +40,13 @@ public class ValidationMessagesTest extends BaseTest {
     public void HW6_invalidRegistrationUsingKeyboardKeys
             (String userName, String email, String password, String expectedMessages) {
         pageProvider.getLoginPage().openLoginPage()
-                .navigateToRegistrationUsernameField()
+                .tabPressing(5)
                 .enterText(userName)
-                .navigateToRegistrationEmailField()
+                .tabPressing(1)
                 .enterText(email)
-                .navigateToRegistrationPasswordField()
+                .tabPressing(1)
                 .enterText(password)
-                .navigateToSignInButton()
+                .tabPressing(1)
                 .checkErrorsMessages(expectedMessages);
     }
 

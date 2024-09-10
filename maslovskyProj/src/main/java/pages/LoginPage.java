@@ -56,15 +56,13 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
-    Utils utils = new Utils(webDriver, logger);
-
-    Actions actions = new Actions(webDriver);
-
     public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened " + baseUrl);
         return this;
     }
+
+    Actions actions = new Actions(webDriver);
 
     public HeaderElement getHeaderElement() {
         return new HeaderElement(webDriver);
@@ -164,55 +162,14 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public LoginPage navigateToUsernameField() {
-        tabPressing(2);
-        return this;
-    }
-
     public LoginPage enterText(String text) {
         actions.sendKeys(text).perform();
-        return this;
-    }
-
-    public LoginPage navigateToPasswordField() {
-        tabPressing(1);
-        return this;
-    }
-
-    private void tabPressing(int count) {
-        for (int i = 0; i < count; i++) {
-            actions.sendKeys(Keys.TAB).perform();
-        }
-    }
-
-    public LoginPage navigateToSignInButton() {
-        tabPressing(1);
         return this;
     }
 
     public HomePage pressEnterButton() {
         actions.sendKeys(Keys.ENTER).perform();
         return new HomePage(webDriver);
-    }
-
-    public LoginPage navigateToRegistrationUsernameField() {
-        tabPressing(5);
-        return this;
-    }
-
-    public LoginPage navigateToRegistrationEmailField() {
-        tabPressing(1);
-        return this;
-    }
-
-    public LoginPage navigateToRegistrationPasswordField() {
-        tabPressing(1);
-        return this;
-    }
-
-    public LoginPage navigateToSignUpButton() {
-        tabPressing(1);
-        return this;
     }
 
     public LoginPage reloadPageContent() {
@@ -222,6 +179,14 @@ public class LoginPage extends ParentPage {
 
     public LoginPage goToNewBrowserTab() {
         switchToNewBrowserTab();
+        return this;
+    }
+
+
+    public LoginPage tabPressing(int count) {
+        for (int i = 0; i < count; i++) {
+            actions.sendKeys(Keys.TAB).perform();
+        }
         return this;
     }
 
