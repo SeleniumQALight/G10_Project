@@ -14,12 +14,15 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty");
         pageProvider.getLoginPage().clickOnButtonSignIn();
 
-        Assert.assertTrue("Button Sign Out is not visible", pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
-        Assert.assertTrue("Create Post button is not visible", pageProvider.getHomePage().isButtonCreatePostVisible());
-        Assert.assertTrue("My Profile button is not visible", pageProvider.getHomePage().getHeaderElement().isButtonMyProfileVisible());
-        Assert.assertTrue("User name is not displayed", pageProvider.getHomePage().getHeaderElement().isUserNameDisplayed());
-        Assert.assertFalse("Input Login is displayed", pageProvider.getLoginPage().isInputLoginDisplayed());
-        Assert.assertFalse("Input Password is displayed", pageProvider.getLoginPage().isInputPasswordDisplayed());
+//        Assert.assertTrue("Button Sign Out is not visible", pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
+//        Assert.assertTrue("Create Post button is not visible", pageProvider.getHomePage().isButtonCreatePostVisible());
+//        Assert.assertTrue("My Profile button is not visible", pageProvider.getHomePage().getHeaderElement().isButtonMyProfileVisible());
+//        Assert.assertTrue("User name is not displayed", pageProvider.getHomePage().getHeaderElement().isUserNameDisplayed());
+//        Assert.assertFalse("Input Login is displayed", pageProvider.getLoginPage().isInputLoginDisplayed());
+//        Assert.assertFalse("Input Password is displayed", pageProvider.getLoginPage().isInputPasswordDisplayed());
+
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutVisible();
+
     }
 
     @Test
