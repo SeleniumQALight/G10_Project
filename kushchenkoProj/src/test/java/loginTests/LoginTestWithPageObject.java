@@ -1,18 +1,30 @@
 package loginTests;
 
 import baseTest.BaseTest;
+import data.TestData;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import utils.ConfigProvider;
+import utils.ExcelDriver;
+
+import java.io.IOException;
+import java.util.Map;
 
 import static data.TestData.*;
 
 
+@RunWith(JUnitParamsRunner.class)
 public class LoginTestWithPageObject extends BaseTest {
+    final String ALERT_MESSAGE = "Invalid username/password.";
+
     @Test
     public void TR001_validLogin() {
         pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().enterTextIntoInputLogin(VALID_LOGIN_UI);
-        pageProvider.getLoginPage().enterTextIntoInputPassword(VALID_PASSWORD_UI);
+        pageProvider.getLoginPage().enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
         pageProvider.getLoginPage().clickOnButtonSignIn();
         pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutIsVisible();
 
@@ -75,5 +87,60 @@ public class LoginTestWithPageObject extends BaseTest {
                 pageProvider.getHeaderElement().isSearchIconVisible());
         Assert.assertFalse("Chat icon is visible",
                 pageProvider.getHeaderElement().isChatIconVisible());
+    }
+
+    @Test
+    public void TR001_validLoginWithExcel() throws IOException {
+        Map<String, String> dataForValidLogin =
+                ExcelDriver.getData(ConfigProvider.configProperties.DATA_FILE(), "validLogOn");
+
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin(dataForValidLogin.get("login"));
+        pageProvider.getLoginPage().enterTextIntoInputPassword(dataForValidLogin.get("pass"));
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutIsVisible();
+    }
+
+    @Test
+    public void TR007_SessionPersistenceAcrossTabs() {
+        pageProvider.getLoginPage().openLoginPageAndLoginWithValidCreds();
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutIsVisible();
+        pageProvider.getCommonActionsWithElements().openNewTab();
+        pageProvider.getCommonActionsWithElements().switchToTab("new tab", 1);
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getHeaderElement().checkIsButtonSignOutIsVisible();
+        pageProvider.getCommonActionsWithElements().switchToTab("main tab", 0);
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutIsVisible();
+        pageProvider.getCommonActionsWithElements().closeTab("new tab",1);
+        pageProvider.getCommonActionsWithElements().switchToTab("main tab", 0);
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutIsVisible();
+    }
+
+    @Test
+    public void TR009_inputsAreClearedAfterRefresh() {
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
+        pageProvider.getCommonActionsWithElements().refreshPage();
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getLoginPage().checkIsButtonSignInVisible();
+    }
+
+    @Test
+    @Parameters(method = "parametersForInvalidLoginTest")
+    public void TR010_invalidLoginWithParameters(String login, String password, String alertMessage) {
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin(login);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(password);
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getLoginPage().checkIsAlertMessageDisplayed(alertMessage);
+    }
+
+    public Object[][] parametersForInvalidLoginTest() {
+        return new Object[][]{
+                {INVALID_LOGIN_UI, INVALID_PASSWORD_UI, ALERT_MESSAGE},
+                {VALID_LOGIN_UI, INVALID_PASSWORD_UI, ALERT_MESSAGE},
+                {INVALID_LOGIN_UI, VALID_PASSWORD_UI, ALERT_MESSAGE}
+        };
     }
 }

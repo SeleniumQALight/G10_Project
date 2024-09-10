@@ -9,8 +9,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Set;
 
 import org.openqa.selenium.support.ui.Select;
+import utils.ConfigProvider;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -20,8 +23,8 @@ public class CommonActionsWithElements {
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this); //ініціалізує елементи описані FinfBy
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT()));
     }
 
     protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
@@ -201,6 +204,36 @@ public class CommonActionsWithElements {
             return webElement.getAccessibleName();
         } catch (Exception e) {
             return elementName;
+        }
+    }
+
+    public void switchToTab(String tabName, int tabIndex) {
+        try {
+            Set<String> allWindows = webDriver.getWindowHandles();
+            ArrayList<String> tabList = new ArrayList<>(allWindows);
+            webDriver.switchTo().window(tabList.get(tabIndex));
+            logger.info("Switched to " + tabName);
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    public void closeTab(String tabName, int tabIndex) {
+        try {
+            this.switchToTab(tabName, tabIndex);
+            webDriver.close();
+            logger.info(tabName + " is closed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    public void refreshPage() {
+        try {
+            webDriver.navigate().refresh();
+            logger.info("Page is refreshed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
         }
     }
 }

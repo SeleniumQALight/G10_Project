@@ -27,5 +27,9 @@ public class HeaderElement extends CommonActionsWithElements {
         return isElementVisible(buttonSignOut);
     }
 
+    public HeaderElement checkIsButtonSignOutVisible(){
+        checkIsElementVisible(buttonSignOut);
+        return this;
+    }
 
 }
