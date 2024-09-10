@@ -1,6 +1,7 @@
 package loginTests;
 
 import baseTest.BaseTest;
+import data.TestData;
 import org.junit.Assert;
 import org.junit.Test;
 import utils.ConfigProperties;
@@ -16,7 +17,7 @@ public class LoginTestWithPageObject extends BaseTest {
     public void TR001_validLogin(){
 
         pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto");
+        pageProvider.getLoginPage().enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
         pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty");
         pageProvider.getLoginPage().clickOnButtonSignIn();
 
