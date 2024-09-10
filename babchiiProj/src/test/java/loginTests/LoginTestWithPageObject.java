@@ -40,6 +40,16 @@ public class LoginTestWithPageObject extends BaseTest {
     }
 
     @Test
+    public void TR003_checkSignOutButton(){
+        pageProvider.getLoginPage()
+                .openLoginPageAndFillLoginFormWithValidCred()
+                .getHeaderElement()
+                .checkIsHeaderElementsAreVisible("yes")
+                .getHeaderElement().clickOnButtonSignOut()
+                .getHeaderElement().checkIsHeaderElementsAreVisible("no");
+    }
+
+    @Test
     public void TR001_validLoginWithExcel() throws IOException {
         Map<String, String> dataForValidLogin = ExcelDriver.getData(ConfigProvider.configProperties.DATA_FILE(), "validLogOn");
         pageProvider.getLoginPage().openLoginPage();
