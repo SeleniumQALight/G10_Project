@@ -2,9 +2,11 @@ package loginTests;
 
 import baseTest.BaseTest;
 import categories.SmokeTestFilter;
+import io.qameta.allure.*;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openqa.selenium.Keys;
@@ -19,17 +21,24 @@ import java.util.Arrays;
 import java.util.List;
 
 //@RunWith(JUnitParamsRunner.class)
+@Epic("Allure examples")
+@Feature("Junit 4 support")
 public class LoginTestWithPageObject extends BaseTest {
     protected String userName = "qaauto";
     protected String userPassword = "123456qwerty";
 
     @Test
     @Category(SmokeTestFilter.class)
+    @Description("Some detailed test description")
+    @Link("https://example.org")
+    @Link(name = "allure", type = "mylink")
+    @Issue("123")
+    @Issue("432")
+    @Story("Base support for bdd annotations")
     public void TR001_validLogin() {
-
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin(userName);
-        pageProvider.getLoginPage().enterTextIntoInputPassword(userPassword);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(userPassword+1);
         pageProvider.getLoginPage().clickOnButtonSighIn();
 
 //        Assert.assertTrue("Button Sign Out is not visible",
@@ -58,6 +67,7 @@ public class LoginTestWithPageObject extends BaseTest {
     }
 
     @Test
+//    @Ignore
     public void TR001_validLoginWithExcel() throws IOException {
         Map<String, String> dataForValidLogin =
                 ExcelDriver.getData(ConfigProvider.configProperties.DATA_FILE(),"validLogOn");
