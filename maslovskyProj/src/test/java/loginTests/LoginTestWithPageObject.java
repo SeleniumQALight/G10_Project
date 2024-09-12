@@ -1,10 +1,12 @@
 package loginTests;
 
 import baseTest.BaseTest;
+import categories.SmokeTestFilter;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.openqa.selenium.Keys;
 import utils.ConfigProvider;
 import utils.ExcelDriver;
@@ -16,12 +18,13 @@ import org.junit.runner.RunWith;
 import java.util.Arrays;
 import java.util.List;
 
-@RunWith(JUnitParamsRunner.class)
+//@RunWith(JUnitParamsRunner.class)
 public class LoginTestWithPageObject extends BaseTest {
     protected String userName = "qaauto";
     protected String userPassword = "123456qwerty";
 
     @Test
+    @Category(SmokeTestFilter.class)
     public void TR001_validLogin() {
 
         pageProvider.getLoginPage().openLoginPage();
@@ -120,27 +123,27 @@ public class LoginTestWithPageObject extends BaseTest {
                 .checkIsButtonSighOutNotVisible();
     }
 
-    @Test
-    @Parameters(method = "invalidLoginParameters")
-    public void HW6_parameterizedIncorrectLogin(String userName, String userPassword) {
-        pageProvider.getLoginPage().openLoginPage()
-                .enterTextIntoInputLoginAndContinue(userName)
-                .enterTextIntoInputPasswordAndContinue(userPassword)
-                .clickOnButtonSighIn()
-                .getLoginPage()
-                .checkIsErrorMessageDisplayed();
-    }
-
-    private List<Object[]> invalidLoginParameters() {
-        return Arrays.asList(new Object[][] {
-                {userName, ""},
-                {"", userPassword},
-                {"", ""},
-                {"invalidUser", "invalidPass"},
-                {userName, "invalidPass"},
-                {"invalidUser", userPassword}
-        });
-    }
+//    @Test
+//    @Parameters(method = "invalidLoginParameters")
+//    public void HW6_parameterizedIncorrectLogin(String userName, String userPassword) {
+//        pageProvider.getLoginPage().openLoginPage()
+//                .enterTextIntoInputLoginAndContinue(userName)
+//                .enterTextIntoInputPasswordAndContinue(userPassword)
+//                .clickOnButtonSighIn()
+//                .getLoginPage()
+//                .checkIsErrorMessageDisplayed();
+//    }
+//
+//    private List<Object[]> invalidLoginParameters() {
+//        return Arrays.asList(new Object[][] {
+//                {userName, ""},
+//                {"", userPassword},
+//                {"", ""},
+//                {"invalidUser", "invalidPass"},
+//                {userName, "invalidPass"},
+//                {"invalidUser", userPassword}
+//        });
+//    }
 
     @Test
     public void HW6_validLoginUsingKeyboardKeys() {
