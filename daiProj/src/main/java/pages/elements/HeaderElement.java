@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.CommonActionsWithElements;
+import pages.HomePage;
 import pages.MyProfilePage;
 
 public class HeaderElement extends CommonActionsWithElements {
@@ -16,6 +17,14 @@ public class HeaderElement extends CommonActionsWithElements {
 
     @FindBy(xpath = "//*[@href='/create-post']")
     private WebElement buttonCreatePost;
+
+    @FindBy(xpath = "//a[contains(@class, 'header-search-icon')]")
+    private WebElement buttonSearch;
+
+    @FindBy(xpath = "//span[contains(@class, 'header-chat-icon')]")
+    private WebElement buttonChat;
+
+
 
     public HeaderElement(WebDriver webDriver) {
         super(webDriver);
@@ -38,6 +47,16 @@ public class HeaderElement extends CommonActionsWithElements {
     public HeaderElement checkIsButtonSignOutVisible() {
        checkIsElementVisible(buttonSignOut);
         return this;
+    }
+
+    public boolean isButtonSearchVisible() {return isElementVisible(buttonSearch);
+    }
+
+    public boolean isButtonChatVisible() {return isElementVisible(buttonChat);
+    }
+
+    public HomePage clickOnButtonSignOut() {clickOnElement(buttonSignOut);
+        return new HomePage(webDriver);
     }
 }
 

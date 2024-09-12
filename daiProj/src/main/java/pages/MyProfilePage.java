@@ -26,7 +26,7 @@ public class MyProfilePage extends ParentPage {
     }
 
 
-    private List<WebElement> postsListWithTitle(String postTitle) {
+    public List<WebElement> postsListWithTitle(String postTitle) {
         return webDriver.findElements(By.xpath(String.format(postTitleLocator, postTitle)));
     }
 
@@ -68,6 +68,11 @@ public class MyProfilePage extends ParentPage {
         Assert.assertTrue("Message is not displayed"
                 , isElementVisible(successMessageDelete));
         return this;
+    }
+
+    public PostPage clickOnPostWithTitle(String postTitle) {
+        clickOnElement(postsListWithTitle(postTitle).get(0));
+        return new PostPage(webDriver);
     }
 }
 

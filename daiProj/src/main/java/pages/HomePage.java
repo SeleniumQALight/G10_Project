@@ -18,6 +18,7 @@ public class HomePage extends ParentPage {
     @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
     private WebElement buttonCreatePost;
 
+
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -66,7 +67,9 @@ public class HomePage extends ParentPage {
             logger.info("User was logged in");
         }
         return this;
+
     }
+
 }
 
 

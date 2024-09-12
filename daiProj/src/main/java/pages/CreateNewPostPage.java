@@ -22,6 +22,7 @@ public class CreateNewPostPage extends ParentPage {
     @FindBy(xpath = "//input [@type ='checkbox']")
     private WebElement checkBox;
 
+
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -73,8 +74,8 @@ public class CreateNewPostPage extends ParentPage {
         }
         return this;
 
-    }
 
+    }
 }
 
 
