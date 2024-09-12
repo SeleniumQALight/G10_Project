@@ -14,6 +14,12 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
+    @FindBy(xpath = "//a[@class='text-primary mr-2']")
+    private WebElement editPostButton;
+
+    @FindBy(xpath = "//div[@class='d-flex justify-content-between'][.//h2]")
+    private WebElement postTitle;
+
     @FindBy(xpath = "//p[text()='Is this post unique? : yes']")
     private WebElement answerYes;
 
@@ -68,4 +74,16 @@ public class PostPage extends ParentPage {
         Assert.assertTrue(expectedText + "Text is not visible", isElementVisible(String.format(locatorForTextThisPostWasWritten, expectedText)));
         return this;
     }
+
+    public EditPostPage clickOnButtonEditPost() {
+        clickOnElement(editPostButton);
+        return new EditPostPage(webDriver);
+    }
+
+
+    public PostPage checkNewPostTitleIsPresent(String newPostTitle) {
+        Assert.assertTrue("New post title is not visible", isElementVisible(postTitle, newPostTitle));
+        return this;
+    }
+
 }

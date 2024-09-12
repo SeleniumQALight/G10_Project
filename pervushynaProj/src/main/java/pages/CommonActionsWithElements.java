@@ -97,7 +97,6 @@ public class CommonActionsWithElements {
         }
     }
 
-
     protected boolean isElementVisible(WebElement webElement, String elementName){
         try{
             boolean state = webElement.isDisplayed();

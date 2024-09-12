@@ -2,16 +2,17 @@ package postTests;
 
 import baseTest.BaseTest;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
-public class CreateNewPostTest extends BaseTest {
-
-    //GUID = 1b1b1b1b-1b1b-1b1b-1b1b-1b1b1b1b1b1b - бібліотека в java для генерації унікальних ідентифікаторів
+public class UpdatePostTest extends BaseTest {
 
     private final String POST_TITLE = "TR003_pervushyna " + utils.Utils.getDateAndTimeFormatted();
 
-    @Test
-    public void TR003_createNewPost() {
+    private final String NEW_POST_TITLE = "TR003_pervushynaNEW " + utils.Utils.getDateAndTimeFormatted();
+
+    @Before
+    public void createPost() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillingFormWithValidCred()
                 .checkIsRedirectToHomePage().getHeaderElement()
@@ -19,20 +20,33 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("Body of the post from Kait")
-                .setCheckBoxUniquePost()
-                //.selectTextInDropdownAccessByVisibleText("Приватне повідомлення")
-                .selectValueInDropdownAccess ("One Person")
+                .selectValueInDropdownAccess("One Person")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
-                .checkAnswerYesIsDisplayed("Is this post unique? : yes")
                 .checkTextThisPostWasWrittenIsVisible("One Person")
+        ;
+    }
+
+    @Test
+    public void TR005_updatePost() {
+        pageProvider.getPostPage()
+                .clickOnButtonEditPost()
+                .checkIsRedirectToEditPostPage()
+                .enterNewTextIntoInputTitle(NEW_POST_TITLE)
+                .enterNewTextIntoInputBody("New body of the post from KaitNew")
+                .clickOnButtonSaveUpdatePost()
+                .checkIsSuccessUpdateMessageDisplayed()
+                .checkTextInUpdateSuccessMessage("Post successfully updated.")
+                .clickOnButtonBackToPost()
+                .checkIsRedirectToPostPage()
+                .checkNewPostTitleIsPresent(NEW_POST_TITLE)
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
-                .checkPostWithTitleIsPresent(POST_TITLE, 1)
-        ;
+                .checkPostWithTitleIsPresent(NEW_POST_TITLE, 1)
 
+        ;
     }
 
     @After
@@ -41,8 +55,8 @@ public class CreateNewPostTest extends BaseTest {
                 .openHomePageAndLoginIfNeeded()
                 .getHeaderElement().clickOnMyProfileButton()
                 .checkIsRedirectToMyProfilePage()
+                .deletePostsTillPresent(NEW_POST_TITLE)
                 .deletePostsTillPresent(POST_TITLE)
         ;
-
     }
 }

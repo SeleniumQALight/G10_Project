@@ -1,10 +1,12 @@
 package pages;
 
 import data.TestData;
+import org.apache.hc.core5.http.HeaderElement;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,6 +31,7 @@ public class LoginPage extends ParentPage {
     private WebElement textInvalidUsernamePasswordIsDisplay;
 
     private Logger logger = Logger.getLogger(getClass());
+    private HeaderElement headerElement;
 
     @FindBy(id = "username-register")
     private WebElement inputUserNameInRegistrationForm;
@@ -52,6 +55,10 @@ public class LoginPage extends ParentPage {
     @Override
     protected String getRelativeUrl() {
         return "/";
+    }
+
+    public pages.elements.HeaderElement getHeaderElement() {
+        return new pages.elements.HeaderElement(webDriver);
     }
 
     public void openLoginPage() {
@@ -104,6 +111,15 @@ public class LoginPage extends ParentPage {
     public boolean textIsDisplay() {
         return isElementVisible(textInvalidUsernamePasswordIsDisplay);
     }
+
+    public LoginPage checkIsRedirectToLoginPage() {
+        Assert.assertTrue("It is not Login page", isButtonSignInVisible());
+        Assert.assertTrue("Input Username is not visible", isElementVisible(inputUsernameInLoginForm));
+        Assert.assertTrue("Input Password is not visible", isElementVisible(inputPasswordInLoggInForm));
+        checkUrlWithPattern();
+        return this;
+    }
+
 
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         cleatAndEnterTextIntoElement(inputUserNameInRegistrationForm, userName);
