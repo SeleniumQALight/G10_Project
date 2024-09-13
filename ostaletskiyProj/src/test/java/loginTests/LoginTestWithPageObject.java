@@ -2,6 +2,7 @@ package loginTests;
 
 import baseBase.BaseTest;
 import data.TestData;
+import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Test;
 import utils.ConfigProvider;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class LoginTestWithPageObject extends BaseTest {
+    final String ALERT_NOTIFICATION = "Invalid username/password.";
 
     @Test
     public void TR001_validLogin() {
@@ -73,5 +75,15 @@ public class LoginTestWithPageObject extends BaseTest {
                 pageProvider.getLoginPage().isInputPasswordVisible());
         Assert.assertFalse("Input for login is visible",
                 pageProvider.getLoginPage().isInputLoginVisible());
+    }
+
+    @Parameters(method = "parametersForInvalidLoginTest")
+    @Test
+    public void TR003_invalidLoginWithParams (String login, String password, String alertMessage ){
+        pageProvider.getLoginPage().openLoginPage();
+            pageProvider.getLoginPage().enterTextIntoInputLogin(login);
+            pageProvider.getLoginPage().enterTextIntoInputPassword(password);
+            pageProvider.getLoginPage().clickOnButtonSignIn();
+
     }
 }
