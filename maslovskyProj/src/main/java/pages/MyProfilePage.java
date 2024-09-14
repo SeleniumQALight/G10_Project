@@ -10,7 +10,8 @@ import java.util.List;
 
 public class MyProfilePage extends ParentPage {
 
-    private String postTitleLocator = "//*[text()='%s']";  // locator with parameter
+//    private String postTitleLocator = "//*[text()='%s']";  // locator with parameter
+    private String postTitleLocator = "//*[contains(text(), '%s')]";  // locator with parameter
 
     @FindBy(xpath = "//*[text()='Post successfully deleted.']")
     private WebElement successMessageDelete;

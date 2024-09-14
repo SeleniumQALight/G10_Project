@@ -27,6 +27,8 @@ public class PostPage extends ParentPage {
 
     private String locatorForTextThisPostWasWrittenIsVisible = "//*[contains(text(), '%s')]";
 
+    private String locatorForUniqueText = ".//*[text()='Is this post unique? : %s']";
+
     public PostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -69,6 +71,12 @@ public class PostPage extends ParentPage {
 
     public PostPage checkIsUniqueTextInPostDisplayed() {
         Assert.assertTrue("'Unique' text is not displayed", isElementVisible(uniqueText));
+        return this;
+    }
+
+    public PostPage checkIsUniqueTextInPostDisplayed(String uniqueStatus) {
+        Assert.assertTrue("'Unique' text is not displayed",
+                isElementVisible(String.format(locatorForUniqueText, uniqueStatus)));
         return this;
     }
 
