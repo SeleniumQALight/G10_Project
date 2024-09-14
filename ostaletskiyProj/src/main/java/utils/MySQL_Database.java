@@ -1,6 +1,9 @@
-package utils;
+package libs;
 
 import org.aeonbits.owner.ConfigFactory;
+import utils.ConfigProperties;
+import utils.ConfigProvider;
+import utils.Database;
 
 import java.sql.SQLException;
 

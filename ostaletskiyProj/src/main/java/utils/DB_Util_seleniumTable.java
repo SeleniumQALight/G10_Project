@@ -9,7 +9,7 @@ public class DB_Util_seleniumTable {
     Logger logger = Logger.getLogger(getClass());
 
     public String getPassForLogin(String login) throws SQLException, ClassNotFoundException {
-        mySQL_DataBase = MySQL_Database.getDataBase();
+        mySQL_DataBase = libs.MySQL_Database.getDataBase();
         logger.info("--- Connected to DB -------");
 
         String pass = mySQL_DataBase.selectValue(
