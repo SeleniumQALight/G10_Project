@@ -166,6 +166,49 @@ public class CommonActionsWithElements {
         }
     }
 
+    //executes JavaScript code - open new tab with URL
+    protected void openNewTab(String url) {
+        try {
+            ((JavascriptExecutor) webDriver).executeScript("window.open('" + url + "')");
+            logger.info("New tab was opened with URL " + url);
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //executes JavaScript code - close current tab
+    protected void closeCurrentTab() {
+        try {
+            ((JavascriptExecutor) webDriver).executeScript("window.close()");
+            logger.info("Current tab was closed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //method for switching to another tab
+    protected void switchToTabByIndex(int index) {
+        try {
+            webDriver.switchTo().window((String) webDriver.getWindowHandles().toArray()[index]);
+            logger.info("Switched to tab with index " + index);
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void switchToMainTab(){
+        switchToTabByIndex(0);
+    }
+
+    protected void refreshPage() {
+        try {
+            webDriver.navigate().refresh();
+            logger.info("Page was refreshed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);

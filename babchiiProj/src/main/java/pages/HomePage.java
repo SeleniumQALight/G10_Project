@@ -61,4 +61,26 @@ public class HomePage extends ParentPage {
         return this;
 
     }
+
+    public HomePage openNewTabAfterValidLoginAndCheckIsUserLoggedIn(){
+        openNewTab(baseUrl);
+        switchToTabByIndex(1);
+        checkIsRedirectToHomePage();
+        getHeaderElement().checkIsButtonSignOutVisible();
+        return this;
+    }
+
+    public HomePage checkIsUserLoggedInMainTab(){
+        switchToMainTab();
+        getHeaderElement().checkIsButtonSignOutVisible();
+        return this;
+    }
+
+    public HomePage closeNewTabAndCheckIsUserLoggedInOnMainTab(){
+        switchToTabByIndex(1);
+        closeCurrentTab();
+        switchToMainTab();
+        getHeaderElement().checkIsButtonSignOutVisible();
+        return this;
+    }
 }
