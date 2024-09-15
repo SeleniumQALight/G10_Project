@@ -5,10 +5,10 @@ import org.apache.log4j.Logger;
 import java.sql.SQLException;
 
 public class DB_Util_seleniumUsers {
-    private Database mySQL_DataBase;
-    Logger logger = Logger.getLogger(getClass());
+    private static Database mySQL_DataBase;
+    static Logger logger = Logger.getLogger(DB_Util_seleniumUsers.class);
 
-    public String getPassForLogin(String login) throws SQLException, ClassNotFoundException {
+    public static String getPassForLogin(String login) throws SQLException, ClassNotFoundException {
         mySQL_DataBase = MySQL_Database.getDataBase();
         logger.info("--- Connected to DB -------");
 

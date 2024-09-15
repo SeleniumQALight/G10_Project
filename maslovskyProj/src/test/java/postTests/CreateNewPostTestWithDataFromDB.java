@@ -25,12 +25,11 @@ public class CreateNewPostTestWithDataFromDB extends BaseTest {
     private Database mySQLDataBase;
     protected String userName = "newqaauto";
     protected String userPassword;
-    DB_Util_seleniumUsers db_Util_seleniumUsers = new DB_Util_seleniumUsers();
 
     protected void preconditionGetUserPasswordFromDB() throws SQLException, ClassNotFoundException {
         mySQLDataBase = MySQL_Database.getDataBase();
         logger.info("MySQL database was setup");
-        userPassword = db_Util_seleniumUsers.getPassForLogin(userName);
+        userPassword = DB_Util_seleniumUsers.getPassForLogin(userName);
     }
 
     @Test
