@@ -1,4 +1,4 @@
-package loginTests;
+package manipulaitonsWithPages;
 
 import baseBase.BaseTest;
 import data.TestData;

@@ -174,6 +174,11 @@ public class LoginPage extends ParentPage {
         checkUrl();
         return this;
     }
+
+    public LoginPage refreshPage() {
+        webDriver.navigate().refresh();
+        return this;
+    }
 }
 
 
