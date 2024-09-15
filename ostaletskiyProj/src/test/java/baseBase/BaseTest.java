@@ -15,21 +15,27 @@ import utils.ConfigProvider;
 
 import java.time.Duration;
 
+import static utils.ConfigProvider.configProperties;
+
 
 public class BaseTest {
-    private WebDriver webDriver = new  InternetExplorerDriver();
+    private WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
     protected PageProvider pageProvider;
 
     // цей блок викликається перед кожним тестом
     @Before
     public void setup(){
-     //   WebDriverManager.chromedriver().setup();
-        // webDriver = new ChromeDriver();
+//        WebDriverManager.chromedriver().setup();
+//        webDriver = new ChromeDriver();
         webDriver = initDriver();
         webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_IMPLICIT_WAIT()));
-        logger.info("Browser started");
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--headless");
+//        options.addArguments("----window-size=1920,1028");
+//        webDriver = new ChromeDriver(options);
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(configProperties.TIME_FOR_IMPLICIT_WAIT()));
+        logger.info("Browser was opened");
         pageProvider = new PageProvider(webDriver);
     }
 
