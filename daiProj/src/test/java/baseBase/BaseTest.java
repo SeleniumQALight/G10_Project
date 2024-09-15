@@ -18,8 +18,8 @@ import static utils.ConfigProvider.configProperties;
 
 public class BaseTest {
 
-    private WebDriver webDriver;
-    private Logger logger = Logger.getLogger(getClass());
+    protected WebDriver webDriver;
+    protected Logger logger = Logger.getLogger(getClass());
     protected PageProvider pageProvider;
 
       //this method will be run before each test method
