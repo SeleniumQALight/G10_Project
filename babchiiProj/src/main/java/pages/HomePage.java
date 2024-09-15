@@ -76,8 +76,8 @@ public class HomePage extends ParentPage {
         return this;
     }
 
-    public HomePage closeNewTabAndCheckIsUserLoggedInOnMainTab(){
-        switchToTabByIndex(1);
+    public HomePage closeNewTabAndCheckIsUserLoggedInOnMainTab(int tabIndex){
+        switchToTabByIndex(tabIndex);
         closeCurrentTab();
         switchToMainTab();
         getHeaderElement().checkIsButtonSignOutVisible();

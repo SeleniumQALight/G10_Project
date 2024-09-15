@@ -76,7 +76,7 @@ public class LoginTestWithPageObject extends BaseTest {
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .openNewTabAfterValidLoginAndCheckIsUserLoggedIn()
                 .checkIsUserLoggedInMainTab()
-                .closeNewTabAndCheckIsUserLoggedInOnMainTab();
+                .closeNewTabAndCheckIsUserLoggedInOnMainTab(1);
     }
 
     @Test
