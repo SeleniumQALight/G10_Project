@@ -1,5 +1,6 @@
 package pages.elements;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,16 +37,19 @@ public class HeaderElement extends CommonActionsWithElements {
         super(webDriver);
     }
 
+    @Step
     public MyProfilePage clickOnMyProfileButton() {
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
     }
 
+    @Step
     public CreateNewPostPage clickOnButtonCreatePost() {
         clickOnElement(buttonCreatePost);
         return new CreateNewPostPage(webDriver);
     }
 
+    @Step
     public boolean isButtonSignOutVisible() {
         return isElementVisible(buttonSignOut, "Sign Out button");
     }
@@ -66,6 +70,7 @@ public class HeaderElement extends CommonActionsWithElements {
         return isElementVisible(String.format(userNameLocator, userName));
     }
 
+    @Step
     public HomePage clickOnSignOutButton() {
         clickOnElement(buttonSignOut);
         return new HomePage(webDriver);
@@ -79,20 +84,24 @@ public class HeaderElement extends CommonActionsWithElements {
         return isElementVisible(chatButton, "Chat button");
     }
 
+    @Step
     public HeaderElement checkIsButtonSighOutVisible() {
         checkIsElementVisible(buttonSignOut);
         return this;
     }
 
+    @Step
     public HeaderElement checkIsButtonSighOutNotVisible() {
         checkIsElementNotVisible(buttonSignOut, "Sign Out");
         return this;
     }
 
+    @Step
     public HomePage getHomePage() {
         return new HomePage(webDriver);
     }
 
+    @Step
     public LoginPage getLoginPage() {
         return new LoginPage(webDriver);
     }
