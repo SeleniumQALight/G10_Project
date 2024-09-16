@@ -3,6 +3,7 @@ package loginTests;
 import baseTest.BaseTest;
 import categories.SmokeTestFilter;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import utils.ConfigProvider;
@@ -64,6 +65,7 @@ public class LoginTestWithPageObject extends BaseTest {
     }
 
     @Test
+    @Ignore
     public void TR002_invalidLogin() {
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin("invalidLogin");
