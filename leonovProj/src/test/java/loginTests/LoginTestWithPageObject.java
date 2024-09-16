@@ -1,8 +1,10 @@
 package loginTests;
 
 import baseTest.BaseTest;
+import categories.SmokeTestFilter;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import utils.ConfigProvider;
 import utils.ExcelDriver;
 
@@ -16,6 +18,7 @@ public class LoginTestWithPageObject extends BaseTest {
 
 
     @Test
+    @Category(SmokeTestFilter.class)
     public void TR001_validLogin() {
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin(VALID_LOGIN_UI);
@@ -69,7 +72,7 @@ public class LoginTestWithPageObject extends BaseTest {
 
 //        Assert.assertFalse("Button Sign Out should not be displayed",
 //                pageProvider.getHomePage().getHeader().isButtonSignOutVisible());
-        pageProvider.getHomePage().getHeader().checkIsButtonSignOutVisible();
+        pageProvider.getHomePage().getHeader().checkIsButtonSignOutVisible(); // test fails because of this line (should be NOT visible)
 
         Assert.assertTrue("Alert about invalid login should be displayed",
                 pageProvider.getLoginPage().isAlertInvalidLoginDisplayed());
