@@ -4,19 +4,26 @@ import baseBase.BaseTest;
 import categories.SmokeTestFilter;
 import data.TestData;
 import io.qameta.allure.*;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
 import utils.ConfigProvider;
 import utils.ExcelDriver;
 
 import java.io.IOException;
 import java.util.Map;
 
+import static data.TestData.*;
+
 @Epic("Allure examples")
 @Feature("Junit 4 support")
+@RunWith(JUnitParamsRunner.class)
 public class LoginTestWithPageObject extends BaseTest {
+    final String ALERT_MESSAGE = "Invalid username/password.";
 
 
     @Test
@@ -29,8 +36,8 @@ public class LoginTestWithPageObject extends BaseTest {
     @Story("Base support for bdd annotations")
     public void TR001_validLogin() {
         pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
-        pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty");
+        pageProvider.getLoginPage().enterTextIntoInputLogin(VALID_LOGIN_UI);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(VALID_PASSWORD_UI);
         pageProvider.getLoginPage().clickOnButtonSignIn();
 
       //  Assert.assertTrue("Button Sign Out is not displayed",
@@ -51,8 +58,8 @@ public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void TR002_invalidLogin() {
         pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().enterTextIntoInputLogin("qaauto");
-        pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty123");
+        pageProvider.getLoginPage().enterTextIntoInputLogin(INVALID_LOGIN_UI);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(INVALID_PASSWORD_UI);
         pageProvider.getLoginPage().clickOnButtonSignIn();
 
 
@@ -88,5 +95,23 @@ public class LoginTestWithPageObject extends BaseTest {
                 pageProvider.getLoginPage().isInputPasswordVisible());
         Assert.assertFalse("Input for login is visible",
                 pageProvider.getLoginPage().isInputLoginVisible());
+    }
+
+    @Test
+    @Parameters(method = "parametersForInvalidLoginTest")
+    public void TR010_InvalidLoginWithParameters(String login, String password, String alertMessage) {
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin(login);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(password);
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getLoginPage().isNotificationVisible();
+    }
+
+    public Object[][] parametersForInvalidLoginTest() {
+        return new Object[][]{
+                {INVALID_LOGIN_UI, INVALID_PASSWORD_UI, ALERT_MESSAGE},
+                {VALID_LOGIN_UI, INVALID_PASSWORD_UI, ALERT_MESSAGE},
+                {INVALID_LOGIN_UI, VALID_PASSWORD_UI, ALERT_MESSAGE}
+        };
     }
 }
