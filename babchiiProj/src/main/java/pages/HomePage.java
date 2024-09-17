@@ -1,6 +1,7 @@
 package pages;
 
 import data.TestData;
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -28,14 +29,17 @@ public class HomePage extends ParentPage {
         checkUrl();
         return this;
     }
+    @Step
     public HomePage checkIsButtonCreatePostVisible() {
         Assert.assertTrue("Button Create Post is not displayed", getHeaderElement().isButtonCreatePostVisible());
         return this;
     }
+    @Step
     public HomePage checkIsButtonMyProfileVisible() {
         Assert.assertTrue("Button My Profile is not displayed", getHeaderElement().isMyProfileButtonVisible());
         return this;
     }
+    @Step
     public HomePage checkIsUserNameVisible() {
         Assert.assertTrue("User name is not displayed", getHeaderElement().getUserNameText().equals(TestData.VALID_LOGIN_UI));
         return this;
