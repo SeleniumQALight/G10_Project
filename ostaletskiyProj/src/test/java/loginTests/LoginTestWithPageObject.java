@@ -114,4 +114,13 @@ public class LoginTestWithPageObject extends BaseTest {
                 {INVALID_LOGIN_UI, VALID_PASSWORD_UI, ALERT_MESSAGE}
         };
     }
+    @Test
+    public void TR009_inputsAreClearedAfterRefresh() {
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
+        pageProvider.getCommonActionsWithElements().refreshPage();
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getLoginPage().checkIsButtonSignInVisible();
+    }
 }

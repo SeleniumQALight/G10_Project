@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.ConfigProvider;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Set;
 
 import static utils.ConfigProvider.configProperties;
 
@@ -199,6 +201,35 @@ public class CommonActionsWithElements {
             return webElement.getAccessibleName();
         } catch (Exception e) {
             return elementName;
+        }
+    }
+    public void switchToTab(String tabName, int tabIndex) {
+        try {
+            Set<String> allWindows = webDriver.getWindowHandles();
+            ArrayList<String> tabList = new ArrayList<>(allWindows);
+            webDriver.switchTo().window(tabList.get(tabIndex));
+            logger.info("Switched to " + tabName);
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    public void closeTab(String tabName, int tabIndex) {
+        try {
+            this.switchToTab(tabName, tabIndex);
+            webDriver.close();
+            logger.info(tabName + " is closed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    public void refreshPage() {
+        try {
+            webDriver.navigate().refresh();
+            logger.info("Page is refreshed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
         }
     }
 }
