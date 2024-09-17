@@ -1,10 +1,16 @@
 package pages;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.elements.HeaderElement;
+
+import java.time.Duration;
+import java.util.List;
 
 public class PostPage extends ParentPage {
 
@@ -17,7 +23,12 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "// p[text()='Is this post unique? : yes']")
     private WebElement uniqueText;
 
+    @FindBy(xpath = "//a[contains(@class, 'text-primary') and contains(@class, 'mr-2')]")
+    private WebElement buttonEditPost;
+
+
     private String locatorForTextThisPostWasWritten = "//*[contains(text(), '%s')]";
+
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -63,8 +74,8 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkTextThisPostWasWrittenIsVisible(String expectedText) {
-Assert.assertTrue(expectedText + "Text is not visible"
-        , isElementVisible(String.format(locatorForTextThisPostWasWritten, expectedText)));
+        Assert.assertTrue(expectedText + "Text is not visible"
+                , isElementVisible(String.format(locatorForTextThisPostWasWritten, expectedText)));
         return this;
     }
 
@@ -78,5 +89,16 @@ Assert.assertTrue(expectedText + "Text is not visible"
         Assert.assertEquals("Text", expectedText, actualText);
         return this;
     }
-}
+
+
+    public EditPostPage clickOnEditPostButton() {
+        clickOnElement(buttonEditPost);
+        return new EditPostPage(webDriver);
+    }
+
+
+    }
+
+
+
 

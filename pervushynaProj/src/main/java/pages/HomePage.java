@@ -30,14 +30,15 @@ public class HomePage extends ParentPage{
 
     public HomePage checkIsRedirectToHomePage() {
         Assert.assertTrue("It is not Home page", getHeaderElement().isButtonSignOutVisible());
+        Assert.assertTrue("Button Search is not visible", getHeaderElement().isSearchButtonVisible());
+        Assert.assertTrue("Button Chat is not visible", getHeaderElement().isChatButtonVisible());
+        Assert.assertTrue("Img Avatar is not visible", getHeaderElement().isImgAvatarVisible());
+        Assert.assertTrue("Button Create Post is not visible", getHeaderElement().isButtonCreatePostVisible());
+        Assert.assertTrue("Button Sign Out is not visible", getHeaderElement().isButtonSignOutVisible());
         checkUrlWithPattern();
         return this;
     }
 
-    public CreateNewPostPage clickOnButtonCreatePost() {
-        clickOnElement(buttonCreatePost);
-        return new CreateNewPostPage(webDriver);
-    }
 
     public HomePage openHomePageAndLoginIfNeeded() {
         LoginPage loginPage = new LoginPage(webDriver);

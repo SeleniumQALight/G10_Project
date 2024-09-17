@@ -3,13 +3,15 @@ package pages;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import utils.ConfigProvider;
 
 abstract class ParentPage extends CommonActionsWithElements{
 
     protected Logger logger = Logger.getLogger(getClass());
     String environment = System.getProperty("env", "aqa").toLowerCase();
-    String baseURL = "https://"+environment+"-complexapp.onrender.com";
+    //String baseURL = "https://"+environment+"-complexapp.onrender.com";
 
+    String baseURL = ConfigProvider.configProperties.base_url().replace("[env]", environment);
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
     }

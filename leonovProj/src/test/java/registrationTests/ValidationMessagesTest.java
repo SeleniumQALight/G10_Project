@@ -1,12 +1,15 @@
 package registrationTests;
 
 import baseTest.BaseTest;
+import categories.SmokeTestFilter;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 
 @RunWith(JUnitParamsRunner.class)
+@Category(SmokeTestFilter.class)
 public class ValidationMessagesTest extends BaseTest {
     final String SHORT_USERNAME_MESSAGE = "Username must be at least 3 characters.";
     final String SHORT_EMAIL_MESSAGE = "You must provide a valid email address.";

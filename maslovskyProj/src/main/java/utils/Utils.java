@@ -1,11 +1,20 @@
 package utils;
 
+import org.apache.log4j.Logger;
+import org.openqa.selenium.WebDriver;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Utils {
-    private Utils() {
+
+    private WebDriver webDriver;
+    private Logger logger;
+
+    public Utils(WebDriver webDriver, Logger logger) {
+        this.webDriver = webDriver;
+        this.logger = logger;
     }
 
     public static void waitABit(Integer second){

@@ -1,10 +1,13 @@
 package pages;
 
 import data.TestData;
+import io.qameta.allure.Step;
+import org.apache.hc.core5.http.HeaderElement;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,6 +32,7 @@ public class LoginPage extends ParentPage {
     private WebElement textInvalidUsernamePasswordIsDisplay;
 
     private Logger logger = Logger.getLogger(getClass());
+    private HeaderElement headerElement;
 
     @FindBy(id = "username-register")
     private WebElement inputUserNameInRegistrationForm;
@@ -54,11 +58,18 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+
+
+    public pages.elements.HeaderElement getHeaderElement() {
+        return new pages.elements.HeaderElement(webDriver);
+    }
+
+    @Step
     public void openLoginPage() {
         webDriver.get(baseURL);
         logger.info("Login page was opened");
     }
-
+    @Step
     public void enterTextIntoInputLogin(String login) {
 //        try {
 ////            WebElement inputUsernameInLoginForm =
@@ -73,22 +84,27 @@ public class LoginPage extends ParentPage {
         cleatAndEnterTextIntoElement(inputUsernameInLoginForm, login);
     }
 
+
     public boolean isInputLoginDisplayed() {
         return isElementVisible(inputUsernameInLoginForm);
     }
+
 
     public boolean isInputPasswordDisplayed() {
         return isElementVisible(inputPasswordInLoggInForm);
     }
 
+    @Step
     public void enterTextIntoInputPassword(String password) {
         cleatAndEnterTextIntoElement(inputPasswordInLoggInForm, password);
     }
 
+    @Step
     public void clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
     }
 
+    @Step
     public HomePage openLoginPageAndFillingFormWithValidCred() {
         openLoginPage();
         enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
@@ -97,29 +113,44 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
+    @Step
     public boolean isButtonSignInVisible() {
         return isElementVisible(buttonSignIn);
     }
 
+    @Step
     public boolean textIsDisplay() {
         return isElementVisible(textInvalidUsernamePasswordIsDisplay);
     }
 
+    @Step
+    public LoginPage checkIsRedirectToLoginPage() {
+        Assert.assertTrue("It is not Login page", isButtonSignInVisible());
+        Assert.assertTrue("Input Username is not visible", isElementVisible(inputUsernameInLoginForm));
+        Assert.assertTrue("Input Password is not visible", isElementVisible(inputPasswordInLoggInForm));
+        checkUrlWithPattern();
+        return this;
+    }
+
+    @Step
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         cleatAndEnterTextIntoElement(inputUserNameInRegistrationForm, userName);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationEmailField(String email) {
         cleatAndEnterTextIntoElement(inputEmailInRegistrationForm, email);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationPasswordField(String password) {
         cleatAndEnterTextIntoElement(inputPasswordInRegistrationForm, password);
         return this;
     }
 
+    @Step
     public LoginPage checkErrorsMessage(String expectedMessages) {
         //error1;error2;error3 -> [error1, error2, error3]
         String[] messagesArray = expectedMessages.split(";");

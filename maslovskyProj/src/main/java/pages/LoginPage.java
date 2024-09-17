@@ -1,14 +1,18 @@
 package pages;
 
 import data.TestData;
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.elements.HeaderElement;
 import utils.Utils;
 
 import java.util.ArrayList;
@@ -53,37 +57,51 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
-    public void openLoginPage() {
+    @Step
+    public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened " + baseUrl);
+        return this;
     }
 
+    Actions actions = new Actions(webDriver);
+
+    public HeaderElement getHeaderElement() {
+        return new HeaderElement(webDriver);
+    }
+
+    @Step
     public void enterTextIntoInputLogin(String login) {
-//        try{
-//            WebElement inputUserNameInLoginForm =
-//                    webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
-//            inputUserNameInLoginForm.clear();
-//            inputUserNameInLoginForm.sendKeys(login);
-//            logger.info(login + " was inputted into input Login");
-//        } catch (Exception e) {
-//            logger.error("Can not work with element " + e);
-//            Assert.fail("Can not work with element " + e);
-//        }
         clearAndEnterTextIntoElement(inputUserNameInLoginForm, login);
     }
 
+    public LoginPage enterTextIntoInputLoginAndContinue(String login) {
+        clearAndEnterTextIntoElement(inputUserNameInLoginForm, login);
+        return this;
+    }
+
+    @Step
     public void enterTextIntoInputPassword(String password) {
         clearAndEnterTextIntoElement(inputPasswordInLoginForm, password);
     }
 
-    public void clickOnButtonSighIn() {
-        clickOnElement(buttonSighIn);
+    public LoginPage enterTextIntoInputPasswordAndContinue(String password) {
+        clearAndEnterTextIntoElement(inputPasswordInLoginForm, password);
+        return this;
     }
 
+    @Step
+    public HeaderElement clickOnButtonSighIn() {
+        clickOnElement(buttonSighIn);
+        return new HeaderElement(webDriver);
+    }
+
+    @Step
     public boolean isInvalidCredentialsTextDisplayed() {
         return isElementVisible(invalidCredentialsText);
     }
 
+    @Step
     public HomePage openLoginPageAndFillLoginFormWithValidCred() {
         openLoginPage();
         enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
@@ -92,6 +110,7 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
+    @Step
     public boolean isButtonSignInVisible() {
         return isElementVisible(buttonSighIn);
     }
@@ -104,21 +123,25 @@ public class LoginPage extends ParentPage {
         return isElementVisible(inputPasswordInLoginForm);
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextIntoElement(inputUserNameInRegistrationForm, userName);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationEmailField(String email) {
         clearAndEnterTextIntoElement(inputEmailInRegistrationForm, email);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationPasswordField(String password) {
         clearAndEnterTextIntoElement(inputPasswordInRegistrationForm, password);
         return this;
     }
 
+    @Step
     public LoginPage checkErrorsMessages(String expectedMessages) {
         // error1;error2;error3 -> [error1, error2, error3]
         String[] messagesArray = expectedMessages.split(";");
@@ -143,6 +166,45 @@ public class LoginPage extends ParentPage {
                     .isIn(messagesArray);
         }
         softAssertions.assertAll(); // check all soft assertions
+        return this;
+    }
+
+    @Step
+    public LoginPage checkIsErrorMessageDisplayed() {
+        Assert.assertTrue(isElementVisible(invalidCredentialsText, "Invalid username/password message"));
+        return this;
+    }
+
+    @Step
+    public LoginPage enterText(String text) {
+        actions.sendKeys(text).perform();
+        return this;
+    }
+
+    @Step
+    public HomePage pressEnterButton() {
+        actions.sendKeys(Keys.ENTER).perform();
+        return new HomePage(webDriver);
+    }
+
+    @Step
+    public LoginPage reloadPageContent() {
+        refreshPage();
+        return this;
+    }
+
+    @Step
+    public LoginPage goToNewBrowserTab() {
+        switchToNewBrowserTab();
+        return this;
+    }
+
+
+    @Step
+    public LoginPage tabPressing(int count) {
+        for (int i = 0; i < count; i++) {
+            actions.sendKeys(Keys.TAB).perform();
+        }
         return this;
     }
 

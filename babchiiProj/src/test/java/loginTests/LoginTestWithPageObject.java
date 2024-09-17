@@ -1,17 +1,29 @@
 package loginTests;
 
 import baseTest.BaseTest;
+import categories.SmokeTestFilter;
 import data.TestData;
+import io.qameta.allure.*;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import utils.ConfigProvider;
 import utils.ExcelDriver;
 
 import java.io.IOException;
 import java.util.Map;
 
+@Epic("Allure examples")
+@Feature("Junit 4 support")
 public class LoginTestWithPageObject extends BaseTest {
     @Test
+    @Description("Some detailed test description")
+    @Link("https://example.org")
+    @Link(name = "allure", type = "mylink")
+    @Issue("123")
+    @Issue("432")
+    @Story("Base support for bdd annotations")
+    @Category(SmokeTestFilter.class)
     public void TR001_validLogin(){
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
@@ -37,6 +49,16 @@ public class LoginTestWithPageObject extends BaseTest {
         Assert.assertFalse("Button Sign Out is visible", pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
         Assert.assertTrue("Button 'Sign In' is not visible", pageProvider.getLoginPage().isButtonSignInVisible());
         Assert.assertTrue("The alert message is not visible", pageProvider.getLoginPage().isInvalidLoginMessageVisible());
+    }
+
+    @Test
+    public void TR003_checkSignOutButton(){
+        pageProvider.getLoginPage()
+                .openLoginPageAndFillLoginFormWithValidCred()
+                .getHeaderElement()
+                .checkIsHeaderElementsAreVisible("yes")
+                .getHeaderElement().clickOnButtonSignOut()
+                .getHeaderElement().checkIsHeaderElementsAreVisible("no");
     }
 
     @Test

@@ -1,6 +1,7 @@
 package pages;
 
 import data.TestData;
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
@@ -54,11 +55,12 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public void openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened " + baseUrl);
     }
-
+    @Step
     public void enterTextIntoInputLogin(String login) {
         // try{
         //  WebElement inputUserNameInLoginForm =
@@ -74,7 +76,7 @@ public class LoginPage extends ParentPage {
         clearAndEnterTextIntoElement(inputUserNameInLoginForm, login);
 
     }
-
+    @Step
     public void enterTextIntoInputPassword(String password) {
         // try {
         //   WebElement inputPasswordInLoginForm =
@@ -101,19 +103,19 @@ public class LoginPage extends ParentPage {
     //          logger.error("Can not work with element " + e);
     //        Assert.fail("Can not work with element " + e);
     //    }
-
+@Step
     public void clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
     }
-
+    @Step
     public boolean isButtonSignInVisible() {
         return isElementVisible(buttonSignIn);
     }
-
+    @Step
     public boolean isAlertMessageVisible() {
         return isElementVisible(alertMessage);
     }
-
+    @Step
     public HomePage openLoginPageAndFillLoginFormWithValidCred() {
         openLoginPage();
         enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
@@ -135,12 +137,12 @@ public class LoginPage extends ParentPage {
         clearAndEnterTextIntoElement(inputUserNameInRegistrationForm, userName);
         return this;
     }
-
+    @Step
     public LoginPage enterTextIntoRegistrationEmailField(String email) {
         clearAndEnterTextIntoElement(inputEmailInRegistrationForm, email);
         return this;
     }
-
+    @Step
     public LoginPage enterTextIntoRegistrationPasswordField(String password) {
         clearAndEnterTextIntoElement(inputPasswordInRegistrationForm, password);
         return this;
@@ -167,6 +169,11 @@ public class LoginPage extends ParentPage {
                     .isIn(messagesArray);
         }
         softAssertions.assertAll(); //check all soft assertions
+        return this;
+    }
+    public LoginPage checkIsRedirectToLoginPage() {
+        Assert.assertTrue("It is not Login page", isButtonSignInVisible());
+        checkUrl();
         return this;
     }
 }

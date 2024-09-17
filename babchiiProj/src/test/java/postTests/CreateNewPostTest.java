@@ -14,7 +14,7 @@ public class CreateNewPostTest extends BaseTest {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectToHomePage()
-                .clickOnButtonCreatePost()
+                .getHeaderElement().clickOnButtonCreatePost()
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTitleInToInputTitle(POST_TITLE)
                 .enterTextInToTextAreaBody("Text of the post from Vasyl")

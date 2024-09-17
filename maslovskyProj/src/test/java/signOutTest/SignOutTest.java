@@ -52,4 +52,22 @@ public class SignOutTest extends BaseTest {
                 pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
     }
 
+    @Test
+    public void HW6_verifyLogoutInTwoTabs() {
+        pageProvider.getHomePage()
+                .createNewBrowserTab()
+                .goToNewBrowserTab()
+                .openLoginPage()
+                .getHeaderElement().checkIsButtonSighOutVisible()
+                .getHomePage()
+                .getBackToFirstBrowserTab()
+                .getHeaderElement().clickOnSignOutButton()
+                .getHeaderElement().checkIsButtonSighOutNotVisible()
+                .getLoginPage()
+                .openLoginPage()
+                .goToNewBrowserTab()
+                .reloadPageContent()
+                .getHeaderElement().checkIsButtonSighOutNotVisible();
+    }
+
 }

@@ -1,9 +1,15 @@
 package loginTests;
 
 import baseTest.BaseTest;
+import categories.SmokeTestFilter;
 import data.TestData;
+import io.qameta.allure.*;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
 import utils.ConfigProvider;
 import utils.ExcelDriver;
 
@@ -12,9 +18,19 @@ import java.util.Map;
 
 import static data.TestData.*;
 
-
+@Epic("Allure examples")
+@Feature("Junit 4 support")
 public class LoginTestWithPageObject extends BaseTest {
+    final String ALERT_MESSAGE = "Invalid username/password.";
+
     @Test
+    @Category(SmokeTestFilter.class)
+    @Description("Some detailed test description")
+    @Link("https://example.org")
+    @Link(name = "allure", type = "mylink")
+    @Issue("123")
+    @Issue("432")
+    @Story("Base support for bdd annotations")
     public void TR001_validLogin() {
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
@@ -93,5 +109,30 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().enterTextIntoInputPassword(dataForValidLogin.get("pass"));
         pageProvider.getLoginPage().clickOnButtonSignIn();
         pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutIsVisible();
+    }
+
+    @Test
+    public void TR007_SessionPersistenceAcrossTabs() {
+        pageProvider.getLoginPage().openLoginPageAndLoginWithValidCreds();
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutIsVisible();
+        pageProvider.getCommonActionsWithElements().openNewTab();
+        pageProvider.getCommonActionsWithElements().switchToTab("new tab", 1);
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getHeaderElement().checkIsButtonSignOutIsVisible();
+        pageProvider.getCommonActionsWithElements().switchToTab("main tab", 0);
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutIsVisible();
+        pageProvider.getCommonActionsWithElements().closeTab("new tab",1);
+        pageProvider.getCommonActionsWithElements().switchToTab("main tab", 0);
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutIsVisible();
+    }
+
+    @Test
+    public void TR009_inputsAreClearedAfterRefresh() {
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
+        pageProvider.getCommonActionsWithElements().refreshPage();
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getLoginPage().checkIsButtonSignInVisible();
     }
 }
