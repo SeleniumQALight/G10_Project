@@ -26,7 +26,7 @@ public class LoginTestWithPageObject extends BaseTest {
     @Issue("432")
     @Story("Base support for bdd annotations")
     public void TR001_validLogin(){
-        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().openLoginPage()
         pageProvider.getLoginPage().enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
         pageProvider.getLoginPage().enterTextIntoInputPassword("123456qwerty");
         pageProvider.getLoginPage().clickOnButtonSignIn();
