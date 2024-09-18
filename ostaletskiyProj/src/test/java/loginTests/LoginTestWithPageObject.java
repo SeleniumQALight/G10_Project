@@ -98,7 +98,7 @@ public class LoginTestWithPageObject extends BaseTest {
     }
 
     @Test
-    @Parameters(method = "parametersForInvalidLoginTest")
+    @Parameters(method = "ParametersForInvalidLoginTest")
     public void TR010_InvalidLoginWithParameters(String login, String password, String alertMessage) {
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin(login);
@@ -107,7 +107,7 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().isNotificationVisible();
     }
 
-    public Object[][] parametersForInvalidLoginTest() {
+    public Object[][] ParametersForInvalidLoginTest() {
         return new Object[][]{
                 {INVALID_LOGIN_UI, INVALID_PASSWORD_UI, ALERT_MESSAGE},
                 {VALID_LOGIN_UI, INVALID_PASSWORD_UI, ALERT_MESSAGE},
@@ -122,5 +122,19 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getCommonActionsWithElements().refreshPage();
         pageProvider.getLoginPage().clickOnButtonSignIn();
         pageProvider.getLoginPage().checkIsButtonSignInVisible();
+    }
+    @Test
+    public void TR007_SessionPersistenceAcrossTabs() {
+        pageProvider.getLoginPage().openLoginPageAndFillLoginFormWithValidCredentials();
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutVisible();
+        pageProvider.getCommonActionsWithElements().openNewTab();
+        pageProvider.getCommonActionsWithElements().switchToTab("new tab", 1);
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutVisible();
+        pageProvider.getCommonActionsWithElements().switchToTab("main tab", 0);
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutVisible();
+        pageProvider.getCommonActionsWithElements().closeTab("new tab",1);
+        pageProvider.getCommonActionsWithElements().switchToTab("main tab", 0);
+        pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutVisible();
     }
 }
