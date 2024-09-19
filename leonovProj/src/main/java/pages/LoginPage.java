@@ -1,6 +1,7 @@
 package pages;
 
 import data.TestData;
+import data.UserForRegistration;
 import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
@@ -21,6 +22,9 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//input[@placeholder='Username']")
     private WebElement inputUserNameInLoginForm;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElement buttonSignUp;
 
     @FindBy(xpath = "//input[@placeholder='Password']")
     private WebElement inputPasswordInLoginForm;
@@ -170,5 +174,23 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll();
         return this;
 
+    }
+
+    public LoginPage enterRegistrationDataIfNotNull(UserForRegistration user) {
+        if (user.getUsername() != null) {
+            enterTextIntoRegistrationNameField(user.getUsername());
+        }
+        if (user.getEmail() != null) {
+            enterTextIntoRegistrationEmailField(user.getEmail());
+        }
+        if (user.getPassword() != null) {
+            enterTextIntoRegistrationPasswordField(user.getPassword());
+        }
+
+        return this;
+    }
+
+    public void clickOnSignUpButton() {
+        clickOnElement(buttonSignUp);
     }
 }
