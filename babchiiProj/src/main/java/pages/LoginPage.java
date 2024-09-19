@@ -50,13 +50,14 @@ public class LoginPage extends ParentPage {
     }
 
     @Step
-    public void openLoginPage() {
+    public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened " + baseUrl);
+        return this;
     }
 
     @Step
-    public void enterTextIntoInputLogin(String login) {
+    public LoginPage enterTextIntoInputLogin(String login) {
 //        try{
 ////            WebElement inputUserNameInLoginForm = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
 //            inputUserNameInLoginForm.clear();
@@ -67,16 +68,19 @@ public class LoginPage extends ParentPage {
 //            Assert.fail("Can not work with element " + e);
 //        }
         clearAndEnterTextIntoElement(getHeaderElement().getInputUserNameInLoginForm(), login);
+        return this;
     }
 
     @Step
-    public void enterTextIntoInputPassword(String password) {
+    public LoginPage enterTextIntoInputPassword(String password) {
         clearAndEnterTextIntoElement(getHeaderElement().getInputPasswordInLoginForm(), password);
+        return this;
     }
 
     @Step
-    public void clickOnButtonSignIn() {
+    public HomePage clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
+        return new HomePage(webDriver);
     }
 
     @Step
