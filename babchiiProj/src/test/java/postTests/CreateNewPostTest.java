@@ -18,7 +18,7 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTitleInToInputTitle(POST_TITLE)
                 .enterTextInToTextAreaBody("Text of the post from Vasyl")
-                .setStateToIsPostUniqueCheckbox("no")
+                .setStateToIsPostUniqueCheckbox("uncheck")
 //              .selectTextInDropDownAccessByVisibleText("Приватне повідомлення")
                 .selectValueInDropDownAccess("One Person")
                 .clickOnButtonSaveNewPost()

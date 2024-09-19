@@ -1,5 +1,6 @@
 package pages.elements;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -80,12 +81,16 @@ public class HeaderElement extends CommonActionsWithElements {
     public WebElement getInputPasswordInLoginForm() {
         return inputPasswordInLoginForm;
     }
+    @Step
     public boolean isInputUserNameInLoginFormVisible() {
         return isElementVisible(inputUserNameInLoginForm);
     }
+    @Step
     public boolean isInputPasswordInLoginFormVisible() {
         return isElementVisible(inputPasswordInLoginForm);
     }
+
+    @Step
     public HeaderElement checkIsButtonSignOutVisible() {
         checkIsElementVisible(buttonSignOut);
         return this;

@@ -1,5 +1,6 @@
 package pages.elements;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -64,10 +65,12 @@ public class HeaderElement extends CommonActionsWithElements {
         return isElementVisible(imgAvatar);
     }
 
+    @Step
     public boolean isChatButtonVisible() {
 
         return isElementVisible(chatButton);
     }
+    @Step
     public HeaderElement checkIsButtonSignOutVisible() {
         checkIsElementVisible(buttonSignOut);
         return this;

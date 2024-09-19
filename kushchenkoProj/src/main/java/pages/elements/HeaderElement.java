@@ -1,5 +1,6 @@
 package pages.elements;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,40 +36,49 @@ public class HeaderElement extends CommonActionsWithElements {
         super(webDriver);
     }
 
+    @Step
     public MyProfilePage clickOnMyProfileButton() {
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
     }
 
+    @Step
     public boolean isButtonSignOutVisible() {
         return isElementVisible(buttonSignOut, "Sign Out button");
     }
 
+    @Step
     public boolean isButtonCreatePostVisible() {
         return isElementVisible(buttonCreatePost, "Create Post button");
     }
 
+    @Step
     public boolean isButtonMyProfileVisible() {
         return isElementVisible(buttonMyProfile, "My Profile button");
     }
 
+    @Step
     public boolean isUserNameVisible(String login) {
         return isElementVisible(getUserNameElement(login));
     }
 
+    @Step
     public LoginPage clickOnButtonSignOut() {
         clickOnElement(buttonSignOut);
         return new LoginPage(webDriver);
     }
 
+    @Step
     public boolean isSearchIconVisible() {
         return isElementVisible(searchIcon, "Search icon");
     }
 
+    @Step
     public boolean isChatIconVisible() {
         return isElementVisible(chatIcon, "Chat icon");
     }
 
+    @Step
     public  HeaderElement checkIsButtonSignOutIsVisible() {
         checkIsElementVisible(buttonSignOut);
         return this;

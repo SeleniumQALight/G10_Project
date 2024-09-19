@@ -248,9 +248,9 @@ public class CommonActionsWithElements {
         }
     }
     protected void setCheckBoxToNeededState(WebElement webElement, String neededState) {
-        if (neededState.equals("yes")) {
+        if (neededState.equals("check")) {
             makeCheckboxChecked(webElement);
-        } else if (neededState.equals("no")) {
+        } else if (neededState.equals("uncheck")) {
             makeCheckboxUnchecked(webElement);
         } else {
             logger.error("State should be only 'Checked' or 'Unchecked'");
