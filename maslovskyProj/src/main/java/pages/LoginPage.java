@@ -1,6 +1,7 @@
 package pages;
 
 import data.TestData;
+import data.UserForRegistration;
 import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
@@ -28,6 +29,9 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSighIn;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElement buttonSighUp;
 
     @FindBy(xpath = "//*[contains (text(), 'Invalid username/password.')]")
     private WebElement invalidCredentialsText;
@@ -208,4 +212,20 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    public LoginPage enterRegistrationIfNotNull(UserForRegistration user) {
+        if (user.getUserName() != null) {
+            enterTextIntoRegistrationUserNameField(user.getUserName());
+        }
+        if (user.getEmail()!= null) {
+            enterTextIntoRegistrationEmailField(user.getEmail());
+        }
+        if (user.getPassword() != null) {
+            enterTextIntoRegistrationPasswordField(user.getPassword());
+        }
+        return this;
+    }
+
+    public void clickOnSignUpButton() {
+        clickOnElement(buttonSighUp);
+    }
 }
