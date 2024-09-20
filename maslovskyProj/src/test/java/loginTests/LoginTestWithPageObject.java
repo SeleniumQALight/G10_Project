@@ -38,7 +38,7 @@ public class LoginTestWithPageObject extends BaseTest {
     public void TR001_validLogin() {
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin(userName);
-        pageProvider.getLoginPage().enterTextIntoInputPassword(userPassword+1);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(userPassword);
         pageProvider.getLoginPage().clickOnButtonSighIn();
 
 //        Assert.assertTrue("Button Sign Out is not visible",
