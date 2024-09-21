@@ -7,6 +7,7 @@ import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.ArrayList;
 
+
 public class LoginRemainsInNewTab extends BaseTest {
     @Test
     public void TR006_loginRemainsInNewTab() {
@@ -16,21 +17,16 @@ public class LoginRemainsInNewTab extends BaseTest {
         pageProvider.getLoginPage().clickOnButtonSignIn();
         pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutVisible();
 
-        ((JavascriptExecutor) webDriver).executeScript("window.open()");
-        ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
-        webDriver.switchTo().window(tabs.get(1));
-        logger.info("New tab is opened");
 
+        pageProvider.getParentPage().openNewTab();
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutVisible();
 
-        webDriver.switchTo().window(tabs.get(0));
-        logger.info("Switched back to the main tab");
+        pageProvider.getParentPage().switchToTab(0);
         pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutVisible();
 
-        webDriver.switchTo().window(tabs.get(1)).close();
-        webDriver.switchTo().window(tabs.get(0));
-        logger.info("Closed the new tab and switched back to the main tab");
+        pageProvider.getParentPage().closeTab(1);
+        pageProvider.getParentPage().switchToTab(0);
         pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutVisible();
 
     }

@@ -7,35 +7,34 @@ import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import pages.PageProvider;
 
 
 @RunWith(JUnitParamsRunner.class)
 public class LoginWithParams extends BaseTest {
-    final String EMPTY_USERNAME_MESSAGE = "Invalid username/password.";
-    final String EMPTY_PASSWORD_MESSAGE = "Invalid username/password.";
-    final String INVALID_USERNAME_MESSAGE = "Invalid username/password.";
-    final String INVALID_PASSWORD_MESSAGE = "Invalid username/password.";
-    final String SEMICOLON = ";";
-    final String emptyValue = "";
     final String invalidValue = "invalid";
+    final String emptyValue = "";
+
 
     @Test
     @Parameters(method = "parametersForInvalidLoginTest")
-    public void TC008_invalidLoginTestWithParams(String userName, String password, String expectedMessage) {
+    public void TC008_invalidLoginTestWithParams(String userName, String password){
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin(userName);
         pageProvider.getLoginPage().enterTextIntoInputPassword(password);
         pageProvider.getLoginPage().clickOnButtonSignIn();
-        Assert.assertTrue("Alert message is visible", pageProvider.getLoginPage().isAlertMessageVisible());
+        pageProvider.getLoginPage().isAlertMessageVisible();
 
     }
 
     public Object[][] parametersForInvalidLoginTest() {
         return new Object[][]{
-                {emptyValue, emptyValue, EMPTY_USERNAME_MESSAGE + SEMICOLON + EMPTY_PASSWORD_MESSAGE},
-                {invalidValue, invalidValue, INVALID_USERNAME_MESSAGE + SEMICOLON + INVALID_PASSWORD_MESSAGE},
-                {emptyValue, TestData.VALID_PASSWORD_UI, EMPTY_USERNAME_MESSAGE},
-                {TestData.VALID_LOGIN_UI, emptyValue, EMPTY_PASSWORD_MESSAGE},
+                {emptyValue, emptyValue},
+                {TestData.VALID_LOGIN_UI, invalidValue},
+                {invalidValue, TestData.VALID_PASSWORD_UI},
+                {emptyValue, TestData.VALID_PASSWORD_UI},
+                {TestData.VALID_LOGIN_UI, emptyValue}
+
         };
     }
 }

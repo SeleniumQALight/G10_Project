@@ -15,5 +15,15 @@ public class PageProvider {
 
     public HomePage getHomePage() {
         return new HomePage(webDriver);
+
+    }
+
+    public ParentPage getParentPage() {
+        return new ParentPage(webDriver) {
+            @Override
+            protected String getRelativeUrl() {
+                return "";
+            }
+        };
     }
 }
