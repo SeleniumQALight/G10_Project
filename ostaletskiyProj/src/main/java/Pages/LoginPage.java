@@ -151,6 +151,15 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll(); // check all assertions
         return this;
     }
+    public LoginPage checkIsButtonSignInVisible() {
+        Assert.assertTrue("Button Sign In is not visible", isButtonSignInVisible());
+        return this;
+    }
+
+    public LoginPage checkIsAlertMessageDisplayed(String alertMessage) {
+        Assert.assertTrue("Alert message is not displayed", isNotificationVisible());
+        return this;
+    }
 
 
 
