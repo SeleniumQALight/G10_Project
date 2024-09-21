@@ -4,7 +4,6 @@ import baseTest.BaseTest;
 import categories.SmokeTestFilter;
 import io.qameta.allure.*;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import utils.ConfigProvider;
@@ -84,12 +83,42 @@ public class LoginTestWithPageObject extends BaseTest {
 
 //        Assert.assertFalse("Button Sign Out should not be displayed",
 //                pageProvider.getHomePage().getHeader().isButtonSignOutVisible());
-        pageProvider.getHomePage().getHeader().checkIsButtonSignOutVisible(); // test fails because of this line (should be NOT visible)
+        pageProvider.getHomePage().getHeader().checkIsButtonSignOutNotVisible();
 
         Assert.assertTrue("Alert about invalid login should be displayed",
                 pageProvider.getLoginPage().isAlertInvalidLoginDisplayed());
         Assert.assertTrue("Button Sign In should be displayed",
                 pageProvider.getLoginPage().isButtonSignInVisible());
+    }
+
+    @Test
+    public void TR003_signOut() {
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin(VALID_LOGIN_UI);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(VALID_PASSWORD_UI);
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+
+        //ланцюжок перевірок на видимість/невидимість елементів хедеру після логіну
+        pageProvider.getHomePage().getHeader().checkIsButtonSignOutNotVisible()
+                .checkIsIconSearchVisible()
+                .checkIsIconChatVisible()
+                .checkIsButtonCreatePostVisible()
+                .checkIsMyProfileVisible();
+
+        //логаут
+        pageProvider.getHomePage().getHeader().clickOnButtonSignOut();
+
+        //ланцюжок перевірок на видимість елементів після логауту
+        pageProvider.getLoginPage().checkIsLoginFieldVisible()
+                .checkIsPasswordFieldVisible()
+                .checkIsButtonSignInVisible();
+
+        //ланцюжок перевірок на невидимість елементів хедеру після логауту
+        pageProvider.getHomePage().getHeader().checkIsButtonSignOutNotVisible()
+                .checkIsIconSearchNotVisible()
+                .checkIsIconChatNotVisible()
+                .checkIsButtonCreatePostNotVisible()
+                .checkIsMyProfileNotVisible();
     }
 
 

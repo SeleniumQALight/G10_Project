@@ -207,6 +207,10 @@ public class CommonActionsWithElements {
         Assert.assertTrue("Element should be visible", isElementVisible(element));
     }
 
+    public void checkIsElementNotVisible(WebElement element) {
+        Assert.assertFalse("Element should NOT be visible", isElementVisible(element));
+    }
+
     public void checkIsElementVisible(WebElement webElement, String elementName) {
         Assert.assertTrue(elementName + "Element should be visible"
                 , isElementVisible(webElement, elementName));
