@@ -1,6 +1,7 @@
 package pages;
 
 import data.TestData;
+import data.UserForRegistration;
 import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
@@ -41,6 +42,9 @@ public class LoginPage extends ParentPage {
             = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy(xpath = listErrorsMessagesLocator)
     private List<WebElement> listOfMessages;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElement buttonSignUp;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -137,10 +141,20 @@ public class LoginPage extends ParentPage {
     }
 
 
+    public LoginPage enterRegistrationDataIfNotNull(UserForRegistration user) {
+        if (user.getUserName()!=null){
+            enterTextIntoRegistrationUserNameField(user.getUserName());
+        }
+        if (user.getEmail()!=null){
+            enterTextIntoRegistrationEmailField(user.getEmail());
+        }
+        if (user.getPassword()!=null){
+            enterTextIntoRegistrationPasswordField(user.getPassword());
+        }
+        return this;
+    }
 
-
-
-
-
-
+    public void clickOnSighUpButton() {
+        clickOnElement(buttonSignUp);
+    }
 }

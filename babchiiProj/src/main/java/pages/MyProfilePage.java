@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.elements.HeaderElement;
 
 import java.util.List;
 
@@ -26,6 +27,11 @@ public class MyProfilePage extends ParentPage {
     private List<WebElement> postListWithTitle(String postTitle) {
         return webDriver.findElements(By.xpath(String.format(postTitleLocator, postTitle)));
     }
+
+    public HeaderElement getHeaderElement() {
+        return new HeaderElement(webDriver);
+    }
+
 
     public MyProfilePage checkIsRedirectToMyProfilePage() {
         checkUrlWithPattern();

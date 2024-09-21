@@ -1,6 +1,8 @@
 package pages;
 
 import data.TestData;
+import data.UserForRegistration;
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
@@ -35,6 +37,8 @@ public class LoginPage extends ParentPage {
     final static String listMessagesLocator = ".//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy(xpath = listMessagesLocator)
     private List<WebElement> listOfMessages;
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElement buttonSignUp;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -48,12 +52,15 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
-    public void openLoginPage() {
+    @Step
+    public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened " + baseUrl);
+        return this;
     }
 
-    public void enterTextIntoInputLogin(String login) {
+    @Step
+    public LoginPage enterTextIntoInputLogin(String login) {
 //        try{
 ////            WebElement inputUserNameInLoginForm = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
 //            inputUserNameInLoginForm.clear();
@@ -64,20 +71,28 @@ public class LoginPage extends ParentPage {
 //            Assert.fail("Can not work with element " + e);
 //        }
         clearAndEnterTextIntoElement(getHeaderElement().getInputUserNameInLoginForm(), login);
+        return this;
     }
 
-    public void enterTextIntoInputPassword(String password) {
+    @Step
+    public LoginPage enterTextIntoInputPassword(String password) {
         clearAndEnterTextIntoElement(getHeaderElement().getInputPasswordInLoginForm(), password);
+        return this;
     }
 
-    public void clickOnButtonSignIn() {
+    @Step
+    public HomePage clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
+        return new HomePage(webDriver);
     }
 
+    @Step
     public boolean isInvalidLoginMessageVisible() {return isElementVisible(invalidLoginErrorMessage);}
 
+    @Step
     public boolean isButtonSignInVisible() {return isElementVisible(buttonSignIn);}
 
+    @Step
     public HomePage openLoginPageAndFillLoginFormWithValidCred() {
         openLoginPage();
         enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
@@ -86,21 +101,25 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextIntoElement(inputUserNameInRegistrationForm, userName);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationPasswordField(String password) {
         clearAndEnterTextIntoElement(inputPasswordInRegistrationForm, password);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationEmailField(String email) {
         clearAndEnterTextIntoElement(inputEmailInRegistrationForm, email);
         return this;
     }
 
+    @Step
     public LoginPage checkErrorsMessages(String expectedMessages) {
         // error1; error2; error3 -> [error1, error2, error3]
         String[] messagesArray = expectedMessages.split(";");
@@ -125,5 +144,22 @@ public class LoginPage extends ParentPage {
 
         softAssertions.assertAll(); //check all soft assertions
         return this;
+    }
+
+    public LoginPage enterRegistrationDataIfNotNull(UserForRegistration user) {
+        if (user.getUserName() != null) {
+            enterTextIntoRegistrationUserNameField(user.getUserName());
+        }
+        if (user.getEmail() != null) {
+            enterTextIntoRegistrationEmailField(user.getEmail());
+        }
+        if (user.getPassword() != null) {
+            enterTextIntoRegistrationPasswordField(user.getPassword());
+        }
+        return this;
+    }
+
+    public void clickOnButtonSignUp() {
+        clickOnElement(buttonSignUp);
     }
 }

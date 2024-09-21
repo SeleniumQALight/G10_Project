@@ -1,8 +1,12 @@
 package loginTests;
 
 import baseTest.BaseTest;
+import categories.SmokeTestFilter;
+import io.qameta.allure.*;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import utils.ConfigProvider;
 import utils.ExcelDriver;
 
@@ -12,10 +16,19 @@ import java.util.Map;
 import static data.TestData.VALID_LOGIN_UI;
 import static data.TestData.VALID_PASSWORD_UI;
 
+@Epic("Allure examples")
+@Feature("Junit 4 support")
 public class LoginTestWithPageObject extends BaseTest {
 
 
     @Test
+    @Category(SmokeTestFilter.class)
+    @Description("Some detailed test description")
+    @Link("https://example.org")
+    @Link(name = "allure", type = "mylink")
+    @Issue("123")
+    @Issue("432")
+    @Story("Base support for bdd annotations")
     public void TR001_validLogin() {
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin(VALID_LOGIN_UI);
@@ -61,6 +74,8 @@ public class LoginTestWithPageObject extends BaseTest {
     }
 
     @Test
+    //@Ignore
+    @Category(SmokeTestFilter.class)
     public void TR002_invalidLogin() {
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage().enterTextIntoInputLogin("invalidLogin");
@@ -69,7 +84,7 @@ public class LoginTestWithPageObject extends BaseTest {
 
 //        Assert.assertFalse("Button Sign Out should not be displayed",
 //                pageProvider.getHomePage().getHeader().isButtonSignOutVisible());
-        pageProvider.getHomePage().getHeader().checkIsButtonSignOutVisible();
+        pageProvider.getHomePage().getHeader().checkIsButtonSignOutVisible(); // test fails because of this line (should be NOT visible)
 
         Assert.assertTrue("Alert about invalid login should be displayed",
                 pageProvider.getLoginPage().isAlertInvalidLoginDisplayed());

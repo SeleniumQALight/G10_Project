@@ -1,6 +1,7 @@
 package Pages;
 
 import data.TestData;
+import io.qameta.allure.Step;
 import org.apache.commons.logging.Log;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
@@ -55,20 +56,20 @@ public class LoginPage extends ParentPage {
     protected String getRelativeUrl() {
         return "/";
     }
-
+@Step
     public void openLoginPage() {
         webDriver.get(baseUrl);
         logger.info( "Login page was opened_" + baseUrl);
     }
-
+@Step
     public void enterTextIntoInputLogin(String login) {
         clearAndEnterTextIntoElement(inputUserNameInLoginForm, login);
     }
-
+@Step
     public void enterTextIntoInputPassword(String password) {
         clearAndEnterTextIntoElement(inputPasswordInLoginForm, password);
     }
-
+@Step
     public void clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
     }
@@ -88,7 +89,7 @@ public class LoginPage extends ParentPage {
     public boolean isInputPasswordVisible() {
         return isElementDisplayed(inputPasswordInLoginForm, "Password input");
     }
-
+@Step
     public HomePage openLoginPageAndFillLoginFormWithValidCredentials() {
         openLoginPage();
         enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
@@ -96,17 +97,17 @@ public class LoginPage extends ParentPage {
         clickOnButtonSignIn();
         return new HomePage(webDriver);
     }
-
+@Step
     public LoginPage enterTextRegistrationNameField(String userName) {
         clearAndEnterTextIntoElement(inputUserNameInRegistrationForm, userName);
         return this;
     }
-
+@Step
     public LoginPage enterTextRegistrationEmailField(String email) {
         clearAndEnterTextIntoElement(inputEmailInRegistrationForm, email);
         return this;
     }
-
+@Step
     public LoginPage enterTextRegistrationPasswordField(String password) {
         clearAndEnterTextIntoElement(inputPasswordInRegistrationForm, password);
         return this;
@@ -137,6 +138,15 @@ public class LoginPage extends ParentPage {
         }
 
         softAssertions.assertAll(); // check all assertions
+        return this;
+    }
+    public LoginPage checkIsButtonSignInVisible() {
+        Assert.assertTrue("Button Sign In is not visible", isButtonSignInVisible());
+        return this;
+    }
+
+    public LoginPage checkIsAlertMessageDisplayed(String alertMessage) {
+        Assert.assertTrue("Alert message is not displayed", isNotificationVisible());
         return this;
     }
 

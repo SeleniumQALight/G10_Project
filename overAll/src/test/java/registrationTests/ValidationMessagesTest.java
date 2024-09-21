@@ -2,30 +2,33 @@ package registrationTests;
 
 import baseBase.BaseTest;
 import categories.SmokeTestFilter;
+import data.UserForRegistration;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 
+import static data.RegistrationValidationMessages.*;
+import static data.UserForRegistration.*;
+import static utils.StringUtils.deleteSomeSymbols;
+
 @RunWith(JUnitParamsRunner.class)
 @Category(SmokeTestFilter.class)
 public class ValidationMessagesTest extends BaseTest {
-    final String SHORT_USER_NAME_MESSAGE = "Username must be at least 3 characters.";
-    final String SHORT_EMAIL_MESSAGE = "You must provide a valid email address.";
-    final String SHORT_PASSWORD_MESSAGE = "Password must be at least 12 characters.";
-    final String SEMICOLON = ";";
-    final String twoChars = "tr";
+    Logger logger = Logger.getLogger(getClass());
 
     @Test
     @Parameters(method = "parametersForValidationMessagesTest")
     public void TC023_validationMessagesTest(
-            String userName, String email, String password, String expectedMessages) {
+            String tcName, UserForRegistration userForRegistration, String expectedMessages) {
+        logger.info(tcName);
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage()
-                .enterTextIntoRegistrationUserNameField(userName)
-                .enterTextIntoRegistrationEmailField(email)
-                .enterTextIntoRegistrationPasswordField(password)
+                .enterTextIntoRegistrationUserNameField(userForRegistration.getUserName())
+                .enterTextIntoRegistrationEmailField(userForRegistration.getEmail())
+                .enterTextIntoRegistrationPasswordField(userForRegistration.getPassword())
                 .checkErrorsMessages(expectedMessages)
         ;
     }
@@ -33,8 +36,22 @@ public class ValidationMessagesTest extends BaseTest {
 
     public Object[][] parametersForValidationMessagesTest(){
         return new Object[][]{
-                {twoChars, twoChars, twoChars, SHORT_USER_NAME_MESSAGE + SEMICOLON + SHORT_EMAIL_MESSAGE + SEMICOLON + SHORT_PASSWORD_MESSAGE},
-                {"Taras124", twoChars, twoChars,  SHORT_EMAIL_MESSAGE + SEMICOLON + SHORT_PASSWORD_MESSAGE}
+                {"Login - valid, Email - NOT valid, Password - NOT valid"
+                        , new UserForRegistration("TC023").updateEmail(SHORT_EMAIL_NOT_VALID).updatePassword(SHORT_PASSWORD_NOT_VALID)
+                        ,  ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD}
+                ,
+                {"Login - valid, Email - valid, password - NOT valid", new UserForRegistration("TC023").updatePassword(SHORT_PASSWORD_NOT_VALID)
+                        , ERROR_PASSWORD},
+                {"Login -  NOT valid, Email -  NOT valid, password -  NOT valid", new UserForRegistration(deleteSomeSymbols(USER_NAME_MIN_LENGTH, 1), SHORT_EMAIL_NOT_VALID, SHORT_PASSWORD_NOT_VALID)
+                        , ERROR_USERNAME +SEMICOLON+ ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD },
+                {"Login -  NOT valid, Email -  NOT valid, password -  NOT valid", new UserForRegistration(USER_NAME_MAX_LENGTH + "1", SHORT_EMAIL_NOT_VALID, SHORT_PASSWORD_NOT_VALID)
+                        , ERROR_LONG_USER +SEMICOLON+ ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD},
+                {"Login - valid, Email -  NOT valid, password - valid", new UserForRegistration(USER_NAME_MAX_LENGTH, SHORT_EMAIL_NOT_VALID, PASSWORD_MIN_LENGTH)
+                        , ERROR_EMAIL},
+                {"Login -  NOT valid, Email -  NOT valid, password - valid", new UserForRegistration(USER_NAME_MAX_LENGTH + "1", SHORT_EMAIL_NOT_VALID, PASSWORD_MAX_LENGTH)
+                        , ERROR_LONG_USER +SEMICOLON+ ERROR_EMAIL},
+                {"Login -  NOT valid, Email -  NOT valid, password -  NOT valid", new UserForRegistration(USER_NAME_MAX_LENGTH + "1", SHORT_EMAIL_NOT_VALID, PASSWORD_MAX_LENGTH + "2".repeat(2))
+                        , ERROR_LONG_USER +SEMICOLON+ ERROR_EMAIL + SEMICOLON + ERROR_LONG_PASSWORD}
         };
     }
 

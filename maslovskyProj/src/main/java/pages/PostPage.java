@@ -1,7 +1,6 @@
 package pages;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,9 +13,6 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = ".//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
-    @FindBy(xpath = ".//*[text()='Is this post unique? : yes']")
-    private WebElement uniqueText;
-
     @FindBy(xpath = "//h2")
     private WebElement titleText;
 
@@ -26,6 +22,8 @@ public class PostPage extends ParentPage {
     private String postTitleLocator = "//*[text()='%s']";  // locator with parameter
 
     private String locatorForTextThisPostWasWrittenIsVisible = "//*[contains(text(), '%s')]";
+
+    private String locatorForUniqueText = ".//*[text()='Is this post unique? : %s']";
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -68,7 +66,13 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkIsUniqueTextInPostDisplayed() {
-        Assert.assertTrue("'Unique' text is not displayed", isElementVisible(uniqueText));
+        Assert.assertTrue("'Unique' text is not displayed", isElementVisible(locatorForUniqueText));
+        return this;
+    }
+
+    public PostPage checkIsUniqueTextInPostDisplayed(String uniqueStatus) {
+        Assert.assertTrue("'Unique' text is not displayed",
+                isElementVisible(String.format(locatorForUniqueText, uniqueStatus)));
         return this;
     }
 
