@@ -27,6 +27,25 @@ public class HeaderElement extends CommonActionsWithElements {
     @FindBy(xpath = "//span[@class='text-white mr-2 header-chat-icon']")
     private WebElement chatButton;
 
+    @FindBy(id = "username-register")
+    private WebElement inputUserNameInRegistrationForm;
+
+    @FindBy(id = "password-register")
+    private WebElement inputPasswordInRegistrationForm;
+
+    @FindBy(id = "email-register")
+    private WebElement inputEmailInRegistrationForm;
+
+    @FindBy(xpath = "//input[@placeholder='Username']")
+    private WebElement inputUserNameInLoginForm;
+
+    @FindBy(xpath = "//input[@placeholder='Password']")
+    private WebElement inputPasswordInLoginForm;
+
+    @FindBy(xpath = "//img[@alt='My profile']")
+    private WebElement myProfileButton;
+
+
 
     public HeaderElement(WebDriver webDriver) {
         super(webDriver);
@@ -73,4 +92,15 @@ public class HeaderElement extends CommonActionsWithElements {
         return new CreateNewPostPage(webDriver);
     }
 
+    public WebElement getInputUserNameInLoginForm() {
+        return inputUserNameInLoginForm;
+    }
+    public WebElement getInputPasswordInLoginForm() {
+        return inputPasswordInLoginForm;
+    }
+
+    public MyProfilePage clickOnMyProfileButton() {
+        clickOnElement(myProfileButton);
+        return new MyProfilePage(webDriver);
+    }
 }

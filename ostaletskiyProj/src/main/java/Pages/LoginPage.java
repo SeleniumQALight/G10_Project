@@ -1,5 +1,6 @@
 package Pages;
 
+import Pages.elements.HeaderElement;
 import data.TestData;
 import io.qameta.allure.Step;
 import org.apache.commons.logging.Log;
@@ -52,26 +53,36 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
+    public HeaderElement getHeaderElement() {
+        return new HeaderElement(webDriver);
+    }
+
     @Override
     protected String getRelativeUrl() {
         return "/";
     }
-@Step
-    public void openLoginPage() {
+    @Step
+    public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
-        logger.info( "Login page was opened_" + baseUrl);
+        logger.info("Login page was opened " + baseUrl);
+        return this;
     }
-@Step
-    public void enterTextIntoInputLogin(String login) {
-        clearAndEnterTextIntoElement(inputUserNameInLoginForm, login);
+
+    @Step
+    public LoginPage enterTextIntoInputLogin(String login) {
+        clearAndEnterTextIntoElement(getHeaderElement().getInputUserNameInLoginForm(), login);
+        return this;
     }
-@Step
-    public void enterTextIntoInputPassword(String password) {
-        clearAndEnterTextIntoElement(inputPasswordInLoginForm, password);
+    @Step
+    public LoginPage enterTextIntoInputPassword(String password) {
+        clearAndEnterTextIntoElement(getHeaderElement().getInputPasswordInLoginForm(), password);
+        return this;
     }
-@Step
-    public void clickOnButtonSignIn() {
+
+    @Step
+    public HomePage clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
+        return new HomePage(webDriver);
     }
 
     public boolean isNotificationVisible() {
@@ -140,6 +151,8 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll(); // check all assertions
         return this;
     }
+
+
 
 
 

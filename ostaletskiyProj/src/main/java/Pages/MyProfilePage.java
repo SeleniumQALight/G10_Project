@@ -1,5 +1,6 @@
 package Pages;
 
+import Pages.elements.HeaderElement;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -19,6 +20,10 @@ public class MyProfilePage extends ParentPage {
 
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    public HeaderElement getHeaderElement() {
+        return new HeaderElement(webDriver);
     }
 
     @Override
