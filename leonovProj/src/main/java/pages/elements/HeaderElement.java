@@ -68,6 +68,12 @@ public class HeaderElement extends CommonActionsWithElements {
     }
 
     @Step
+    public HeaderElement checkIsButtonSignOutVisible() {
+        checkIsElementVisible(buttonSignOut);
+        return this;
+    }
+
+    @Step
     public HeaderElement checkIsButtonSignOutNotVisible() {
         checkIsElementNotVisible(buttonSignOut);
         return this;

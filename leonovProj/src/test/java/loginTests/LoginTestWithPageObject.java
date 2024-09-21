@@ -99,7 +99,7 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().clickOnButtonSignIn();
 
         //ланцюжок перевірок на видимість/невидимість елементів хедеру після логіну
-        pageProvider.getHomePage().getHeader().checkIsButtonSignOutNotVisible()
+        pageProvider.getHomePage().getHeader().checkIsButtonSignOutVisible()
                 .checkIsIconSearchVisible()
                 .checkIsIconChatVisible()
                 .checkIsButtonCreatePostVisible()
