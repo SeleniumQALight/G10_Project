@@ -23,8 +23,7 @@ public class LoginWithParams extends BaseTest {
         pageProvider.getLoginPage().enterTextIntoInputLogin(userName);
         pageProvider.getLoginPage().enterTextIntoInputPassword(password);
         pageProvider.getLoginPage().clickOnButtonSignIn();
-        pageProvider.getLoginPage().isAlertMessageVisible();
-
+        Assert.assertTrue("Alert message is visible", pageProvider.getLoginPage().isAlertMessageVisible());
     }
 
     public Object[][] parametersForInvalidLoginTest() {
