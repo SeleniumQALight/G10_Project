@@ -1,6 +1,7 @@
 package pages;
 
 import data.TestData;
+import data.UserForRegistration;
 import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
@@ -37,6 +38,9 @@ public class LoginPage extends ParentPage {
 
     @FindBy(id = "password-register")
     private WebElement inputPasswordInRegistrationForm;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElement buttonSignUp;
 
     final static String listErrorMessagesLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
 
@@ -181,5 +185,22 @@ public class LoginPage extends ParentPage {
     public LoginPage checkIsAlertMessageDisplayed(String alertMessage) {
         Assert.assertTrue("Alert message is not displayed", isAlertMessageVisible());
         return this;
+    }
+
+    public LoginPage enterRegistrationDataIfNotNull(UserForRegistration user) {
+        if (user.getUserName() != null) {
+            enterTextIntoRegistrationUserNameField(user.getUserName());
+        }
+        if (user.getEmail() != null) {
+            enterTextIntoRegistrationEmailField(user.getEmail());
+        }
+        if (user.getPassword() != null) {
+            enterTextIntoRegistrationPasswordField(user.getPassword());
+        }
+        return this;
+    }
+
+    public void clickOnSignUpButton() {
+        clickOnElement(buttonSignUp);
     }
 }
