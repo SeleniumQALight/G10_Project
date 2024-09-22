@@ -72,16 +72,4 @@ public class HeaderElement extends CommonActionsWithElements {
         clickOnElement(buttonCreatePost);
         return new CreateNewPostPage(webDriver);
     }
-
-    public WebElement getInputUserNameInLoginForm() {
-        return inputUserNameInLoginForm;
-    }
-    public WebElement getInputPasswordInLoginForm() {
-        return inputPasswordInLoginForm;
-    }
-
-    public MyProfilePage clickOnMyProfileButton() {
-        clickOnElement(myProfileButton);
-        return new MyProfilePage(webDriver);
-    }
 }
