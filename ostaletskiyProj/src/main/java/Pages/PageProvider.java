@@ -16,4 +16,7 @@ public class PageProvider {
     public HomePage getHomePage() {
         return new HomePage(webDriver);
     }
+    public CommonActionsWithElements getCommonActionsWithElements() {
+        return new CommonActionsWithElements(webDriver);
+    }
 }
