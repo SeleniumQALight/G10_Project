@@ -43,10 +43,7 @@ public class CreateNewPostTest extends BaseTest {
                 .openHomePageAndLoginIfNeeded()
                 .getHeaderElement().clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
-                .deletePostsTillPresent(POST_TITLE)
-
-
-        ;
+                .deletePostsTillPresent(POST_TITLE);
     }
 
 

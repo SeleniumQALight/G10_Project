@@ -124,6 +124,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+@Step
     public LoginPage checkErrorMessageForRegistrationForm(String exeptedMessage) {
         String[] messagesArray = exeptedMessage.split(";");
 
