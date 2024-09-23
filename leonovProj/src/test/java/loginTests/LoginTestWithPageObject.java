@@ -3,20 +3,23 @@ package loginTests;
 import baseTest.BaseTest;
 import categories.SmokeTestFilter;
 import io.qameta.allure.*;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
 import utils.ConfigProvider;
 import utils.ExcelDriver;
 
 import java.io.IOException;
 import java.util.Map;
 
-import static data.TestData.VALID_LOGIN_UI;
-import static data.TestData.VALID_PASSWORD_UI;
+import static data.TestData.*;
 
 @Epic("Allure examples")
 @Feature("Junit 4 support")
+@RunWith(JUnitParamsRunner.class)
 public class LoginTestWithPageObject extends BaseTest {
 
 
@@ -139,6 +142,27 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().refreshLoginPage();
         pageProvider.getLoginPage().clickOnButtonSignIn();
         pageProvider.getHomePage().getHeader().checkIsButtonSignOutNotVisible();
+    }
+
+    @Test
+    @Parameters(method = "parametersForInvalidLogin")
+    public void TR007_InvalidLoginWithParameters(String login, String pass) {
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin(login);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(pass);
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getHomePage().getHeader().checkIsButtonSignOutNotVisible();
+
+        Assert.assertTrue("Alert about invalid login should be displayed",
+                pageProvider.getLoginPage().isAlertInvalidLoginDisplayed());
+    }
+
+    public Object[] parametersForInvalidLogin() {
+        return new Object[][]{
+                {INVALID_LOGIN_UI, INVALID_PASSWORD_UI},
+                {VALID_LOGIN_UI, INVALID_PASSWORD_UI},
+                {INVALID_LOGIN_UI, VALID_PASSWORD_UI}
+        };
     }
 
 
