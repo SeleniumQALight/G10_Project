@@ -2,6 +2,7 @@ package pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import utils.ConfigProvider;
 
@@ -39,7 +40,22 @@ abstract public class ParentPage extends CommonActionsWithElements {
         Assert.assertTrue("URL is not expected \n" + "Expected URL: " + baseUrl + getRelativeUrl()
                         + "\n" + "Actual URL: " + webDriver.getCurrentUrl(),
                 webDriver.getCurrentUrl().matches(baseUrl + getRelativeUrl()));
+    }
 
+    protected void switchTab(int tabNumber) {
+        Object[] openedTabs = webDriver.getWindowHandles().toArray();
+        webDriver.switchTo().window((String) openedTabs[tabNumber]);
+        logger.info("Switched to tab #" + tabNumber);
+    }
 
+    protected void openPageInNewTab(String url) {
+        String script = "window.open('" + url + "')";
+        ((JavascriptExecutor) webDriver).executeScript(script);
+        logger.info("Opened new tab with URL: " + url);
+    }
+
+    protected void closeCurrentTab() {
+        webDriver.close();
+        logger.info("Tab was closed");
     }
 }

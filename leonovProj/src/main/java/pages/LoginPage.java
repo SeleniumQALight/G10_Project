@@ -48,7 +48,6 @@ public class LoginPage extends ParentPage {
     private List<WebElement> listOfErrorMessages;
     // подивитись як виглядатиме список
 
-
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -62,6 +61,11 @@ public class LoginPage extends ParentPage {
     public void openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened " + baseUrl);
+    }
+
+    @Step
+    public void openLoginPageInNewTab() {
+        openPageInNewTab(baseUrl + getRelativeUrl());
     }
 
     @Step
@@ -187,6 +191,6 @@ public class LoginPage extends ParentPage {
 
         softAssertions.assertAll();
         return this;
-
     }
+
 }

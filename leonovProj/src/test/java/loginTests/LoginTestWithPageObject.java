@@ -121,5 +121,15 @@ public class LoginTestWithPageObject extends BaseTest {
                 .checkIsMyProfileNotVisible();
     }
 
+    @Test
+    public void TR005_stayLoggedInNewTab() {
+        pageProvider.getHomePage().openHomepageAndLoginIfNeeded().checkIsRedirectOnHomePage();
+        pageProvider.getLoginPage().openLoginPageInNewTab();
+        pageProvider.getHomePage().getHeader().checkIsButtonSignOutVisible();
+        pageProvider.getHomePage().switchTabToHomePage(0).checkIsRedirectOnHomePage();
+        pageProvider.getHomePage().switchTabToHomePage(1).closeCurrentHomePageTab();
+        pageProvider.getHomePage().switchTabToHomePage(0).getHeader().checkIsButtonSignOutVisible();
+    }
+
 
 }
