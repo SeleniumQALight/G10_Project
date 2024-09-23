@@ -28,8 +28,8 @@ import static utils.ConfigProvider.configProperties;
 
 public class BaseTest {
 
-    private WebDriver webDriver;
-    private Logger logger = Logger.getLogger(getClass());
+    protected WebDriver webDriver;
+    protected Logger logger = Logger.getLogger(getClass());
     protected PageProvider pageProvider;
     final String symbols = "-".repeat(10);
     protected ArrayList<ScreenShot> listOfScreenShots = new ArrayList<>();

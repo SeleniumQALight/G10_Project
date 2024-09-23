@@ -2,9 +2,11 @@ package pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import utils.ConfigProvider;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 
@@ -41,5 +43,29 @@ String baseUrl = ConfigProvider.configProperties.base_url().replace("[env]", env
                 "\n Actual url: " + webDriver.getCurrentUrl(),
                 webDriver.getCurrentUrl().matches(baseUrl + getRelativeUrl()));
     }
+
+
+    public void openNewTab(){
+        try {
+            ((JavascriptExecutor) webDriver).executeScript("window.open()");
+            logger.info("New tab is opened");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+
+public void switchToTab(int tabNumber) {
+        ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(tabNumber));
+        logger.info("Switched to tab" + tabNumber);
+    }
+
+    public void closeTab ( int tabNumber){
+        ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(tabNumber)).close();
+        logger.info("Tab number " + tabNumber + " is closed");
+    }
+
 }
 
