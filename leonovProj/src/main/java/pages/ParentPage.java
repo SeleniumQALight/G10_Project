@@ -58,4 +58,9 @@ abstract public class ParentPage extends CommonActionsWithElements {
         webDriver.close();
         logger.info("Tab was closed");
     }
+
+    protected void refreshPage() {
+        webDriver.navigate().refresh();
+        logger.info("Page was refreshed");
+    }
 }

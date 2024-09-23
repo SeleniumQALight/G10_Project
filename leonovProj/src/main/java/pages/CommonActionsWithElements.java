@@ -77,7 +77,7 @@ public class CommonActionsWithElements {
             }
             return state;
         } catch (Exception e) {
-            logger.info("Element is not present on the page");
+            logger.info(elementName + " is not present on the page");
             return false;
         }
     }
@@ -213,6 +213,11 @@ public class CommonActionsWithElements {
 
     public void checkIsElementVisible(WebElement webElement, String elementName) {
         Assert.assertTrue(elementName + "Element should be visible"
+                , isElementVisible(webElement, elementName));
+    }
+
+    public void checkIsElementNotVisible(WebElement webElement, String elementName) {
+        Assert.assertFalse(elementName + "Element should be visible"
                 , isElementVisible(webElement, elementName));
     }
 

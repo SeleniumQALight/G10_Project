@@ -193,4 +193,9 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    public LoginPage refreshLoginPage() {
+        refreshPage();
+        return this;
+    }
+
 }

@@ -131,5 +131,15 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getHomePage().switchTabToHomePage(0).getHeader().checkIsButtonSignOutVisible();
     }
 
+    @Test
+    public void TR006_refreshPageAndCheckLogin() {
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin(VALID_LOGIN_UI);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(VALID_PASSWORD_UI);
+        pageProvider.getLoginPage().refreshLoginPage();
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getHomePage().getHeader().checkIsButtonSignOutNotVisible();
+    }
+
 
 }
