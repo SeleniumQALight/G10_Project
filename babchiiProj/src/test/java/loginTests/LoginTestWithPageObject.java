@@ -4,8 +4,11 @@ import baseTest.BaseTest;
 import categories.SmokeTestFilter;
 import data.TestData;
 import io.qameta.allure.*;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.experimental.categories.Category;
 import utils.ConfigProvider;
 import utils.ExcelDriver;
@@ -13,6 +16,7 @@ import utils.ExcelDriver;
 import java.io.IOException;
 import java.util.Map;
 
+@RunWith(JUnitParamsRunner.class)
 @Epic("Allure examples")
 @Feature("Junit 4 support")
 public class LoginTestWithPageObject extends BaseTest {
@@ -76,5 +80,47 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getHomePage().getHeaderElement().checkIsButtonSignOutVisible();
         Assert.assertFalse("Input Login is displayed", pageProvider.getLoginPage().getHeaderElement().isInputUserNameInLoginFormVisible());
         Assert.assertFalse("Input Password is displayed", pageProvider.getLoginPage().getHeaderElement().isInputPasswordInLoginFormVisible());
+    }
+
+    @Test
+    public void TR004_validLoginAndCheckLoggedUserInNewTab(){
+        pageProvider.getLoginPage()
+                .openLoginPageAndFillLoginFormWithValidCred()
+                .openNewTabAfterValidLoginAndCheckIsUserLoggedIn()
+                .checkIsUserLoggedInMainTab()
+                .closeNewTabAndCheckIsUserLoggedInOnMainTab(1);
+    }
+
+    @Test
+    public void TR005_checkInputsClearAfterRefreshPage(){
+        pageProvider.getLoginPage()
+                .openLoginPage()
+                .enterTextIntoInputLogin(TestData.VALID_LOGIN_UI)
+                .enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI)
+                .refreshLoginPage()
+                .clickOnButtonSignIn()
+                .getHeaderElement().checkIsHeaderElementsAreVisible("no");
+    }
+
+    @Test
+    @Parameters(method = "parametersForInvalidLogin")
+    public void TR006_checkInputsClearAfterRefreshPage(String userName, String password){
+        pageProvider.getLoginPage()
+                .openLoginPage()
+                .enterTextIntoInputLogin(userName)
+                .enterTextIntoInputPassword(password)
+                .clickOnButtonSignIn();
+
+        Assert.assertFalse("Button Sign Out is visible", pageProvider.getHomePage().getHeaderElement().isButtonSignOutVisible());
+        Assert.assertTrue("Button 'Sign In' is not visible", pageProvider.getLoginPage().isButtonSignInVisible());
+        Assert.assertTrue("The alert message is not visible", pageProvider.getLoginPage().isInvalidLoginMessageVisible());
+    }
+
+    public Object[][] parametersForInvalidLogin(){
+        return new Object[][]{
+                {TestData.VALID_LOGIN_UI, "1"},
+                {"1", TestData.VALID_PASSWORD_UI},
+                {"1", "1"}
+        };
     }
 }
