@@ -164,6 +164,30 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void pressKeysUsingActions(Keys key) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.sendKeys(key)
+                    .perform();
+            logger.info("Key " + key + " was pressed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void enterTextUsingActions(String text) {
+        try {
+            Actions actions = new Actions(webDriver);
+            for (char c : text.toCharArray()) {
+                actions.sendKeys(String.valueOf(c))
+                        .perform();
+            }
+            logger.info("Text " + text + " was entered via keyboard");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
     //execute JS script - open a new tab
     protected void openNewTab() {
         try {
@@ -220,6 +244,4 @@ public class CommonActionsWithElements {
         Assert.assertFalse(elementName + "Element should be visible"
                 , isElementVisible(webElement, elementName));
     }
-
-
 }

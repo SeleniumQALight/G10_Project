@@ -165,5 +165,16 @@ public class LoginTestWithPageObject extends BaseTest {
         };
     }
 
+    @Test
+    public void TR008_validLoginViaKeyboard() {
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().clickTabKeyViaActions().clickTabKeyViaActions()
+                .enterTextViaKeyboard("qaauto")
+                .clickTabKeyViaActions()
+                .enterTextViaKeyboard("123456qwerty")
+                .clickTabKeyViaActions().clickEnterKeyViaActions();
+        pageProvider.getHomePage().getHeader().checkIsButtonSignOutVisible();
+    }
+
 
 }
