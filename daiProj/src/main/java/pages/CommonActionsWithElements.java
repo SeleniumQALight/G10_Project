@@ -145,14 +145,14 @@ public class CommonActionsWithElements {
     }
 
     //execute JavaScript code - open new tab
-    public void openNewTab(){
-        try {
-            ((JavascriptExecutor) webDriver).executeScript("window.open()");
-            logger.info("New tab was opened");
-        } catch (Exception e) {
-            printErrorAndStopTest(e);
-        }
-    }
+//    public void openNewTab(){
+//        try {
+//            ((JavascriptExecutor) webDriver).executeScript("window.open()");
+//            logger.info("New tab was opened");
+//        } catch (Exception e) {
+//            printErrorAndStopTest(e);
+//        }
+//    }
 
 
     public void checkIsElementVisible(WebElement webElement) {
@@ -164,7 +164,7 @@ public class CommonActionsWithElements {
     }
 
 
-    private void printErrorAndStopTest(Exception e) {
+    public void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
     }

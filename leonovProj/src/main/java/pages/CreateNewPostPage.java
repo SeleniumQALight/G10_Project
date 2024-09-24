@@ -27,12 +27,24 @@ public class CreateNewPostPage extends ParentPage {
     @FindBy(xpath = "//button[text()= 'Save New Post']")
     WebElement buttonSaveNewPost;
 
+    @FindBy(xpath = "//button[text()= 'Save Updates']")
+    WebElement buttonUpdatePost;
+
+
+
     @FindBy(xpath = "//input[@type='checkbox']")
     WebElement checkbox;
 
     public CreateNewPostPage enterTextIntoInputTitle(String postTitle) {
         clearAndEnterTextIntoElement(inputTitle, postTitle);
         return this;
+    }
+
+    public PostPage createTestPost(String postTitle, String postBody) {
+        enterTextIntoInputTitle(postTitle);
+        enterTextIntoInputBody(postBody);
+        clickOnButtonSaveNewPost();
+        return new PostPage(webDriver);
     }
 
     public CreateNewPostPage enterTextIntoInputBody(String postBody) {
@@ -81,4 +93,9 @@ public class CreateNewPostPage extends ParentPage {
     }
 
 
+    public PostPage editPostTitle(String newPostTitle) {
+        clearAndEnterTextIntoElement(inputTitle, newPostTitle);
+        clickOnElement(buttonUpdatePost);
+        return new PostPage(webDriver);
+    }
 }

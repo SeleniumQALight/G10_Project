@@ -13,6 +13,10 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
+    @FindBy(xpath = "//a[@data-original-title='Edit']")
+    private WebElement buttonEditPost;
+
+
     private String locatorIsPostUnique = "//p[text()='Is this post unique? : %s']";
 
     private String locatorForTextThisPostWasWritten = "//*[contains(text(), '%s')]";  //параметризований локатор
@@ -39,7 +43,7 @@ public class PostPage extends ParentPage {
 
     /**
      * Method checks if success message is displayed
-     * doest check the text of the message
+     * doesn't check the text of the message
      *
      * @return PostPage
      */
@@ -75,4 +79,10 @@ public class PostPage extends ParentPage {
 
         return this;
     }
+
+    public CreateNewPostPage clickOnEditButton() {
+        clickOnElement(buttonEditPost);
+        return new CreateNewPostPage(webDriver);
+    }
+
 }

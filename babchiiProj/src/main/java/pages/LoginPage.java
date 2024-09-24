@@ -98,6 +98,7 @@ public class LoginPage extends ParentPage {
         enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
         enterTextIntoInputPassword(TestData.VALID_PASSWORD_UI);
         clickOnButtonSignIn();
+        getHeaderElement().checkIsButtonSignOutVisible();
         return new HomePage(webDriver);
     }
 
@@ -161,5 +162,10 @@ public class LoginPage extends ParentPage {
 
     public void clickOnButtonSignUp() {
         clickOnElement(buttonSignUp);
+    }
+
+    public LoginPage refreshLoginPage() {
+        refreshPage();
+        return this;
     }
 }

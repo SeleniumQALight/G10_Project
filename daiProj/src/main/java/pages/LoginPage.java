@@ -199,6 +199,11 @@ public class LoginPage extends ParentPage {
         clickOnElement(buttonSignUp);
 
     }
+
+    public LoginPage refreshPage() {
+        webDriver.navigate().refresh();
+        return this;
+    }
 }
 
 
