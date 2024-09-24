@@ -3,20 +3,25 @@ package loginTests;
 import baseTest.BaseTest;
 import categories.SmokeTestFilter;
 import io.qameta.allure.*;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
+import org.openqa.selenium.Keys;
+import pages.LoginPage;
 import utils.ConfigProvider;
 import utils.ExcelDriver;
 
 import java.io.IOException;
 import java.util.Map;
 
-import static data.TestData.VALID_LOGIN_UI;
-import static data.TestData.VALID_PASSWORD_UI;
+import static data.TestData.*;
 
 @Epic("Allure examples")
 @Feature("Junit 4 support")
+@RunWith(JUnitParamsRunner.class)
 public class LoginTestWithPageObject extends BaseTest {
 
 
@@ -119,6 +124,61 @@ public class LoginTestWithPageObject extends BaseTest {
                 .checkIsIconChatNotVisible()
                 .checkIsButtonCreatePostNotVisible()
                 .checkIsMyProfileNotVisible();
+    }
+
+    @Test
+    public void TR005_stayLoggedInNewTab() {
+        pageProvider.getHomePage().openHomepageAndLoginIfNeeded().checkIsRedirectOnHomePage();
+        pageProvider.getLoginPage().openLoginPageInNewTab();
+        pageProvider.getHomePage().getHeader().checkIsButtonSignOutVisible();
+        pageProvider.getHomePage().switchTabToHomePage(0).checkIsRedirectOnHomePage();
+        pageProvider.getHomePage().switchTabToHomePage(1).closeCurrentHomePageTab();
+        pageProvider.getHomePage().switchTabToHomePage(0).getHeader().checkIsButtonSignOutVisible();
+    }
+
+    @Test
+    public void TR006_refreshPageAndCheckLogin() {
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin(VALID_LOGIN_UI);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(VALID_PASSWORD_UI);
+        pageProvider.getLoginPage().refreshLoginPage();
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getHomePage().getHeader().checkIsButtonSignOutNotVisible();
+    }
+
+    @Test
+    @Parameters(method = "parametersForInvalidLogin")
+    public void TR007_InvalidLoginWithParameters(String login, String pass) {
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin(login);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(pass);
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getHomePage().getHeader().checkIsButtonSignOutNotVisible();
+
+        Assert.assertTrue("Alert about invalid login should be displayed",
+                pageProvider.getLoginPage().isAlertInvalidLoginDisplayed());
+    }
+
+    public Object[] parametersForInvalidLogin() {
+        return new Object[][]{
+                {INVALID_LOGIN_UI, INVALID_PASSWORD_UI},
+                {VALID_LOGIN_UI, INVALID_PASSWORD_UI},
+                {INVALID_LOGIN_UI, VALID_PASSWORD_UI}
+        };
+    }
+
+    @Test
+    public void TR008_validLoginViaKeyboard() {
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().pressKeysUsingActions(Keys.TAB);
+        pageProvider.getLoginPage().pressKeysUsingActions(Keys.TAB);
+        pageProvider.getLoginPage().enterTextUsingActions("qaauto");
+        pageProvider.getLoginPage().pressKeysUsingActions(Keys.TAB);
+        pageProvider.getLoginPage().enterTextUsingActions("123456qwerty");
+        pageProvider.getLoginPage().pressKeysUsingActions(Keys.TAB);
+        pageProvider.getLoginPage().pressKeysUsingActions(Keys.ENTER);
+
+        pageProvider.getHomePage().getHeader().checkIsButtonSignOutVisible();
     }
 
 

@@ -60,4 +60,13 @@ public class HomePage extends ParentPage {
 
         return this;
     }
+
+    public HomePage switchTabToHomePage(int tabNumber) {
+        switchTab(tabNumber);
+        return this;
+    }
+
+    public void closeCurrentHomePageTab() {
+        closeCurrentTab();
+    }
 }
