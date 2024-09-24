@@ -26,7 +26,7 @@ public class CreatePostWithExcelAndDB extends BaseTest {
         DB_Util_seleniumUsers db_util_seleniumUsers = new DB_Util_seleniumUsers();
 
         final String LOGIN = "newqaauto";
-        String PASS = db_util_seleniumUsers.getPassForLogin(LOGIN);
+        final String PASS = db_util_seleniumUsers.getPassForLogin(LOGIN);
 
     }
 }
