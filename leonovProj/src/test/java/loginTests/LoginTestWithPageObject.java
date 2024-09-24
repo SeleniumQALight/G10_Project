@@ -9,6 +9,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.Keys;
+import pages.LoginPage;
 import utils.ConfigProvider;
 import utils.ExcelDriver;
 
@@ -168,11 +170,14 @@ public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void TR008_validLoginViaKeyboard() {
         pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().clickTabKeyViaActions().clickTabKeyViaActions()
-                .enterTextViaKeyboard("qaauto")
-                .clickTabKeyViaActions()
-                .enterTextViaKeyboard("123456qwerty")
-                .clickTabKeyViaActions().clickEnterKeyViaActions();
+        pageProvider.getLoginPage().pressKeysUsingActions(Keys.TAB);
+        pageProvider.getLoginPage().pressKeysUsingActions(Keys.TAB);
+        pageProvider.getLoginPage().enterTextUsingActions("qaauto");
+        pageProvider.getLoginPage().pressKeysUsingActions(Keys.TAB);
+        pageProvider.getLoginPage().enterTextUsingActions("123456qwerty");
+        pageProvider.getLoginPage().pressKeysUsingActions(Keys.TAB);
+        pageProvider.getLoginPage().pressKeysUsingActions(Keys.ENTER);
+
         pageProvider.getHomePage().getHeader().checkIsButtonSignOutVisible();
     }
 

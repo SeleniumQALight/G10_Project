@@ -198,19 +198,8 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public LoginPage clickTabKeyViaActions() {
-        pressKeysUsingActions(Keys.TAB);
-        return this;
-    }
 
-    public LoginPage clickEnterKeyViaActions() {
-        pressKeysUsingActions(Keys.ENTER);
-        return this;
-    }
 
-    public LoginPage enterTextViaKeyboard(String text) {
-        enterTextUsingActions(text);
-        return this;
-    }
+
 
 }

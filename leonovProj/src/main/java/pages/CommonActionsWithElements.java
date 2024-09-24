@@ -36,7 +36,7 @@ public class CommonActionsWithElements {
         }
     }
 
-    private void printErrorAndStopTest(Exception e) {
+    protected void printErrorAndStopTest(Exception e) {
         logger.error("Cannot work with element" + e);
         Assert.fail("Cannot work with element" + e);
     }
@@ -159,30 +159,6 @@ public class CommonActionsWithElements {
             Actions actions = new Actions(webDriver);
             actions.sendKeys(webElement, Keys.ENTER)
                     .perform();
-        } catch (Exception e) {
-            printErrorAndStopTest(e);
-        }
-    }
-
-    protected void pressKeysUsingActions(Keys key) {
-        try {
-            Actions actions = new Actions(webDriver);
-            actions.sendKeys(key)
-                    .perform();
-            logger.info("Key " + key + " was pressed");
-        } catch (Exception e) {
-            printErrorAndStopTest(e);
-        }
-    }
-
-    protected void enterTextUsingActions(String text) {
-        try {
-            Actions actions = new Actions(webDriver);
-            for (char c : text.toCharArray()) {
-                actions.sendKeys(String.valueOf(c))
-                        .perform();
-            }
-            logger.info("Text " + text + " was entered via keyboard");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
