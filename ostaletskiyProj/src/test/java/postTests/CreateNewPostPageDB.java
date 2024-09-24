@@ -5,12 +5,10 @@ import baseBase.BaseTest;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.apache.log4j.Logger;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import utils.ConfigProvider;
-import utils.DB_Util_seleniumUsers;
-import utils.ExcelSpreadsheetData;
-import utils.Utils;
+import utils.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,38 +20,46 @@ public class CreateNewPostPageDB extends BaseTest {
     //GUID = 1b3b3b3b-1b3b-1b3b-1b3b-1b3b3b3b1b3b
     private String login = "newqaauto";
     private Logger logger = Logger.getLogger(getClass());
+    private Database mySQLDatabase;
+
+    @Before
+    public void setMySQLDatabase() throws SQLException, ClassNotFoundException {
+        mySQLDatabase = libs.MySQL_Database.getDataBase();
+        logger.info("MySQL database was setup");
+
+    }
+
+
 
     @Test
     @Parameters(method = "parametersForCreateNewPostTest")
     public void TR003_createNewPost(String title, String body, String dropDownAccess, String postUniqueCheckbox, String successfulMessage, String isPostUnique) throws SQLException, ClassNotFoundException {
         DB_Util_seleniumUsers dbUtilSeleniumTable = new DB_Util_seleniumUsers();
-            String uniqueTitle = String.format(title, "Andriy", Utils.getDateAndTimeFormatted());
+        String uniquePostTitle = String.format(title, "Andriy", Utils.getDateAndTimeFormatted());
         String uniqueBody = String.format(body, Utils.getDateAndTimeFormatted());
-        pageProvider.getLoginPage()
-                .openLoginPage()
-                .enterTextIntoInputLogin(login)
-                .enterTextIntoInputPassword(dbUtilSeleniumTable.getPasswordForLogin(login))
-                .clickOnButtonSignIn()
-                .checkIsRedirectToHomePage()
-                .getHeaderElement().clickOnButtonCreatePost()
+
+        pageProvider.getLoginPage().openLoginPage();
+        pageProvider.getLoginPage().enterTextIntoInputLogin(login);
+        pageProvider.getLoginPage().enterTextIntoInputPassword(dbUtilSeleniumTable.getPasswordForLogin(login));
+        pageProvider.getLoginPage().clickOnButtonSignIn();
+        pageProvider.getHomePage().checkIsRedirectToHomePage();
+        pageProvider.getHomePage().getHeaderElement().clickOnButtonCreatePost()
                 .checkIsRedirectToCreatePostPage()
-                .enterTextIntoInputTitle(uniqueTitle)
+                .enterTextIntoInputTitle(uniquePostTitle)
                 .enterTextIntoInputBody(uniqueBody)
-                .setCheckBoxState(postUniqueCheckbox)
                 .selectValueInDropDownAccess(dropDownAccess)
+                .setCheckBoxState(postUniqueCheckbox)
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage(successfulMessage)
+                .checkIsPostUniqueDisplayed()
                 .checkIsPostUniqueText(isPostUnique)
                 .checkTextThisPostWasWrittenIsVisible(dropDownAccess)
                 .getHeaderElement().clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
-                .checkPostWithTitleIsPresent(uniqueTitle, 1)
-                .getHeaderElement().clickOnMyProfileButton()
-                .checkIsRedirectToMyProfilePage()
-                .deletePostsTillPresent(uniqueTitle);
-
+                .checkPostWithTitleIsPresent(uniquePostTitle, 1)
+                .deletePostsTillPresent(uniquePostTitle);
     }
 
     public Collection parametersForCreateNewPostTest() throws IOException {

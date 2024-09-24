@@ -53,10 +53,6 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
-    public HeaderElement getHeaderElement() {
-        return new HeaderElement(webDriver);
-    }
-
     @Override
     protected String getRelativeUrl() {
         return "/";
@@ -69,14 +65,13 @@ public class LoginPage extends ParentPage {
     }
 
     @Step
-    public LoginPage enterTextIntoInputLogin(String login) {
-        clearAndEnterTextIntoElement(getHeaderElement().getInputUserNameInLoginForm(), login);
-        return this;
+    public void enterTextIntoInputLogin(String login) {
+        clearAndEnterTextIntoElement(inputUserNameInLoginForm, login);
     }
+
     @Step
-    public LoginPage enterTextIntoInputPassword(String password) {
-        clearAndEnterTextIntoElement(getHeaderElement().getInputPasswordInLoginForm(), password);
-        return this;
+    public void enterTextIntoInputPassword(String password) {
+        clearAndEnterTextIntoElement(inputPasswordInLoginForm, password);
     }
 
     @Step
@@ -161,14 +156,6 @@ public class LoginPage extends ParentPage {
         Assert.assertTrue("Alert message is not displayed", isNotificationVisible());
         return this;
     }
-
-
-
-
-
-
-
-
 
 }
 
