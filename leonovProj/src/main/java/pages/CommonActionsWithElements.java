@@ -36,7 +36,7 @@ public class CommonActionsWithElements {
         }
     }
 
-    private void printErrorAndStopTest(Exception e) {
+    protected void printErrorAndStopTest(Exception e) {
         logger.error("Cannot work with element" + e);
         Assert.fail("Cannot work with element" + e);
     }
@@ -77,7 +77,7 @@ public class CommonActionsWithElements {
             }
             return state;
         } catch (Exception e) {
-            logger.info("Element is not present on the page");
+            logger.info(elementName + " is not present on the page");
             return false;
         }
     }
@@ -216,5 +216,8 @@ public class CommonActionsWithElements {
                 , isElementVisible(webElement, elementName));
     }
 
-
+    public void checkIsElementNotVisible(WebElement webElement, String elementName) {
+        Assert.assertFalse(elementName + "Element should be visible"
+                , isElementVisible(webElement, elementName));
+    }
 }

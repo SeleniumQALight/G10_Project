@@ -1,5 +1,6 @@
 package Pages;
 
+import Pages.elements.HeaderElement;
 import data.TestData;
 import io.qameta.allure.Step;
 import org.apache.commons.logging.Log;
@@ -56,22 +57,27 @@ public class LoginPage extends ParentPage {
     protected String getRelativeUrl() {
         return "/";
     }
-@Step
-    public void openLoginPage() {
+    @Step
+    public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
-        logger.info( "Login page was opened_" + baseUrl);
+        logger.info("Login page was opened " + baseUrl);
+        return this;
     }
-@Step
+
+    @Step
     public void enterTextIntoInputLogin(String login) {
         clearAndEnterTextIntoElement(inputUserNameInLoginForm, login);
     }
-@Step
+
+    @Step
     public void enterTextIntoInputPassword(String password) {
         clearAndEnterTextIntoElement(inputPasswordInLoginForm, password);
     }
-@Step
-    public void clickOnButtonSignIn() {
+
+    @Step
+    public HomePage clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
+        return new HomePage(webDriver);
     }
 
     public boolean isNotificationVisible() {
@@ -113,6 +119,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+@Step
     public LoginPage checkErrorMessageForRegistrationForm(String exeptedMessage) {
         String[] messagesArray = exeptedMessage.split(";");
 
@@ -149,12 +156,6 @@ public class LoginPage extends ParentPage {
         Assert.assertTrue("Alert message is not displayed", isNotificationVisible());
         return this;
     }
-
-
-
-
-
-
 
 }
 

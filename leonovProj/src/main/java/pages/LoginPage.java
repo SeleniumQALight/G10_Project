@@ -6,10 +6,10 @@ import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Utils;
 
@@ -48,7 +48,6 @@ public class LoginPage extends ParentPage {
     private List<WebElement> listOfErrorMessages;
     // подивитись як виглядатиме список
 
-
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -62,6 +61,11 @@ public class LoginPage extends ParentPage {
     public void openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened " + baseUrl);
+    }
+
+    @Step
+    public void openLoginPageInNewTab() {
+        openPageInNewTab(baseUrl + getRelativeUrl());
     }
 
     @Step
@@ -187,6 +191,15 @@ public class LoginPage extends ParentPage {
 
         softAssertions.assertAll();
         return this;
-
     }
+
+    public LoginPage refreshLoginPage() {
+        refreshPage();
+        return this;
+    }
+
+
+
+
+
 }

@@ -26,38 +26,46 @@ public class HeaderElement extends CommonActionsWithElements {
     private WebElement buttonChat;
 
 
-
     public HeaderElement(WebDriver webDriver) {
         super(webDriver);
     }
-        public MyProfilePage clickOnMyProfileButton() {
-            clickOnElement(buttonMyProfile);
-            return new MyProfilePage(webDriver);
-        }
+
+    public MyProfilePage clickOnMyProfileButton() {
+        clickOnElement(buttonMyProfile);
+        return new MyProfilePage(webDriver);
+    }
+
     public boolean isButtonSignOutVisible() {
         return isElementVisible(buttonSignOut);
     }
 
-    public boolean isButtonCreatePostVisible() {return isElementVisible(buttonCreatePost);
+    public boolean isButtonCreatePostVisible() {
+        return isElementVisible(buttonCreatePost);
     }
 
-    public boolean isButtonMyProfileVisible() {return isElementVisible(buttonMyProfile);
+    public boolean isButtonMyProfileVisible() {
+        return isElementVisible(buttonMyProfile);
     }
 
     @Step
     public HeaderElement checkIsButtonSignOutVisible() {
-       checkIsElementVisible(buttonSignOut);
+        checkIsElementVisible(buttonSignOut);
         return this;
     }
 
-    public boolean isButtonSearchVisible() {return isElementVisible(buttonSearch);
+    public boolean isButtonSearchVisible() {
+        return isElementVisible(buttonSearch);
     }
 
-    public boolean isButtonChatVisible() {return isElementVisible(buttonChat);
+    public boolean isButtonChatVisible() {
+        return isElementVisible(buttonChat);
     }
 
-    public HomePage clickOnButtonSignOut() {clickOnElement(buttonSignOut);
+    public HomePage clickOnButtonSignOut() {
+        clickOnElement(buttonSignOut);
         return new HomePage(webDriver);
     }
+
+
 }
 
