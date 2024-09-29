@@ -27,10 +27,10 @@ public class HeaderElement extends CommonActionsWithElements {
     @FindBy(xpath = "//span[@class='text-white mr-2 header-chat-icon']")
     private WebElement chatButton;
 
-
     public HeaderElement(WebDriver webDriver) {
         super(webDriver);
     }
+
     @Step
     public MyProfilePage clickOnButtonMyProfile() {
         clickOnElement(buttonMyProfile);
@@ -72,5 +72,4 @@ public class HeaderElement extends CommonActionsWithElements {
         clickOnElement(buttonCreatePost);
         return new CreateNewPostPage(webDriver);
     }
-
 }

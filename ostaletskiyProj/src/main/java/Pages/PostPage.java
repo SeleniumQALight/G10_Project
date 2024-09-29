@@ -16,7 +16,7 @@ public class PostPage extends ParentPage {
 
     private String locatorForTextThisPostWasWritten = "//*[contains(text(), '%s')]";
 
-    @FindBy(xpath = "// p[text()='Is this post unique? : yes']")
+    @FindBy(xpath = ".//p[contains(text(),'Is this post unique?')]")
     private WebElement uniqueText;
 
     @FindBy(xpath = "//h2")
@@ -80,8 +80,9 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkIsPostUniqueText(String expectedText) {
-        String actualText = uniqueText.getText();
-        Assert.assertEquals("Text", expectedText, actualText);
+        String infoText = uniqueText.getText();
+        String actualUniqueValue = infoText.substring(infoText.indexOf(":") + 2);
+        Assert.assertEquals("IsPostUnique value is not as expected", expectedText, actualUniqueValue);
         return this;
     }
 
