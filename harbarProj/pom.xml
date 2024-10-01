@@ -7,12 +7,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>overAll</artifactId>
+    <artifactId>harbarProj</artifactId>
     <packaging>jar</packaging>
 
-    <name>overAll</name>
+    <name>harbarProj</name>
     <url>http://maven.apache.org</url>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>15</maven.compiler.source>
