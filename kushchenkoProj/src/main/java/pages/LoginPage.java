@@ -130,6 +130,15 @@ public class LoginPage extends ParentPage {
     }
 
     @Step
+    public HomePage openLoginPageAndLoginWithValidCreds(String login, String password) {
+        openLoginPage();
+        enterTextIntoInputLogin(login);
+        enterTextIntoInputPassword(password);
+        clickOnButtonSignIn();
+        return new HomePage(webDriver);
+    }
+
+    @Step
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextIntoElement(inputUserNameInRegistrationForm, userName);
         return this;
