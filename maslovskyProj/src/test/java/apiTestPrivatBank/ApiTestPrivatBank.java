@@ -27,11 +27,9 @@ public class ApiTestPrivatBank {
                 given()
                         .queryParam("date", currencyExchangeRateOnDate)
                         .contentType(ContentType.JSON)
-//                        .log().all()
                         .when()
                         .get(EndPoints.CURRENCY_EXCHANGE_RATE)
                         .then()
-//                        .log().all()
                         .statusCode(200)
                         .extract().body().as(CurrencyRateDto.class);
         logger.info("Number of currencies in response = " +

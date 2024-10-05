@@ -9,17 +9,6 @@ public class CurrencyRateDto {
     private String baseCurrencyLit;
     private List<ExchangeRateDto> exchangeRate;
 
-    public CurrencyRateDto() {
-    }
-
-    public CurrencyRateDto(String date, ExchangeRateDto exchangeRate) {
-        this.date = date;
-        this.bank = "PB";
-        this.baseCurrency = 980;
-        this.baseCurrencyLit = "UAH";
-        this.exchangeRate = (List<ExchangeRateDto>) exchangeRate;
-    }
-
     public String getDate() {
         return date;
     }
@@ -52,17 +41,9 @@ public class CurrencyRateDto {
         this.baseCurrencyLit = baseCurrencyLit;
     }
 
-//    public ExchangeRateDto getExchangeRate() {
-//        return (ExchangeRateDto) exchangeRate;
-//    }
-
     public List<ExchangeRateDto> getExchangeRate() {
         return exchangeRate;
     }
-
-//    public void setExchangeRate(ExchangeRateDto exchangeRate) {
-//        this.exchangeRate = (List<ExchangeRateDto>) exchangeRate;
-//    }
 
     public void setExchangeRate(List<ExchangeRateDto> exchangeRate) {
         this.exchangeRate = exchangeRate;

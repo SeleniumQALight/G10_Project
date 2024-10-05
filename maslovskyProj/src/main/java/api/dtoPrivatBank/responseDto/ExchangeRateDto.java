@@ -9,16 +9,6 @@ public class ExchangeRateDto {
     private Double saleRateNB;
     private Double purchaseRateNB;
 
-    public ExchangeRateDto() {
-    }
-
-    public ExchangeRateDto(String currency, Double saleRateNB, Double purchaseRateNB) {
-        this.baseCurrency = "UAH";
-        this.currency = currency;
-        this.saleRateNB = saleRateNB;
-        this.purchaseRateNB = purchaseRateNB;
-    }
-
     public String getBaseCurrency() {
         return baseCurrency;
     }
