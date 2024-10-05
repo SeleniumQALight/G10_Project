@@ -44,48 +44,15 @@ public class ApiTestPrivatBank {
         Assert.assertEquals("number of currencies in 'exchangeRate' doesn't match",
                 actualResponseAsCurrencyRateDto.getExchangeRate().size(),
                 expectedCurrencyRateDto.getExchangeRate().size());
-        logger.info("number of currencies in 'exchangeRate' match");
-
-        Assert.assertEquals("values of 'date' don't match",
-                actualResponseAsCurrencyRateDto.getDate(),
-                expectedCurrencyRateDto.getDate());
-        logger.info("values of 'date' match");
-
-        Assert.assertEquals("values of 'bank' don't match",
-                actualResponseAsCurrencyRateDto.getBank(),
-                expectedCurrencyRateDto.getBank());
-        logger.info("values of 'bank' match");
-
-        Assert.assertEquals("values of 'baseCurrency' don't match",
-                actualResponseAsCurrencyRateDto.getBaseCurrency(),
-                expectedCurrencyRateDto.getBaseCurrency());
-        logger.info("values of 'baseCurrency' match");
-
-        Assert.assertEquals("values of 'baseCurrencyLit' don't match",
-                actualResponseAsCurrencyRateDto.getBaseCurrencyLit(),
-                expectedCurrencyRateDto.getBaseCurrencyLit());
-        logger.info("values of 'baseCurrencyLit' match");
+        logger.info("number of currencies match");
 
         SoftAssertions softAssertions = new SoftAssertions();
-        for (int i = 0; i < actualResponseAsCurrencyRateDto.getExchangeRate().size(); i++) {
-            softAssertions
-                    .assertThat(actualResponseAsCurrencyRateDto
-                            .getExchangeRate().get(i)
-                            .getBaseCurrency())
-                    .isEqualTo(expectedCurrencyRateDto
-                            .getExchangeRate().get(i)
-                            .getBaseCurrency());
-            softAssertions
-                    .assertThat(actualResponseAsCurrencyRateDto
-                            .getExchangeRate().get(i)
-                            .getCurrency())
-                    .isEqualTo(expectedCurrencyRateDto
-                            .getExchangeRate().get(i)
-                            .getCurrency());
-        }
+        softAssertions
+                .assertThat(actualResponseAsCurrencyRateDto)
+                .usingRecursiveComparison()
+                .isEqualTo(expectedCurrencyRateDto);
         softAssertions.assertAll();
-        logger.info("values of 'BaseCurrency' match");
-        logger.info("values of 'ExchangeRate' match");
+        logger.info("actual result values match to expected result");
     }
 
     @Test
