@@ -6,7 +6,6 @@ import api.dto.responseDto.PostsDto;
 import io.restassured.http.ContentType;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
-import org.codehaus.groovy.classgen.genArrayAccess;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -50,9 +49,9 @@ public class ApiTests {
         //Expected result
         PostsDto[] expectedResponseDto = {
                 new PostsDto("The second Default post", "This post was created automatically after cleaning the database"
-                , "All Users", "no", new AuthorDto(USER_NAME), false),
+                        , "All Users", "no", new AuthorDto(USER_NAME), false),
                 new PostsDto("The first Default post", "This post was created automatically after cleaning the database"
-                , "All Users", "no", new AuthorDto(USER_NAME), false)
+                        , "All Users", "no", new AuthorDto(USER_NAME), false)
         };
 
         Assert.assertEquals("Number of posts ", expectedResponseDto.length, actualResponseAsDto.length);
