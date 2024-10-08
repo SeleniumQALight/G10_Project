@@ -14,6 +14,7 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Map;
 
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.hamcrest.CoreMatchers.equalTo;
 
@@ -142,6 +143,11 @@ public class ApiTests {
 
     }
 
+    @Test
+    public void getAllPostsByUserSchema(){
+        apiHelper.getAllPostByUserRequest(USER_NAME)
+                .assertThat().body(matchesJsonSchemaInClasspath("response.json"));
+    }
 
 
 
