@@ -48,12 +48,29 @@ public class ApiTests {
         //Expected result
 
         PostDto[] expectedResponseDto = {
-                new PostDto("The second Default post"
-                        , "This post was created automatically after cleaning the database",
-                        "All Users", "no",new AuthorDto(USER_NAME), false),
-                new PostDto("The first Default post"
-                        , "This post was created automatically after cleaning the database",
-                        "All Users", "no",new AuthorDto(USER_NAME), false)
+                PostDto.builder()
+                        .title("The second Default post")
+                        .body("This post was created automatically after cleaning the database")
+                        .select("All Users")
+                        .uniquePost("no")
+                        .author(AuthorDto.builder().username(USER_NAME).build())
+                        .isVisitorOwner(false)
+                        .build(),
+                PostDto.builder()
+                        .title("The first Default post")
+                        .body("This post was created automatically after cleaning the database")
+                        .select("All Users")
+                        .uniquePost("no")
+                        .author(AuthorDto.builder().username(USER_NAME).build())
+                        .isVisitorOwner(false)
+                        .build()
+
+//                new PostDto("The second Default post"
+//                        , "This post was created automatically after cleaning the database",
+//                        "All Users", "no",new AuthorDto(USER_NAME), false),
+//                new PostDto("The first Default post"
+//                        , "This post was created automatically after cleaning the database",
+//                        "All Users", "no",new AuthorDto(USER_NAME), false)
         };
 
         Assert.assertEquals("Number of posts ", expectedResponseDto.length, actualResponseAsDto.length);
