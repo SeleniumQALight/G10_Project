@@ -1,9 +1,11 @@
 package apiTests;
 
+import api.ApiHelper;
 import api.EndPoints;
 import api.dto.responseDto.AuthorDto;
 import api.dto.responseDto.PostDto;
 import io.restassured.http.ContentType;
+import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
@@ -18,6 +20,7 @@ public class ApiTests {
 
     final String USER_NAME = "autoapi";
     Logger logger = Logger.getLogger(getClass());
+    ApiHelper apiHelper = new ApiHelper();
 
     @Test
     public void getAllPostsForUser() {
@@ -25,9 +28,9 @@ public class ApiTests {
                 given()
                         .contentType(ContentType.JSON)
                         .log().all()
-                .when()
+                        .when()
                         .get(EndPoints.POSTS_BY_USER, USER_NAME)
-                .then()
+                        .then()
                         .log().all()
                         .statusCode(200)
                         //method #1 restassured asserts
@@ -42,7 +45,7 @@ public class ApiTests {
 
         for (int i = 0; i < actualResponseAsDto.length; i++) {
             Assert.assertEquals("Username is not expected in post " + i
-                    , USER_NAME,actualResponseAsDto[i].getAuthor().getUsername());
+                    , USER_NAME, actualResponseAsDto[i].getAuthor().getUsername());
         }
 
         //Expected result
@@ -79,9 +82,20 @@ public class ApiTests {
 
         softAssertions
                 .assertThat(actualResponseAsDto)
-                        .usingRecursiveComparison()
-                                .ignoringFields("id", "createdDate", "author.avatar")
-                                        .isEqualTo(expectedResponseDto);
+                .usingRecursiveComparison()
+                .ignoringFields("id", "createdDate", "author.avatar")
+                .isEqualTo(expectedResponseDto);
         softAssertions.assertAll();
+    }
+
+    @Test
+    public void getAllPostsByUserNegative() {
+        final String NOT_VALID_USER_NAME = "NotValidUserName";
+        String actualResponse = apiHelper.getAllPostsByUserRequest(NOT_VALID_USER_NAME, HttpStatus.SC_BAD_REQUEST)
+                .extract().response().body().asString();
+
+        Assert.assertEquals("Massage in response"
+                , "\"Sorry, invalid user requested. Wrong username - " + NOT_VALID_USER_NAME
+                        + " or there is no posts. Exception is undefined\"", actualResponse);
     }
 }
