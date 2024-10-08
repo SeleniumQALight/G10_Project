@@ -1,5 +1,6 @@
 package apiTests;
 
+import api.ApiHelper;
 import api.EndPoints;
 import api.dto.responseDto.AuthorDto;
 import api.dto.responseDto.PostsDto;
@@ -8,6 +9,8 @@ import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.junit.Test;
+
+import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 import static io.restassured.RestAssured.given;
@@ -16,6 +19,7 @@ import static org.hamcrest.CoreMatchers.everyItem;
 public class ApiTests {
     final String USER_NAME = "autoapi";
     Logger logger = Logger.getLogger(getClass());
+    ApiHelper apiHelper = new ApiHelper();
 
     @Test
     public void getAllPostsForUser(){
@@ -87,4 +91,25 @@ public class ApiTests {
         softAssertions.assertAll();
 
     }
+
+
+    @Test
+    public void getAllPostsByUserNegative(){
+       final String NOT_VALID_USER_NAME = "NotValidUser";
+
+       String actualResponse =
+               apiHelper.getAllPostByUserRequest(NOT_VALID_USER_NAME, SC_BAD_REQUEST)
+               .extract().response().body().asString();
+
+       Assert.assertEquals(
+               "Message in response "
+               , "\"Sorry, invalid user requested. Wrong username - "+NOT_VALID_USER_NAME
+                       +" or there is no posts. Exception is undefined\""
+               ,actualResponse
+       );
+    }
+
+
+
+
 }
