@@ -48,10 +48,31 @@ public class ApiTests {
 
         //Expected result
         PostsDto[] expectedResponseDto = {
-                new PostsDto("The second Default post", "This post was created automatically after cleaning the database",
-                        "All Users", "no", new AuthorDto(USER_NAME), false ),
-                new PostsDto("The first Default post", "This post was created automatically after cleaning the database",
-                        "All Users", "no", new AuthorDto(USER_NAME), false )
+                PostsDto.builder()
+                        .title("The second Default post")
+                        .body("This post was created automatically after cleaning the database")
+                        .select("All Users")
+                        .uniquePost("no")
+                        .author(AuthorDto.builder()
+                                .username(USER_NAME)
+                                .build())
+                        .isVisitorOwner(false)
+                        .build(),
+                PostsDto.builder()
+                        .title("The first Default post")
+                        .body("This post was created automatically after cleaning the database")
+                        .select("All Users")
+                        .uniquePost("no")
+                        .author(AuthorDto.builder()
+                                .username(USER_NAME)
+                                .build())
+                        .isVisitorOwner(false)
+                        .build()
+
+//                new PostsDto("The second Default post", "This post was created automatically after cleaning the database",
+//                        "All Users", "no", new AuthorDto(USER_NAME), false ),
+//                new PostsDto("The first Default post", "This post was created automatically after cleaning the database",
+//                        "All Users", "no", new AuthorDto(USER_NAME), false )
         };
 
         Assert.assertEquals("Number of posts " , expectedResponseDto.length, actualResponseAsDto.length);
