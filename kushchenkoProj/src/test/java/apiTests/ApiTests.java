@@ -9,7 +9,6 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.everyItem;
 
@@ -61,6 +60,7 @@ public class ApiTests {
                                 .isEqualTo(expectedResponseDto);
 
         softAssertions.assertAll();
+
     }
 }
 
