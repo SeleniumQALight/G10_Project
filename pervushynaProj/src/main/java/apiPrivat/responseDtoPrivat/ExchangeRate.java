@@ -12,6 +12,11 @@ public class ExchangeRate {
     public ExchangeRate() {
     }
 
+    public ExchangeRate(String baseCurrency, String currency) {
+        this.baseCurrency = baseCurrency;
+        this.currency = currency;
+    }
+
     public String getBaseCurrency() {
         return baseCurrency;
     }

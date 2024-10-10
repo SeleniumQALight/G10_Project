@@ -11,7 +11,7 @@ public class ExchangeRateDto {
     public ExchangeRateDto() {
     }
 
-    public ExchangeRateDto(String date, String bank, int baseCurrency, String baseCurrencyLit, ExchangeRate[] exchangeRate) {
+    public ExchangeRateDto(String date, String bank, Integer baseCurrency, String baseCurrencyLit, ExchangeRate[] exchangeRate) {
         this.date = date;
         this.bank = bank;
         this.baseCurrency = baseCurrency;
