@@ -1,20 +1,14 @@
-package api.dto.responseDto;
+package API.DTO.responseDTO;
 
-import lombok.*;
-
-@Data
-@ToString
-@NoArgsConstructor
-@Builder
-@AllArgsConstructor
-public class AuthorDto {
+public class AuthorDTO {
     private String username;
     private String avatar;
 
-/*    public AuthorDto() {
+    public AuthorDTO (){
+
     }
 
-    public AuthorDto(String username) {
+    public AuthorDTO(String username) {
         this.username = username;
     }
 
@@ -36,9 +30,9 @@ public class AuthorDto {
 
     @Override
     public String toString() {
-        return "AuthorDto{" +
+        return "AuthorDTO{" +
                 "username='" + username + '\'' +
                 ", avatar='" + avatar + '\'' +
                 '}';
-    }*/
+    }
 }

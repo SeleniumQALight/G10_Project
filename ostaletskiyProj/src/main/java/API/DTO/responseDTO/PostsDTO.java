@@ -1,31 +1,23 @@
-package api.dto.responseDto;
+package API.DTO.responseDTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
 
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@Builder
-@AllArgsConstructor
-public class PostsDto {
-    @JsonProperty("_id")
+public class PostsDTO {
+    @JsonProperty ("_id")
     private String id;
     private String title;
     private String body;
-    @JsonProperty("select1")
+    @JsonProperty ("select1")
     private String select;
     private String uniquePost;
     private String createdDate;
-    private AuthorDto author;
+    private AuthorDTO author;
     private Boolean isVisitorOwner;
-/*
-    public PostsDto() {
 
+    public PostsDTO () {
     }
 
-    public PostsDto(String title, String body, String select, String uniquePost, AuthorDto author, Boolean isVisitorOwner) {
+    public PostsDTO(String title, String body, String select, String uniquePost, AuthorDTO author, Boolean isVisitorOwner) {
         this.title = title;
         this.body = body;
         this.select = select;
@@ -38,69 +30,69 @@ public class PostsDto {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getBody() {
+        return body;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
     public String getSelect() {
         return select;
     }
 
-    public void setSelect(String select) {
-        this.select = select;
+    public AuthorDTO getAuthor() {
+        return author;
     }
 
     public String getUniquePost() {
         return uniquePost;
     }
 
-    public void setUniquePost(String uniquePost) {
-        this.uniquePost = uniquePost;
-    }
-
     public String getCreatedDate() {
         return createdDate;
-    }
-
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public AuthorDto getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(AuthorDto author) {
-        this.author = author;
     }
 
     public Boolean getIsVisitorOwner() {
         return isVisitorOwner;
     }
 
+    public void setSelect(String select) {
+        this.select = select;
+    }
+
+    public void setUniquePost(String uniquePost) {
+        this.uniquePost = uniquePost;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public void setAuthor(AuthorDTO author) {
+        this.author = author;
+    }
+
     public void setIsVisitorOwner(Boolean visitorOwner) {
         isVisitorOwner = visitorOwner;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
     @Override
     public String toString() {
-        return "PostsDto{" +
+        return "PostsDTO{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", body='" + body + '\'' +
@@ -110,5 +102,5 @@ public class PostsDto {
                 ", author=" + author +
                 ", isVisitorOwner=" + isVisitorOwner +
                 '}';
-    }*/
+    }
 }
