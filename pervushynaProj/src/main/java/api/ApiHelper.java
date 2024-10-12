@@ -2,6 +2,7 @@ package api;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
+import org.apache.hc.core5.http.HttpStatus;
 
 import static api.EndPoints.POSTS_BY_USER;
 import static io.restassured.RestAssured.given;
@@ -17,5 +18,9 @@ public class ApiHelper {
                 .then()
                 .log().all()
                 .statusCode(expectedStatusCode);
+    }
+
+    public ValidatableResponse getAllPostsByUserRequest (String userName) {
+        return getAllPostsByUserRequest(userName, HttpStatus.SC_OK);
     }
 }
