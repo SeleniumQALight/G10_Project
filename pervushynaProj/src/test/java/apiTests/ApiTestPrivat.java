@@ -22,7 +22,7 @@ public class ApiTestPrivat {
     public void getPrivatBankExchangeRate() {
         ExchangeRateDto actualResponseAsDto =
                 given()
-                .queryParam("date", "01.12.2014")
+                .queryParam("date", "22.03.2022")
                 .contentType(ContentType.JSON)
                 .log().all()
                 .when()
@@ -39,35 +39,70 @@ public class ApiTestPrivat {
 
 
 
-        List<String> actualCurrencies = Arrays.stream(actualResponseAsDto.getExchangeRate())
-                .map(ExchangeRate::getCurrency)
-                .collect(Collectors.toList());
+//        List<String> actualCurrencies = Arrays.stream(actualResponseAsDto.getExchangeRate())
+//                .map(ExchangeRate::getCurrency)
+//                .collect(Collectors.toList());
+//
+//        List<String> expectedCurrencies = Arrays.asList("USD", "EUR", "CHF", "GBP", "SEK", "CAD");
+//
+//        SoftAssertions softAssertions = new SoftAssertions();
+//
+//        for (String expectedCurrency : expectedCurrencies) {
+//            softAssertions
+//                    .assertThat(actualCurrencies)
+//                    .as("Currency " + expectedCurrency + " should be present in the exchange rates")
+//                    .contains(expectedCurrency);
+//
+//
+//            softAssertions.assertAll();
+//
+//        }
 
-        List<String> expectedCurrencies = Arrays.asList("USD", "EUR", "CHF", "GBP", "PLZ", "SEK", "CAD");
+//        // Expected result
+        ExchangeRateDto expectedResponseAsDto = new ExchangeRateDto(
+                "22.03.2022",
+                "PB",
+                980,
+                "UAH",
+                new ExchangeRate[]{
+                        new ExchangeRate("UAH", "AUD"),
+                        new ExchangeRate("UAH", "AZN"),
+                        new ExchangeRate("UAH", "BYN"),
+                        new ExchangeRate("UAH", "CAD"),
+                        new ExchangeRate("UAH", "CHF"),
+                        new ExchangeRate("UAH", "CNY"),
+                        new ExchangeRate("UAH", "CZK"),
+                        new ExchangeRate("UAH", "DKK"),
+                        new ExchangeRate("UAH", "EUR"),
+                        new ExchangeRate("UAH", "GBP"),
+                        new ExchangeRate("UAH", "GEL"),
+                        new ExchangeRate("UAH", "HUF"),
+                        new ExchangeRate("UAH", "ILS"),
+                        new ExchangeRate("UAH", "JPY"),
+                        new ExchangeRate("UAH", "KZT"),
+                        new ExchangeRate("UAH", "MDL"),
+                        new ExchangeRate("UAH", "NOK"),
+                        new ExchangeRate("UAH", "PLN"),
+                        new ExchangeRate("UAH", "SEK"),
+                        new ExchangeRate("UAH", "SGD"),
+                        new ExchangeRate("UAH", "TMT"),
+                        new ExchangeRate("UAH", "TRY"),
+                        new ExchangeRate("UAH", "UAH"),
+                        new ExchangeRate("UAH", "USD"),
+                        new ExchangeRate("UAH", "UZS")
+                }
+        );
+
 
         SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions
+                .assertThat(actualResponseAsDto.getExchangeRate())
+                .usingRecursiveComparison()
+                .ignoringFields("saleRateNB", "purchaseRateNB", "saleRate", "purchaseRate")
+                   .isEqualTo(expectedResponseAsDto.getExchangeRate());
 
-        for (String expectedCurrency : expectedCurrencies) {
-            softAssertions
-                    .assertThat(actualCurrencies)
-                    .as("Currency " + expectedCurrency + " should be present in the exchange rates")
-                    .contains(expectedCurrency);
+        softAssertions.assertAll();
 
-
-            softAssertions.assertAll();
-
-        }
-
-
-//        SoftAssertions softAssertionsTwo = new SoftAssertions();
-//        softAssertions
-//                .assertThat(actualResponseAsDto.getExchangeRate())
-//                .usingRecursiveComparison()
-//                .ignoringFields("saleRateNB", "purchaseRateNB", "saleRate", "purchaseRate")
-//                   .isEqualTo(());
-//
-//        softAssertions.assertAll();
-//
   }
 }
 
