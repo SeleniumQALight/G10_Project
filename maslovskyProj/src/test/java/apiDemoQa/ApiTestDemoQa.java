@@ -5,19 +5,24 @@ import api.dtoDemoQa.BookStoreDto;
 import api.dtoDemoQa.CollectionOfIsbnsDto;
 import api.dtoDemoQa.UserDataDto;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.apache.log4j.Logger;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.ArrayList;
 
 import static api.EndPoints.BOOKS_STORE;
 import static io.restassured.RestAssured.given;
 
 public class ApiTestDemoQa {
+    Logger logger = Logger.getLogger(getClass());
+
     String userName = "alex";
     String password = "Alex_123456!";
 
@@ -29,6 +34,8 @@ public class ApiTestDemoQa {
     String userId;
     String token;
     String isbnFirstBook;
+    String nameFirstBook;
+    JsonPath jsonPath;
 
     @Before
     public void createUserAndGenerateTokenAndLogin() {
@@ -38,8 +45,8 @@ public class ApiTestDemoQa {
                 .when()
                 .post(EndPoints.REGISTER_USER)
                 .then()
-//                .statusCode(201)
-                ;
+                .statusCode(201);
+        logger.info(String.format("User '%s' created successfully", userName));
 
         token = given()
                 .contentType(ContentType.JSON)
@@ -47,12 +54,12 @@ public class ApiTestDemoQa {
                 .when()
                 .post(EndPoints.GENERATE_TOKEN)
                 .then()
-//                .statusCode(200)
-//                .log().all()
+                .statusCode(200)
                 .extract()
                 .response()
                 .jsonPath()
                 .getString("token");
+        logger.info(String.format("Token for User '%s' generated", userName));
 
         userId = given()
                 .contentType(ContentType.JSON)
@@ -65,6 +72,7 @@ public class ApiTestDemoQa {
                 .response()
                 .jsonPath()
                 .getString("userId");
+        logger.info(String.format("UserID '%s' received", userId));
     }
 
     @After
@@ -75,24 +83,25 @@ public class ApiTestDemoQa {
                 .when()
                 .delete(EndPoints.DELETE_USER, userId)
                 .then()
-                .statusCode(204)
-                ;
+                .statusCode(204);
+        logger.info(String.format("User account for '%s' deleted", userName));
+
     }
 
     @Test
     public void addBookToUserProfile() {
-        isbnFirstBook = given()
+        jsonPath = given()
                 .contentType(ContentType.JSON)
                 .when()
                 .get(BOOKS_STORE)
                 .then()
-//                .log().all()
                 .statusCode(200)
                 .extract()
                 .body()
-                .jsonPath()
-                .getJsonObject("books[0].isbn");
-        System.out.println(isbnFirstBook);
+                .jsonPath();
+        isbnFirstBook = jsonPath.getJsonObject("books[0].isbn");
+        nameFirstBook = jsonPath.getJsonObject("books[0].title");
+        logger.info(String.format("ISBN '%s' of the first book is found", isbnFirstBook));
 
 //        List<CollectionOfIsbnsDto> isbnList = new ArrayList<>();
 //        isbnList.add(CollectionOfIsbnsDto.builder()
@@ -101,7 +110,7 @@ public class ApiTestDemoQa {
 
         BookStoreDto bookStoreDtoRequestBody = BookStoreDto.builder()
                 .userId(userId)
-                .collectionOfIsbnsDto(
+                .collectionOfIsbns(
                         Collections.singletonList(
                                 CollectionOfIsbnsDto.builder()
                                         .isbn(isbnFirstBook)
@@ -110,22 +119,44 @@ public class ApiTestDemoQa {
                 )
                 .build();
 
-        System.out.println(bookStoreDtoRequestBody);
-
-        Response response = given()
+        given()
                 .header("Authorization", "Bearer " + token)
                 .contentType(ContentType.JSON)
                 .body(bookStoreDtoRequestBody)
-                .log().all()
                 .when()
                 .post(EndPoints.BOOKS_STORE)
                 .then()
-                .log().all()
+                .statusCode(201)
+                .extract().response();
+        logger.info(String.format("Book '%s' is added to User profile", nameFirstBook));
+
+        Response checkBook = given()
+                .header("Authorization", "Bearer " + token)
+                .contentType(ContentType.JSON)
+                .when()
+                .get(EndPoints.BOOKS_OF_USER, userId)
+                .then()
                 .statusCode(200)
                 .extract().response();
-        System.out.println(response.prettyPrint());
 
+        List<CollectionOfIsbnsDto> bookList = new ArrayList<>();
+        bookList.add(CollectionOfIsbnsDto.builder()
+               .isbn(isbnFirstBook)
+               .build());
 
+        Assert.assertEquals("Number of books is more than 1", 1, bookList.size());
+        logger.info("Number of books in User profile = 1");
+
+        String actualIsbn = checkBook
+                .body()
+                .jsonPath()
+                .getJsonObject("books[0].isbn");
+
+        Assert.assertEquals(
+                String.format("Wrong book ISBN '%s' added to user '%s' profile", actualIsbn, userName),
+                isbnFirstBook,
+                actualIsbn);
+        logger.info(String.format("ISBN '%s' in '%s' profile the same as expected", actualIsbn, userName));
     }
 
 }

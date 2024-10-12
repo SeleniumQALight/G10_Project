@@ -1,6 +1,5 @@
 package api.dtoDemoQa;
 
-import api.dtoPrivatBank.responseDto.ExchangeRateDto;
 import lombok.*;
 
 import java.util.List;
@@ -13,5 +12,5 @@ import java.util.List;
 @AllArgsConstructor
 public class BookStoreDto {
     private String userId;
-    private List<CollectionOfIsbnsDto> collectionOfIsbnsDto;
+    private List<CollectionOfIsbnsDto> collectionOfIsbns;
 }

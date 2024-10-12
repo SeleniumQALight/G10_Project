@@ -17,5 +17,6 @@ public interface EndPoints {
     String LOGIN_USER = DEMO_QA_URL + "/Account/v1/Login";
     String DELETE_USER = REGISTER_USER + "/{0}";
     String BOOKS_STORE = DEMO_QA_URL + "/BookStore/v1/Books";
+    String BOOKS_OF_USER = DEMO_QA_URL + "/Account/v1/User/{0}";
 
 }
