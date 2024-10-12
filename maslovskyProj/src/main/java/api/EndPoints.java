@@ -10,4 +10,12 @@ public interface EndPoints {
     String LOGIN = BASE_URL + "/api/login";
     String CREATE_POST = BASE_URL + "/api/create-post";
     String DELETE_POST = BASE_URL + "/api/post/{0}";
+
+    String DEMO_QA_URL = "https://demoqa.com";
+    String REGISTER_USER = DEMO_QA_URL + "/Account/v1/User";
+    String GENERATE_TOKEN = DEMO_QA_URL + "/Account/v1/GenerateToken";
+    String LOGIN_USER = DEMO_QA_URL + "/Account/v1/Login";
+    String DELETE_USER = REGISTER_USER + "/{0}";
+    String BOOKS_STORE = DEMO_QA_URL + "/BookStore/v1/Books";
+
 }
