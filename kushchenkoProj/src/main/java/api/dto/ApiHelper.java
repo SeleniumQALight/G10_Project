@@ -1,10 +1,12 @@
-package api;
+package api.dto;
 
+import api.EndPoints;
 import api.dto.responseDto.PostsDto;
 import data.TestData;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
+import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
@@ -14,51 +16,53 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 import static api.EndPoints.POSTS_BY_USER;
-import static data.TestData.VALID_LOGIN_API;
 import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
 import static org.apache.http.HttpStatus.SC_OK;
 
 public class ApiHelper {
-    private Logger logger = Logger.getLogger(getClass());
+    Logger logger = Logger.getLogger(getClass());
+
 
     public static RequestSpecification requestSpecification = new RequestSpecBuilder()
-            .setContentType(JSON)
+            .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();
+
     public static ResponseSpecification responseSpecification = new ResponseSpecBuilder()
             .log(LogDetail.ALL)
             .expectStatusCode(SC_OK)
             .build();
 
-    public ValidatableResponse getAllPostByUserRequest(String userName, int expectedStatusCode) {
-        return given()
-/*                .contentType(JSON)
-                .log().all()*/
-                .spec(requestSpecification)
-                .when()
-                .get(POSTS_BY_USER, userName)
-                .then()
-/*                .log().all()
-                .statusCode(expectedStatusCode);*/
-                .spec(responseSpecification.statusCode(expectedStatusCode));
+
+    public ValidatableResponse getAllPostsByUser(String username, int expectedStatusCode) {
+        return
+                given()
+//                        .contentType(ContentType.JSON)
+//                        .log().all()
+                        .spec(requestSpecification)
+                        .when()
+                        .get(POSTS_BY_USER, username)
+                        .then()
+//                        .log().all()
+//                        .statusCode(expectedStatusCode);
+                        .spec(responseSpecification.statusCode(expectedStatusCode));
     }
 
-    public ValidatableResponse getAllPostByUserRequest() {
-        return getAllPostByUserRequest(VALID_LOGIN_API, SC_OK);
+    public ValidatableResponse getAllPostsByUserRequest(String username) {
+        return getAllPostsByUser(username, SC_OK);
     }
 
-    public ValidatableResponse getAllPostByUserRequest(String userName) {
-        return getAllPostByUserRequest(userName, SC_OK);
+    public ValidatableResponse getAllPostsByUserRequest() {
+        return getAllPostsByUser(TestData.VALID_LOGIN_API, SC_OK);
     }
 
     public String getToken() {
-        return getToken(VALID_LOGIN_API, TestData.VALID_PASSWORD_API);
+        return getToken(TestData.VALID_LOGIN_API, TestData.VALID_PASSWORD_API);
     }
 
-    public String getToken(String userName, String password) {
+    public String getToken(String username, String password) {
         JSONObject requestBody = new JSONObject();
-        requestBody.put("username", userName);
+        requestBody.put("username", username);
         requestBody.put("password", password);
         return given()
                 .spec(requestSpecification)
@@ -70,18 +74,19 @@ public class ApiHelper {
                 .extract().response().getBody().asString().replace("\"", "");
     }
 
-    public void deleteAllPostsTillPresent(String useName, String token) {
-        PostsDto[] listOfPosts = getAllPostByUserRequest(useName.toLowerCase())
+    public void deleteAllPostsTillPresent(String username, String token) {
+        PostsDto[] listOfPosts = getAllPostsByUserRequest(username)
                 .extract().response().body().as(PostsDto[].class);
         for (int i = 0; i < listOfPosts.length; i++) {
-            deletePostsById(token, listOfPosts[i].getId());
-            logger.info(String.format("Post with id %s and title '%s' was deleted",
-                    listOfPosts[i].getId(),
-                    listOfPosts[i].getTitle()));
+            deletePostById(token, listOfPosts[i].getId());
+            logger.info(String.format("Post with id %s and title '%s' was deleted"
+                    , listOfPosts[i].getId()
+                    , listOfPosts[i].getTitle()));
+
         }
     }
 
-    private void deletePostsById(String token, String id) {
+    private void deletePostById(String token, String id) {
         HashMap<String, String> bodyRequest = new HashMap<>();
         bodyRequest.put("token", token);
         given()
