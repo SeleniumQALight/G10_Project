@@ -17,7 +17,6 @@ import java.util.Map;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.hamcrest.CoreMatchers.equalTo;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.everyItem;
 
@@ -87,6 +86,7 @@ public class ApiTests {
                 .isEqualTo(expectedResponseDto);
 
         softAssertions.assertAll();
+
     }
 
     @Test
