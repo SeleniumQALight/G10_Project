@@ -13,9 +13,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import static api.EndPoints.BOOKS_STORE;
 import static io.restassured.RestAssured.given;
@@ -46,7 +44,7 @@ public class ApiTestDemoQa {
                 .post(EndPoints.REGISTER_USER)
                 .then()
                 .statusCode(201);
-        logger.info(String.format("User '%s' created successfully", userName));
+        logger.info(String.format("User '%s' profile created successfully", userName));
 
         token = given()
                 .contentType(ContentType.JSON)
@@ -72,7 +70,7 @@ public class ApiTestDemoQa {
                 .response()
                 .jsonPath()
                 .getString("userId");
-        logger.info(String.format("UserID '%s' received", userId));
+        logger.info(String.format("User ID '%s' is received", userId));
     }
 
     @After
@@ -84,7 +82,7 @@ public class ApiTestDemoQa {
                 .delete(EndPoints.DELETE_USER, userId)
                 .then()
                 .statusCode(204);
-        logger.info(String.format("User account for '%s' deleted", userName));
+        logger.info(String.format("User account for '%s' has been deleted", userName));
 
     }
 
@@ -103,20 +101,13 @@ public class ApiTestDemoQa {
         nameFirstBook = jsonPath.getJsonObject("books[0].title");
         logger.info(String.format("ISBN '%s' of the first book is found", isbnFirstBook));
 
-//        List<CollectionOfIsbnsDto> isbnList = new ArrayList<>();
-//        isbnList.add(CollectionOfIsbnsDto.builder()
-//                .isbn(isbnFirstBook)
-//                .build());
-
         BookStoreDto bookStoreDtoRequestBody = BookStoreDto.builder()
                 .userId(userId)
                 .collectionOfIsbns(
                         Collections.singletonList(
                                 CollectionOfIsbnsDto.builder()
                                         .isbn(isbnFirstBook)
-                                        .build()
-                        )
-                )
+                                        .build()))
                 .build();
 
         given()
@@ -139,13 +130,10 @@ public class ApiTestDemoQa {
                 .statusCode(200)
                 .extract().response();
 
-        List<CollectionOfIsbnsDto> bookList = new ArrayList<>();
-        bookList.add(CollectionOfIsbnsDto.builder()
-               .isbn(isbnFirstBook)
-               .build());
-
-        Assert.assertEquals("Number of books is more than 1", 1, bookList.size());
-        logger.info("Number of books in User profile = 1");
+        int actualNumberBooks = checkBook.getBody().jsonPath().getList("books").size();
+        int expectedNumberBooks = 1;
+        Assert.assertEquals("Number of books in User profile is more than 1", expectedNumberBooks, actualNumberBooks);
+        logger.info(String.format("Number of books in '%s' profile = 1", userName));
 
         String actualIsbn = checkBook
                 .body()
@@ -154,9 +142,8 @@ public class ApiTestDemoQa {
 
         Assert.assertEquals(
                 String.format("Wrong book ISBN '%s' added to user '%s' profile", actualIsbn, userName),
-                isbnFirstBook,
-                actualIsbn);
-        logger.info(String.format("ISBN '%s' in '%s' profile the same as expected", actualIsbn, userName));
+                isbnFirstBook, actualIsbn);
+        logger.info(String.format("Book with ISBN '%s' is in '%s' profile as expected", actualIsbn, userName));
     }
 
 }
