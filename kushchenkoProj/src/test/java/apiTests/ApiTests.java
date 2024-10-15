@@ -4,10 +4,8 @@ import api.EndPoints;
 import api.dto.ApiHelper;
 import api.dto.responseDto.AuthorDto;
 import api.dto.responseDto.PostsDto;
-import com.github.dockerjava.transport.DockerHttpClient;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
@@ -19,7 +17,6 @@ import java.util.Map;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.hamcrest.CoreMatchers.equalTo;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.everyItem;
 
@@ -89,6 +86,7 @@ public class ApiTests {
                 .isEqualTo(expectedResponseDto);
 
         softAssertions.assertAll();
+
     }
 
     @Test
@@ -107,7 +105,7 @@ public class ApiTests {
     @Test
     public void getAllPostsByUserPath() {
         // method #4 json path
-        Response actualResponse = apiHelper.getAllPostsByUser(USER_NAME).extract().response();
+        Response actualResponse = apiHelper.getAllPostsByUserRequest(USER_NAME).extract().response();
 
         SoftAssertions softAssertions = new SoftAssertions();
         List<String> actualListOfPosts = actualResponse.jsonPath().getList("title", String.class);
@@ -129,7 +127,7 @@ public class ApiTests {
     @Test
     public void getAllPostsByUserSchema() {
         // method #5 schema
-apiHelper.getAllPostsByUser(USER_NAME)
+apiHelper.getAllPostsByUserRequest(USER_NAME)
         .assertThat().body(matchesJsonSchemaInClasspath("response.json"));
     }
 }
