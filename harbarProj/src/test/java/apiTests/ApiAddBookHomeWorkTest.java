@@ -48,7 +48,8 @@ public class ApiAddBookHomeWorkTest {
     public void addBookByApi() {
         logger.info("Delete all user books");
         authenticatedRequest()
-                .delete(DemoQaEndPoints.DELETE_BOOKS, loginResponse.getUserId())
+                .queryParam("UserId",loginResponse.getUserId() )
+                .delete(DemoQaEndPoints.BOOKS)
                 .then()
                 .spec(responseSpecification.statusCode(SC_NO_CONTENT));
 
@@ -56,7 +57,7 @@ public class ApiAddBookHomeWorkTest {
         BooksResponseDto booksResponseDto = given()
                 .spec(requestSpecification)
                 .when()
-                .get(DemoQaEndPoints.GET_BOOKS)
+                .get(DemoQaEndPoints.BOOKS)
                 .then()
                 .spec(responseSpecification.statusCode(SC_OK))
                 .extract().response().body().as(BooksResponseDto.class);
@@ -76,7 +77,7 @@ public class ApiAddBookHomeWorkTest {
         authenticatedRequest()
                 .body(addBookRequestBody)
                 .when()
-                .post(DemoQaEndPoints.GET_BOOKS)
+                .post(DemoQaEndPoints.BOOKS)
                 .then()
                 .spec(responseSpecification.statusCode(SC_CREATED))
                 .body("books[0].isbn", equalTo(firstBookIsbn))
