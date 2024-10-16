@@ -5,11 +5,16 @@ import API.DTO.responseDTO.AuthorDTO;
 import API.DTO.responseDTO.PostsDTO;
 import API.EndPoints;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+import java.util.Map;
+
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.hamcrest.CoreMatchers.equalTo;
 
@@ -47,7 +52,6 @@ public class ApiTests {
         for (int i = 0; i < actualResponseAsDto.length; i++) {
             Assert.assertEquals("User Name is not expected in post", USER_NAME,
                     actualResponseAsDto[i].getAuthor().getUsername());
-            
         }
         // Expected Result
         PostsDTO[] expectedResponseDTO = {
@@ -87,14 +91,15 @@ public class ApiTests {
                                         .isEqualTo(expectedResponseDTO);
 
         softAssertions.assertAll();
-
     }
+
     @Test
     public void getAllPostsByUserNegative(){
         final String NOT_VALID_USER_NAME = "NotValidUser";
 
        String actualResponse =
                apiHelper.getAllPostByUserRequest(NOT_VALID_USER_NAME, SC_BAD_REQUEST)
+                       // method 3 response as String
                 .extract().response().body().asString();
        Assert.assertEquals(
                "Message in response "
@@ -102,11 +107,38 @@ public class ApiTests {
                        ""+NOT_VALID_USER_NAME +" or there is no posts. Exception is undefined\""
                ,actualResponse
        );
+    }
+    @Test
+    public void getAllPostsByUserPath () {
+        // method 4 - json path
+        Response actualResponse = apiHelper.getAllPostByUserRequest(USER_NAME).extract().response();
 
+        SoftAssertions softAssertions = new SoftAssertions();
 
+        List <String> actualListOfPosts = actualResponse.jsonPath().getList("title", String.class);
+
+        for (int i = 0; i < actualListOfPosts.size(); i++) {
+            softAssertions.assertThat(actualListOfPosts.get(i))
+                    .as("Item number " + i)
+                    .contains("Default post");
+        }
+
+        List<Map> actualAuthorList = actualResponse.jsonPath().getList("author", Map.class);
+        for (Map actualAuthorObject: actualAuthorList) {
+            softAssertions.assertThat(actualAuthorObject.get("username"))
+                    .as("Field userName in Author")
+                    .isEqualTo(USER_NAME);
+        }
+
+        softAssertions.assertAll();
 
     }
 
+    @Test
+    public void getAllPostsByUserSchema (){
+        apiHelper.getAllPostByUserRequest(USER_NAME)
+                .assertThat().body(matchesJsonSchemaInClasspath("response.json"));
+    }
 
 
 
