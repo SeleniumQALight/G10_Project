@@ -9,8 +9,8 @@ import pages.MyProfilePage;
 
 public class HeaderElement extends CommonActionsWithElements {
 
-     @FindBy(xpath = "//img[@alt='My profile']")
-     private WebElement buttonMyProfile;
+    @FindBy(xpath = "//img[@alt='My profile']")
+    private WebElement buttonMyProfile;
 
     @FindBy(xpath = "//button[text()='Sign Out']")
     private WebElement buttonSignOut;
@@ -31,9 +31,13 @@ public class HeaderElement extends CommonActionsWithElements {
     }
 
     @Step
-    public HeaderElement checkIsButtonSignOutVisible(){
+    public HeaderElement checkIsButtonSignOutVisible() {
         checkIsElementVisible(buttonSignOut);
         return this;
     }
 
+    public HeaderElement checkIsMyProfileButtonVisible() {
+        checkIsElementVisible(buttonMyProfile);
+        return this;
+    }
 }

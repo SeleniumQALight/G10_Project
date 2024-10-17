@@ -25,44 +25,44 @@ public class CommonActionsWithElements {
         webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_DEFAULT_WAIT()));
     }
 
-    protected void clearAndEnterTextIntoElement(WebElement webElement, String text){
-        try{
+    protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
+        try {
             webElement.clear();
             webElement.sendKeys(text);
             logger.info(text + " was inputted into element " + getElementName(webElement));
-        }catch (Exception e){
+        } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
 
-    protected void clickOnElement(WebElement webElement){
-        try{
+    protected void clickOnElement(WebElement webElement) {
+        try {
             webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
             String elementName = getElementName(webElement);
             webElement.click();
             logger.info(elementName + " Element was clicked");
-        }catch (Exception e){
+        } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
 
-    protected boolean isElementVisible(WebElement webElement){
-        try{
+    protected boolean isElementVisible(WebElement webElement) {
+        try {
             boolean state = webElement.isDisplayed();
             if (state) {
-               logger.info(getElementName(webElement) + " Element is displayed");
+                logger.info(getElementName(webElement) + " Element is displayed");
             } else {
                 logger.info(getElementName(webElement) + "Element is not displayed");
             }
             return state;
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.info("Element is not displayed");
             return false;
         }
     }
 
-    protected boolean isElementVisible(WebElement webElement, String elementName){
-        try{
+    protected boolean isElementVisible(WebElement webElement, String elementName) {
+        try {
             boolean state = webElement.isDisplayed();
             if (state) {
                 logger.info(elementName + " Element is displayed");
@@ -70,16 +70,16 @@ public class CommonActionsWithElements {
                 logger.info(elementName + " Element is not displayed");
             }
             return state;
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.info(elementName + " Element is not displayed");
             return false;
         }
     }
 
-    protected boolean isElementVisible(String locator){
-        try{
+    protected boolean isElementVisible(String locator) {
+        try {
             return isElementVisible(webDriver.findElement(By.xpath(locator)));
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.info("Element is not displayed");
             return false;
         }
@@ -156,6 +156,12 @@ public class CommonActionsWithElements {
         Assert.assertTrue(elementName + " is not visible", isElementVisible(webElement, elementName));
     }
 
+    protected void checkTextInElement(WebElement webElement, String expectedMessage) {
+        Assert.assertTrue("Element is not displayed", isElementVisible(webElement));
+        String textFromElement = webElement.getText();
+        Assert.assertEquals("Text in element not matched", expectedMessage, textFromElement);
+    }
+
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
@@ -163,9 +169,9 @@ public class CommonActionsWithElements {
 
     private String getElementName(WebElement webElement) {
         String elementName = "";
-        try{
+        try {
             return webElement.getAccessibleName();
-        }catch (Exception e){
+        } catch (Exception e) {
             return elementName;
         }
 
