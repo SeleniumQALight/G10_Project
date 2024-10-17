@@ -28,6 +28,11 @@ public class ApiHelper {
             .setContentType(JSON)
             .log(LogDetail.ALL)
             .build();
+    /*    public static RequestSpecification requestSpecificationWithToken = new RequestSpecBuilder()
+                .setContentType(JSON)
+                .setAuth(token)
+                .log(LogDetail.ALL)
+                .build();*/
     public static ResponseSpecification responseSpecification = new ResponseSpecBuilder()
             .log(LogDetail.ALL)
             .expectStatusCode(SC_OK)
