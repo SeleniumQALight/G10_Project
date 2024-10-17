@@ -106,4 +106,8 @@ public class HeaderElement extends CommonActionsWithElements {
         return new LoginPage(webDriver);
     }
 
+    public HeaderElement checkIsMyProfileVisible() {
+
+        return this;
+    }
 }
