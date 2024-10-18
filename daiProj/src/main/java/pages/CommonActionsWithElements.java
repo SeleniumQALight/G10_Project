@@ -23,8 +23,8 @@ public class CommonActionsWithElements {
         this.webDriver = webDriver;
 
         PageFactory.initElements(webDriver, this); //initialized elements described FindBy
-    webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_DEFAULT_WAIT()));
-    webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_DEFAULT_WAIT()));
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_DEFAULT_WAIT()));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(configProperties.TIME_FOR_DEFAULT_WAIT()));
     }
 
     protected void clearAndEnterTextIntoElement(WebElement webElement, String text) {
@@ -111,21 +111,21 @@ public class CommonActionsWithElements {
         }
     }
 
-    public void acceptAlert () {
-            try {
-                webDriver.switchTo().alert().accept();
-                logger.info("Alert was accepted");
-            } catch (Exception e) {
-                printErrorAndStopTest(e);
-            }
+    public void acceptAlert() {
+        try {
+            webDriver.switchTo().alert().accept();
+            logger.info("Alert was accepted");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
     }
 
-//scroll to element
+    //scroll to element
     public void scrollToElement(WebElement webElement) {
         try {
             Actions actions = new Actions(webDriver);
             actions.moveToElement(webElement)
-            .build().perform();
+                    .build().perform();
             logger.info("Scroll to element " + getElementName(webElement));
         } catch (Exception e) {
             printErrorAndStopTest(e);
@@ -133,7 +133,7 @@ public class CommonActionsWithElements {
     }
 
     //press Enter key using Actions class
-    public void pressEnterKeyUsingActions(){
+    public void pressEnterKeyUsingActions() {
         try {
             Actions actions = new Actions(webDriver);
             actions.sendKeys(Keys.ENTER)
@@ -169,15 +169,22 @@ public class CommonActionsWithElements {
         Assert.fail("Can not work with element " + e);
     }
 
+
+    protected void checkTextInElement(WebElement webElement, String expectedMessage) {
+        Assert.assertTrue("Element is not displayed", isElementVisible(webElement));
+        String textFromElement = webElement.getText();
+        Assert.assertEquals("Text in element not matched", expectedMessage, textFromElement);
+    }
+
+
     private String getElementName(WebElement webElement) {
         String elementName = "";
-        try{
+        try {
             return webElement.getAccessibleName();
         } catch (Exception e) {
             return elementName;
         }
     }
-
 
 
     public boolean checkCheckBox(WebElement checkBox) {
@@ -201,6 +208,7 @@ public class CommonActionsWithElements {
             return false;
         }
     }
+
 
 }
 
