@@ -2,6 +2,7 @@ package api;
 
 import api.dto.responseDto.PostsDto;
 import data.TestData;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -23,9 +24,15 @@ public class ApiHelper {
     private Logger logger = Logger.getLogger(getClass());
 
     public static RequestSpecification requestSpecification = new RequestSpecBuilder()
+            .addFilter(new AllureRestAssured())
             .setContentType(JSON)
             .log(LogDetail.ALL)
             .build();
+    /*    public static RequestSpecification requestSpecificationWithToken = new RequestSpecBuilder()
+                .setContentType(JSON)
+                .setAuth(token)
+                .log(LogDetail.ALL)
+                .build();*/
     public static ResponseSpecification responseSpecification = new ResponseSpecBuilder()
             .log(LogDetail.ALL)
             .expectStatusCode(SC_OK)
