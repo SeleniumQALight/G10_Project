@@ -4,6 +4,7 @@ import API.ApiHelper;
 import API.DTO.responseDTO.AuthorDTO;
 import API.DTO.responseDTO.PostsDTO;
 import API.EndPoints;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
@@ -32,6 +33,7 @@ public class ApiTests {
         PostsDTO[] actualResponseAsDto =
         given()
                 .contentType(ContentType.JSON)
+                .filter(new AllureRestAssured())
                 .log().all()
                 .when()
                 .get(EndPoints.POSTS_BY_USER, USER_NAME)

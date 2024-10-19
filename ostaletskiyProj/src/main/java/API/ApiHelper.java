@@ -3,6 +3,7 @@ package API;
 import API.DTO.responseDTO.PostsDTO;
 import com.mysql.cj.log.Log;
 import data.TestData;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -32,6 +33,7 @@ public class ApiHelper {
 
     private static final Logger log = LoggerFactory.getLogger(ApiHelper.class);
     public static  RequestSpecification requestSpecification = new RequestSpecBuilder()
+            .addFilter(new AllureRestAssured())
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();
@@ -45,14 +47,10 @@ public class ApiHelper {
 
     public ValidatableResponse getAllPostByUserRequest (String userName, int expectedStatusCode){
         return given()
-         //       .contentType(ContentType.JSON)
-        //     .log().all()
                 .spec(requestSpecification)
                 .when()
                 .get(POSTS_BY_USER, userName)
                 .then()
-              //  .log().all()
-              //  .statusCode(expectedStatusCode);
                 .spec(responseSpecification.statusCode(expectedStatusCode));
     }
 
