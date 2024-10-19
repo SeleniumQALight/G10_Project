@@ -5,6 +5,7 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
+import io.restassured.response.ValidatableResponseOptions;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.log4j.Logger;
@@ -68,21 +69,8 @@ public class ApiHelperDemo {
                 .extract().response().jsonPath().getString("userId").replace("\"", "");
     }
 
-    public void deleteAllBooksTillPresent(String id, String token) {
-        LoginDtoDemo loginDto = new LoginDtoDemo();
 
-        }
 
-    public void deleteAllBooksFromUser(String userId, String token) {
-        HashMap<String, String> headers = new HashMap<>();
-        headers.put("Authorization", token);
-
-        given()
-                .headers(headers)
-                .delete(EndPointsDemo.DELETE_BOOK + userId)
-                .then()
-                .statusCode(200);
-    }
 }
 
 

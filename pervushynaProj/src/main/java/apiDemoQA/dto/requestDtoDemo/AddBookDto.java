@@ -1,6 +1,6 @@
 package apiDemoQA.dto.requestDtoDemo;
 
-import apiDemoQA.dto.responseDtoDemo.IsbnDto;
+import apiDemoQA.dto.responseDtoDemo.BookListDto;
 import lombok.*;
 
 import java.util.List;
@@ -12,5 +12,5 @@ import java.util.List;
 @AllArgsConstructor
 public class AddBookDto {
     private String userId;
-    private List<IsbnDto> collectionOfIsbns;
+    private List<BookListDto> collectionOfIsbns;
 }
