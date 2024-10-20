@@ -4,7 +4,7 @@ import api.ApiHelper;
 import api.EndPoints;
 import api.dto.requestDto.CreatePostDto;
 import api.dto.responseDto.AuthorDto;
-import api.dto.responseDto.PostDto;
+import api.dto.responseDto.PostsDto;
 import data.TestData;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
@@ -58,10 +58,10 @@ public class CreateNewPostByApi {
                 numberOfPosts + 1,
                 numberOfPostsAfterCreatingPost);
 
-        PostDto expectedPostDto = PostDto.builder()
+        PostsDto expectedPostDto = PostsDto.builder()
                 .title(createPostDtoBody.getTitle())
                 .body(createPostDtoBody.getBody())
-                .select(createPostDtoBody.getSelect1())
+                .select1(createPostDtoBody.getSelect1())
                 .uniquePost(createPostDtoBody.getUniquePost())
                 .isVisitorOwner(false)
                 .author(AuthorDto.builder()
@@ -71,7 +71,7 @@ public class CreateNewPostByApi {
 
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions
-                .assertThat(apiHelper.getAllPostsByUserRequest().extract().body().as(PostDto[].class)[0])
+                .assertThat(apiHelper.getAllPostsByUserRequest().extract().body().as(PostsDto[].class)[0])
                         .usingRecursiveComparison()
                         .ignoringFields("id", "createdDate", "author.avatar")
                         .isEqualTo(expectedPostDto);
@@ -79,6 +79,6 @@ public class CreateNewPostByApi {
     }
 
     private int getNumberOfPostsByUser() {
-        return apiHelper.getAllPostsByUserRequest().extract().body().as(PostDto[].class).length;
+        return apiHelper.getAllPostsByUserRequest().extract().body().as(PostsDto[].class).length;
     }
 }
