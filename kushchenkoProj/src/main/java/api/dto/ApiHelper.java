@@ -2,6 +2,7 @@ package api.dto;
 
 import api.EndPoints;
 import api.dto.responseDto.PostsDto;
+import apiDemoQa.EndPointsDemoQa;
 import data.TestData;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -96,5 +97,37 @@ public class ApiHelper {
                 .delete(EndPoints.DELETE_POST, id)
                 .then()
                 .spec(responseSpecification);
+    }
+
+    public String getTokenForDemoQa(String username, String password) {
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("username", username);
+        requestBody.put("password", password);
+        return given()
+                .spec(requestSpecification)
+                .body(requestBody.toMap())
+                .when()
+                .post(EndPointsDemoQa.LOGIN)
+                .then()
+                .spec(responseSpecification)
+                .extract().response().getBody().jsonPath().getString("token").replace("\"", "");
+
+    }
+
+    public String getUserIdForDemoQa(String username,String password){
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("username", username);
+        requestBody.put("password", password);
+        return given()
+                .spec(requestSpecification)
+                .body(requestBody.toMap())
+                .when()
+                .post(EndPointsDemoQa.LOGIN)
+                .then()
+                .spec(responseSpecification)
+                .extract().response().getBody().jsonPath().getString("userId");
+    }
+
+    public void deleteAllBooksTillPresent(String username, String token) {
     }
 }
