@@ -1,7 +1,8 @@
 package api;
 
-import api.dto.responseDto.PostDto;
+import api.dto.responseDto.PostsDto;
 import data.TestData;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -26,6 +27,7 @@ public class ApiHelper {
 
 
     public static RequestSpecification requestSpecification = new RequestSpecBuilder()
+            .addFilter(new AllureRestAssured())
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();
@@ -78,8 +80,8 @@ public class ApiHelper {
     }
 
     public void deleteAllPostsTillPresent(String userName, String token) {
-        PostDto[] listOfPosts = getAllPostsByUserRequest(userName.toLowerCase())
-                .extract().response().body().as(PostDto[].class);
+        PostsDto[] listOfPosts = getAllPostsByUserRequest(userName.toLowerCase())
+                .extract().response().body().as(PostsDto[].class);
 
         for (int i = 0; i < listOfPosts.length; i++) {
             deletePostById(token, listOfPosts[i].getId());
