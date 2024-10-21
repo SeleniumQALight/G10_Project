@@ -1,17 +1,14 @@
 package apiDemoQA;
 
-import apiDemoQA.dto.responseDtoDemo.LoginDtoDemo;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
-import io.restassured.response.ValidatableResponseOptions;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
-import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
 import static org.apache.hc.core5.http.HttpStatus.SC_OK;
@@ -24,6 +21,14 @@ public class ApiHelperDemo {
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();
+
+    public static RequestSpecification requestSpecificationWithToken(String token) {
+        return new RequestSpecBuilder()
+                .setContentType(ContentType.JSON)
+                .addHeader("Authorization", "Bearer " + token)
+                .log(LogDetail.ALL)
+                .build();
+    }
 
     public static ResponseSpecification responseSpecification = new ResponseSpecBuilder()
             .log(LogDetail.ALL)
@@ -69,7 +74,29 @@ public class ApiHelperDemo {
                 .extract().response().jsonPath().getString("userId").replace("\"", "");
     }
 
+public void DeleteAllBooks() {
+    String token = getToken();
+    String userId = getUserId();
+    given()
+            .queryParam("UserId", userId)
+            .spec(requestSpecificationWithToken(token))
+            .delete(EndPointsDemo.ACTIVITIES_WITH_BOOKS)
+            .then()
+            .statusCode(204);
 
+    logger.info("All books are deleted");
+
+}
+
+//    public String getBookIsbnByUserId(String userId) {
+//        return given()
+//                .queryParam("UserId", userId)
+//                .spec(requestSpecification)
+//                .get(EndPointsDemo.ACTIVITIES_WITH_BOOKS)
+//                .then()
+//                .statusCode(200)
+//                .extract().jsonPath().getString("books[0].isbn");
+//    }
 
 }
 

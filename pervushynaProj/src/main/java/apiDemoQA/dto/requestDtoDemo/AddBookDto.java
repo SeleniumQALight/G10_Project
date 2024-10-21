@@ -12,5 +12,5 @@ import java.util.List;
 @AllArgsConstructor
 public class AddBookDto {
     private String userId;
-    private List<BookListDto> collectionOfIsbns;
+    private List<BookIsbnDto> collectionOfIsbns;
 }
