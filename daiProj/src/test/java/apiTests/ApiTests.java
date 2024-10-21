@@ -4,6 +4,7 @@ import api.ApiHelper;
 import api.EndPoints;
 import api.dto.responseDto.AuthorDto;
 import api.dto.responseDto.PostsDto;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
@@ -32,6 +33,8 @@ public class ApiTests {
         PostsDto[] actualResponseAsDto =
                 given()
                         .contentType(ContentType.JSON)
+                        .filter(new AllureRestAssured())
+                        .log().all()
                         .when()
                         .get(EndPoints.POSTS_BY_USER, USER_NAME)
                         .then()
@@ -62,7 +65,7 @@ PostsDto[] expectedResponseDto = {
                 PostsDto.builder()
                         .title("The second Default post")
                         .body("This post was created automatically after cleaning the database")
-                        .select1("All Users")
+                        .select("All Users")
                         .uniquePost("no")
                         .author(AuthorDto.builder()
                                 .username(USER_NAME)
@@ -72,7 +75,7 @@ PostsDto[] expectedResponseDto = {
         PostsDto.builder()
                 .title("The first Default post")
                 .body("This post was created automatically after cleaning the database")
-                .select1("All Users")
+                .select("All Users")
                 .uniquePost("no")
                 .author(AuthorDto.builder()
                         .username(USER_NAME)
