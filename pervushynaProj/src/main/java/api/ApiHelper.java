@@ -1,6 +1,7 @@
 package api;
 
-import api.dto.responseDto.PostDto;
+
+import api.dto.responseDto.PostsDto;
 import data.TestData;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -78,8 +79,8 @@ public class ApiHelper {
     }
 
     public void deleteAllPostsTillPresent(String userName, String token) {
-        PostDto[] listOfPosts = getAllPostsByUserRequest(userName.toLowerCase())
-                .extract().response().body().as(PostDto[].class);
+        PostsDto[] listOfPosts = getAllPostsByUserRequest(userName.toLowerCase())
+                .extract().response().body().as(PostsDto[].class);
 
         for (int i = 0; i < listOfPosts.length; i++) {
             deletePostById(token, listOfPosts[i].getId());

@@ -36,4 +36,8 @@ public class HeaderElement extends CommonActionsWithElements {
         return this;
     }
 
+    public HeaderElement checkIsMyProfileButtonVisible() {
+        checkIsElementVisible(buttonMyProfile);
+        return this;
+    }
 }
