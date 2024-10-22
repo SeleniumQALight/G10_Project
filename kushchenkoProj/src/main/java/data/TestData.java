@@ -9,6 +9,6 @@ public class TestData {
     public static final String INVALID_PASSWORD_UI = "123456";
     public static final String VALID_LOGIN_API = "yuliia234567".toLowerCase();
     public static final String VALID_PASSWORD_API = "123456qwerty";
-    public static final String VALID_LOGIN_DEMO_QA = "yuliia1234567";
+    public static final String VALID_LOGIN_DEMO_QA = "user3456test";
     public static final String VALID_PASSWORD_DEMO_QA = "12Qwerty34@78Tr";
 }

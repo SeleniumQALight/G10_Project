@@ -20,7 +20,7 @@ public void getTokenAndDeleteBooks() {
         userId = apiHelper.getUserIdForDemoQa(VALID_LOGIN_DEMO_QA, VALID_PASSWORD_DEMO_QA);
         System.out.println("TOKEN from api " + token);
         System.out.println("USER ID from api " + userId);
-        apiHelper.deleteAllBooksTillPresent(VALID_LOGIN_DEMO_QA, token);
+        apiHelper.deleteAllBooksForUser(VALID_LOGIN_DEMO_QA, token);
     }
 
     @Test

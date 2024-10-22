@@ -29,6 +29,12 @@ public class ApiHelper {
             .log(LogDetail.ALL)
             .build();
 
+    public static RequestSpecification requestSpecificationWithAuth = new RequestSpecBuilder()
+            .setContentType(ContentType.JSON)
+            .addHeader("Authorization", "Bearer " + token)
+            .log(LogDetail.ALL)
+            .build();
+
     public static ResponseSpecification responseSpecification = new ResponseSpecBuilder()
             .log(LogDetail.ALL)
             .expectStatusCode(SC_OK)
@@ -101,7 +107,7 @@ public class ApiHelper {
 
     public String getTokenForDemoQa(String username, String password) {
         JSONObject requestBody = new JSONObject();
-        requestBody.put("username", username);
+        requestBody.put("userName", username);
         requestBody.put("password", password);
         return given()
                 .spec(requestSpecification)
@@ -114,9 +120,9 @@ public class ApiHelper {
 
     }
 
-    public String getUserIdForDemoQa(String username,String password){
+    public String getUserIdForDemoQa(String username, String password) {
         JSONObject requestBody = new JSONObject();
-        requestBody.put("username", username);
+        requestBody.put("userName", username);
         requestBody.put("password", password);
         return given()
                 .spec(requestSpecification)
@@ -128,6 +134,9 @@ public class ApiHelper {
                 .extract().response().getBody().jsonPath().getString("userId");
     }
 
-    public void deleteAllBooksTillPresent(String username, String token) {
+    public void deleteAllBooksForUser(String userId, String token) {
+        JSONObject requestHeader = new JSONObject();
+
+
     }
 }
