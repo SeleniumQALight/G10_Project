@@ -4,6 +4,7 @@ import bdd.helpers.WebDriverHelper;
 import pages.PageProvider;
 
 public class MainSteps {
+    public static final String DEFAULT = "default";
     protected WebDriverHelper webDriverHelper;
     protected PageProvider pageProvider;
 
