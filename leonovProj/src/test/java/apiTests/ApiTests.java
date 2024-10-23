@@ -4,6 +4,7 @@ import api.ApiHelper;
 import api.EndPoints;
 import api.dto.responseDto.AuthorDto;
 import api.dto.responseDto.PostDto;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -32,6 +33,7 @@ public class ApiTests {
         PostDto[] actualResponseAsDto =
                 given()
                         .contentType(ContentType.JSON)
+                        .filter(new AllureRestAssured())
                         .log().all()
                         .when()
                         .get(EndPoints.POSTS_BY_USER, USER_NAME)
@@ -132,7 +134,7 @@ public class ApiTests {
     }
 
     @Test
-    public void getAllPostsByUserSchema() {
+    public void  getAllPostsByUserSchema() {
         apiHelper.getAllPostsByUserRequest(USER_NAME)
                 .assertThat().body(matchesJsonSchemaInClasspath("response.json"));
     }

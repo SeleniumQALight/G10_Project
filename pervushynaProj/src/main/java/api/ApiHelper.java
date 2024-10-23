@@ -1,5 +1,6 @@
 package api;
 
+
 import api.dto.responseDto.PostsDto;
 import data.TestData;
 import io.qameta.allure.restassured.AllureRestAssured;
