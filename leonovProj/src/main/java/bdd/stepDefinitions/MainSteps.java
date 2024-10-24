@@ -9,8 +9,9 @@ public class MainSteps {
 
     public static final String DEFAULT = "default";
 
-    public MainSteps(WebDriverHelper webDriverHelper){
+    public MainSteps(WebDriverHelper webDriverHelper) {
         this.webDriverHelper = webDriverHelper;
         pageProvider = new PageProvider(webDriverHelper.getWebDriver());
     }
+
 }
