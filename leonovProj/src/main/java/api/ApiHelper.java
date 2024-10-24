@@ -1,5 +1,6 @@
 package api;
 
+import api.dto.requestDto.CreatePostDto;
 import api.dto.responseDto.PostDto;
 import data.TestData;
 import io.qameta.allure.restassured.AllureRestAssured;
@@ -15,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static data.TestData.VALID_LOGIN_API;
 import static io.restassured.RestAssured.given;
@@ -22,8 +24,8 @@ import static io.restassured.RestAssured.given;
 public class ApiHelper {
     private Logger logger = Logger.getLogger(getClass());
 
-    public static RequestSpecification  requestSpecification = new RequestSpecBuilder()
-            .addFilter(new  AllureRestAssured())
+    public static RequestSpecification requestSpecification = new RequestSpecBuilder()
+            .addFilter(new AllureRestAssured())
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();
@@ -96,5 +98,25 @@ public class ApiHelper {
                 .delete(EndPoints.DELETE_POST, id)
                 .then()
                 .spec(responseSpecification);
+    }
+
+    public void createPosts(Integer numberOfPosts, String token, Map<String, String> postsData) {
+        for (int i = 0; i < numberOfPosts; i++) {
+            CreatePostDto body =
+                    CreatePostDto.builder()
+                            .title(postsData.get("title") + i)
+                            .body(postsData.get("body"))
+                            .select1(postsData.get("select"))
+                            .uniquePost("no")
+                            .token(token)
+                            .build();
+            given()
+                .spec(requestSpecification)
+                .body(body)
+            .when()
+                .post(EndPoints.CREATE_POST)
+            .then()
+                .spec(responseSpecification);
+        }
     }
 }
