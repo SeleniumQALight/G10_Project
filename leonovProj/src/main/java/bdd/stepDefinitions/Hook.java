@@ -3,6 +3,9 @@ package bdd.stepDefinitions;
 import bdd.helpers.WebDriverHelper;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import utils.ConfigProvider;
+
+import java.time.Duration;
 
 public class Hook {
 
@@ -13,11 +16,14 @@ public class Hook {
     }
 
     @Before
-    public void setup(){
+    public void setup() {
+        webDriverHelper.getWebDriver().manage().window().maximize();
+        webDriverHelper.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(
+                ConfigProvider.configProperties.TIME_FOR_IMPLICIT_WAIT()));
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         webDriverHelper.quitDriver();
     }
 }
