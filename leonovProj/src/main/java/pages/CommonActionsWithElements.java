@@ -220,4 +220,10 @@ public class CommonActionsWithElements {
         Assert.assertFalse(elementName + "Element should be visible"
                 , isElementVisible(webElement, elementName));
     }
+
+    protected void checkTextInElement(WebElement webElement, String expectedErrorMessage) {
+        Assert.assertTrue("Element is not displayed", isElementVisible(webElement));
+        String textFromElement = webElement.getText();
+        Assert.assertEquals("Text in element is not as expected", expectedErrorMessage, textFromElement);
+    }
 }
