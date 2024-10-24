@@ -47,6 +47,8 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = LIST_OF_ERROR_MESSAGES)
     private List<WebElement> listOfErrorMessages;
     // подивитись як виглядатиме список
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement alertInCenter;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -199,7 +201,10 @@ public class LoginPage extends ParentPage {
     }
 
 
-
+    public LoginPage checkErrorMessage(String expectedErrorMessage) {
+        checkTextInElement(alertInCenter, expectedErrorMessage);
+        return this;
+    }
 
 
 }
