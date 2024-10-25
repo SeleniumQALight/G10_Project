@@ -12,7 +12,7 @@ public class CurrencyRateDto {
     private String currency;
     private double saleRateNB;
     private double saleRate;
-    private double purchaseRate;
-    private double purchaseRateNB;
+    private Double purchaseRate;
+    private Double purchaseRateNB;
 
 }
