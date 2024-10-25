@@ -57,9 +57,4 @@ public class CurrencyValidationTest {
 
         logger.info("Currency validation test finished");
     }
-
-    @Test
-    public void checkCurrencyValues() {
-
-    }
 }
