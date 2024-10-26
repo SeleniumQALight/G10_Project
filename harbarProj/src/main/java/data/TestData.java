@@ -10,4 +10,7 @@ public class TestData {
     public static final String VALID_LOGIN_API = "NaQa".toLowerCase();
     public static final String VALID_PASSWORD_API = "qwerty123456789";
 
+    public static final String DEMO_QA_VALID_USERNAME_API = "harbarQa";
+    public static final String DEMO_QA_VALID_PASSWORD_API = "Qwerty123$";
+
 }
