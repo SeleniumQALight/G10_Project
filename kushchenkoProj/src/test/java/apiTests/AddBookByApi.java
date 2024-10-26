@@ -1,6 +1,7 @@
 package apiTests;
 
 import api.dto.ApiHelper;
+import apiDemoQa.dto.ApiHelperDemoQa;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,7 +10,7 @@ import static data.TestData.VALID_PASSWORD_DEMO_QA;
 
 public class AddBookByApi {
 
-    ApiHelper apiHelper = new ApiHelper();
+    ApiHelperDemoQa apiHelper = new ApiHelperDemoQa();
     String token;
     String userId;
 

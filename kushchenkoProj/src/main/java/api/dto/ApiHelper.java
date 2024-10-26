@@ -29,12 +29,6 @@ public class ApiHelper {
             .log(LogDetail.ALL)
             .build();
 
-    public static RequestSpecification requestSpecificationWithAuth = new RequestSpecBuilder()
-            .setContentType(ContentType.JSON)
-            .addHeader("Authorization", "Bearer " + token)
-            .log(LogDetail.ALL)
-            .build();
-
     public static ResponseSpecification responseSpecification = new ResponseSpecBuilder()
             .log(LogDetail.ALL)
             .expectStatusCode(SC_OK)
@@ -103,40 +97,5 @@ public class ApiHelper {
                 .delete(EndPoints.DELETE_POST, id)
                 .then()
                 .spec(responseSpecification);
-    }
-
-    public String getTokenForDemoQa(String username, String password) {
-        JSONObject requestBody = new JSONObject();
-        requestBody.put("userName", username);
-        requestBody.put("password", password);
-        return given()
-                .spec(requestSpecification)
-                .body(requestBody.toMap())
-                .when()
-                .post(EndPointsDemoQa.LOGIN)
-                .then()
-                .spec(responseSpecification)
-                .extract().response().getBody().jsonPath().getString("token").replace("\"", "");
-
-    }
-
-    public String getUserIdForDemoQa(String username, String password) {
-        JSONObject requestBody = new JSONObject();
-        requestBody.put("userName", username);
-        requestBody.put("password", password);
-        return given()
-                .spec(requestSpecification)
-                .body(requestBody.toMap())
-                .when()
-                .post(EndPointsDemoQa.LOGIN)
-                .then()
-                .spec(responseSpecification)
-                .extract().response().getBody().jsonPath().getString("userId");
-    }
-
-    public void deleteAllBooksForUser(String userId, String token) {
-        JSONObject requestHeader = new JSONObject();
-
-
     }
 }
