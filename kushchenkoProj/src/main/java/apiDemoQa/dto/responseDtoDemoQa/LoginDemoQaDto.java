@@ -15,5 +15,5 @@ public class LoginDemoQaDto {
     private String token;
     private String expires;
     private String created_date;
-    private boolean isActive;
+    private Boolean isActive;
 }
