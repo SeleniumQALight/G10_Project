@@ -41,17 +41,23 @@ public class ValidationMessagesTest extends BaseTest {
                 {"Login - valid, Email - not valid, Password - not valid",
                         new UserForRegistration("TC023").updateEmail(SHORT_EMAIL_NOT_VALID).updatePassword(SHORT_PASSWORD_NOT_VALID),
                         ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD},
-                {"Login - valid, Email - valid, password - NOT valid", new UserForRegistration("TC023").updatePassword(SHORT_PASSWORD_NOT_VALID)
+                {"Login - valid, Email - valid, password - NOT valid"
+                        , new UserForRegistration("TC023").updatePassword(SHORT_PASSWORD_NOT_VALID)
                         , ERROR_PASSWORD},
-                {"Login -  NOT valid, Email -  NOT valid, password -  NOT valid", new UserForRegistration(deleteSomeSymbols(USER_NAME_MIN_LENGTH, 1), SHORT_EMAIL_NOT_VALID, SHORT_PASSWORD_NOT_VALID)
+                {"Login -  NOT valid, Email -  NOT valid, password -  NOT valid"
+                        , new UserForRegistration(deleteSomeSymbols(USER_NAME_MIN_LENGTH, 1), SHORT_EMAIL_NOT_VALID, SHORT_PASSWORD_NOT_VALID)
                         , ERROR_USERNAME +SEMICOLON+ ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD },
-                {"Login -  NOT valid, Email -  NOT valid, password -  NOT valid", new UserForRegistration(USER_NAME_MAX_LENGTH + "1", SHORT_EMAIL_NOT_VALID, SHORT_PASSWORD_NOT_VALID)
+                {"Login -  NOT valid, Email -  NOT valid, password -  NOT valid"
+                        , new UserForRegistration(USER_NAME_MAX_LENGTH + "1", SHORT_EMAIL_NOT_VALID, SHORT_PASSWORD_NOT_VALID)
                         , ERROR_LONG_USER +SEMICOLON+ ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD},
-                {"Login - valid, Email -  NOT valid, password - valid", new UserForRegistration(USER_NAME_MAX_LENGTH, SHORT_EMAIL_NOT_VALID, PASSWORD_MIN_LENGTH)
+                {"Login - valid, Email -  NOT valid, password - valid"
+                        , new UserForRegistration(USER_NAME_MAX_LENGTH, SHORT_EMAIL_NOT_VALID, PASSWORD_MIN_LENGTH)
                         , ERROR_EMAIL},
-                {"Login -  NOT valid, Email -  NOT valid, password - valid", new UserForRegistration(USER_NAME_MAX_LENGTH + "1", SHORT_EMAIL_NOT_VALID, PASSWORD_MAX_LENGTH)
+                {"Login -  NOT valid, Email -  NOT valid, password - valid"
+                        , new UserForRegistration(USER_NAME_MAX_LENGTH + "1", SHORT_EMAIL_NOT_VALID, PASSWORD_MAX_LENGTH)
                         , ERROR_LONG_USER +SEMICOLON+ ERROR_EMAIL},
-                {"Login -  NOT valid, Email -  NOT valid, password -  NOT valid", new UserForRegistration(USER_NAME_MAX_LENGTH + "1", SHORT_EMAIL_NOT_VALID, PASSWORD_MAX_LENGTH + "2".repeat(2))
+                {"Login -  NOT valid, Email -  NOT valid, password -  NOT valid"
+                        , new UserForRegistration(USER_NAME_MAX_LENGTH + "1", SHORT_EMAIL_NOT_VALID, PASSWORD_MAX_LENGTH + "2".repeat(2))
                         , ERROR_LONG_USER +SEMICOLON+ ERROR_EMAIL + SEMICOLON + ERROR_LONG_PASSWORD}
         };
     }
