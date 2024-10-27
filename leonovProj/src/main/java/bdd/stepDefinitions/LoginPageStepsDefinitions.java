@@ -44,4 +44,25 @@ public class LoginPageStepsDefinitions extends MainSteps {
     public void iSeeErrorMessageInvalidUsernamePassword(String  expectedErrorMessage){
         pageProvider.getLoginPage().checkErrorMessage(expectedErrorMessage);
     }
+
+    @When("I enter {string} into Username field")
+    public void iEnterIntoUsernameField(String userName) {
+        pageProvider.getLoginPage().enterTextIntoRegistrationNameField(userName);
+    }
+
+    @And("I enter {string} into Email field")
+    public void iEnterIntoEmailField(String email) {
+        pageProvider.getLoginPage().enterTextIntoRegistrationEmailField(email);
+    }
+
+    @And("I enter {string} into Password field")
+    public void iEnterIntoPasswordField(String password) {
+        pageProvider.getLoginPage().enterTextIntoRegistrationPasswordField(password);
+    }
+
+
+    @Then("I see validation message {string} for fields")
+    public void iSeeValidationMessageForFields(String expectedMessages) {
+        pageProvider.getLoginPage().checkErrorsMessages(expectedMessages);
+    }
 }
