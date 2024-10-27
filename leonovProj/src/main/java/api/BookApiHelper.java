@@ -11,6 +11,7 @@ import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
+import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 
 public class BookApiHelper {
+    Logger logger = Logger.getLogger(getClass());
     public static RequestSpecification requestSpecification = new RequestSpecBuilder()
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
@@ -68,6 +70,7 @@ public class BookApiHelper {
         listOfBook = List.of(Map.of("isbn", isbn));
         requestBody.put("collectionOfIsbns", listOfBook);
 
+        logger.info("Book with isbn: " + isbn + " added to user collection");
         return given()
                 .spec(requestSpecification)
                 .header("Authorization", "Bearer " + token)

@@ -50,7 +50,7 @@ public class HW2Api {
 
         Assert.assertEquals("Number of books in user collection", 1, userBooks.getBooks().length);
         Assert.assertEquals("ISBN of the book", firstBookIsbn, userBooks.getBooks()[0].getIsbn());
-
+        logger.info("Test finished");
         //TEST
         //get a list with books catalog
         // get the first book ISBN
