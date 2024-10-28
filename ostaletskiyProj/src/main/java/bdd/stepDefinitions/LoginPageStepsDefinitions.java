@@ -46,4 +46,28 @@ public class LoginPageStepsDefinitions extends MainSteps {
     public void iSeeAlertMessageWithTextInvalidUsernamePassword(String expectedMessage) {
         pageProvider.getLoginPage().checkIsAlertMessageDisplayed(expectedMessage);
     }
+
+    @When("I enter {string} into input username in Registration form")
+    public void iEnterIntoInputUsernameInRegistrationForm(String username) {
+        pageProvider.getLoginPage().enterTextRegistrationNameField(username);
+    }
+
+
+    @And("I enter {string} into input email in Registration form")
+    public void iEnterIntoInputEmailInRegistrationForm(String email) {
+        pageProvider.getLoginPage().enterTextRegistrationEmailField(email);
+    }
+
+
+    @And("I enter {string} into input password in Registration form")
+    public void iEnterIntoInputPasswordInRegistrationForm(String password) {
+        pageProvider.getLoginPage().enterTextRegistrationPasswordField(password);
+    }
+
+
+    @Then("I see alert messages {string}")
+    public void iSeeAlertMessages(String expectedMessages) {
+        pageProvider.getLoginPage().checkErrorMessageForRegistrationForm(expectedMessages);
+
+    }
 }
