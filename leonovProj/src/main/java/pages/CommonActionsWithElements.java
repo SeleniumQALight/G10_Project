@@ -36,6 +36,17 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected String getTextFromElement(WebElement webElement) {
+        try {
+            String textFromElement = webElement.getText();
+            logger.info("Text from element " + getElementName(webElement) + " was got : " + textFromElement);
+            return textFromElement;
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+            return "";
+        }
+    }
+
     protected void printErrorAndStopTest(Exception e) {
         logger.error("Cannot work with element" + e);
         Assert.fail("Cannot work with element" + e);
