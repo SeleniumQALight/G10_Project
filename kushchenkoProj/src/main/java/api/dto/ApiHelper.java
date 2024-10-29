@@ -2,6 +2,7 @@ package api.dto;
 
 import api.EndPoints;
 import api.dto.responseDto.PostsDto;
+import apiDemoQa.EndPointsDemoQa;
 import data.TestData;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
