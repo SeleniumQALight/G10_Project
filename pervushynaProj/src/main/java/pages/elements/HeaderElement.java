@@ -98,4 +98,9 @@ public class HeaderElement extends CommonActionsWithElements {
         Assert.assertFalse("Button Create Post is visible", isButtonCreatePostVisible());
         return this;
     }
+
+    public HeaderElement checkIsMyProfileButtonVisible() {
+        checkIsElementVisible(myProfileButton);
+        return this;
+    }
 }
