@@ -1,7 +1,9 @@
 package api.dto;
 
 import api.EndPoints;
+import api.dto.requestDto.CreatePostDto;
 import api.dto.responseDto.PostsDto;
+import apiDemoQa.EndPointsDemoQa;
 import data.TestData;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -15,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static api.EndPoints.POSTS_BY_USER;
 import static io.restassured.RestAssured.given;
@@ -98,5 +101,25 @@ public class ApiHelper {
                 .delete(EndPoints.DELETE_POST, id)
                 .then()
                 .spec(responseSpecification);
+    }
+
+    public void createPosts(Integer numberOfPosts, String token, Map<String, String> postsData) {
+        for (int i = 0; i < numberOfPosts; i++) {
+            CreatePostDto body =
+                    CreatePostDto.builder()
+                            .title(postsData.get("title") + i)
+                            .body(postsData.get("body"))
+                            .select1(postsData.get("select"))
+                            .uniquePost("no")
+                            .token(token)
+                            .build();
+            given()
+                    .spec(requestSpecification)
+                    .body(body)
+                    .when()
+                    .post(EndPoints.CREATE_POST)
+                    .then()
+                    .spec(responseSpecification);
+        }
     }
 }
