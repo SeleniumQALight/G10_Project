@@ -1,5 +1,6 @@
 package API;
 
+import API.DTO.requestDTO.CreatePostDTO;
 import API.DTO.responseDTO.PostsDTO;
 import com.mysql.cj.log.Log;
 import data.TestData;
@@ -19,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static API.EndPoints.LOGIN;
 import static API.EndPoints.POSTS_BY_USER;
@@ -110,5 +112,26 @@ public class ApiHelper {
                 .then()
                 .spec(responseSpecification);
 
+    }
+
+    public void createPosts(Integer numberOfPosts, String token, Map<String, String> postsData) {
+        for (int i = 0; i < numberOfPosts; i++) {
+            CreatePostDTO body =
+                    CreatePostDTO.builder()
+                            .title(postsData.get("title") + i)
+                            .body(postsData.get("body"))
+                            .select1(postsData.get("select"))
+                            .uniquePost("no")
+                            .token(token)
+                            .build();
+            given()
+                    .spec(requestSpecification)
+                    .body(body)
+                    .when()
+                    .post(EndPoints.CREATE_POST)
+                    .then()
+                    .spec(responseSpecification);
+
+        }
     }
 }
