@@ -49,11 +49,21 @@ public class LoginPage extends ParentPage {
 
     final static String listOfMessagesLocator =
             "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
+
     @FindBy(xpath = listOfMessagesLocator)
     private List<WebElement> listOfMessages;
 
     @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
     private WebElement alertInCenter;
+
+    @FindBy(xpath = "//input[@id='username-register']/../div")
+    private WebElement registrationUsername;
+
+    @FindBy(xpath = "//input[@id='email-register']/../div")
+    private WebElement registrationEmail;
+
+    @FindBy(xpath = "//input[@id='password-register']/../div")
+    private WebElement registrationPassword;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);

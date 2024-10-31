@@ -15,6 +15,9 @@ public class MyProfilePage extends ParentPage {
     @FindBy(xpath = ".//div[@class='alert alert-success text-center']")
     private WebElement successDeleteMessage;
 
+    @FindBy(xpath = ".//a[@class='list-group-item list-group-item-action']")
+    private List<WebElement> postList;
+
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
 
@@ -65,6 +68,11 @@ public class MyProfilePage extends ParentPage {
 
     private MyProfilePage checkIsMessageSuccessDeletePostPresent() {
         Assert.assertTrue("Success message is not displayed", isElementVisible(successDeleteMessage));
+        return this;
+    }
+
+    public MyProfilePage checkNumberOfPosts(int numberOfPosts) {
+        Assert.assertEquals("Number of posts", numberOfPosts, postList.size());
         return this;
     }
 }
