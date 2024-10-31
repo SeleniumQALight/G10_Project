@@ -18,6 +18,9 @@ public class TestData {
     public static final String VALID_LOGIN_API = "denysleonov";
     public static final String VALID_PASSWORD_API = "123456qwerty";
 
+    public static final String VALID_LOGIN_BOOK = "denystest1";
+    public static final String VALID_PASSWORD_BOOK = "Qwerty123456!";
+
     public static final ExchangeRateDto exchangeRateDto = ExchangeRateDto.builder()
             .bank("PB")
             .date("22.03.2022")
