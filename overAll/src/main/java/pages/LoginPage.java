@@ -18,6 +18,9 @@ import java.util.List;
 
 public class LoginPage extends ParentPage {
 
+    @FindBy(xpath = "//h1[text()='Remember Writing?']")
+    private WebElement h1Header;
+
     @FindBy(xpath = "//input[@placeholder='Username']")
     private WebElement inputUserNameInLoginForm;
 
@@ -59,13 +62,14 @@ public class LoginPage extends ParentPage {
     }
 
     @Step
-    public void openLoginPage() {
+    public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened " + baseUrl);
+        return this;
     }
 
     @Step
-    public void enterTextIntoInputLogin(String login) {
+    public LoginPage enterTextIntoInputLogin(String login) {
 //        try{
 ////            WebElement inputUserNameInLoginForm =
 ////                    webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
@@ -77,16 +81,19 @@ public class LoginPage extends ParentPage {
 //            Assert.fail("Can not work with element " + e);
 //        }
         clearAndEnterTextIntoElement(inputUserNameInLoginForm, login);
+        return this;
     }
 
     @Step
-    public void enterTextIntoInputPassword(String password) {
+    public LoginPage enterTextIntoInputPassword(String password) {
         clearAndEnterTextIntoElement(inputPasswordInLoginForm, password);
+        return this;
     }
 
     @Step
-    public void clickOnButtonSignIn() {
+    public LoginPage clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
+        return this;
     }
 
     @Step
@@ -163,6 +170,31 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkTextInAlertMessageInCenter(String expectedMessage) {
         checkTextInElement(alertInCenter, expectedMessage);
+        return this;
+    }
+
+    @Step
+    public LoginPage checkH1HeaderText(String expectedText) {
+        checkTextInElement(h1Header, expectedText);
+        return this;
+    }
+
+
+    @Step
+    public LoginPage checkIsLoginInputVisible() {
+        checkIsElementVisible(inputUserNameInLoginForm, "Login input");
+        return this;
+    }
+
+    @Step
+    public LoginPage checkIsPasswordInputVisible() {
+        checkIsElementVisible(inputPasswordInLoginForm, "Password input");
+        return this;
+    }
+
+    @Step
+    public LoginPage checkIsLoginButtonVisible() {
+        checkIsElementVisible(buttonSignIn, "Login button");
         return this;
     }
 
