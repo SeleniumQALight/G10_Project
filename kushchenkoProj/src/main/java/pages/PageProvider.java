@@ -23,4 +23,8 @@ public class PageProvider {
 
     public CommonActionsWithElements getCommonActionsWithElements() { return new CommonActionsWithElements(webDriver);
     }
+
+    public MyProfilePage getMyProfilePage() {
+        return new MyProfilePage(webDriver);
+    }
 }

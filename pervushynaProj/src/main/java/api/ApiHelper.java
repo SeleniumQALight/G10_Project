@@ -3,6 +3,7 @@ package api;
 
 import api.dto.responseDto.PostsDto;
 import data.TestData;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -27,6 +28,7 @@ public class ApiHelper {
 
 
     public static RequestSpecification requestSpecification = new RequestSpecBuilder()
+            .addFilter(new AllureRestAssured())
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();

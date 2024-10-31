@@ -36,6 +36,17 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected String getTextFromElement(WebElement webElement) {
+        try {
+            String textFromElement = webElement.getText();
+            logger.info("Text from element " + getElementName(webElement) + " was got : " + textFromElement);
+            return textFromElement;
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+            return "";
+        }
+    }
+
     protected void printErrorAndStopTest(Exception e) {
         logger.error("Cannot work with element" + e);
         Assert.fail("Cannot work with element" + e);
@@ -219,5 +230,11 @@ public class CommonActionsWithElements {
     public void checkIsElementNotVisible(WebElement webElement, String elementName) {
         Assert.assertFalse(elementName + "Element should be visible"
                 , isElementVisible(webElement, elementName));
+    }
+
+    protected void checkTextInElement(WebElement webElement, String expectedErrorMessage) {
+        Assert.assertTrue("Element is not displayed", isElementVisible(webElement));
+        String textFromElement = webElement.getText();
+        Assert.assertEquals("Text in element is not as expected", expectedErrorMessage, textFromElement);
     }
 }
