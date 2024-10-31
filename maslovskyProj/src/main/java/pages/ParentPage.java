@@ -11,11 +11,11 @@ import java.util.ArrayList;
 
 import static data.TestData.initialNumberOpenedTabs;
 
-abstract class ParentPage extends CommonActionsWithElements {
+abstract public class ParentPage extends CommonActionsWithElements {
     protected Logger logger = Logger.getLogger(getClass());
-    String environment = System.getProperty("env", "aqa");
+    static String environment = System.getProperty("env", "aqa");
 //    String baseUrl = "https://" + environment.toLowerCase() + "-complexapp.onrender.com";
-    String baseUrl = ConfigProvider.configProperties.base_url().replace("[env]", environment);
+    public static String baseUrl = ConfigProvider.configProperties.base_url().replace("[env]", environment);
     String privatBankUrl = ConfigProvider.configProperties.privat_bank_url();
 
     public ParentPage(WebDriver webDriver) {
