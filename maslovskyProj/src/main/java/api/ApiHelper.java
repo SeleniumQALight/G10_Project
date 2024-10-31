@@ -2,6 +2,7 @@ package api;
 
 import api.dto.requestDto.CreatePostDto;
 import api.dto.responseDto.PostsDto;
+import api.dtoPrivatBank.responseDto.ExchangeRateDto;
 import data.TestData;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -125,4 +126,15 @@ public class ApiHelper {
 
         }
     }
+//
+//    public void temp() {
+//        System.out.println(given()
+//                .queryParam("json", "", "exchange", "", "coursid", "5")
+//                .contentType(ContentType.JSON)
+//                .when()
+//                .get(EndPoints.CURRENCY_EXCHANGE_RATE_PUBLIC)
+//                .then()
+//                .statusCode(200)
+//                .extract().body().as(ExchangeRateDto.class));
+//    }
 }
