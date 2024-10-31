@@ -1,6 +1,7 @@
 package api;
 
 
+import api.dto.requestDto.CreatePostDto;
 import api.dto.responseDto.PostsDto;
 import data.TestData;
 import io.qameta.allure.restassured.AllureRestAssured;
@@ -16,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static api.EndPoints.POSTS_BY_USER;
 import static data.TestData.VALID_LOGIN_API;
@@ -88,7 +90,7 @@ public class ApiHelper {
             deletePostById(token, listOfPosts[i].getId());
             logger.info(
                     String.format("Post with id %s and title '%s' was deleted",
-                    listOfPosts[i].getId(), listOfPosts[i].getTitle())
+                            listOfPosts[i].getId(), listOfPosts[i].getTitle())
             );
         }
     }
@@ -107,4 +109,26 @@ public class ApiHelper {
 
 
     }
+
+    public void createPosts(Integer numberOfPosts, String token, Map<String, String> postData) {
+
+        for (int i = 0; i < numberOfPosts; i++) {
+            CreatePostDto body = CreatePostDto.builder()
+                    .title(postData.get("title") + i)
+                    .body(postData.get("body"))
+                    .select1(postData.get("select"))
+                    .uniquePost("no")
+                    .token(token)
+                    .build();
+
+            given()
+                    .spec(requestSpecification)
+                    .body(body)
+                    .when()
+                    .post(EndPoints.CREATE_POST)
+                    .then()
+                    .spec(responseSpecification);
+        }
+    }
+
 }

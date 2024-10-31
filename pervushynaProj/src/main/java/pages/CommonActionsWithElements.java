@@ -190,6 +190,12 @@ public class CommonActionsWithElements {
         Assert.assertTrue(elementName + " is not visible", isElementVisible(webElement, elementName));
     }
 
+    protected void checkTextInElement(WebElement webElement, String expectedMessage) {
+        Assert.assertTrue("Element is not displayed", isElementVisible(webElement));
+        String textFromElement = webElement.getText();
+        Assert.assertEquals("Text in element is not matched", expectedMessage, textFromElement);
+    }
+
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
