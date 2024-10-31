@@ -45,8 +45,7 @@ public class ApiHelper {
                 .when()
                 .get(POSTS_BY_USER, userName)
                 .then()
-//                .log().all()
-//                .statusCode(expectedStatusCode);
+              .log().all()
                 .spec(responseSpecification.statusCode(expectedStatusCode));
 
     }

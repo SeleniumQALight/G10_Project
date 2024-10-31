@@ -115,6 +115,19 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected Double returnDoubleFromElementByLocator(String xPath) {
+        try {
+            Double value = Double.valueOf(webDriver
+                    .findElement(By.xpath(xPath))
+                    .getText().trim());
+            return value;
+        } catch (Exception e) {
+            logger.error("Element is not displayed");
+            Assert.fail("Element is not displayed " + e);
+            return null;
+        }
+    }
+
     private void printErrorAndStopTest(Exception e) {
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
@@ -210,6 +223,10 @@ public class CommonActionsWithElements {
         Assert.assertTrue("Element is not displayed", isElementVisible(webElement));
         String textFromElement = webElement.getText();
         Assert.assertEquals("Text in element not matched", expectedMessage, textFromElement);
+    }
+
+    public static Double roundToTwoDigits (Double value) {
+        return Math.round(value * 100.0) / 100.0;
     }
 
 }

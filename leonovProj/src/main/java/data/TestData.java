@@ -23,6 +23,9 @@ public class TestData {
     public static HashMap<String, Double> CURRENCY_RATE_API = new HashMap<>();
     public static HashMap<String, Double> CURRENCY_RATE_UI = new HashMap<>();
 
+    public static final String VALID_LOGIN_BOOK = "denystest1";
+    public static final String VALID_PASSWORD_BOOK = "Qwerty123456!";
+
     public static final ExchangeRateDto exchangeRateDto = ExchangeRateDto.builder()
             .bank("PB")
             .date("22.03.2022")
