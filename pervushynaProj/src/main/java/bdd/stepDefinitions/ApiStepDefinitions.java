@@ -6,17 +6,17 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 
 public class ApiStepDefinitions {
-    final String DEFAULT = "default";
+
     ApiHelper apiHelper = new ApiHelper();
 
     @Given("I create {} new posts via API for {string} user and {string} password")
     public void iCreateNewPostsViaAPIForDefaultUserAndDefaultPassword(
             Integer numberOfPosts, String userName, String password, DataTable dataTable) {
 
-        if (userName.equalsIgnoreCase(userName)){
+        if (MainSteps.DEFAULT.equalsIgnoreCase(userName)){
             userName = TestData.VALID_LOGIN_API;
         }
-        if (password.equalsIgnoreCase(DEFAULT)){
+        if (MainSteps.DEFAULT.equalsIgnoreCase(password)){
             password = TestData.VALID_PASSWORD_API;
         }
 
