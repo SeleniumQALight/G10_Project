@@ -18,13 +18,20 @@ public class PageProvider {
         return new HomePage(webDriver);
     }
 
-    public HeaderElement getHeaderElement() { return new HeaderElement(webDriver);
+    public HeaderElement getHeaderElement() {
+        return new HeaderElement(webDriver);
     }
 
-    public CommonActionsWithElements getCommonActionsWithElements() { return new CommonActionsWithElements(webDriver);
+    public CommonActionsWithElements getCommonActionsWithElements() {
+        return new CommonActionsWithElements(webDriver);
     }
 
     public MyProfilePage getMyProfilePage() {
         return new MyProfilePage(webDriver);
     }
+
+    public PrivatHomePage getPrivatHomePage() {
+        return new PrivatHomePage(webDriver);
+    }
 }
+
