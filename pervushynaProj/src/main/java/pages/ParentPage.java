@@ -11,7 +11,7 @@ abstract class ParentPage extends CommonActionsWithElements{
     String environment = System.getProperty("env", "aqa").toLowerCase();
     //String baseURL = "https://"+environment+"-complexapp.onrender.com";
 
-    String baseURL = ConfigProvider.configProperties.base_url().replace("[env]", environment);
+    String  baseURL = ConfigProvider.configProperties.base_url().replace("[env]", environment);
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
     }
