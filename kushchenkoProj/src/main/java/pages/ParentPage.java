@@ -9,7 +9,8 @@ abstract public class ParentPage extends CommonActionsWithElements {
     protected Logger logger = Logger.getLogger(getClass());
     static String environment = System.getProperty("env", "aqa").toLowerCase();
 //    String baseUrl = "https://"+environment+"-complexapp.onrender.com";
-    public static String baseUrl = ConfigProvider.configProperties.base_url().replace("[env]", environment);
+    String baseUrl = ConfigProvider.configProperties.base_url().replace("[env]", environment);
+    String baseUrlPrivatbank = "https://privatbank.ua";
 
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
