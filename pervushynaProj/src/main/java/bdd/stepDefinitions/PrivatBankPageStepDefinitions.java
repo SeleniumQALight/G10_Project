@@ -21,8 +21,13 @@ public class PrivatBankPageStepDefinitions extends MainSteps {
         pageProvider.getPrivatBankPage().clickOnButtonOnHeader(buttonName);
     }
 
-    @Then("I save exchange rates {string} from UI")
-    public void i_save_exchange_rates_from_ui(String string) {
-        pageProvider.getPrivatBankPage().getSaveExchangeRates(string);
+    @And("I save exchange rates {string} from UI")
+    public void i_save_exchange_rates_from_ui(String currency) {
+        pageProvider.getPrivatBankPage().getSaveExchangeRates(currency);
+    }
+
+    @Then("I compare exchange rates from API and UI")
+    public void iCompareExchangeRatesFromAPIAndUI() {
+        pageProvider.getPrivatBankPage().compareExchangeRates();
     }
 }
