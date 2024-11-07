@@ -9,6 +9,7 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import lombok.Getter;
+import org.apache.log4j.Logger;
 
 import static io.restassured.RestAssured.given;
 import static org.apache.hc.core5.http.HttpStatus.SC_OK;
@@ -17,7 +18,7 @@ public class ApiHelperPrivat {
 
     @Getter
     TestDataPrivat testDataPrivat;
-
+    Logger logger = Logger.getLogger(getClass());
 
     public static RequestSpecification requestSpecification = new RequestSpecBuilder()
             .setContentType(ContentType.JSON)
@@ -29,7 +30,7 @@ public class ApiHelperPrivat {
             .expectStatusCode(SC_OK)
             .build();
 
-    public void getPrivatBankCurrencyRate(String currency) {
+    public void getISendRequestAndSaveTheApiBuyAndSaleRates(String currency, double uiBuyRate, double uiSaleRate) {
         CurrencyRateDto[] actualResponseAsDto =
                 given()
                         .queryParam("coursid", "5")
@@ -40,22 +41,33 @@ public class ApiHelperPrivat {
                         .spec(responseSpecification)
                         .extract().body().as(CurrencyRateDto[].class);
 
-    }
+//        [
+//        {
+//            "ccy": "EUR",
+//                "base_ccy": "UAH",
+//                "buy": "44.40000",
+//                "sale": "45.40000"
+//        },
+//        {
+//            "ccy": "USD",
+//                "base_ccy": "UAH",
+//                "buy": "41.05000",
+//                "sale": "41.65000"
+//        }
+//]
 
-    public void getI_save_the_api_buy_and_sale_rates_for(String currency, double uiBuyRate, double uiSaleRate) {
-        CurrencyRateDto[] actualResponseAsDto =
-                given()
-                        .queryParam("coursid", "5")
-                        .spec(requestSpecification)
-                        .when()
-                        .get(EndPointPrivat.PUBINFO)
-                        .then()
-                        .spec(responseSpecification)
-                        .extract().body().as(CurrencyRateDto[].class);
+        // знайди в масиві валюту currency
+        // зберижи buyRate в тестДату
+        // зберижи saleRate в тестДату
 
-        double apiBuyRate = Double.parseDouble(actualResponseAsDto[0].getBuy());
-        double apiSaleRate = Double.parseDouble(actualResponseAsDto[0].getSale());
-        testDataPrivat = new TestDataPrivat(currency, apiBuyRate, apiSaleRate, uiBuyRate, uiSaleRate);
+        for (CurrencyRateDto currencyRateDto : actualResponseAsDto) {
+            if (currencyRateDto.getCcy().equalsIgnoreCase(currency)) {
+                TestDataPrivat.apiBuyRate = Double.parseDouble(currencyRateDto.getBuy());
+                TestDataPrivat.apiSaleRate = Double.parseDouble(currencyRateDto.getSale());
+            }
+        }
+        logger.info("API buy rate: " + TestDataPrivat.apiBuyRate);
+        logger.info("API sale rate: " + TestDataPrivat.apiSaleRate);
     }
 
 }

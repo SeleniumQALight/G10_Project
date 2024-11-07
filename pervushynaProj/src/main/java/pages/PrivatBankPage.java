@@ -3,6 +3,7 @@ package pages;
 import data.TestDataPrivat;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,17 +29,8 @@ public class PrivatBankPage {
     @FindBy(xpath = "//div[@class='widget-container']//div[@class='exchange-rates']")
     private WebElement currencyRatesModalWindow;
 
-    @FindBy(xpath = "//td[@id='EUR_buy']")
-    private WebElement eurBuyRate;
-
-    @FindBy(xpath = "//td[@id='EUR_sell']")
-    private WebElement eurSelLRate;
-
-    @FindBy(xpath = "//td[@id='USD_buy']")
-    private WebElement usdBuyRate;
-
-    @FindBy(xpath = "//td[@id='USD_sell']")
-    private WebElement usdSellRate;
+//    параметризований локатор для валют
+    String currencyRateLocator = "//td[@id='%s_%s']";
 
     WebDriverWait webDriverWait10;
     private WebDriver driver;
@@ -63,10 +55,23 @@ public class PrivatBankPage {
     }
 
     public void getSaveExchangeRates(String currency) {
-        double uiBuyRate = Double.parseDouble(eurBuyRate.getText());
-        double uiSellRate = Double.parseDouble(eurSelLRate.getText());
-        testDataPrivat = new TestDataPrivat(currency, testDataPrivat.getApiBuyRate(), testDataPrivat.getApiSaleRate(), uiBuyRate, uiSellRate);
-        driver.quit();
+        WebElement buyRate = webDriver.findElement(By.xpath(String.format(currencyRateLocator, currency.toUpperCase(), "buy")));
+        WebElement saleRate = webDriver.findElement(By.xpath(String.format(currencyRateLocator, currency.toUpperCase(), "sell")));
+
+        TestDataPrivat.uiBuyRate = Double.parseDouble(buyRate.getText());
+        TestDataPrivat.uiSaleRate = Double.parseDouble(saleRate.getText());
+
+        logger.info("UI buy rate is " + TestDataPrivat.uiBuyRate);
+        logger.info("UI sale rate is " + TestDataPrivat.uiSaleRate);
+    }
+
+    public void compareExchangeRates() {
+        if (TestDataPrivat.apiBuyRate == TestDataPrivat.uiBuyRate && TestDataPrivat.apiSaleRate == TestDataPrivat.uiSaleRate) {
+            System.out.println("Курси збігаються: Buy Rate = " + TestDataPrivat.apiBuyRate + ", Sale Rate = " + TestDataPrivat.apiSaleRate);
+        } else {
+            System.out.println("Різниця в курсах: API Buy = " + TestDataPrivat.apiBuyRate + ", UI Buy = " + TestDataPrivat.uiBuyRate +
+                    ", API Sale = " + TestDataPrivat.apiSaleRate + ", UI Sale = " + TestDataPrivat.uiSaleRate);
+        }
     }
 
 
@@ -94,12 +99,12 @@ public class PrivatBankPage {
         }
     }
 
-    protected void clickOnElement(WebElement webElement){
+    protected void clickOnElement(WebElement webElement) {
         try {
             webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
             webElement.click();
             logger.info("Element was clicked");
-        }catch (Exception e){
+        } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
@@ -108,6 +113,5 @@ public class PrivatBankPage {
         logger.error("Can not work with element " + e);
         Assert.fail("Can not work with element " + e);
     }
-
 
 }
