@@ -10,7 +10,6 @@ import utils.ConfigProvider;
 import java.time.Duration;
 
 public class Hook {
-
     WebDriverHelper webDriverHelper;
 
     private ApiHelper apiHelper = new ApiHelper();
@@ -24,6 +23,7 @@ public class Hook {
         webDriverHelper.getWebDriver().manage().window().maximize();
         webDriverHelper.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(
                 ConfigProvider.configProperties.TIME_FOR_IMPLICIT_WAIT()));
+
     }
 
     @After (order = 15)

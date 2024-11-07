@@ -7,9 +7,10 @@ import utils.ConfigProvider;
 
 abstract public class ParentPage extends CommonActionsWithElements {
     protected Logger logger = Logger.getLogger(getClass());
-    String environment = System.getProperty("env", "aqa").toLowerCase();
+    static String environment = System.getProperty("env", "aqa").toLowerCase();
 //    String baseUrl = "https://"+environment+"-complexapp.onrender.com";
     String baseUrl = ConfigProvider.configProperties.base_url().replace("[env]", environment);
+    String baseUrlPrivatbank = "https://privatbank.ua";
 
     public ParentPage(WebDriver webDriver) {
         super(webDriver);

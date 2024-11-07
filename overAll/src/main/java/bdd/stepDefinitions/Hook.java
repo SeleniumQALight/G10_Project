@@ -1,5 +1,6 @@
 package bdd.stepDefinitions;
 
+import api.ApiHelper;
 import bdd.helpers.WebDriverHelper;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -7,14 +8,18 @@ import utils.ConfigProvider;
 
 import java.time.Duration;
 
+import static data.TestData.VALID_LOGIN_API;
+import static data.TestData.VALID_PASSWORD_API;
+
 public class Hook {
     WebDriverHelper webDriverHelper;
+    private ApiHelper apiHelper = new ApiHelper();
 
     public Hook (WebDriverHelper webDriverHelper){
         this.webDriverHelper = webDriverHelper;
     }
 
-    @Before
+    @Before (order = 10)
     public void setUp(){
 //        webDriverHelper = new WebDriverHelper();
         webDriverHelper.getWebDriver().manage().window().maximize();
@@ -22,8 +27,15 @@ public class Hook {
                 Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_IMPLICIT_WAIT()));
     }
 
-    @After
+    @After (order = 15)
     public void tearDown(){
         webDriverHelper.quiteDriver();
+    }
+
+    @Before(value = "@deletePostsForDefaultUser", order = 50)
+    @After(value = "@deletePostsForDefaultUser", order = 50)
+    public void deletePostsForDefaultUser(){
+        apiHelper.deleteAllPostsTillPresent(VALID_LOGIN_API,
+                apiHelper.getToken(VALID_LOGIN_API, VALID_PASSWORD_API));
     }
 }
