@@ -40,8 +40,37 @@ public class LoginPageStepsDefinitions extends MainSteps {
         pageProvider.getLoginPage().clickOnButtonSignIn();
     }
 
+
+    @When("I enter {string} into input Username in Login page")
+    public void iEnterIntoInputUsernameInLoginPage(String username) {
+        pageProvider.getLoginPage().enterTextIntoRegistrationUserNameField(username);
+    }
+
+    @When("I enter {string} into input Email in Login page")
+    public void iEnterIntoInputEmailInLoginPage(String email) {
+        pageProvider.getLoginPage().enterTextIntoRegistrationEmailField(email);
+    }
+
+    @When("I enter {string} into input Password in Login page")
+    public void iEnterIntoInputPasswordInLoginPage(String password) {
+        pageProvider.getLoginPage().enterTextIntoRegistrationPasswordField(password);
+    }
+
+    @When("I click on button SignUp in Login page")
+    public void iClickOnButtonSignUpInLoginPage() {
+        pageProvider.getLoginPage().clickOnSignUpButton();
+    }
+
+
     @Then("I see alert message with text {string}")
     public void iSeeAlertMessageWithTextInvalidUsernamePassword(String expectedMessage) {
         pageProvider.getLoginPage().checkTextInAlertMessageInCenter(expectedMessage);
     }
+
+
+    @Then("I see validation message with text {string}")
+    public void iSeeValidationMessageWithText(String expectedMessage) {
+        pageProvider.getLoginPage().checkErrorsMessages(expectedMessage);
+    }
 }
+
