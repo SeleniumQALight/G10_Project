@@ -209,6 +209,16 @@ public class CommonActionsWithElements {
         }
     }
 
+public String getTextFromElement(WebElement webElement) {
+        try {
+            String textFromElement = webElement.getText();
+            logger.info("Text from element: " + getElementName(webElement) + " is got : " + textFromElement);
+            return textFromElement;
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+            return "";
+        }
+}
 
 }
 
