@@ -26,4 +26,8 @@ public class PageProvider {
         return new MyProfilePage(webDriver);
 
     }
+
+    public PrivatBankPage getPrivatBankPage( ) {
+        return new PrivatBankPage(webDriver);
+    }
 }
